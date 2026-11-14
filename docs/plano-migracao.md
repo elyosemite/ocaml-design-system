@@ -2,7 +2,27 @@
 
 Plano para tirar o design system de `epistulamail/design-system/` e transformá-lo num projeto próprio, **EpistulaDesignSystem**, com tokens em Sass divididos por nível e assunto, documentação escrita em MDX e publicada como site estático, e um pacote versionado que o app, o site e as docs consomem.
 
-> Estado: proposta, 14 nov 2026. Nada aqui foi executado. As decisões marcadas **[decidir]** precisam do OK de quem mantém o DS antes da fase em que aparecem.
+> Estado em 14 nov 2026: **fases 0 a 4 executadas** no repositório `C:\Users\Alfredo\Projects\epistulads`. Faltam as fases 5 a 8. As decisões marcadas **[decidir]** continuam esperando o OK de quem mantém o DS.
+
+### O que foi feito
+
+| Fase | Feito | Conferência |
+|---|---|---|
+| 0 · Linha de base | `baseline/` guarda o `tokens.css`, o `components.css` e o sprite de antes. Google Fonts trocado por `@fontsource` nas páginas; `rascunho-us16.html` apagado; referências a US tiradas das descrições dos tokens. | Nenhuma requisição a terceiros, conferido no Edge em todas as 45 páginas. |
+| 1 · Extração | Repositório novo com os 22 commits de `design-system/` (`git subtree split`). O app não foi tocado. | — |
+| 2 · Tokens em Sass | Árvore de §3.2 completa, `themes()` gera os três blocos de tema, alto contraste e movimento reduzido por mixin. | `pnpm compare`: 311 tokens, 1866 valores resolvidos em 6 contextos, todos iguais. |
+| 3 · Componentes em Sass | 60 partials por camada; tokens de componente em `src/tokens/components/` com `set()`; `@media` por `down()`/`up()`. | `pnpm compare`: 872 regras iguais, na mesma ordem. |
+| 4 · Ícones | 83 arquivos `.svg` + `icons.json`; `dist/sprite.svg` e `dist/sprite.js`. | Sprite byte a byte igual ao antigo. |
+
+Ainda **não** foi feito, de propósito, porque muda o resultado e precisa de teste ou de decisão:
+- `forced-colors`;
+- `@layer`;
+- o prefixo de classes;
+- a densidade como dimensão de token;
+- os 6 tokens sem uso e os 25 valores fixos;
+- o `@media (max-width: 960px)` do blog, que difere 1px dos outros.
+
+As decisões registradas foram numeradas de 0015 a 0020, porque o `DECISIONS.md` já ia até a 0014 (veja §8).
 
 ---
 
@@ -326,8 +346,8 @@ Cada fase termina num estado que funciona e pode ser publicado. Uma fase só com
 ### Fase 1 · Extração com histórico
 
 1. Num clone novo do app: `git filter-repo --path design-system/ --path scripts/check-design-system.mjs --path EpistulaMailDesignSystem-v3.md`. Isso preserva os 22 commits do DS.
-2. Mover para `legacy/` dentro do repositório novo, sem alterar o conteúdo.
-3. Criar `package.json`, `LICENSE`, `README`, `CHANGELOG` (0.1.0) e CI mínimo (o `check.mjs` atual rodando contra `legacy/`).
+2. Separar as páginas em `site/` e guardar o CSS e o sprite originais em `baseline/`, sem alterar o conteúdo (feito).
+3. Criar `package.json`, `LICENSE`, `README`, `CHANGELOG` (0.1.0) e CI mínimo (o `check.mjs` atual rodando contra `site/` e `dist/`).
 4. O app continua usando o próprio `design-system/`; nada muda para ele ainda.
 
 **Sai quando:** o repositório novo tem o histórico e o CI passa.
@@ -425,7 +445,7 @@ Cada fase termina num estado que funciona e pode ser publicado. Uma fase só com
 8. **Migrar as 54 páginas,** começando por três para validar o modelo (Botões, Cores, Padrão de confirmação) e depois por camada. As demos interativas do `docs.js` viram ilhas Astro com JS puro, só nas páginas que precisam.
 9. **Página de variáveis gerada no build** a partir dos mapas Sass (substitui o `docs.js` que lê o CSS no navegador).
 
-**Sai quando:** todas as páginas estão no site novo, sem `style=""`, com busca, e o `legacy/` pode ser apagado.
+**Sai quando:** todas as páginas estão no site novo, sem `style=""`, com busca, e as páginas HTML de `site/` podem ser apagadas.
 
 ### Fase 6 · Enriquecer o conteúdo
 
@@ -544,19 +564,29 @@ Prioridade por uso no app: botões, campos, menus, modais, toasts, lista de conv
 | O app quebra na troca para o pacote | 1.0 com os mesmos nomes de classe e de token; o prefixo fica para a 2.0 |
 | Dois lugares para mudar durante a migração | o `design-system/` do app fica congelado a partir da fase 1; mudança visual nova vai só para o repositório novo |
 | O Sass vira uma segunda linguagem de lógica | regras de §3.6 no Stylelint; o resultado são sempre custom properties trocáveis em tempo de execução |
-| A migração das 54 páginas se arrasta | três páginas-piloto primeiro; o `legacy/` continua publicado até a última página migrar |
+| A migração das 54 páginas se arrasta | três páginas-piloto primeiro; as páginas HTML de `site/` continuam publicadas até a última página migrar |
 
 ---
 
 ## 8. Decisões para registrar no `DECISIONS.md`
 
+Registradas em 14 nov 2026:
+
 | # | Decisão | Substitui |
 |---|---|---|
-| 0009 | O DS vira o repositório EpistulaDesignSystem, distribuído como pacote | — |
-| 0010 | Tokens em Sass, em três pastas por nível e um arquivo por assunto; o tema só no nível semântico | 0003 (`tokens.css` como fonte) |
-| 0011 | Primitivos só em Sass, fora do CSS publicado | parte de 0004 |
-| 0012 | O sprite é gerado de `src/icons/*.svg` | 0002 (L2) |
-| 0013 | Documentação em Astro + MDX, com frontmatter validado | — |
-| 0014 | `@layer` e prefixo de classe configurável | — |
-| 0015 | Suporte a `forced-colors` faz parte do critério de Estável | — |
-| 0016 | Critérios objetivos de maturidade | completa 0005 |
+| 0015 | O DS vira o repositório EpistulaDesignSystem | — |
+| 0016 | Tokens em Sass, em três pastas por nível e um arquivo por assunto; o tema só no nível semântico | 0003 (`tokens.css` como fonte) |
+| 0017 | A paleta continua saindo no CSS por enquanto (`$emit-primitives: true`); a decisão de §3.5 segue em aberto | — |
+| 0018 | O sprite é gerado de `src/icons/*.svg` | 0002 (L2) |
+| 0019 | Componentes em partials Sass por camada, tokens de componente com `set()`, breakpoints por mixin | — |
+| 0020 | Só o Atlassian como referência externa | — |
+
+A registrar quando a fase chegar:
+
+| Decisão | Fase |
+|---|---|
+| Documentação em Astro + MDX, com frontmatter validado | 5 |
+| `@layer` e prefixo de classe configurável | 3 (pendente) |
+| Suporte a `forced-colors` faz parte do critério de Estável | 3, 7 |
+| Critérios objetivos de maturidade (completa 0005) | 7 |
+| Forma de distribuição e licença | 8 |

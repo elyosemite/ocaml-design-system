@@ -13,11 +13,13 @@ As decisões 0001 e 0002 vêm de antes do v3 e estão aqui para o registro ficar
 
 ## 0002 · O sprite de ícones vive dentro de `docs.js` (L2)
 
-- **Status:** em vigor, anterior ao v3.
+- **Status:** substituída pela 0018 neste repositório. O app ainda extrai o sprite da cópia antiga até trocar para o pacote.
 - **Decisão:** não existe `icons.svg`. O app (`vite.config.ts`), o site (`site/build.mjs`) e as docs (`docs-site/scripts/sync-ds.mjs`) extraem o sprite de `docs.js` por expressão regular.
 - **Efeito:** não mudar o formato de `insertAdjacentHTML('afterbegin', "...")` sem atualizar os três extratores.
 
 ## 0003 · `tokens.css` é a fonte de verdade, sem Figma nem Style Dictionary
+
+- **Status:** substituída pela 0016 (a fonte agora é o Sass de `src/tokens/`; continua sem Figma nem Style Dictionary).
 
 - **Contexto:** o v3 recomenda um fluxo Figma → Style Dictionary → CSS, mas diz que, sem essas ferramentas, basta documentar a fonte efetiva e manter a separação entre os níveis.
 - **Decisão:** o projeto não usa biblioteca de design. `design-system/tokens.css` é a fonte. A conferência é o `pnpm ds:check`, que valida nomes, referências, paridade do tema escuro, uso da paleta, breakpoints e tokens sem uso.
@@ -63,7 +65,7 @@ As decisões 0001 e 0002 vêm de antes do v3 e estão aqui para o registro ficar
 
 ## 0011 · Foto de exemplo dos avatares
 
-- **Decisão:** as páginas do design system usam as fotos em domínio público (CC0) de `design-system/images/people/`, as mesmas do site. Nada de serviço externo, porque o hash do endereço de e-mail identifica a pessoa.
+- **Decisão:** as páginas do design system usam as fotos em domínio público (CC0) de `site/images/people/`, as mesmas do site. Nada de serviço externo, porque o hash do endereço de e-mail identifica a pessoa.
 - **Efeito:** o seletor de cor da conta continua sem foto, porque ali a cor é a informação.
 
 ## 0012 · Texto das páginas sem classes CSS
@@ -80,3 +82,36 @@ As decisões 0001 e 0002 vêm de antes do v3 e estão aqui para o registro ficar
 - **Contexto:** o site ganhou um índice de blog e uma página de artigo, feitos primeiro no `site.css`.
 - **Decisão:** as duas composições viraram o padrão "Blog e artigos" (L89 e L90), em beta, na camada Padrões. A categoria usa o lozenge e o filtro usa o botão sutil com `aria-pressed`; não há componente novo para isso.
 - **Efeito:** nenhum token novo. Os multiplicadores do corpo de leitura (1,125) e dos títulos grandes ficam como valores locais de `.post` e `.blog`; viram tokens se aparecerem em mais de um padrão.
+
+As decisões 0015 a 0020 são de 14 nov 2026, da migração para o repositório próprio (`docs/plano-migracao.md`).
+
+## 0015 · Repositório próprio: EpistulaDesignSystem
+
+- **Contexto:** o design system morava em `epistulamail/design-system/` e vai servir a mais de um projeto.
+- **Decisão:** repositório próprio, com o histórico de `design-system/` trazido por `git subtree split`. As páginas ficam em `site/`, os fontes em `src/`, o resultado em `dist/` (gerado, fora do Git) e o CSS de antes da migração em `baseline/`, como referência.
+- **Efeito:** `pnpm compare` confere que o CSS gerado equivale ao de `baseline/`. O app continua com a cópia dele até a fase 8 do plano; nada foi apagado lá.
+
+## 0016 · Tokens em Sass: três níveis, uma pasta por nível, um arquivo por assunto
+
+- **Contexto:** `tokens.css` tinha 596 linhas e o tema escuro escrito duas vezes à mão.
+- **Decisão:** `src/tokens/primitives/`, `semantic/` e `components/`, um arquivo por assunto. O tema mora só no nível semântico: cada token de cor traz `light` e `dark` lado a lado, e a mixin `themes()` gera o claro, o escuro do sistema e o escuro forçado da mesma fonte. A compilação falha se faltar um tema ou se `palette()` receber uma cor que não existe.
+- **Efeito:** os 311 tokens resolvem para o mesmo valor nos seis contextos (claro, escuro do sistema, escuro forçado, alto contraste por sistema e por atributo, movimento reduzido), conferido por `pnpm compare`. Os nomes das custom properties não mudaram.
+
+## 0017 · A paleta continua saindo no CSS, por enquanto
+
+- **Decisão:** `$emit-primitives: true` em `src/tokens/_config.scss`. A paleta sai como `--palette-*` e os semânticos apontam para ela, como antes.
+- **Efeito:** em aberto. Com `false`, a paleta fica só no Sass e ninguém consegue usá-la por engano; a página de variáveis precisaria de outra fonte para mostrar a paleta.
+
+## 0018 · Um arquivo por ícone
+
+- **Decisão:** cada ícone é `src/icons/<nome>.svg` (abre sozinho em qualquer visualizador); `src/icons/icons.json` guarda a ordem e a categoria (interface ou marca). O build gera `dist/sprite.svg`, `dist/sprite.js` e `dist/icons.json`.
+- **Efeito:** o sprite gerado é byte a byte igual ao que estava dentro do `docs.js`. O `docs.js` deixou de carregar o sprite.
+
+## 0019 · Componentes em partials Sass por camada
+
+- **Decisão:** `components.css` virou 60 partials em `src/styles/base|core|patterns|product|layouts|docs-site/`. As seções organizadas por entrega (por exemplo, "Aparência, rolagem, arrastar e sinalizadas") foram separadas por peça. A ordem dos `@use` em `src/styles/index.scss` é a ordem da cascata. Tokens de componente (`--btn-*`, `--av-*`, `--lb-*`, `--sm-*`, `--tt-*`, `--app-shell-*`, `--post-*`) ficam em `src/tokens/components/` e entram na regra por `@include <componente>.set('<variante>')`. Os `@media` de largura usam `down()`/`up()`.
+- **Efeito:** as 872 regras do CSS gerado são as mesmas de antes, na mesma ordem. O `@media (max-width: 960px)` do índice do blog ficou como estava: difere 1px dos outros (959px) e está no roteiro.
+
+## 0020 · Só o Atlassian como referência externa
+
+- **Decisão:** o plano e as páginas se baseiam só no Atlassian Design System. O que não vem dele é necessidade própria do EpistulaMail (Alto Contraste do Windows, Sass, densidade) e é marcado como tal.

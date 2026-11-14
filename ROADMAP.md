@@ -19,6 +19,17 @@ A ordem de trabalho do design system do EpistulaMail, na sequência do v3 (§14)
 7. **Fichas.** Cada página de componente tem a ficha: camada, status, onde é usado, fazer e não fazer, tokens, texto e tradução, testes, plataforma, relacionados e histórico.
 8. **Governança.** `ds:check` no CI, `CONTRIBUTING.md`, `DECISIONS.md` e este roteiro.
 
+## Feito em 14 nov 2026 (migração para o repositório próprio)
+
+Fases 0 a 4 do `docs/plano-migracao.md`:
+
+1. **Repositório.** Histórico trazido do app; páginas em `site/`, fontes em `src/`, referência em `baseline/`.
+2. **Tokens em Sass.** Três pastas (primitives, semantic, components) e um arquivo por assunto; tema claro e escuro lado a lado; alto contraste e movimento reduzido em `themes/`. Zero diferença nos valores resolvidos.
+3. **Componentes em Sass.** 60 partials por camada; tokens de componente com `set()`; breakpoints com `down()`/`up()`. As 872 regras iguais.
+4. **Ícones.** 83 arquivos `.svg`; sprite gerado igual ao antigo.
+5. **Páginas.** Fontes locais (`@fontsource`) no lugar do Google Fonts; nenhuma requisição a terceiros; o rascunho `rascunho-us16.html` apagado.
+6. **Conferência.** `pnpm compare` (resultado contra `baseline/`) e `pnpm check` adaptado.
+
 ## Próximo
 
 Cada item tem uma evidência e pode virar uma proposta futura em <code>userstory/</code>.
@@ -29,12 +40,14 @@ Cada item tem uma evidência e pode virar uma proposta futura em <code>userstory
 | 2 | Extrair um helper de classes em `src/lib`. | 33 arquivos montam a lista na mão. | Utilities |
 | 3 | Extrair um primitive para fechar com Esc e clique fora. | 9 arquivos tratam o Esc. | Primitives |
 | 4 | Extrair um primitive de foco por setas. | 9 arquivos tratam as setas. | Primitives |
-| 5 | Teste automático de acessibilidade e regressão visual das páginas do design system. | O `ds:check` confere tokens e registro, mas não pixels nem leitor de tela. | Governança |
+| 5 | Teste automático de acessibilidade e regressão visual das páginas do design system. | O `pnpm check` confere tokens e registro, mas não pixels nem leitor de tela. | Governança |
 | 6 | Decidir o destino dos 6 tokens sem uso: usar ou tirar. | `--color-border-warning`, `--space-0`, `--z-card`, `--z-dialog`, `--z-modal`, `--easing-exit`. | Fundamentos |
-| 7 | Trocar os 25 valores fixos de `components.css` por tokens. | `pnpm ds:check --metrics --list` lista cada um. | Fundamentos |
+| 7 | Trocar os 25 valores fixos de `components.css` por tokens. | `pnpm check --metrics --list` lista cada um. | Fundamentos |
 | 8 | Preparar o app para tradução e validar o RTL com um idioma real. | O app só tem pt-BR; o espelhamento foi conferido só nos componentes. | Conteúdo |
 | 9 | Conferir o alto contraste com um sistema de verdade e a seta do ícone no RTL. | Só foi testado por atributo. | Temas |
 | 10 | Revisar os status de maturidade. | Os status Beta de `arquivos` e `criptografia` e os quatro padrões novos são estimativas. | Governança |
+| 11 | Alinhar o `@media (max-width: 960px)` do índice do blog aos outros (959px, `down(compact)`). | Único `@media` que difere 1px do token; ficou igual na migração para não mudar o resultado. | Layouts |
+| 12 | Fases 5 a 8 do plano: documentação em Astro + MDX, conteúdo no modelo do ADS, testes e a troca no app. | `docs/plano-migracao.md`. | Governança |
 
 ## Como priorizar
 

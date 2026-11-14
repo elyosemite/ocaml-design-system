@@ -1,6 +1,6 @@
 # Como contribuir com o design system
 
-Este arquivo é o fluxo operacional do design system do EpistulaMail. A arquitetura, as camadas e os critérios estão em `EpistulaMailDesignSystem-v3.md` e na página `governanca.html`. As decisões com impacto duradouro ficam em `DECISIONS.md`, e a ordem de trabalho em `ROADMAP.md`.
+Este arquivo é o fluxo operacional do EpistulaDesignSystem, o design system do EpistulaMail. A arquitetura, as camadas e os critérios estão em `docs/fundamentos-v3.md` e na página `site/governanca.html`. A única referência externa é o Atlassian Design System. As decisões com impacto duradouro ficam em `DECISIONS.md`, e a ordem de trabalho em `ROADMAP.md`.
 
 ## Quando uma mudança passa por revisão
 
@@ -19,11 +19,33 @@ Correção de erro de digitação e ajuste de texto de uma página só não prec
 
 ## Fluxo
 
-1. **Rascunho.** Crie `design-system/rascunho-<tema>.html` só com tokens e componentes que já existem, mostrando todos os estados nos dois temas. O CSS novo vai em `components.css`, só com tokens.
-2. **Aprovação.** Mostre o rascunho a quem mantém o design system. Nada vai para `src/`, `site/` ou `docs-site/` antes disso.
-3. **Incorporação.** Mova as peças para a página do componente (ou crie `<id>.html` e registre em `EPISTULA_PAGES`, em `docs.js`, com camada e status). Apague o rascunho e registre o que foi decidido em <code>DECISIONS.md</code>.
+1. **Rascunho.** Crie `site/rascunho-<tema>.html` só com tokens e componentes que já existem, mostrando todos os estados nos dois temas. O CSS novo vai num partial de `src/styles/<camada>/`, só com tokens semânticos; um token novo vai no arquivo do assunto em `src/tokens/` (veja "Onde fica cada coisa").
+2. **Aprovação.** Mostre o rascunho a quem mantém o design system. Nada vai para o app, o site ou as docs do EpistulaMail antes disso.
+3. **Incorporação.** Mova as peças para a página do componente (ou crie `site/<id>.html` e registre em `EPISTULA_PAGES`, em `site/docs.js`, com camada e status). Apague o rascunho e registre o que foi decidido em <code>DECISIONS.md</code>.
 4. **Implementação.** Use as mesmas classes no app, no site e nas docs.
-5. **Conferência.** Rode `pnpm ds:check` e deixe tudo sem erro.
+5. **Conferência.** Rode `pnpm verify` (build, comparação e conferência) e deixe tudo sem erro. Se a mudança altera o resultado de propósito, atualize `baseline/` no mesmo commit e diga por quê.
+
+## Onde fica cada coisa
+
+| Quero mudar | Arquivo |
+|---|---|
+| Uma cor bruta da paleta | `src/tokens/primitives/color/_<família>.scss` |
+| Uma escala bruta (espaço, fonte, raio, tamanho, camada, movimento, opacidade, breakpoint) | `src/tokens/primitives/_<assunto>.scss` |
+| O significado de uma cor, com o valor claro e o escuro | `src/tokens/semantic/color/_<assunto>.scss` |
+| Um token semântico que não é cor | `src/tokens/semantic/_<assunto>.scss` |
+| O alto contraste ou o movimento reduzido | `src/tokens/themes/` |
+| Uma variante de componente (botão primário, avatar verde…) | `src/tokens/components/_<componente>.scss` |
+| A forma de um componente | `src/styles/<camada>/_<componente>.scss` |
+| Um ícone | `src/icons/<nome>.svg` e a ordem em `src/icons/icons.json` |
+| Uma página da documentação | `site/<id>.html`, `site/fichas.js` e o registro em `site/docs.js` |
+
+Regras que a compilação ou o `pnpm check` garantem:
+
+- Um token de cor com `light` precisa de `dark`; o que é igual nos dois temas usa `value`.
+- Tema só no nível semântico: arquivos de `src/tokens/components/` não têm `light`/`dark`, não chamam `palette()` e não usam cor fixa.
+- `src/styles/` nunca chama `palette()`.
+- `palette('nome')` falha se a cor não existir.
+- Os `@media` de largura usam `down()` e `up()` de `src/tokens/semantic/_breakpoint.scss`.
 
 ## Papéis
 
@@ -58,7 +80,7 @@ Antes de aprovar, responda sim às seis perguntas (ou registre a exceção):
 - [ ] Texto preparado para tradução; RTL considerado.
 - [ ] Exemplos cobrindo as variantes e os estados.
 - [ ] Ficha do componente preenchida (fazer e não fazer, texto, testes, relacionados, histórico).
-- [ ] `pnpm ds:check` sem erro.
+- [ ] `pnpm verify` sem erro.
 - [ ] Changelog e migração, se algo mudou para quem já usa.
 - [ ] Gates aprovados.
 
@@ -89,4 +111,4 @@ Aprovada, a proposta vira uma entrada em `DECISIONS.md`.
 
 - Revisão por pull request é o caminho comum.
 - A meta é dar retorno em até três dias úteis. É uma meta, não uma garantia.
-- Uma vez por mês, olhe a lista de descontinuações pendentes e as métricas de `pnpm ds:check --metrics`.
+- Uma vez por mês, olhe a lista de descontinuações pendentes e as métricas de `pnpm check --metrics`.
