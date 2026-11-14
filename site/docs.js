@@ -17,6 +17,12 @@ const OCAML_PAGES = [
     "group": "Fundamentos",
     "items": [
       [
+        "tokens",
+        "Tokens",
+        "O que são tokens, como ler o nome de um e os grupos de cor, elevação, opacidade, espaço e tipografia.",
+        "beta"
+      ],
+      [
         "principios",
         "Princípios",
         "As quatro regras que orientam cada decisão.",
@@ -1058,6 +1064,11 @@ const OCAML_PAGES = [
     refreshCatalog(); filterCatalog();
     if (location.hash.startsWith('#tk-')) document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: 'center' });
   }
+  // Valores ao vivo em qualquer página: [data-token-value="--nome"] mostra o valor do token no tema atual
+  function refreshTokenValues() { $$('[data-token-value]').forEach(el => { el.textContent = cssVar(el.dataset.tokenValue) || '—'; }); }
+  refreshTokenValues();
+  new MutationObserver(refreshTokenValues).observe(root, { attributes: true, attributeFilter: ['data-theme', 'data-contrast'] });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', refreshTokenValues);
   function refreshCatalog() {
     $$('#token-catalog [data-val]').forEach(td => { td.textContent = cssVar(td.dataset.val) || '—'; });
   }

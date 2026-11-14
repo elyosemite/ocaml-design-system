@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tokens · OCaml Design System</title>
+<meta name="description" content="O que são tokens, como ler o nome de um e os tokens de cor, elevação, opacidade, espaço e tipografia.">
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
+<link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
+</head>
+<body data-page="tokens">
+<div class="doc">
+  <nav class="doc-nav" id="doc-nav" aria-label="Índice"></nav>
+  <main>
+    <section class="ds-section" id="tokens">
+      <div class="ds-head">
+        <h1>Tokens</h1>
+        <p class="lede">Um token é o nome de uma decisão de design. O botão não pede <code>#0C66E4</code>: pede o fundo da marca. Quando a marca, o tema ou o contraste mudam, o valor muda num lugar só e a tela inteira acompanha.</p>
+      </div>
+      <div class="tk-compare">
+        <figure class="tk-compare__item tk-compare__item--no">
+          <figcaption><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><b>Valor solto</b>Funciona hoje, quebra no tema escuro e ninguém sabe por que é essa cor.</figcaption>
+          <pre><code>.aviso { color: #44546F; padding: 12px; }</code></pre>
+        </figure>
+        <figure class="tk-compare__item tk-compare__item--yes">
+          <figcaption><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><b>Token</b>Diz a intenção, troca de valor com o tema e passa na conferência automática.</figcaption>
+          <pre><code>.aviso { color: var(--color-text-subtle); padding: var(--space-150); }</code></pre>
+        </figure>
+      </div>
+    </section>
+
+    <section class="ds-section" id="o-que-sao">
+      <div class="ds-head">
+        <h2>O que são tokens</h2>
+        <p class="lede">Variáveis CSS com nome e significado, guardadas em <code>dist/tokens.css</code>. Cada uma responde a uma pergunta de design: que cor tem o texto de apoio, quanto espaço separa dois campos, que sombra tem um menu.</p>
+      </div>
+      <dl class="guidance">
+        <div><dt>Três níveis</dt><dd>Os primitivos são a paleta e as escalas brutas, e só o próprio sistema os usa. Os semânticos dizem a intenção e são o que componentes e telas usam. Os de componente ajustam uma peça só, como o fundo de cada variante do botão.</dd></div>
+        <div><dt>Uma fonte</dt><dd>Os tokens são escritos em Sass, uma pasta por nível e um arquivo por assunto, e viram custom properties no CSS gerado. Quem usa o sistema só precisa do CSS.</dd></div>
+        <div><dt>Nada de valor solto</dt><dd>Cor, espaço, raio, sombra, fonte, opacidade e tempo sempre passam por um token. A conferência do sistema avisa quando aparece um valor fixo.</dd></div>
+      </dl>
+    </section>
+
+    <section class="ds-section" id="temas">
+      <div class="ds-head">
+        <h2>O que são temas</h2>
+        <p class="lede">Um tema é um conjunto de valores para os mesmos tokens. O nome fica, o valor troca. Use o botão de tema no topo da página e veja os valores abaixo mudarem.</p>
+      </div>
+      <div class="stage">
+        <ul class="tk-rows">
+          <li><span class="tk-dot" style="background:var(--color-text)"></span><code>--color-text</code><span class="tk-rows__val" data-token-value="--color-text"></span><span class="tk-rows__use">Texto padrão</span></li>
+          <li><span class="tk-dot" style="background:var(--color-surface)"></span><code>--color-surface</code><span class="tk-rows__val" data-token-value="--color-surface"></span><span class="tk-rows__use">Superfície padrão</span></li>
+          <li><span class="tk-dot" style="background:var(--color-bg-brand-bold)"></span><code>--color-bg-brand-bold</code><span class="tk-rows__val" data-token-value="--color-bg-brand-bold"></span><span class="tk-rows__use">Fundo do botão principal</span></li>
+          <li><span class="tk-dot tk-dot--shadow" style="box-shadow:var(--shadow-overlay)"></span><code>--shadow-overlay</code><span class="tk-rows__val" data-token-value="--shadow-overlay"></span><span class="tk-rows__use">Sombra de menus e modais</span></li>
+        </ul>
+      </div>
+      <dl class="guidance">
+        <div><dt>Claro e escuro</dt><dd>Cada token de cor traz os dois valores lado a lado. O escuro segue o sistema operacional, a menos que a pessoa escolha um tema.</dd></div>
+        <div><dt>Alto contraste</dt><dd>Não cria cores novas: aponta os tokens de apoio para os mais fortes. Bordas sobem, o texto de apoio vira texto comum e o anel de foco engrossa.</dd></div>
+        <div><dt>Além da cor</dt><dd>Com "reduzir movimento" ligado no sistema, os tokens de duração vão a zero. A densidade troca as alturas de linha e de controle.</dd></div>
+      </dl>
+    </section>
+
+    <section class="ds-section" id="por-que">
+      <div class="ds-head">
+        <h2>Por que usar tokens</h2>
+      </div>
+      <dl class="guidance">
+        <div><dt>Temas de graça</dt><dd>Uma tela feita só com tokens funciona no claro, no escuro e no alto contraste sem nenhuma linha a mais.</dd></div>
+        <div><dt>Uma mudança, todo lugar</dt><dd>Mudar o raio dos botões ou o azul da marca é editar um arquivo. Não existe caça a valores espalhados.</dd></div>
+        <div><dt>Mesma língua</dt><dd>Design e código falam "fundo de perigo forte", não "aquele vermelho". A conversa e a revisão ficam mais curtas.</dd></div>
+        <div><dt>Conferido</dt><dd>A conferência automática acusa token inexistente, tema sem valor e valor fixo onde havia um token.</dd></div>
+      </dl>
+    </section>
+
+    <section class="ds-section" id="ler">
+      <div class="ds-head">
+        <h2>Como ler o nome de um token</h2>
+        <p class="lede">O nome se lê da esquerda para a direita, do geral para o específico: a fundação, a propriedade e, quando precisa, os modificadores.</p>
+      </div>
+      <div class="stage">
+        <div class="tk-anatomy" role="img" aria-label="O token --color-bg-danger-bold-hovered dividido em partes: color é a fundação, bg é a propriedade, danger, bold e hovered são modificadores de papel, ênfase e estado.">
+          <span class="tk-anatomy__dash">--</span>
+          <span class="tk-part tk-part--foundation"><code>color</code><span>fundação</span></span>
+          <span class="tk-anatomy__dash">-</span>
+          <span class="tk-part tk-part--property"><code>bg</code><span>propriedade</span></span>
+          <span class="tk-anatomy__dash">-</span>
+          <span class="tk-part tk-part--modifier"><code>danger</code><span>papel</span></span>
+          <span class="tk-anatomy__dash">-</span>
+          <span class="tk-part tk-part--modifier"><code>bold</code><span>ênfase</span></span>
+          <span class="tk-anatomy__dash">-</span>
+          <span class="tk-part tk-part--modifier"><code>hovered</code><span>estado</span></span>
+        </div>
+        <p class="tk-anatomy__read">Lê-se: a cor do fundo de algo perigoso, forte, com o ponteiro em cima. É o fundo do botão "Excluir" no hover.</p>
+      </div>
+      <dl class="guidance">
+        <div><dt>Fundação</dt><dd>O tipo de decisão: <code>color</code>, <code>shadow</code>, <code>opacity</code>, <code>space</code>, <code>font</code>, <code>radius</code>, <code>duration</code>. Toda token começa por uma.</dd></div>
+        <div><dt>Propriedade</dt><dd>Onde a decisão se aplica: <code>text</code>, <code>icon</code>, <code>border</code>, <code>bg</code> (fundo), <code>surface</code>, <code>label</code>, <code>link</code>. Nas escalas (espaço, raio) o lugar está no nome da fundação e a propriedade não aparece.</dd></div>
+        <div><dt>Modificador</dt><dd>O detalhe que falta: o papel (<code>danger</code>, <code>success</code>, <code>brand</code>), a ênfase (<code>subtle</code>, <code>bold</code>), o estado (<code>hovered</code>, <code>pressed</code>) ou a cor de uma etiqueta (<code>blue</code>). É opcional: <code>--color-text</code> não tem nenhum.</dd></div>
+      </dl>
+      <div class="scroll-x">
+        <table class="tier-table tk-names">
+          <thead><tr><th scope="col">Token</th><th scope="col">Fundação</th><th scope="col">Propriedade</th><th scope="col">Modificadores</th><th scope="col">Onde entra</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>--color-text</code></th><td>color</td><td>text</td><td>nenhum</td><td>O texto de todo dia.</td></tr>
+            <tr><th scope="row"><code>--color-text-information</code></th><td>color</td><td>text</td><td>information</td><td>Texto de um aviso informativo.</td></tr>
+            <tr><th scope="row"><code>--color-icon-danger</code></th><td>color</td><td>icon</td><td>danger</td><td>O ícone de um erro.</td></tr>
+            <tr><th scope="row"><code>--color-label-blue-bg</code></th><td>color</td><td>label</td><td>blue, bg</td><td>O fundo suave de uma etiqueta azul.</td></tr>
+            <tr><th scope="row"><code>--color-bg-danger-bold-hovered</code></th><td>color</td><td>bg</td><td>danger, bold, hovered</td><td>O botão de perigo no hover.</td></tr>
+            <tr><th scope="row"><code>--color-border-focused</code></th><td>color</td><td>border</td><td>focused</td><td>O anel de foco do teclado.</td></tr>
+            <tr><th scope="row"><code>--shadow-overlay</code></th><td>shadow</td><td>nenhuma</td><td>overlay</td><td>A sombra de menus e modais.</td></tr>
+            <tr><th scope="row"><code>--opacity-disabled</code></th><td>opacity</td><td>nenhuma</td><td>disabled</td><td>Uma linha ou um avatar desabilitado.</td></tr>
+            <tr><th scope="row"><code>--space-150</code></th><td>space</td><td>nenhuma</td><td>150 (12px)</td><td>O espaço entre campos de um formulário.</td></tr>
+            <tr><th scope="row"><code>--font-body-small</code></th><td>font</td><td>body</td><td>small</td><td>Texto de apoio e legendas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="sub">Os modificadores, em um lugar</h3>
+      <dl class="guidance">
+        <div><dt>Papel</dt><dd><code>brand</code>, <code>information</code>, <code>success</code>, <code>warning</code>, <code>danger</code>, <code>discovery</code>, <code>neutral</code>, <code>selected</code>, <code>disabled</code>, <code>inverse</code>, <code>input</code>.</dd></div>
+        <div><dt>Ênfase</dt><dd>Do mais leve ao mais forte: <code>subtlest</code>, <code>subtle</code>, o padrão (sem modificador) e <code>bold</code>.</dd></div>
+        <div><dt>Estado</dt><dd><code>hovered</code> com o ponteiro em cima, <code>pressed</code> no clique, <code>focused</code> no foco do teclado.</dd></div>
+        <div><dt>Cor de etiqueta</dt><dd><code>blue</code>, <code>teal</code>, <code>green</code>, <code>purple</code>, <code>magenta</code>, <code>orange</code>, cada uma com um par <code>bg</code> e <code>text</code>.</dd></div>
+      </dl>
+    </section>
+
+    <section class="ds-section" id="usar">
+      <div class="ds-head">
+        <h2>Encontrar e usar tokens</h2>
+        <p class="lede">Escolha pelo significado, nunca pelo valor. O catálogo completo, com busca e o valor de cada token no tema atual, está em <a href="variaveis.html">Variáveis CSS</a>.</p>
+      </div>
+      <div class="ficha__dos">
+        <div class="ficha__do">
+          <h3><svg class="i" aria-hidden="true"><use href="#i-success"/></svg>Faça</h3>
+          <ul>
+            <li>Escolha o token cujo nome descreve o seu caso: texto de apoio é <code>--color-text-subtle</code>.</li>
+            <li>Use o par certo: fundo <code>bold</code> pede texto <code>inverse</code>.</li>
+            <li>Confira a tela no escuro e no alto contraste antes de entregar.</li>
+          </ul>
+        </div>
+        <div class="ficha__dont">
+          <h3><svg class="i" aria-hidden="true"><use href="#i-error"/></svg>Não faça</h3>
+          <ul>
+            <li>Não escolha um token só porque a cor parece certa: no outro tema ela pode sumir.</li>
+            <li>Não use a paleta (<code>--palette-*</code>) direto: ela não troca com o tema.</li>
+            <li>Não escreva valores soltos nem crie um token novo sem passar pela revisão.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="ds-section" id="exemplos">
+      <div class="ds-head">
+        <h2>Exemplos de tokens</h2>
+        <p class="lede">Os grupos que mais aparecem numa tela. Os valores mostrados são os do tema atual.</p>
+      </div>
+
+      <h3 class="sub" id="cor">Tokens de cor</h3>
+      <p class="tk-lead">Texto, ícones, bordas, fundos e superfícies têm tokens próprios. Um fundo não serve de texto, nem um texto de borda: cada par foi medido para passar no contraste.</p>
+      <div class="tk-groups">
+        <div class="stage tk-group-card">
+          <h4>Texto</h4>
+          <ul class="tk-rows tk-rows--compact">
+            <li><span class="tk-sample" style="color:var(--color-text)">Aa</span><code>--color-text</code></li>
+            <li><span class="tk-sample" style="color:var(--color-text-subtle)">Aa</span><code>--color-text-subtle</code></li>
+            <li><span class="tk-sample" style="color:var(--color-text-subtlest)">Aa</span><code>--color-text-subtlest</code></li>
+            <li><span class="tk-sample" style="color:var(--color-text-brand)">Aa</span><code>--color-text-brand</code></li>
+            <li><span class="tk-sample" style="color:var(--color-text-danger)">Aa</span><code>--color-text-danger</code></li>
+          </ul>
+        </div>
+        <div class="stage tk-group-card">
+          <h4>Ícones</h4>
+          <ul class="tk-rows tk-rows--compact">
+            <li><svg class="i tk-sample-i" style="color:var(--color-icon)" aria-hidden="true"><use href="#i-settings"/></svg><code>--color-icon</code></li>
+            <li><svg class="i tk-sample-i" style="color:var(--color-icon-subtle)" aria-hidden="true"><use href="#i-clock"/></svg><code>--color-icon-subtle</code></li>
+            <li><svg class="i tk-sample-i" style="color:var(--color-icon-brand)" aria-hidden="true"><use href="#i-info"/></svg><code>--color-icon-brand</code></li>
+            <li><svg class="i tk-sample-i" style="color:var(--color-icon-success)" aria-hidden="true"><use href="#i-success"/></svg><code>--color-icon-success</code></li>
+            <li><svg class="i tk-sample-i" style="color:var(--color-icon-danger)" aria-hidden="true"><use href="#i-error"/></svg><code>--color-icon-danger</code></li>
+          </ul>
+        </div>
+        <div class="stage tk-group-card">
+          <h4>Bordas</h4>
+          <ul class="tk-rows tk-rows--compact">
+            <li><span class="tk-box" style="border:2px solid var(--color-border)"></span><code>--color-border</code></li>
+            <li><span class="tk-box" style="border:2px solid var(--color-border-bold)"></span><code>--color-border-bold</code></li>
+            <li><span class="tk-box" style="border:2px solid var(--color-border-input)"></span><code>--color-border-input</code></li>
+            <li><span class="tk-box" style="border:2px solid var(--color-border-focused)"></span><code>--color-border-focused</code></li>
+            <li><span class="tk-box" style="border:2px solid var(--color-border-danger)"></span><code>--color-border-danger</code></li>
+          </ul>
+        </div>
+        <div class="stage tk-group-card">
+          <h4>Fundos</h4>
+          <ul class="tk-rows tk-rows--compact">
+            <li><span class="tk-box" style="background:var(--color-bg-neutral)"></span><code>--color-bg-neutral</code></li>
+            <li><span class="tk-box" style="background:var(--color-bg-selected)"></span><code>--color-bg-selected</code></li>
+            <li><span class="tk-box" style="background:var(--color-bg-brand-bold)"></span><code>--color-bg-brand-bold</code></li>
+            <li><span class="tk-box" style="background:var(--color-bg-warning)"></span><code>--color-bg-warning</code></li>
+            <li><span class="tk-box" style="background:var(--color-bg-danger-bold)"></span><code>--color-bg-danger-bold</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub" id="elevacao">Tokens de elevação</h3>
+      <p class="tk-lead">A elevação diz o quanto algo flutua acima do resto. Cada nível tem uma superfície e, a partir do elevado, uma sombra. No escuro a superfície clareia em vez de a sombra escurecer.</p>
+      <div class="stage stage--sunken">
+        <div class="states">
+          <figure class="state"><div class="elev elev--sunken"><b>Afundada</b><code>--color-surface-sunken</code></div><figcaption><b>Fundo da janela</b>atrás de tudo</figcaption></figure>
+          <figure class="state"><div class="elev elev--default"><b>Padrão</b><code>--color-surface</code></div><figcaption><b>Conteúdo</b>a lista, a leitura</figcaption></figure>
+          <figure class="state"><div class="elev elev--raised"><b>Elevada</b><code>--shadow-raised</code></div><figcaption><b>Cards</b>algo que se pega ou se move</figcaption></figure>
+          <figure class="state"><div class="elev elev--overlay"><b>Sobreposta</b><code>--shadow-overlay</code></div><figcaption><b>Menus e modais</b>por cima de tudo</figcaption></figure>
+        </div>
+      </div>
+
+      <h3 class="sub" id="opacidade">Tokens de opacidade</h3>
+      <p class="tk-lead">Só cinco níveis, cada um com um uso. Nenhum componente usa um número solto.</p>
+      <div class="stage">
+        <div class="states">
+          <figure class="state"><span class="avatar avatar--lg avatar--purple" style="opacity:var(--opacity-disabled)">AL<img class="avatar__img" alt="" src="images/people/pessoa-2.webp" width="160" height="160"></span><figcaption><b><code>--opacity-disabled</code></b>conta desabilitada</figcaption></figure>
+          <figure class="state"><span class="lozenge" style="opacity:var(--opacity-muted)">Regra desligada</span><figcaption><b><code>--opacity-muted</code></b>o que está pausado</figcaption></figure>
+          <figure class="state"><button class="btn btn--primary" type="button" style="opacity:var(--opacity-busy)"><span class="spinner spinner--sm" aria-hidden="true"></span>Enviando…</button><figcaption><b><code>--opacity-busy</code></b>enquanto trabalha</figcaption></figure>
+          <figure class="state"><span class="chip"><span class="chip__name" style="opacity:var(--opacity-soft)">Texto sobre cor</span></span><figcaption><b><code>--opacity-soft</code></b>apoio sobre um fundo</figcaption></figure>
+        </div>
+      </div>
+
+      <h3 class="sub" id="espaco">Tokens de espaço</h3>
+      <p class="tk-lead">Base 8, com meios-passos de 2 e 4. O número no nome é o valor em centésimos de rem: 100 é 8px, 200 é 16px.</p>
+      <div class="stage">
+        <ul class="tk-space-list">
+          <li><code>--space-050</code><span class="space-bar" style="width:var(--space-050)"></span><span>4px · ícone e texto</span></li>
+          <li><code>--space-100</code><span class="space-bar" style="width:var(--space-100)"></span><span>8px · itens de uma linha</span></li>
+          <li><code>--space-150</code><span class="space-bar" style="width:var(--space-150)"></span><span>12px · campos de um formulário</span></li>
+          <li><code>--space-200</code><span class="space-bar" style="width:var(--space-200)"></span><span>16px · respiro de um card</span></li>
+          <li><code>--space-300</code><span class="space-bar" style="width:var(--space-300)"></span><span>24px · grupos dentro de uma tela</span></li>
+          <li><code>--space-500</code><span class="space-bar" style="width:var(--space-500)"></span><span>40px · seções de uma página</span></li>
+          <li><code>--space-800</code><span class="space-bar" style="width:var(--space-800)"></span><span>64px · respiro entre blocos grandes</span></li>
+        </ul>
+      </div>
+
+      <h3 class="sub" id="tipografia">Tokens de tipografia</h3>
+      <p class="tk-lead">Cada estilo é um atalho que junta peso, tamanho, altura de linha e família. Use <code>font: var(--font-body)</code> em vez de montar as quatro partes na mão.</p>
+      <div class="stage">
+        <div class="type-row"><div class="type-meta"><b>Hero</b><code>--font-hero</code></div><p class="type-sample" style="font:var(--font-hero);letter-spacing:var(--letter-spacing-hero)">Caixa de entrada</p></div>
+        <div class="type-row"><div class="type-meta"><b>Título de página</b><code>--font-page-title</code></div><p class="type-sample" style="font:var(--font-page-title);letter-spacing:var(--letter-spacing-page-title)">Configurações</p></div>
+        <div class="type-row"><div class="type-meta"><b>Card</b><code>--font-card</code></div><p class="type-sample" style="font:var(--font-card)">Plano Equipe</p></div>
+        <div class="type-row"><div class="type-meta"><b>Corpo</b><code>--font-body</code></div><p class="type-sample" style="font:var(--font-body)">Reponha antes de sexta para não perder pedidos.</p></div>
+        <div class="type-row"><div class="type-meta"><b>Apoio</b><code>--font-body-small</code></div><p class="type-sample" style="font:var(--font-body-small)">Rascunho salvo às 10:44</p></div>
+        <div class="type-row"><div class="type-meta"><b>Código</b><code>--font-code</code></div><p class="type-sample" style="font:var(--font-code)">var(--color-text)</p></div>
+      </div>
+
+      <h3 class="sub" id="outros">Raio, borda e movimento</h3>
+      <dl class="guidance">
+        <div><dt>Raio</dt><dd>Cresce com o tamanho da peça: <code>--radius-small</code> em botões e campos, <code>--radius-medium</code> em menus, <code>--radius-large</code> em modais, <code>--radius-round</code> em avatares.</dd></div>
+        <div><dt>Borda</dt><dd><code>--border-width</code> para linhas e caixas, <code>--border-width-focused</code> para o anel de foco.</dd></div>
+        <div><dt>Movimento</dt><dd>Três durações, <code>--duration-fast</code>, <code>--duration-medium</code> e <code>--duration-slow</code>, e a curva <code>--easing-standard</code> para algo que entra na tela. Com "reduzir movimento", as durações vão a zero.</dd></div>
+      </dl>
+    </section>
+
+    <section class="ds-section" id="proximos">
+      <div class="ds-head">
+        <h2>Próximos passos</h2>
+      </div>
+      <ul class="showcase-links tk-next">
+        <li><a href="cores.html">Cores</a></li>
+        <li><a href="espacamento.html">Espaçamento e layout</a></li>
+        <li><a href="tipografia.html">Tipografia</a></li>
+        <li><a href="forma.html">Forma e elevação</a></li>
+        <li><a href="temas.html">Temas e densidade</a></li>
+        <li><a href="variaveis.html">Todas as variáveis CSS</a></li>
+      </ul>
+      <p class="classes"><span>Classes</span> nenhuma: esta página mostra só variáveis de <code>dist/tokens.css</code>.</p>
+    </section>
+  </main>
+</div>
+<script src="../dist/sprite.js"></script>
+<script src="docs.js"></script>
+</body>
+</html>
