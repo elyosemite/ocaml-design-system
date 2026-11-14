@@ -1,5 +1,7 @@
 # OCaml Design System
 
+[![CI](https://github.com/elyosemite/ocaml-design-system/actions/workflows/ci.yml/badge.svg)](https://github.com/elyosemite/ocaml-design-system/actions/workflows/ci.yml)
+
 Um design system para qualquer produto: tokens, componentes CSS, ícones e a documentação de cada peça. Feito para telas densas, que se leem rápido e se usam com um gesto. Meta de **WCAG 2.2 AA**, com temas claro, escuro e alto contraste.
 
 CSS puro no resultado: quem consome não precisa de Sass nem de framework. Nenhuma página carrega nada de terceiros (fontes, ícones e scripts são locais).

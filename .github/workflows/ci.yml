@@ -1,0 +1,59 @@
+# CI do OCaml Design System.
+# Em cada push para a main e em cada pull request:
+#   1. instala as dependências exatamente como estão no pnpm-lock.yaml;
+#   2. gera dist/ a partir de src/ (Sass, sprite, fontes, registro de páginas);
+#   3. confere o resultado contra baseline/ (tokens em todos os temas, regras do CSS e sprite);
+#   4. confere tokens, temas, registro de páginas e uso da paleta (pnpm check).
+# O dist/ gerado fica como artefato da execução por 14 dias.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build e verificação
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Instalar o pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Instalar o Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar as dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Gerar dist/
+        run: pnpm build
+
+      - name: Comparar com baseline/
+        run: pnpm compare
+
+      - name: Conferir tokens, temas e páginas
+        run: pnpm check
+
+      - name: Guardar dist/
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 14
+          if-no-files-found: error
