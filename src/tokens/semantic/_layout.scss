@@ -1,0 +1,17 @@
+// Nível 2 · Semânticos · layout do cliente
+// Larguras e alturas da casca do app: colunas, lista, leitura, composição e modais.
+@use '../primitives/size' as p;
+
+$groups: (
+  'Layout do cliente': (
+    'layout-header-height': (value: p.$size-56, desc: '56px'),
+    'layout-sidebar-width': (value: p.$size-240, desc: '240px'),
+    'layout-sidebar-collapsed': (value: p.$size-64, desc: '64px'),
+    'layout-list-width': (value: p.$size-400, desc: '400px'),
+    'layout-reading-measure': (value: p.$size-672, desc: '672px ≈ 70 caracteres em Body Large'),
+    'layout-compose-width': (value: p.$size-560, desc: '560px'),
+    'layout-modal-small': (value: p.$size-400, desc: '400px'),
+    'layout-modal-medium': (value: p.$size-600, desc: '600px'),
+    'layout-form-column': (value: p.$size-240, desc: '240px: largura mínima de cada coluna de formulário'),
+  ),
+);

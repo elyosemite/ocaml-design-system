@@ -1,0 +1,37 @@
+// Produto · Arquivos de e-mail (L70–L72)
+// Veio de components.css (linhas 1737–1769) na migração para o EpistulaDesignSystem.
+
+@use '../../tokens/components/avatar';
+
+/* ==========================================================================
+   Arquivos de e-mail (L70–L72, US15): abrir backups de outros programas, sem conta
+   ========================================================================== */
+
+/* L70 · Área de soltar: cobre a janela enquanto um arquivo ou pasta é arrastado sobre ela. */
+.drop-zone {
+  display: grid; place-items: center; align-content: center; gap: var(--space-150);
+  min-height: 16rem; padding: var(--space-400);
+  border: var(--border-width-focused) dashed var(--color-border-focused); border-radius: var(--radius-large);
+  background: var(--color-bg-selected); color: var(--color-text-selected);
+  text-align: center;
+}
+.drop-zone .i { width: 2.5rem; height: 2.5rem; color: var(--color-icon-brand); }
+.drop-zone__title { margin: 0; font: var(--font-section); color: var(--color-text); }
+.drop-zone__desc { margin: 0; max-width: 44ch; font: var(--font-body); color: var(--color-text-subtle); }
+.drop-zone--overlay { position: fixed; inset: var(--space-200); z-index: var(--z-blanket); pointer-events: none; box-shadow: var(--shadow-overlay); }
+
+/* L71 · Arquivo local na coluna de contas e nos menus: neutro e com ícone no lugar da inicial. */
+.avatar--archive { @include avatar.set('archive'); }
+.avatar--archive .i { width: 1rem; height: 1rem; }
+.avatar--lg.avatar--archive .i { width: 1.25rem; height: 1.25rem; }
+
+/* L72 · Resumo da importação: três números lado a lado. */
+.import-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-100); margin: 0; }
+.import-summary > div {
+  display: grid; gap: var(--space-025); padding: var(--space-150);
+  border: var(--border-width) solid var(--color-border); border-radius: var(--radius-medium);
+  background: var(--color-surface-raised);
+}
+.import-summary dt { font: var(--font-body-small); color: var(--color-text-subtle); }
+.import-summary dd { margin: 0; font: var(--font-section); color: var(--color-text); font-variant-numeric: tabular-nums; }
+.import-summary .is-danger dd { color: var(--color-text-danger); }

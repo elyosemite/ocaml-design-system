@@ -1,0 +1,12 @@
+// Nível 2 · Semânticos · elevação · sombras
+// Cada token tem o valor do tema claro e o do escuro lado a lado (light/dark). O que é igual nos dois
+// temas de propósito usa value. A compilação falha se faltar um dos temas.
+
+@use '../primitives/color' as p;
+
+$groups: (
+  'Elevação · sombras': (
+    'shadow-raised': (light: (0 1px 1px p.palette('blue-860-a25'), 0 0 1px p.palette('blue-860-a31')), dark: (0 0 0 1px p.palette('white-a08'), 0 1px 2px p.palette('black-1000-a80'))),
+    'shadow-overlay': (light: (0 8px 12px p.palette('blue-860-a15'), 0 0 1px p.palette('blue-860-a31')), dark: (0 0 0 1px p.palette('white-a12'), 0 8px 16px p.palette('black-1000-a70'))),
+  ),
+);

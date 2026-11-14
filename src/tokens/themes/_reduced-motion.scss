@@ -1,0 +1,18 @@
+// Temas · movimento reduzido
+// Com "reduzir movimento" ligado no sistema, toda duração vai a zero.
+@use '../emit';
+@use '../primitives/motion' as p;
+
+$overrides: (
+  'duration-fast': p.$duration-0,
+  'duration-medium': p.$duration-0,
+  'duration-slow': p.$duration-0,
+);
+
+@mixin emit {
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      @include emit.vars($overrides);
+    }
+  }
+}

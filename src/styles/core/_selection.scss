@@ -1,0 +1,50 @@
+// Core · Seleção: checkbox e toggle (ADS Checkbox / Toggle)
+// Veio de components.css (linhas 222–269) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Seleção: checkbox e toggle (ADS Checkbox / Toggle)
+   ========================================================================== */
+.checkbox {
+  appearance: none; -webkit-appearance: none; margin: 0;
+  display: inline-grid; place-content: center;
+  width: 16px; height: 16px; flex: none;
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-xsmall);
+  background: var(--color-bg-input); cursor: pointer;
+  transition: background-color var(--duration-fast), border-color var(--duration-fast);
+}
+.checkbox::after {
+  content: ""; width: 8px; height: 4px; margin-top: -2px;
+  border-left: 2px solid var(--color-text-inverse); border-bottom: 2px solid var(--color-text-inverse); /* físico: o traço do "ok" do checkbox não espelha no RTL */
+  transform: rotate(-45deg) scale(0); transition: transform var(--duration-fast) var(--easing-standard);
+}
+.checkbox:hover, .checkbox.is-hover { border-color: var(--color-border-bold); background: var(--color-bg-input-hovered); }
+.checkbox:checked, .checkbox:indeterminate { background: var(--color-bg-brand-bold); border-color: var(--color-bg-brand-bold); }
+.checkbox:checked:hover { background: var(--color-bg-brand-bold-hovered); border-color: var(--color-bg-brand-bold-hovered); }
+.checkbox:checked::after { transform: rotate(-45deg) scale(1); }
+.checkbox:indeterminate::after { width: 8px; height: 0; margin: 0; border-left: 0; transform: none; } /* físico: o traço do "ok" do checkbox não espelha no RTL */
+.checkbox:focus-visible, .checkbox.is-focus { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: 1px; }
+.checkbox:disabled { background: var(--color-bg-disabled); border-color: var(--color-bg-neutral-hovered); cursor: not-allowed; }
+.checkbox.is-invalid { border-color: var(--color-border-danger); }
+
+.toggle {
+  appearance: none; -webkit-appearance: none; margin: 0; position: relative;
+  width: 32px; height: 16px; flex: none;
+  border-radius: var(--radius-round); background: var(--color-bg-neutral-bold);
+  cursor: pointer; transition: background-color var(--duration-medium);
+}
+.toggle::after {
+  content: ""; position: absolute; top: 2px; inset-inline-start: 2px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--color-surface);
+  transition: transform var(--duration-medium) var(--easing-standard);
+}
+.toggle:hover { filter: brightness(0.92); }
+.toggle:checked { background: var(--color-bg-success-bold); }
+.toggle:checked::after { transform: translateX(16px); }
+[dir="rtl"] .toggle:checked::after { transform: translateX(-16px); }
+.toggle:focus-visible, .toggle.is-focus { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.toggle:disabled { background: var(--color-bg-disabled); box-shadow: inset 0 0 0 1px var(--color-border); cursor: not-allowed; }
+.toggle:disabled::after { background: var(--color-text-disabled); }
+
+.choice { display: inline-flex; align-items: center; gap: var(--space-100); font: var(--font-body); color: var(--color-text); }

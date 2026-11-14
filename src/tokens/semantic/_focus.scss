@@ -1,0 +1,12 @@
+// Nível 2 · Semânticos · foco
+// O anel de teclado, igual em todo componente.
+@use '../primitives/shape' as p;
+
+$groups: (
+  'Foco': (
+    'focus-ring-width': (value: var(--border-width-focused), desc: 'O anel de teclado, igual em todo componente.'),
+    'focus-ring-color': var(--color-border-focused),
+    'focus-ring-offset': (value: p.$offset-2, desc: 'afastado da borda do controle'),
+    'focus-ring-offset-inset': (value: p.$offset-minus-2, desc: 'para dentro, quando o controle ocupa a linha inteira'),
+  ),
+);

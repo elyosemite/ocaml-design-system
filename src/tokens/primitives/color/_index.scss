@@ -1,0 +1,38 @@
+// Nível 1 · Primitivos · cor
+// Junta as famílias da paleta e oferece palette(), a única forma de um token semântico chegar a uma cor bruta.
+// palette() falha na compilação se o nome não existir.
+@use 'sass:map';
+@use '../../config';
+@use 'neutral' as neutral-family;
+@use 'blue' as blue-family;
+@use 'green' as green-family;
+@use 'warm' as warm-family;
+@use 'magenta' as magenta-family;
+
+$_families: (neutral-family.$groups, blue-family.$groups, green-family.$groups, warm-family.$groups, magenta-family.$groups);
+
+/// nome → valor, para palette()
+$palette: ();
+/// grupos com os nomes --palette-*, para emitir no CSS
+$groups: ();
+
+@each $family in $_families {
+  @each $group, $colors in $family {
+    $prefixed: ();
+    @each $name, $value in $colors {
+      $palette: map.set($palette, $name, $value);
+      $prefixed: map.set($prefixed, 'palette-#{$name}', $value);
+    }
+    $groups: map.set($groups, $group, $prefixed);
+  }
+}
+
+@function palette($name) {
+  @if not map.has-key($palette, $name) {
+    @error 'Cor primitiva inexistente: #{$name}. Veja src/tokens/primitives/color/.';
+  }
+  @if config.$emit-primitives {
+    @return var(--palette-#{$name});
+  }
+  @return map.get($palette, $name);
+}

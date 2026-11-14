@@ -1,0 +1,29 @@
+// Produto · Anexo (ADS Media card, simplificado)
+// Veio de components.css (linhas 1211–1237) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Anexo (ADS Media card, simplificado)
+   ========================================================================== */
+.attachments { display: flex; flex-wrap: wrap; gap: var(--space-100); }
+.attachment {
+  position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-100); align-items: center;
+  width: 13.5rem; max-width: 100%; padding: var(--space-100) var(--space-150) var(--space-100) var(--space-100);
+  border: var(--border-width) solid var(--color-border); border-radius: var(--radius-medium);
+  background: var(--color-surface-raised); color: var(--color-text);
+  text-align: start; cursor: pointer; font: var(--font-body);
+}
+.attachment__icon { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: var(--radius-small); background: var(--color-bg-neutral); color: var(--color-icon); }
+.attachment__icon--pdf { background: var(--color-bg-danger); color: var(--color-icon-danger); }
+.attachment__icon--img { background: var(--color-bg-discovery); color: var(--color-icon-discovery); }
+.attachment__icon--doc { background: var(--color-bg-information); color: var(--color-icon-brand); }
+.attachment__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: var(--font-weight-medium); }
+.attachment__meta { font: var(--font-body-small); color: var(--color-text-subtlest); }
+.attachment__action { position: absolute; inset-inline-end: var(--space-075); top: 50%; transform: translateY(-50%); display: none; }
+.attachment:hover, .attachment.is-hover { background: var(--color-bg-neutral-subtle-hovered); box-shadow: var(--shadow-raised); }
+.attachment:hover .attachment__action, .attachment.is-hover .attachment__action { display: inline-flex; }
+.attachment.is-error { border-color: var(--color-border-danger); }
+.attachment.is-error .attachment__meta { color: var(--color-text-danger); }
+.attachment .progress { margin-top: var(--space-050); }
+/* Somente informação: sem download nem abertura (ex.: recurso ainda indisponível). */
+.attachment--static { cursor: default; }
+.attachment--static:hover, .attachment--static.is-hover { background: var(--color-surface-raised); box-shadow: none; }

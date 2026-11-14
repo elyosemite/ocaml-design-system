@@ -1,0 +1,6 @@
+// Nível 1 · Primitivos · breakpoints
+// Larguras de janela, em px. Também alimentam a mixin bp() dos componentes, então o token e o @media
+// não podem divergir.
+
+$breakpoint-960: 960px;
+$breakpoint-1280: 1280px;

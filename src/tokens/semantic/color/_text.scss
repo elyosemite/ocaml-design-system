@@ -1,0 +1,25 @@
+// Nível 2 · Semânticos · cor · texto e links
+// Cada token tem o valor do tema claro e o do escuro lado a lado (light/dark). O que é igual nos dois
+// temas de propósito usa value. A compilação falha se faltar um dos temas.
+
+@use '../../primitives/color' as p;
+
+$groups: (
+  'Cor · texto': (
+    'color-text': (light: p.palette('blue-810'), dark: p.palette('slate-85')),
+    'color-text-subtle': (light: p.palette('slate-650'), dark: p.palette('slate-225')),
+    'color-text-subtlest': (light: p.palette('slate-550'), dark: p.palette('slate-350')),
+    'color-text-disabled': (light: p.palette('blue-860-a31'), dark: p.palette('white-a30')),
+    'color-text-inverse': (light: p.palette('white'), dark: p.palette('slate-925')),
+    'color-text-brand': (light: p.palette('blue-525'), dark: p.palette('blue-275')),
+    'color-text-selected': (light: p.palette('blue-600'), dark: p.palette('blue-235')),
+    'color-text-danger': (light: p.palette('red-600'), dark: p.palette('red-200')),
+    'color-text-warning': (light: p.palette('orange-675'), dark: p.palette('yellow-325')),
+    'color-text-warning-inverse': (light: p.palette('blue-810'), dark: p.palette('slate-925')),
+    'color-text-success': (light: p.palette('green-725'), dark: p.palette('green-300')),
+    'color-text-information': (light: p.palette('blue-600'), dark: p.palette('blue-250')),
+    'color-text-discovery': (light: p.palette('blue-500'), dark: p.palette('blue-175')),
+    'color-link': (light: p.palette('blue-525'), dark: p.palette('blue-275')),
+    'color-link-pressed': (light: p.palette('blue-600'), dark: p.palette('blue-225')),
+  ),
+);

@@ -1,0 +1,13 @@
+// Nível 2 · Semânticos · opacidade
+// Só estes níveis.
+@use '../primitives/opacity' as p;
+
+$groups: (
+  'Opacidade': (
+    'opacity-disabled': (value: p.$opacity-45, desc: 'conta de que saiu, linha desabilitada, pulso do skeleton'),
+    'opacity-muted': (value: p.$opacity-55, desc: 'regra desligada, entrada desfeita no histórico'),
+    'opacity-busy': (value: p.$opacity-60, desc: 'janela enviando'),
+    'opacity-soft': (value: p.$opacity-80, desc: 'texto de apoio sobre cor, como o rótulo de um chip'),
+    'opacity-glow': (value: p.$opacity-22, desc: 'brilho desfocado do topo das páginas de destaque'),
+  ),
+);

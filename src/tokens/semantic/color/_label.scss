@@ -1,0 +1,22 @@
+// Nível 2 · Semânticos · cor · etiquetas de e-mail e avatares (pares fundo/texto)
+// Cada token tem o valor do tema claro e o do escuro lado a lado (light/dark). O que é igual nos dois
+// temas de propósito usa value. A compilação falha se faltar um dos temas.
+
+@use '../../primitives/color' as p;
+
+$groups: (
+  'Cor · etiquetas de e-mail (pares fundo/texto)': (
+    'color-label-blue-bg': (light: p.palette('blue-50'), dark: p.palette('blue-775')),
+    'color-label-blue-text': (light: p.palette('blue-600'), dark: p.palette('blue-100')),
+    'color-label-teal-bg': (light: p.palette('blue-60'), dark: p.palette('blue-800')),
+    'color-label-teal-text': (light: p.palette('blue-675'), dark: p.palette('blue-125')),
+    'color-label-green-bg': (light: p.palette('green-75'), dark: p.palette('green-800')),
+    'color-label-green-text': (light: p.palette('green-725'), dark: p.palette('green-150')),
+    'color-label-purple-bg': (light: p.palette('blue-25'), dark: p.palette('blue-785')),
+    'color-label-purple-text': (light: p.palette('blue-500'), dark: p.palette('blue-75')),
+    'color-label-magenta-bg': (light: p.palette('magenta-25'), dark: p.palette('magenta-775')),
+    'color-label-magenta-text': (light: p.palette('magenta-600'), dark: p.palette('magenta-100')),
+    'color-label-orange-bg': (light: p.palette('orange-50'), dark: p.palette('orange-775')),
+    'color-label-orange-text': (light: p.palette('orange-675'), dark: p.palette('orange-120')),
+  ),
+);

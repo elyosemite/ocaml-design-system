@@ -1,0 +1,13 @@
+// Core · Controle segmentado (L41)
+// Veio de components.css (linhas 888–898) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Menu da conta, colunas recolhíveis, densidade e envio (L40–L45, US7)
+   ========================================================================== */
+/* L41 · Controle segmentado: uma opção entre poucas (role="radiogroup" com aria-checked, ou
+   botões com aria-pressed). --fill divide a largura igualmente. */
+.segmented { display: inline-flex; gap: var(--space-025); padding: var(--space-025); border-radius: var(--radius-small); background: var(--color-bg-neutral); }
+.segmented .btn { --btn-bg: transparent; height: 1.75rem; }
+.segmented .btn[aria-checked="true"], .segmented .btn[aria-pressed="true"] { --btn-bg: var(--color-surface); --btn-bg-hover: var(--color-surface); --btn-fg: var(--color-text); box-shadow: var(--shadow-raised); }
+.segmented--fill { display: flex; }
+.segmented--fill .btn { flex: 1; justify-content: center; }

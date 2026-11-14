@@ -1,0 +1,5 @@
+// Produto · Sinalizadas na coluna de pastas (L39)
+// Veio de components.css (linhas 885–887) na migração para o EpistulaDesignSystem.
+
+/* L39 · Sinalizadas na coluna de pastas: prazo vencido em vermelho (com a palavra "Atrasadas") */
+.nav-item.is-overdue > .i, .nav-item.is-overdue .nav-item__count { color: var(--color-text-danger); }

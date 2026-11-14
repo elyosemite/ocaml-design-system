@@ -1,0 +1,16 @@
+// Nível 3 · Tokens de componente · section message (ADS Section Message)
+@use 'sass:map';
+@use '../emit';
+
+$variants: (
+  'information': ('sm-bg': var(--color-bg-information), 'sm-icon': var(--color-icon-brand)),
+  'warning': ('sm-bg': var(--color-bg-warning), 'sm-icon': var(--color-icon-warning)),
+  'error': ('sm-bg': var(--color-bg-danger), 'sm-icon': var(--color-icon-danger)),
+  'success': ('sm-bg': var(--color-bg-success), 'sm-icon': var(--color-icon-success)),
+  'discovery': ('sm-bg': var(--color-bg-discovery), 'sm-icon': var(--color-icon-discovery)),
+);
+
+@mixin set($variant) {
+  @if not map.has-key($variants, $variant) { @error 'Section message sem a variante "#{$variant}".'; }
+  @include emit.vars(map.get($variants, $variant));
+}

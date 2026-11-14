@@ -1,0 +1,18 @@
+// Nível 2 · Semânticos · cor · fundo da janela e a paleta de Aparência
+// Cada token tem o valor do tema claro e o do escuro lado a lado (light/dark). O que é igual nos dois
+// temas de propósito usa value. A compilação falha se faltar um dos temas.
+
+@use '../../primitives/color' as p;
+
+$groups: (
+  'Cor · fundo da janela': (
+    'color-canvas': (light: p.palette('slate-75'), dark: p.palette('slate-975'), desc: 'Fundo da janela atrás dos blocos. A casca lê --app-background, que aceita cor ou imagem.'),
+    'color-canvas-blue': (light: p.palette('blue-95'), dark: p.palette('blue-950'), desc: 'Paleta do fundo: escolhida em Configurações → Aparência, grava --app-background'),
+    'color-canvas-teal': (light: p.palette('teal-100'), dark: p.palette('teal-975')),
+    'color-canvas-green': (light: p.palette('green-100'), dark: p.palette('green-975')),
+    'color-canvas-purple': (light: p.palette('blue-85'), dark: p.palette('blue-925')),
+    'color-canvas-magenta': (light: p.palette('magenta-75'), dark: p.palette('magenta-950')),
+    'color-canvas-orange': (light: p.palette('orange-110'), dark: p.palette('orange-950')),
+    'color-canvas-sand': (light: p.palette('orange-100'), dark: p.palette('yellow-950')),
+  ),
+);

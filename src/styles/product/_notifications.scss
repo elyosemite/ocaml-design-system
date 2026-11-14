@@ -1,0 +1,30 @@
+// Produto · Sino e painel de notificações (L52)
+// Veio de components.css (linhas 907–934) na migração para o EpistulaDesignSystem.
+
+/* L52 · Sino no header: botão com contador e o painel das notificações recentes */
+.bell { position: relative; }
+.bell__count { position: absolute; top: 0; inset-inline-end: 0; min-width: 1.125rem; padding-inline: var(--space-050); box-shadow: 0 0 0 2px var(--color-surface); pointer-events: none; }
+.notice-panel { width: 23rem; max-width: calc(100vw - 2 * var(--space-200)); padding-block: 0; }
+.notice-panel__head { display: flex; align-items: center; gap: var(--space-100); padding: var(--space-150) var(--space-200) var(--space-100); }
+.notice-panel__title { flex: 1; margin: 0; font: var(--font-card); color: var(--color-text); }
+.notice-panel__list { display: grid; max-height: 24rem; overflow: auto; }
+.notice {
+  position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-150); align-items: start;
+  padding: var(--space-150) var(--space-200); border: 0; border-top: var(--border-width) solid var(--color-border);
+  background: transparent; color: var(--color-text-subtle); font: var(--font-body-small); text-align: start; cursor: pointer;
+}
+.notice:hover, .notice.is-hover { background: var(--color-bg-neutral-subtle-hovered); }
+.notice:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset-inset); }
+.notice__body { min-width: 0; }
+.notice__title { display: block; font: var(--font-weight-semibold) var(--font-size-body)/var(--line-height-body) var(--font-family-body); color: var(--color-text); }
+.notice__text { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.notice__time { color: var(--color-text-subtlest); white-space: nowrap; }
+.notice.is-unread::before { content: ""; position: absolute; inset-inline-start: var(--space-075); top: calc(var(--space-150) + 8px); width: 6px; height: 6px; border-radius: 50%; background: var(--color-icon-brand); }
+/* Ícone do tipo de aviso num círculo: neutro, vermelho (falha) ou amarelo (atenção) */
+.notice__icon { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-bg-neutral); color: var(--color-icon); }
+.notice__icon--danger { background: var(--color-bg-danger); color: var(--color-icon-danger); }
+.notice__icon--warning { background: var(--color-bg-warning); color: var(--color-icon-warning); }
+.notice-panel__foot { display: flex; align-items: center; gap: var(--space-100); padding: var(--space-100) var(--space-200); border-top: var(--border-width) solid var(--color-border); }
+.notice-panel__foot label { font: var(--font-body-small); color: var(--color-text-subtle); }
+.notice-panel__foot .btn--link { margin-inline-start: auto; }
+.notice-panel .empty { padding-block: var(--space-300); }

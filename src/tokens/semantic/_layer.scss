@@ -1,0 +1,16 @@
+// Nível 2 · Semânticos · camadas
+// A ordem de sobreposição, com os nomes do ADS. Use só estes níveis, nunca um número solto.
+@use '../primitives/layer' as p;
+
+$groups: (
+  'Camadas (z-index, escala ADS)': (
+    'z-card': p.$z-100,
+    'z-navigation': p.$z-200,
+    'z-dialog': p.$z-300,
+    'z-layer': p.$z-400,
+    'z-blanket': p.$z-500,
+    'z-modal': p.$z-510,
+    'z-flag': p.$z-600,
+    'z-tooltip': p.$z-800,
+  ),
+);

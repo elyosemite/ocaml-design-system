@@ -1,0 +1,14 @@
+// Nível 2 · Semânticos · movimento
+// Durações por intenção e as curvas. Com "reduzir movimento" no sistema, as durações vão a zero
+// (src/tokens/themes/_reduced-motion.scss).
+@use '../primitives/motion' as p;
+
+$groups: (
+  'Movimento': (
+    'duration-fast': p.$duration-100,
+    'duration-medium': p.$duration-200,
+    'duration-slow': p.$duration-350,
+    'easing-standard': p.$easing-emphasized,
+    'easing-exit': p.$easing-accelerate,
+  ),
+);

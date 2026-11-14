@@ -1,0 +1,17 @@
+// Nível 3 · Tokens de componente · artigo (L89)
+// O título grande e a margem lateral crescem com a janela, entre um mínimo e um máximo.
+@use 'sass:map';
+@use 'sass:string';
+@use '../emit';
+
+$variants: (
+  'default': (
+    'post-display': string.unquote('clamp(calc(var(--font-size-hero) * 1.4), 5vw, calc(var(--font-size-hero) * 2.1))'),
+    'post-gutter': string.unquote('clamp(var(--space-300), 6vw, var(--space-1000))'),
+  ),
+);
+
+@mixin set($variant) {
+  @if not map.has-key($variants, $variant) { @error 'Artigo sem a variante "#{$variant}".'; }
+  @include emit.vars(map.get($variants, $variant));
+}

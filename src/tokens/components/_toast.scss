@@ -1,0 +1,16 @@
+// Nível 3 · Tokens de componente · toast (ADS Flag)
+// Só a cor do ícone muda com o tipo; o texto diz o que aconteceu, a cor não basta.
+@use 'sass:map';
+@use '../emit';
+
+$variants: (
+  'success': ('tt-icon': var(--color-icon-success)),
+  'info': ('tt-icon': var(--color-icon-brand)),
+  'warning': ('tt-icon': var(--color-icon-warning)),
+  'error': ('tt-icon': var(--color-icon-danger)),
+);
+
+@mixin set($variant) {
+  @if not map.has-key($variants, $variant) { @error 'Toast sem a variante "#{$variant}".'; }
+  @include emit.vars(map.get($variants, $variant));
+}

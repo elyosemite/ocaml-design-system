@@ -1,0 +1,37 @@
+// Nível 1 · Primitivos · cor · quentes (amarelo, laranja, vermelho)
+// Valor bruto, sem intenção de uso. O nome diz a família e o quanto é escuro (25 claro … 1000 escuro);
+// o sufixo -aNN é a opacidade em %. Só os tokens semânticos usam estes valores, pela função palette().
+
+$groups: (
+  'Paleta · amarelo': (
+    'yellow-75': #FFF7D6,
+    'yellow-325': #F8D35C,
+    'yellow-375': #F5CD47,
+    'yellow-550': #E2B203,
+    'yellow-825': #533F04,
+    'yellow-950': #0C0B08,
+  ),
+  'Paleta · laranja': (
+    'orange-50': #FFF3EB,
+    'orange-100': #EFE9DF,
+    'orange-110': #F8E6D6,
+    'orange-120': #FEDEC8,
+    'orange-275': #FFAE70,
+    'orange-400': #F38A3F,
+    'orange-525': #E56910,
+    'orange-675': #A54800,
+    'orange-775': #5F3811,
+    'orange-950': #120A04,
+  ),
+  'Paleta · vermelho': (
+    'red-50': #FFECEB,
+    'red-200': #FF9C94,
+    'red-225': #FD9891,
+    'red-300': #F87168,
+    'red-375': #F15B50,
+    'red-425': #E2483D,
+    'red-525': #C9372C,
+    'red-600': #AE2E24,
+    'red-800': #42221F,
+  ),
+);

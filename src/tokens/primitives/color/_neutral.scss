@@ -1,0 +1,42 @@
+// Nível 1 · Primitivos · cor · neutros (branco, ardósia, preto)
+// Valor bruto, sem intenção de uso. O nome diz a família e o quanto é escuro (25 claro … 1000 escuro);
+// o sufixo -aNN é a opacidade em %. Só os tokens semânticos usam estes valores, pela função palette().
+
+$groups: (
+  'Paleta · branco': (
+    'white': #FFFFFF,
+    'white-a06': #FFFFFF0F,
+    'white-a07': #FFFFFF12,
+    'white-a08': #FFFFFF14,
+    'white-a11': #FFFFFF1C,
+    'white-a12': #FFFFFF1F,
+    'white-a20': #FFFFFF33,
+    'white-a30': #FFFFFF4D,
+  ),
+  'Paleta · ardósia': (
+    'slate-25': #F7F8F9,
+    'slate-75': #E9EBEE,
+    'slate-85': #E6EAF0,
+    'slate-225': #BCC5D0,
+    'slate-275': #B3B9C4,
+    'slate-325': #9FADBC,
+    'slate-350': #9AA5B2,
+    'slate-425': #8590A2,
+    'slate-475': #758195,
+    'slate-525': #6B7685,
+    'slate-550': #626F86,
+    'slate-650': #44546F,
+    'slate-675': #4A535E,
+    'slate-800': #2E343B,
+    'slate-875': #1B1F24,
+    'slate-900': #15181C,
+    'slate-925': #0E1013,
+    'slate-950': #090A0C,
+    'slate-975': #030304,
+  ),
+  'Paleta · preto': (
+    'black-1000': #000000,
+    'black-1000-a70': #000000B3,
+    'black-1000-a80': #000000CC,
+  ),
+);

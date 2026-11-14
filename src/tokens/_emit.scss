@@ -1,0 +1,101 @@
+// Como os tokens viram custom properties.
+//
+// Um arquivo de tokens exporta $groups: um mapa de "nome do grupo" → (token → entrada).
+// A entrada pode ser:
+//   valor                               igual em todos os temas
+//   (value: valor, desc: '…')           igual em todos os temas, com descrição
+//   (light: valor, dark: valor)         muda com o tema (só no nível semântico)
+//   (light: …, dark: …, desc: '…')
+// O nome do grupo e a descrição saem como comentário antes do token: a página de variáveis da
+// documentação monta o catálogo a partir deles.
+@use 'sass:map';
+@use 'sass:color';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
+
+/// Texto do valor como foi escrito: cores literais saem como estão (#091E424F, e não rgba()),
+/// o resto via inspect, que mantém as aspas das famílias de fonte.
+@function _css($v) {
+  @if meta.type-of($v) == 'color' {
+    @if color.alpha($v) == 0 { @return transparent; }
+    @return _hex($v);
+  }
+  @return meta.inspect($v);
+}
+
+/// #RRGGBB, ou #RRGGBBAA quando há transparência, em maiúsculas.
+@function _hex($c) {
+  $out: '#' + _byte(color.channel($c, 'red', $space: rgb)) + _byte(color.channel($c, 'green', $space: rgb))
+    + _byte(color.channel($c, 'blue', $space: rgb));
+  $a: color.alpha($c);
+  @if $a < 1 { $out: $out + _byte($a * 255); }
+  @return string.unquote($out);
+}
+@function _byte($n) {
+  $digits: '0123456789ABCDEF';
+  $n: math.round($n);
+  $hi: math.floor(math.div($n, 16));
+  @return string.slice($digits, $hi + 1, $hi + 1) + string.slice($digits, $n - $hi * 16 + 1, $n - $hi * 16 + 1);
+}
+
+@function _entry($raw) {
+  @if meta.type-of($raw) == 'map' and (map.has-key($raw, 'value') or map.has-key($raw, 'light')) {
+    @return $raw;
+  }
+  @return (value: $raw);
+}
+
+/// Declara os tokens de $groups para um tema. light também declara os que não mudam com o tema.
+@mixin declare($groups, $mode) {
+  @each $group, $tokens in $groups {
+    $headed: false;
+    @each $name, $raw in $tokens {
+      $e: _entry($raw);
+      $v: null;
+      @if map.has-key($e, 'light') {
+        @if not map.has-key($e, 'dark') {
+          @error 'Token --#{$name} tem valor claro mas não tem escuro. Se for igual nos dois temas, use (value: …).';
+        }
+        $v: map.get($e, $mode);
+      } @else if $mode == light {
+        $v: map.get($e, 'value');
+      }
+      @if $v != null {
+        @if $mode == light and not $headed {
+          /* ---------- #{$group} ---------- */
+          $headed: true;
+        }
+        @if $mode == light and map.has-key($e, 'desc') {
+          /* #{map.get($e, 'desc')} */
+        }
+        --#{$name}: #{_css($v)};
+      }
+    }
+  }
+}
+
+/// Gera o tema claro, o escuro que segue o sistema e o escuro forçado por data-theme, da mesma fonte.
+@mixin themes($groups) {
+  :root {
+    color-scheme: light;
+    @include declare($groups, light);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      @include declare($groups, dark);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    @include declare($groups, dark);
+  }
+}
+
+/// Tokens de componente: declara um mapa (token → valor) dentro da regra atual.
+@mixin vars($map) {
+  @each $name, $value in $map {
+    --#{$name}: #{_css($value)};
+  }
+}

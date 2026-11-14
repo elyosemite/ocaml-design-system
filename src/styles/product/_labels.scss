@@ -1,0 +1,25 @@
+// Produto · Etiquetas de e-mail (ADS Tag colorida)
+// Veio de components.css (linhas 332–352) na migração para o EpistulaDesignSystem.
+
+@use '../../tokens/components/label';
+
+/* ==========================================================================
+   Etiquetas de e-mail (ADS Tag colorida)
+   ========================================================================== */
+.label {
+  @include label.set('default');
+  display: inline-flex; align-items: center; gap: var(--space-050);
+  height: 1.25rem; padding-inline: var(--space-075);
+  border-radius: var(--radius-small);
+  background: var(--lb-bg); color: var(--lb-fg);
+  font: var(--font-weight-medium) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body);
+  white-space: nowrap;
+}
+.label--blue { @include label.set('blue'); }
+.label--teal { @include label.set('teal'); }
+.label--green { @include label.set('green'); }
+.label--purple { @include label.set('purple'); }
+.label--magenta { @include label.set('magenta'); }
+.label--orange { @include label.set('orange'); }
+.label .chip__remove { color: inherit; width: 0.875rem; height: 0.875rem; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--lb-fg, var(--color-icon-subtle)); }

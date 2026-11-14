@@ -1,0 +1,15 @@
+// Nível 2 · Semânticos · forma
+// Raios por tamanho de peça e larguras de linha.
+@use '../primitives/shape' as p;
+
+$groups: (
+  'Forma': (
+    'radius-xsmall': (value: p.$radius-2, desc: 'checkbox, badge interno'),
+    'radius-small': (value: p.$radius-3, desc: 'botões, inputs, lozenges, chips'),
+    'radius-medium': (value: p.$radius-6, desc: 'menus, toasts, cartões de anexo'),
+    'radius-large': (value: p.$radius-8, desc: 'modais, janela de composição'),
+    'radius-round': (value: p.$radius-999, desc: 'avatares, badges de contagem'),
+    'border-width': p.$width-1,
+    'border-width-focused': p.$width-2,
+  ),
+);

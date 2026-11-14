@@ -1,0 +1,23 @@
+// Layouts e páginas · Colunas recolhíveis (L43)
+// Veio de components.css (linhas 948–967) na migração para o EpistulaDesignSystem.
+@use '../../tokens/semantic/breakpoint' as bp;
+
+/* L43 · Colunas recolhíveis na casca em blocos: sem pastas, sem leitura ou só a lista */
+.app-shell--no-folders .app-shell__block--nav > .app-shell__sidebar,
+.app-shell--no-reader .app-shell__reader,
+.app-shell--no-reader .app-shell__resizer { display: none; }
+@include bp.up(compact) {
+  .app-shell--blocks.app-shell--no-folders { grid-template-columns: var(--layout-sidebar-collapsed) 0 clamp(20rem, var(--app-shell-list), 35rem) var(--app-shell-gap) minmax(0, 1fr); }
+  .app-shell--blocks.app-shell--no-reader { grid-template-columns: var(--layout-sidebar-collapsed) var(--app-shell-sidebar) minmax(0, 1fr) 0 0; }
+  .app-shell--blocks.app-shell--no-folders.app-shell--no-reader { grid-template-columns: var(--layout-sidebar-collapsed) 0 minmax(0, 1fr) 0 0; }
+  /* Sem a leitura, as colunas sobre ela ficam com largura 0 e levariam junto o fim do header (botões e
+     foto): o header passa a ser uma linha, com a marca na largura das pastas e a busca alinhada à lista */
+  .app-shell--no-reader .appbar.appbar--shell { display: flex; }
+  .app-shell--no-reader:not(.app-shell--no-folders) .appbar--shell .appbar__brand { flex: none; width: var(--app-shell-sidebar); }
+  .app-shell--no-reader .appbar--shell .appbar__search { flex: 1; max-width: 40rem; }
+  /* Sem a coluna de pastas, o header deixa de seguir as colunas: marca, busca e o fim em linha */
+  .app-shell--no-folders .appbar.appbar--shell { display: flex; gap: var(--space-100); padding-inline: var(--space-150); }
+  .app-shell--no-folders .appbar--shell .appbar__brand,
+  .app-shell--no-folders .appbar--shell .appbar__actions { padding-inline: 0; }
+  .app-shell--no-folders .appbar--shell .appbar__search { flex: 1; max-width: 40rem; padding-inline: 0; }
+}

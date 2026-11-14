@@ -1,0 +1,14 @@
+// Base · Foco visível
+// Veio de components.css (linhas 20–31) na migração para o EpistulaDesignSystem.
+
+/* ---------- Foco visível (padrão para todo controle) ---------- */
+.focus-ring:focus-visible,
+.btn:focus-visible, .btn.is-focus,
+.nav-item:focus-visible, .nav-item.is-focus,
+.menu-item:focus-visible, .menu-item.is-focus,
+.tab:focus-visible, .tab.is-focus,
+.chip:focus-visible,
+.attachment:focus-visible, .attachment.is-focus {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}

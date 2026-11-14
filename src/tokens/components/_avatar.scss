@@ -1,0 +1,19 @@
+// Nível 3 · Tokens de componente · avatar
+// Fundo e inicial de cada cor de conta (os mesmos pares das etiquetas) e o avatar de arquivo local.
+@use 'sass:map';
+@use '../emit';
+
+$variants: (
+  'blue': ('av-bg': var(--color-label-blue-bg), 'av-fg': var(--color-label-blue-text)),
+  'teal': ('av-bg': var(--color-label-teal-bg), 'av-fg': var(--color-label-teal-text)),
+  'green': ('av-bg': var(--color-label-green-bg), 'av-fg': var(--color-label-green-text)),
+  'purple': ('av-bg': var(--color-label-purple-bg), 'av-fg': var(--color-label-purple-text)),
+  'magenta': ('av-bg': var(--color-label-magenta-bg), 'av-fg': var(--color-label-magenta-text)),
+  'orange': ('av-bg': var(--color-label-orange-bg), 'av-fg': var(--color-label-orange-text)),
+  'archive': ('av-bg': var(--color-bg-neutral), 'av-fg': var(--color-icon)),
+);
+
+@mixin set($variant) {
+  @if not map.has-key($variants, $variant) { @error 'Avatar sem a variante "#{$variant}".'; }
+  @include emit.vars(map.get($variants, $variant));
+}

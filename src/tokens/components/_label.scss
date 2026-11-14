@@ -1,0 +1,20 @@
+// Nível 3 · Tokens de componente · etiqueta de e-mail
+// O neutro (padrão) e as seis cores. A cor de uma etiqueta criada pela pessoa chega em tempo de execução
+// por --lb-fg (estilo inline).
+@use 'sass:map';
+@use '../emit';
+
+$variants: (
+  'default': ('lb-bg': var(--color-bg-neutral), 'lb-fg': var(--color-text-subtle)),
+  'blue': ('lb-bg': var(--color-label-blue-bg), 'lb-fg': var(--color-label-blue-text)),
+  'teal': ('lb-bg': var(--color-label-teal-bg), 'lb-fg': var(--color-label-teal-text)),
+  'green': ('lb-bg': var(--color-label-green-bg), 'lb-fg': var(--color-label-green-text)),
+  'purple': ('lb-bg': var(--color-label-purple-bg), 'lb-fg': var(--color-label-purple-text)),
+  'magenta': ('lb-bg': var(--color-label-magenta-bg), 'lb-fg': var(--color-label-magenta-text)),
+  'orange': ('lb-bg': var(--color-label-orange-bg), 'lb-fg': var(--color-label-orange-text)),
+);
+
+@mixin set($variant) {
+  @if not map.has-key($variants, $variant) { @error 'Etiqueta sem a variante "#{$variant}".'; }
+  @include emit.vars(map.get($variants, $variant));
+}

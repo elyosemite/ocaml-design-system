@@ -1,0 +1,5 @@
+// Padrões · Formulário em duas colunas (L88)
+// Veio de components.css (linhas 194–196) na migração para o EpistulaDesignSystem.
+
+/* L88 · Formulário em duas colunas: entrada e saída lado a lado, com gap; em telas estreitas, uma coluna. */
+.form-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-form-column)), 1fr)); gap: var(--space-300); align-items: start; }

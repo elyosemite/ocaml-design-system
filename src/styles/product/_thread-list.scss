@@ -1,0 +1,90 @@
+// Produto · Lista de conversas
+// Veio de components.css (linhas 1042–1129) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Lista de threads
+   ========================================================================== */
+.thread-list { display: flex; flex-direction: column; background: var(--color-surface); }
+.thread {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "check star from  meta"
+    ".     .    subj  subj"
+    ".     .    snip  snip";
+  column-gap: var(--space-100); row-gap: var(--space-025);
+  align-items: center;
+  min-height: var(--row-height-default);
+  padding: var(--space-150) var(--space-200) var(--space-150) var(--space-150);
+  border-bottom: var(--border-width) solid var(--color-border);
+  background: var(--color-surface); color: var(--color-text-subtle);
+  font: var(--font-body); cursor: pointer;
+}
+.thread__check { grid-area: check; }
+.thread__star { grid-area: star; }
+.thread__from { grid-area: from; display: flex; align-items: center; gap: var(--space-075); min-width: 0; }
+.thread__from-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.thread__count { color: var(--color-text-subtlest); font-variant-numeric: tabular-nums; }
+.thread__meta { grid-area: meta; display: flex; align-items: center; gap: var(--space-075); color: var(--color-text-subtlest); font: var(--font-body-small); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.thread__subject { grid-area: subj; display: flex; align-items: center; gap: var(--space-075); min-width: 0; color: var(--color-text); }
+.thread__subject-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.thread__snippet { grid-area: snip; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text-subtlest); }
+.thread__actions { display: none; gap: var(--space-025); }
+.thread__draft { color: var(--color-text-danger); }
+
+.star-btn {
+  display: grid; place-items: center; width: 1.5rem; height: 1.5rem;
+  border: 0; padding: 0; border-radius: var(--radius-small);
+  background: transparent; color: var(--color-icon-subtle); cursor: pointer;
+}
+.star-btn:hover { background: var(--color-bg-neutral-subtle-hovered); color: var(--color-icon); }
+.star-btn[aria-pressed="true"] { color: var(--color-icon-starred); }
+.star-btn[aria-pressed="true"] .i { fill: currentColor; }
+.star-btn:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: 0; }
+
+/* Não lida: peso, cor plena e ponto de marca. Forma + cor, nunca só cor. */
+.thread.is-unread { color: var(--color-text); }
+.thread.is-unread .thread__from-name,
+.thread.is-unread .thread__subject-text { font-weight: var(--font-weight-semibold); }
+.thread.is-unread .thread__meta { color: var(--color-text-brand); font-weight: var(--font-weight-semibold); }
+.thread.is-unread::before {
+  content: ""; position: absolute; inset-inline-start: var(--space-050); top: calc(var(--space-150) + 6px);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--color-icon-brand);
+}
+.thread:hover, .thread.is-hover { background: var(--color-bg-neutral-subtle-hovered); }
+.thread:hover .thread__actions, .thread.is-hover .thread__actions { display: inline-flex; }
+.thread:hover .thread__date, .thread.is-hover .thread__date { display: none; }
+.thread.is-checked { background: var(--color-bg-selected); }
+.thread.is-checked:hover, .thread.is-checked.is-hover { background: var(--color-bg-selected-hovered); }
+.thread.is-open { background: var(--color-bg-selected); box-shadow: inset 2px 0 0 var(--color-border-selected); }
+.thread:focus-visible, .thread.is-focus { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset-inset); }
+.thread.is-sending { cursor: progress; }
+.thread.is-sending .thread__subject-text, .thread.is-sending .thread__from-name { color: var(--color-text-subtlest); }
+
+/* Densidade compacta: uma linha, 36px */
+.thread-list--compact .thread {
+  grid-template-columns: auto auto minmax(6rem, 11rem) minmax(0, 1fr) auto;
+  grid-template-areas: "check star from subj meta";
+  min-height: var(--row-height-compact);
+  padding-block: var(--space-050);
+}
+.thread-list--compact .thread__snippet { display: none; }
+.thread-list--compact .thread.is-unread::before { top: 50%; margin-top: -3px; }
+
+/* Só cabeçalho: sem checkbox e sem prévia. Ações rápidas são opcionais: sem elas, a data
+   continua visível no hover. A estrela é a primeira coluna, para manter o alinhamento. */
+.thread-list--headers .thread {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "star from meta"
+    ".    subj subj";
+  min-height: 0;
+}
+.thread-list--headers .thread__check,
+.thread-list--headers .thread__snippet { display: none; }
+.thread-list--headers .thread:not(:has(.thread__actions)):hover .thread__date { display: inline; }
+.thread-list--headers.thread-list--compact .thread {
+  grid-template-columns: auto minmax(6rem, 11rem) minmax(0, 1fr) auto;
+  grid-template-areas: "star from subj meta";
+}

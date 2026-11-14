@@ -1,0 +1,37 @@
+// Nível 1 · Primitivos · tipografia
+// Famílias, pesos e as escalas brutas de tamanho, altura de linha e espaçamento entre letras.
+// O número dos tamanhos e alturas é o valor em px; o do tracking é o valor em milésimos de em.
+
+// Famílias (com a pilha de reserva do sistema)
+$family-inter: ("Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+$family-jetbrains-mono: ("JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace);
+
+// Pesos
+$weight-400: 400;
+$weight-500: 500;
+$weight-600: 600;
+$weight-700: 700;
+
+// Tamanhos
+$size-11: 0.6875rem;
+$size-12: 0.75rem;
+$size-13: 0.8125rem;
+$size-14: 0.875rem;
+$size-16: 1rem;
+$size-20: 1.25rem;
+$size-24: 1.5rem;
+$size-32: 2rem;
+
+// Alturas de linha
+$line-16: 1rem;
+$line-20: 1.25rem;
+$line-24: 1.5rem;
+$line-28: 1.75rem;
+$line-36: 2.25rem;
+
+// Espaçamento entre letras
+$tracking-minus-20: -0.02em;
+$tracking-minus-15: -0.015em;
+$tracking-minus-10: -0.01em;
+$tracking-minus-5: -0.005em;
+$tracking-40: 0.04em;

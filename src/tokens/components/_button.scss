@@ -1,0 +1,65 @@
+// Nível 3 · Tokens de componente · botão
+// Cada variante só troca estes quatro tokens; a forma do botão está em src/styles/core/_button.scss.
+// Sempre var(--semântico) ou transparent: o tema chega pelos semânticos, nunca é declarado aqui.
+@use 'sass:map';
+@use '../emit';
+
+$variants: (
+  'default': (
+    'btn-bg': var(--color-bg-neutral),
+    'btn-bg-hover': var(--color-bg-neutral-hovered),
+    'btn-bg-active': var(--color-bg-neutral-pressed),
+    'btn-fg': var(--color-text-subtle),
+  ),
+  'primary': (
+    'btn-bg': var(--color-bg-brand-bold),
+    'btn-bg-hover': var(--color-bg-brand-bold-hovered),
+    'btn-bg-active': var(--color-bg-brand-bold-pressed),
+    'btn-fg': var(--color-text-inverse),
+  ),
+  'subtle': (
+    'btn-bg': transparent,
+    'btn-bg-hover': var(--color-bg-neutral-subtle-hovered),
+    'btn-bg-active': var(--color-bg-neutral-subtle-pressed),
+  ),
+  'danger': (
+    'btn-bg': var(--color-bg-danger-bold),
+    'btn-bg-hover': var(--color-bg-danger-bold-hovered),
+    'btn-bg-active': var(--color-bg-danger-bold-hovered),
+    'btn-fg': var(--color-text-inverse),
+  ),
+  'warning': (
+    'btn-bg': var(--color-bg-warning-bold),
+    'btn-bg-hover': var(--color-bg-warning-bold-hovered),
+    'btn-bg-active': var(--color-bg-warning-bold-hovered),
+    'btn-fg': var(--color-text-warning-inverse),
+  ),
+  'link': (
+    'btn-bg': transparent,
+    'btn-bg-hover': transparent,
+    'btn-bg-active': transparent,
+    'btn-fg': var(--color-link),
+  ),
+  'selected': (
+    'btn-bg': var(--color-bg-selected),
+    'btn-bg-hover': var(--color-bg-selected-hovered),
+    'btn-bg-active': var(--color-bg-selected-hovered),
+    'btn-fg': var(--color-text-selected),
+  ),
+  'disabled': (
+    'btn-bg': var(--color-bg-disabled),
+    'btn-bg-hover': var(--color-bg-disabled),
+    'btn-bg-active': var(--color-bg-disabled),
+    'btn-fg': var(--color-text-disabled),
+  ),
+  // Sutil e link desabilitados continuam sem fundo
+  'disabled-transparent': (
+    'btn-bg': transparent,
+    'btn-bg-hover': transparent,
+  ),
+);
+
+@mixin set($variant) {
+  @if not map.has-key($variants, $variant) { @error 'Botão sem a variante "#{$variant}".'; }
+  @include emit.vars(map.get($variants, $variant));
+}

@@ -1,0 +1,23 @@
+// Nível 1 · Primitivos · cor · verde e verde-água
+// Valor bruto, sem intenção de uso. O nome diz a família e o quanto é escuro (25 claro … 1000 escuro);
+// o sufixo -aNN é a opacidade em %. Só os tokens semânticos usam estes valores, pela função palette().
+
+$groups: (
+  'Paleta · verde-água': (
+    'teal-100': #D6EEF2,
+    'teal-975': #030D0F,
+  ),
+  'Paleta · verde': (
+    'green-75': #DCFFF1,
+    'green-100': #DCEFE3,
+    'green-150': #BAF3DB,
+    'green-300': #7EE8BC,
+    'green-450': #4BCE97,
+    'green-550': #2ABB7F,
+    'green-625': #22A06B,
+    'green-675': #1F845A,
+    'green-725': #216E4E,
+    'green-800': #164B35,
+    'green-975': #040D08,
+  ),
+);

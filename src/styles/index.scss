@@ -1,0 +1,65 @@
+// EpistulaDesignSystem · componentes
+// Entrada de dist/components.css. Depende de dist/tokens.css.
+// Estados forçados (.is-hover, .is-focus, .is-active) existem só para a documentação mostrar todos os estados lado a lado.
+// A ordem dos @use é a ordem da cascata: não reordene sem conferir com pnpm compare.
+
+@use 'base/box-model';
+@use 'base/icon';
+@use 'base/focus';
+@use 'core/button';
+@use 'core/text-field';
+@use 'product/recipients';
+@use 'layouts/row';
+@use 'patterns/form-columns';
+@use 'patterns/field-suggestions';
+@use 'product/search';
+@use 'core/selection';
+@use 'core/avatar';
+@use 'core/badge-lozenge';
+@use 'product/labels';
+@use 'core/side-navigation';
+@use 'layouts/app-shell';
+@use 'product/accounts';
+@use 'layouts/shell-header';
+@use 'core/toolbar';
+@use 'layouts/resizer';
+@use 'layouts/blocks';
+@use 'patterns/drag-to-folder';
+@use 'core/select';
+@use 'product/settings';
+@use 'base/scrollbar';
+@use 'product/theme-picker';
+@use 'product/color-swatch';
+@use 'patterns/drag-cursor';
+@use 'product/flagged';
+@use 'core/segmented';
+@use 'layouts/header-end';
+@use 'product/notifications';
+@use 'product/account-menu';
+@use 'layouts/collapsible-columns';
+@use 'product/list-density';
+@use 'product/sending';
+@use 'product/wordmark';
+@use 'layouts/global-header';
+@use 'core/tabs';
+@use 'product/thread-list';
+@use 'product/bulk-actions';
+@use 'product/reading-pane';
+@use 'product/attachment';
+@use 'product/compose';
+@use 'core/banner';
+@use 'core/toast';
+@use 'core/modal';
+@use 'core/menu';
+@use 'core/tooltip';
+@use 'product/provider-grid';
+@use 'product/account-color';
+@use 'patterns/empty-state';
+@use 'core/loading';
+@use 'product/privacy';
+@use 'product/rules';
+@use 'product/crypto';
+@use 'product/mail-archives';
+@use 'layouts/article';
+@use 'layouts/blog-index';
+@use 'docs-site/docs-site';

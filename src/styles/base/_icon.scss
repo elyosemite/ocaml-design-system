@@ -1,0 +1,12 @@
+// Base · Ícones
+// Veio de components.css (linhas 10–19) na migração para o EpistulaDesignSystem.
+
+/* ---------- Ícones ---------- */
+.i {
+  width: var(--icon-size); height: var(--icon-size); flex: none;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.i--sm { width: var(--icon-size-sm); height: var(--icon-size-sm); }
+.i--lg { width: var(--icon-size-lg); height: var(--icon-size-lg); }
+.i--xl { width: var(--icon-size-xl); height: var(--icon-size-xl); }

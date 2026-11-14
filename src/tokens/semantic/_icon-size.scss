@@ -1,0 +1,11 @@
+// Nível 2 · Semânticos · tamanho de ícone
+@use '../primitives/size' as p;
+
+$groups: (
+  'Ícones': (
+    'icon-size-sm': (value: p.$icon-12, desc: 'dentro de chips e textos pequenos'),
+    'icon-size': (value: p.$icon-16, desc: 'padrão'),
+    'icon-size-lg': (value: p.$icon-20, desc: 'títulos de modal, botões grandes'),
+    'icon-size-xl': (value: p.$icon-24, desc: 'estados vazios e destaques'),
+  ),
+);

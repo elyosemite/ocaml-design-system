@@ -1,0 +1,12 @@
+// Nível 1 · Primitivos · movimento
+// Durações (o número é o valor em ms) e curvas.
+
+$duration-0: 0ms;
+$duration-100: 100ms;
+$duration-200: 200ms;
+$duration-350: 350ms;
+
+// Entra rápido e assenta devagar
+$easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+// Acelera até sair
+$easing-accelerate: cubic-bezier(0.4, 0, 1, 1);

@@ -1,0 +1,16 @@
+// Produto · Barra de ações em massa
+// Veio de components.css (linhas 1130–1143) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Barra de ações em massa (ADS Page Header actions / Button Group)
+   ========================================================================== */
+.toolbar {
+  display: flex; align-items: center; gap: var(--space-050); flex-wrap: wrap;
+  min-height: 3rem; padding: var(--space-075) var(--space-150);
+  background: var(--color-surface);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+.toolbar__sep { width: 1px; height: 1.25rem; margin-inline: var(--space-050); background: var(--color-border); }
+.toolbar__count { font: var(--font-weight-semibold) var(--font-size-body)/var(--line-height-body) var(--font-family-body); color: var(--color-text); margin-inline: var(--space-050) var(--space-100); }
+.toolbar__end { margin-inline-start: auto; display: flex; align-items: center; gap: var(--space-050); font: var(--font-body-small); color: var(--color-text-subtlest); font-variant-numeric: tabular-nums; }
+.toolbar.is-selecting { background: var(--color-bg-selected); }

@@ -1,0 +1,16 @@
+// Core · Lista de opções (L33)
+// Veio de components.css (linhas 747–760) na migração para o EpistulaDesignSystem.
+
+/* L33 · Lista de opções: <span class="select"><select>…</select><svg class="i">chevron-down</svg></span> */
+.select { position: relative; display: inline-flex; align-items: center; min-width: 10rem; }
+.select > select {
+  width: 100%; height: var(--control-height); appearance: none;
+  padding: 0 var(--space-400) 0 var(--space-100);
+  border: var(--border-width) solid var(--color-border-bold); border-radius: var(--radius-small);
+  background: var(--color-bg-input); color: var(--color-text);
+  font: var(--font-body); cursor: pointer;
+}
+.select > select:hover { background: var(--color-bg-input-hovered); }
+.select > select:focus-visible { outline: none; border-color: var(--color-border-focused); box-shadow: inset 0 0 0 1px var(--color-border-focused); }
+.select > select:disabled { background: var(--color-bg-disabled); border-color: transparent; color: var(--color-text-disabled); cursor: not-allowed; }
+.select > .i { position: absolute; inset-inline-end: var(--space-100); pointer-events: none; color: var(--color-icon-subtle); }

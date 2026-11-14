@@ -1,0 +1,93 @@
+// Layouts e páginas · Casca do cliente: header, banner, sidebar, lista e leitura
+// Veio de components.css (linhas 395–483) na migração para o EpistulaDesignSystem.
+
+@use '../../tokens/components/app-shell';
+@use '../../tokens/semantic/breakpoint' as bp;
+
+/* ==========================================================================
+   Casca do cliente (app shell): header, banner, sidebar, lista e leitura
+   Segue espacamento.html: sidebar 240px (64px abaixo de 1280px), lista 400px
+   ajustável de 320 a 560px, leitura flexível; abaixo de 960px lista e leitura
+   dividem o mesmo espaço e a leitura entra por cima com "Voltar".
+   ========================================================================== */
+.app-shell {
+  @include app-shell.set('default');
+  position: fixed; inset: 0;
+  display: grid;
+  grid-template-columns: var(--app-shell-sidebar) clamp(20rem, var(--app-shell-list), 35rem) minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-areas:
+    "header  header header"
+    "banner  banner banner"
+    "sidebar list   reader";
+  background: var(--color-surface); color: var(--color-text);
+  font: var(--font-body);
+}
+/* Sem sidebar (conta única, sem pastas) */
+.app-shell--no-sidebar {
+  grid-template-columns: clamp(20rem, var(--app-shell-list), 35rem) minmax(0, 1fr);
+  grid-template-areas:
+    "header header"
+    "banner banner"
+    "list   reader";
+}
+/* Dentro de outra página (documentação, pré-visualizações): ocupa o contêiner em vez da janela */
+.app-shell--embedded { position: relative; inset: auto; height: 32rem; }
+
+.app-shell__header { grid-area: header; }
+.app-shell__banner { grid-area: banner; }
+.app-shell__sidebar { grid-area: sidebar; width: auto; min-height: 0; overflow-y: auto; }
+.app-shell__list {
+  grid-area: list; display: flex; flex-direction: column; min-width: 0; min-height: 0;
+  border-inline-end: var(--border-width) solid var(--color-border);
+}
+.app-shell__list-body { flex: 1; min-height: 0; overflow-y: auto; }
+.app-shell__reader { grid-area: reader; min-width: 0; min-height: 0; overflow-y: auto; background: var(--color-surface); }
+.app-shell__back { display: none; }
+
+/* Tela inteira abaixo do header (boas-vindas, conexão de conta, carregamento do app) */
+.app-shell__center {
+  grid-row: 3; grid-column: 1 / -1;
+  display: grid; place-items: center; min-height: 0; overflow-y: auto;
+  padding: var(--space-300);
+}
+.app-shell__center > * { width: 100%; max-width: var(--layout-modal-medium); }
+
+/* Sidebar recolhida: só ícones (cada .nav-item precisa de data-tip com o nome da pasta) */
+.sidebar--collapsed { padding-inline: var(--space-050); align-items: center; }
+.sidebar--collapsed .nav-heading,
+.sidebar--collapsed .nav-item__text,
+.sidebar--collapsed .nav-item__count,
+.sidebar--collapsed .meter { display: none; }
+.sidebar--collapsed .nav-item { justify-content: center; width: var(--control-height); padding: 0; }
+.sidebar--collapsed .nav-item.has-unread { box-shadow: inset -3px 0 0 var(--color-border-selected); }
+
+@include bp.down(commands) {
+  .app-shell { @include app-shell.set('collapsed'); }
+  .app-shell__sidebar { padding-inline: var(--space-050); align-items: center; }
+  .app-shell__sidebar .nav-heading,
+  .app-shell__sidebar .nav-item__text,
+  .app-shell__sidebar .nav-item__count,
+  .app-shell__sidebar .meter { display: none; }
+  .app-shell__sidebar .nav-item { justify-content: center; width: var(--control-height); padding: 0; }
+  .app-shell__sidebar .nav-item.has-unread { box-shadow: inset -3px 0 0 var(--color-border-selected); }
+}
+
+@include bp.down(compact) {
+  .app-shell {
+    grid-template-columns: var(--app-shell-sidebar) minmax(0, 1fr);
+    grid-template-areas:
+      "header  header"
+      "banner  banner"
+      "sidebar main";
+  }
+  .app-shell--no-sidebar {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "header" "banner" "main";
+  }
+  .app-shell__list, .app-shell__reader { grid-area: main; border-inline-end: 0; }
+  .app-shell__reader { display: none; }
+  .app-shell.has-reader .app-shell__reader { display: block; }
+  .app-shell.has-reader .app-shell__list { display: none; }
+  .app-shell__back { display: inline-flex; }
+}

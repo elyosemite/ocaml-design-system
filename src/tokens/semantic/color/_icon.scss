@@ -1,0 +1,18 @@
+// Nível 2 · Semânticos · cor · ícones
+// Cada token tem o valor do tema claro e o do escuro lado a lado (light/dark). O que é igual nos dois
+// temas de propósito usa value. A compilação falha se faltar um dos temas.
+
+@use '../../primitives/color' as p;
+
+$groups: (
+  'Cor · ícones': (
+    'color-icon': (light: p.palette('slate-650'), dark: p.palette('slate-225')),
+    'color-icon-subtle': (light: p.palette('slate-550'), dark: p.palette('slate-350')),
+    'color-icon-brand': (light: p.palette('blue-525'), dark: p.palette('blue-275')),
+    'color-icon-danger': (light: p.palette('red-525'), dark: p.palette('red-375')),
+    'color-icon-warning': (light: p.palette('orange-525'), dark: p.palette('orange-400')),
+    'color-icon-success': (light: p.palette('green-625'), dark: p.palette('green-550')),
+    'color-icon-discovery': (light: p.palette('blue-350'), dark: p.palette('blue-310')),
+    'color-icon-starred': (light: p.palette('orange-525'), dark: p.palette('orange-275')),
+  ),
+);

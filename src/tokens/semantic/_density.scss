@@ -1,0 +1,13 @@
+// Nível 2 · Semânticos · densidade
+// Confortável e Padrão mostram 3 e 2 linhas por conversa; Compacta mostra 1. Controles seguem a densidade da linha.
+@use '../primitives/size' as p;
+
+$groups: (
+  'Densidade (linhas e controles)': (
+    'row-height-compact': (value: p.$size-36, desc: '36px · 1 linha'),
+    'row-height-default': (value: p.$size-76, desc: '76px · 3 linhas'),
+    'control-height': (value: p.$size-32, desc: '32px · botões'),
+    'control-height-compact': (value: p.$size-24, desc: '24px'),
+    'input-height': (value: p.$size-36, desc: '36px'),
+  ),
+);

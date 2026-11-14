@@ -1,0 +1,29 @@
+// Produto · Chips de destinatário (ADS Tag + User Picker)
+// Veio de components.css (linhas 164–189) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Chips de destinatário (ADS Tag + User Picker)
+   ========================================================================== */
+.chip {
+  display: inline-flex; align-items: center; gap: var(--space-050);
+  height: 1.5rem; max-width: 100%;
+  padding-inline: var(--space-025) var(--space-050);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-small);
+  background: var(--color-bg-neutral); color: var(--color-text);
+  font: var(--font-body); cursor: default;
+}
+.chip__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip__remove {
+  display: grid; place-items: center; width: 1rem; height: 1rem;
+  border: 0; border-radius: var(--radius-xsmall); padding: 0;
+  background: transparent; color: var(--color-icon-subtle); cursor: pointer;
+}
+.chip__remove:hover { background: var(--color-bg-neutral-hovered); color: var(--color-icon); }
+.chip:hover, .chip.is-hover { background: var(--color-bg-neutral-hovered); }
+.chip.is-selected { background: var(--color-bg-selected); border-color: var(--color-border-selected); color: var(--color-text-selected); }
+.chip.is-invalid { background: var(--color-bg-danger); color: var(--color-text-danger); border-color: var(--color-border-danger); border-style: dashed; }
+.chip.is-external { background: var(--color-label-orange-bg); color: var(--color-label-orange-text); }
+.chip .avatar { width: 1.25rem; height: 1.25rem; font-size: 0.5625rem; }
+.chip-input { flex-wrap: wrap; padding-block: var(--space-050); gap: var(--space-050); }
+.chip-input > input { min-width: 8rem; }

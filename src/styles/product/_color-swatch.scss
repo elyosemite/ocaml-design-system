@@ -1,0 +1,12 @@
+// Produto · Amostra de cor do fundo (L37)
+// Veio de components.css (linhas 869–878) na migração para o EpistulaDesignSystem.
+
+/* L37 · Amostra de cor do fundo no .color-swatch (a cor vem de --swatch) */
+.color-swatch__fill {
+  display: block; width: 2.5rem; height: 2.5rem; border-radius: var(--radius-medium);
+  background: var(--swatch); box-shadow: inset 0 0 0 1px var(--color-border);
+  pointer-events: none;
+}
+.color-swatch:has(.color-swatch__fill) { border-radius: var(--radius-medium); }
+.color-swatch:hover .color-swatch__fill { box-shadow: inset 0 0 0 1px var(--color-border), 0 0 0 2px var(--color-surface-overlay), 0 0 0 4px var(--color-border); }
+.color-swatch:has(input:checked) .color-swatch__fill { box-shadow: inset 0 0 0 1px var(--color-border), 0 0 0 2px var(--color-surface-overlay), 0 0 0 4px var(--color-border-selected); }

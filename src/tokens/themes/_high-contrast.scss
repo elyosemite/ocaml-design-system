@@ -1,0 +1,27 @@
+// Temas · alto contraste
+// Só reaponta tokens semânticos para outros mais fortes (nenhuma cor nova): bordas sobem para a borda forte,
+// o texto de apoio vira texto comum, os ícones sutis viram ícones comuns e o anel de foco engrossa.
+// Vale pela preferência do sistema (prefers-contrast: more), no claro e no escuro, e por data-contrast="more"
+// no <html> (para testar e para as páginas de documentação). As duas saídas vêm do mesmo mapa.
+@use '../emit';
+@use '../primitives/shape' as p;
+
+$overrides: (
+  'color-border': var(--color-border-bold),
+  'color-text-subtle': var(--color-text),
+  'color-text-subtlest': var(--color-text),
+  'color-text-disabled': var(--color-text-subtle),
+  'color-icon-subtle': var(--color-icon),
+  'focus-ring-width': p.$width-3,
+);
+
+@mixin emit {
+  @media (prefers-contrast: more) {
+    :root, :root:not([data-theme="light"]), :root[data-theme="light"], :root[data-theme="dark"] {
+      @include emit.vars($overrides);
+    }
+  }
+  :root[data-contrast="more"], :root[data-contrast="more"][data-theme="light"], :root[data-contrast="more"][data-theme="dark"] {
+    @include emit.vars($overrides);
+  }
+}

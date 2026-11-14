@@ -1,0 +1,56 @@
+// Core · Botões (ADS Button)
+// Veio de components.css (linhas 32–102) na migração para o EpistulaDesignSystem.
+
+@use '../../tokens/components/button';
+
+/* ==========================================================================
+   Botões (ADS Button)
+   ========================================================================== */
+.btn {
+  @include button.set('default');
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-050);
+  height: var(--control-height);
+  padding-inline: var(--space-150);
+  border: 0; border-radius: var(--radius-small);
+  background: var(--btn-bg); color: var(--btn-fg);
+  font: var(--font-weight-medium) var(--font-size-body)/var(--line-height-body) var(--font-family-body);
+  white-space: nowrap; cursor: pointer; text-decoration: none;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+.btn:hover, .btn.is-hover { background: var(--btn-bg-hover); }
+.btn:active, .btn.is-active { background: var(--btn-bg-active); }
+.btn--primary {
+  @include button.set('primary');
+}
+.btn--subtle {
+  @include button.set('subtle');
+}
+.btn--danger {
+  @include button.set('danger');
+}
+.btn--warning {
+  @include button.set('warning');
+}
+.btn--link {
+  @include button.set('link');
+  padding-inline: var(--space-050);
+}
+.btn--link:hover, .btn--link.is-hover { text-decoration: underline; }
+.btn--link:active, .btn--link.is-active { color: var(--color-link-pressed); }
+.btn.is-selected, .btn[aria-pressed="true"] {
+  @include button.set('selected');
+}
+.btn:disabled, .btn.is-disabled {
+  @include button.set('disabled');
+  cursor: not-allowed;
+}
+.btn--subtle:disabled, .btn--subtle.is-disabled, .btn--link:disabled { @include button.set('disabled-transparent'); }
+.btn--compact { height: var(--control-height-compact); padding-inline: var(--space-100); }
+.btn--icon { width: var(--control-height); padding: 0; }
+.btn--icon.btn--compact { width: var(--control-height-compact); }
+.btn--block { width: 100%; }
+.btn .spinner { width: 14px; height: 14px; }
+
+.btn-split { display: inline-flex; gap: 1px; }
+.btn-split > .btn:first-child { border-start-end-radius: 0; border-end-end-radius: 0; }
+.btn-split > .btn:last-child { border-start-start-radius: 0; border-end-start-radius: 0; padding-inline: var(--space-075); }

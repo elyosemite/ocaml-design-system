@@ -1,23 +1,37 @@
 // Confere o design system (v3 §4.3 e §12): tokens, temas, registro de páginas e métricas de saúde.
-// Uso: node scripts/check-design-system.mjs [--metrics]
+// Lê o CSS gerado (dist/, rode pnpm build antes) e as páginas de documentação (site/).
+// Uso: node scripts/check.mjs [--metrics [--list]]
 // Sai com código 1 se houver erro (variável sem token, tema escuro divergente, página fora do registro).
-import { readFileSync, readdirSync, existsSync } from "node:fs";
+// A conferência dos comentários // DS: do app fica no repositório do app, contra dist/pages.json.
+import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const ds = root;
+const ds = join(root, "site");
 const read = (f) => readFileSync(join(ds, f), "utf8");
 const errors = [];
 const warnings = [];
 
-const tokensCss = read("tokens.css");
-const componentsCss = read("components.css");
+for (const f of ["tokens.css", "components.css"]) if (!existsSync(join(root, "dist", f))) { console.error(`erro: falta dist/${f}. Rode pnpm build.`); process.exit(1); }
+const tokensCss = readFileSync(join(root, "dist", "tokens.css"), "utf8");
+const componentsCss = readFileSync(join(root, "dist", "components.css"), "utf8");
 const docsCss = read("docs.css");
+// Os fontes Sass dos componentes: nenhum pode chamar a paleta nem usar cor fixa fora de src/tokens/primitives/.
+const walkFiles = (d, ext) => readdirSync(d).flatMap((n) => { const p = join(d, n); return statSync(p).isDirectory() ? walkFiles(p, ext) : p.endsWith(ext) ? [p] : []; });
+const stylesScss = walkFiles(join(root, "src", "styles"), ".scss").map((p) => readFileSync(p, "utf8")).join("\n");
+const componentTokensScss = walkFiles(join(root, "src", "tokens", "components"), ".scss").map((p) => [p, readFileSync(p, "utf8")]);
+for (const [p, text] of componentTokensScss) {
+  const clean = text.replace(/\/\/.*$/gm, "");
+  if (/palette\(|#[0-9a-f]{3,8}\b/i.test(clean)) errors.push(`${p.replace(root, "").replace(/\\/g, "/").slice(1)}: token de componente usa a paleta ou cor fixa (use var(--semântico))`);
+  if (/\blight\s*:|\bdark\s*:/.test(clean)) errors.push(`${p.replace(root, "").replace(/\\/g, "/").slice(1)}: token de componente com tema (o tema mora só no nível semântico)`);
+}
+if (/palette\(/.test(stylesScss.replace(/\/\/.*$/gm, ""))) errors.push("src/styles/ chama palette(): componentes usam só tokens semânticos");
 
 /** Remove comentários e devolve o texto do bloco que começa na linha `start` (até a chave que fecha). */
 function blocks(css) {
-  const clean = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  // sem comentários, sem @charset e com os seletores de atributo sem aspas (o Sass tira as aspas)
+  const clean = css.replace(/\/\*[\s\S]*?\*\//g, "").replace(/@charset[^;]+;/g, "").replace(/\[([\w-]+)="([\w-]+)"\]/g, "[$1=$2]");
   const out = [];
   const re = /([^{}]+)\{/g;
   let m;
@@ -44,7 +58,7 @@ for (const b of top) {
   if (b.selector === ":root") for (const [k, v] of decls(b.body)) light.set(k, v);
   else if (b.selector.startsWith("@media (prefers-color-scheme: dark)")) {
     for (const inner of blocks(b.body)) for (const [k, v] of decls(inner.body)) darkMedia.set(k, v);
-  } else if (b.selector === ':root[data-theme="dark"]') for (const [k, v] of decls(b.body)) darkForced.set(k, v);
+  } else if (b.selector === ":root[data-theme=dark]") for (const [k, v] of decls(b.body)) darkForced.set(k, v);
 }
 for (const [k, v] of darkMedia) if (darkForced.get(k) !== v) errors.push(`tema escuro diverge: ${k} (sistema: ${v} · forçado: ${darkForced.get(k) ?? "ausente"})`);
 for (const k of darkForced.keys()) if (!darkMedia.has(k)) errors.push(`tema escuro diverge: ${k} só existe no bloco forçado`);
@@ -88,23 +102,6 @@ for (const f of readdirSync(ds).filter((n) => n.endsWith(".html") && n !== "inde
   if (!ids.includes(f.slice(0, -5))) errors.push(`${f} não está em EPISTULA_PAGES`);
 }
 
-// ---- 3b. ligação entre o app e o design system (v3 §12: drift e adoção) ----
-// Todo componente de src/ começa com um comentário que aponta para a página do DS (`// DS: botoes.html · ...`).
-let appFiles = 0, appLinked = 0;
-const walkTsx = (d) => {
-  for (const e of readdirSync(d, { withFileTypes: true })) {
-    const p = join(d, e.name);
-    if (e.isDirectory()) walkTsx(p);
-    else if (e.name.endsWith(".tsx")) {
-      appFiles++;
-      const head = readFileSync(p, "utf8").split("\n").slice(0, 14).filter((l) => l.trim().startsWith("//")).join("\n");
-      const refs = [...head.matchAll(/([a-z][a-z-]*)\.html/g)].map((m) => m[1]);
-      if (refs.length) appLinked++;
-      for (const r of refs) if (!existsSync(join(ds, `${r}.html`))) errors.push(`${p.replace(root, "").replace(/\\/g, "/").slice(1)}: aponta para ${r}.html, que não existe no design system`);
-    }
-  }
-};
-if (existsSync(join(root, "src"))) walkTsx(join(root, "src"));
 
 // ---- 4. métricas (v3 §12) ----
 const clean = componentsCss.replace(/\/\*(?![^*]*físico)[\s\S]*?\*\//g, "");
@@ -119,27 +116,38 @@ for (const m of clean.matchAll(declRe)) {
   if (/var\(/.test(value)) tokenized++;
   else if (/#[0-9a-f]{3,8}\b|rgba?\(|\b\d*\.?\d+(px|rem|em|ms|s)\b/i.test(value)) hardcoded.push(`${prop}: ${value}`);
 }
-const physical = (clean.split("\n").filter((l) => !l.includes("físico")).join("\n").match(/(margin|padding)-(left|right)\s*:|(^|[;{\s])(left|right)\s*:|text-align\s*:\s*(left|right)|border-(left|right)(-\w+)?\s*:|border-(top|bottom)-(left|right)-radius\s*:/g) ?? []).length;
+// Lido dos fontes Sass: lá o comentário /* físico: … */ continua na mesma linha da propriedade (no CSS gerado, não).
+const scssNoComments = stylesScss.split("\n").filter((l) => !l.includes("físico")).join("\n").replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
+const physical = (scssNoComments.match(/(margin|padding)-(left|right)\s*:|(^|[;{\s])(left|right)\s*:|text-align\s*:\s*(left|right)|border-(left|right)(-\w+)?\s*:|border-(top|bottom)-(left|right)-radius\s*:/g) ?? []).length;
 const allTokenNames = [...light.keys()];
 const primitives = allTokenNames.filter((n) => n.startsWith("--palette-"));
 const semantic = allTokenNames.filter((n) => !n.startsWith("--palette-"));
 const corpus = [componentsCss, docsCss, docsJs, ...readdirSync(ds).filter((n) => n.endsWith(".html")).map(read)].join("\n");
+// Uso pelos consumidores: um token pode ser usado só no app, no site ou nas docs. Por padrão procura o
+// repositório do app ao lado deste (../epistulamail); --app=<pasta> aponta outro lugar.
+const appArg = process.argv.find((a) => a.startsWith("--app="));
+const appDir = appArg ? appArg.slice(6) : join(root, "..", "epistulamail");
 let src = "";
-for (const dir of ["src", "site", "docs-site/src"]) {
-  const walk = (d) => { for (const e of readdirSync(d, { withFileTypes: true })) { if (e.name === "node_modules" || e.name === "dist") continue; const p = join(d, e.name); if (e.isDirectory()) walk(p); else if (/\.(tsx?|css|html|astro|mdx?|mjs)$/.test(e.name)) src += readFileSync(p, "utf8") + "\n"; } };
-  if (existsSync(join(root, dir))) walk(join(root, dir));
-}
+if (existsSync(appDir)) {
+  for (const dir of ["src", "site", "docs-site/src"]) {
+    const walk = (d) => { for (const e of readdirSync(d, { withFileTypes: true })) { if (e.name === "node_modules" || e.name === "dist" || e.name === "generated") continue; const p = join(d, e.name); if (e.isDirectory()) walk(p); else if (/\.(tsx?|css|html|astro|mdx?|mjs)$/.test(e.name) && !/^ds-/.test(e.name)) src += readFileSync(p, "utf8") + "\n"; } };
+    if (existsSync(join(appDir, dir))) walk(join(appDir, dir));
+  }
+} else warnings.push(`repositório do app não encontrado (${appDir}): tokens usados só pelo app vão aparecer como sem uso`);
+// Tokens de cor iguais nos dois temas de propósito: declarados com (value: …) em src/tokens/semantic/color/.
+const sameInBothThemes = new Set(walkFiles(join(root, "src", "tokens", "semantic", "color"), ".scss")
+  .flatMap((p) => [...readFileSync(p, "utf8").matchAll(/'(color-[\w-]+)': \(value:/g)].map((m) => `--${m[1]}`)));
 const tokensBody = tokensCss.replace(/\/\*[\s\S]*?\*\//g, "");
 const refs = (n, text) => text.includes(`var(${n})`) || text.includes(`var(${n},`);
 // Primitivo: tem de ser usado por algum semântico. Semântico: por componentes, páginas, app, site ou docs (ou por outro token).
 const orphanPrimitives = primitives.filter((n) => !refs(n, tokensBody) && !primitives.some((o) => o.startsWith(n + "-a"))); // a base de uma opacidade (-aNN) conta como usada
 const orphans = semantic.filter((n) => !refs(n, corpus) && !refs(n, src) && !refs(n, tokensBody) && !/^--(gradient|color-canvas-|breakpoint-)/.test(n));
 // Regra de ouro dos três níveis: nada fora de tokens.css usa a paleta direto.
-for (const [name, text] of [["components.css", componentsCss], ["docs.css", docsCss], ["docs.js", docsJs], ["src/ (app)", src]]) {
+for (const [name, text] of [["components.css", componentsCss], ["docs.css", docsCss], ["docs.js", docsJs], ["app", src]]) {
   const bad = [...new Set([...text.matchAll(/var\(\s*(--palette-[\w-]+)/g)].map((m) => m[1]))];
   if (bad.length) errors.push(`${name} usa primitivo(s) direto (use o token semântico): ${bad.slice(0, 5).join(", ")}`);
 }
-const darkMissing = semantic.filter((n) => n.startsWith("--color-") && !darkMedia.has(n));
+const darkMissing = semantic.filter((n) => n.startsWith("--color-") && !darkMedia.has(n) && !sameInBothThemes.has(n));
 
 const pct = (a, b) => (b ? Math.round((a / b) * 1000) / 10 : 100);
 const report = {
@@ -148,7 +156,6 @@ const report = {
   semanticos: semantic.length,
   tokensComTemaEscuro: [...darkMedia.keys()].length,
   paginas: ids.length,
-  arquivosDoAppComPaginaDoDS: `${appLinked} de ${appFiles} (${pct(appLinked, appFiles)}%)`,
   paginasPorStatus: Object.fromEntries([...STATUS].map((s) => [s, registry.flatMap((g) => g.items).filter((i) => i[3] === s).length])),
   coberturaDeTokens: `${pct(tokenized, visual)}% (${tokenized} de ${visual} declarações visuais em components.css)`,
   valoresFixosEmComponents: hardcoded.length,

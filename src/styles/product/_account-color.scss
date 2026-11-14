@@ -1,0 +1,23 @@
+// Produto · Seletor de cor da conta (L17)
+// Veio de components.css (linhas 1465–1485) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Seletor de cor da conta (L17): rádios com amostras de .avatar nas 6 cores.
+   Cada opção leva o nome da cor em .visually-hidden. Ver selecao.html.
+   ========================================================================== */
+.color-picker { display: flex; flex-wrap: wrap; gap: var(--space-150); min-width: 0; margin: 0; padding: 0; border: 0; }
+.color-picker legend { padding: 0; margin-bottom: var(--space-100); font: var(--font-weight-semibold) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body); color: var(--color-text-subtle); }
+.color-swatch { position: relative; display: inline-grid; cursor: pointer; border-radius: var(--radius-round); }
+.color-swatch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.color-swatch .avatar { pointer-events: none; }
+.color-swatch:hover .avatar { box-shadow: 0 0 0 2px var(--color-surface-overlay), 0 0 0 4px var(--color-border); }
+.color-swatch:has(input:checked) .avatar { box-shadow: 0 0 0 2px var(--color-surface-overlay), 0 0 0 4px var(--color-border-selected); }
+.color-swatch:has(input:focus-visible) { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: 6px; }
+.color-swatch__check {
+  position: absolute; inset-inline-end: -4px; bottom: -4px; display: none; place-items: center;
+  width: 1rem; height: 1rem; border-radius: var(--radius-round);
+  background: var(--color-bg-brand-bold); color: var(--color-text-inverse);
+  box-shadow: 0 0 0 2px var(--color-surface-overlay);
+}
+.color-swatch__check .i { width: 10px; height: 10px; stroke-width: 3; }
+.color-swatch:has(input:checked) .color-swatch__check { display: grid; }

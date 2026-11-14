@@ -1,0 +1,55 @@
+// Nível 2 · Semânticos · tipografia
+// Famílias por papel, pesos, a escala de Hero a Code e os atalhos para usar com font: var(--font-body).
+// Prefira o atalho a combinar tamanho e peso na mão.
+@use 'sass:string';
+@use '../primitives/font' as p;
+
+$groups: (
+  'Tipografia · famílias': (
+    'font-family-body': p.$family-inter,
+    'font-family-heading': var(--font-family-body),
+    'font-family-code': p.$family-jetbrains-mono,
+  ),
+  'Tipografia · pesos': (
+    'font-weight-regular': p.$weight-400,
+    'font-weight-medium': p.$weight-500,
+    'font-weight-semibold': p.$weight-600,
+    'font-weight-bold': p.$weight-700,
+  ),
+  'Tipografia · escala (tamanho / altura de linha / tracking)': (
+    'font-size-hero': p.$size-32,
+    'line-height-hero': p.$line-36,
+    'letter-spacing-hero': p.$tracking-minus-20,
+    'font-size-page-title': p.$size-24,
+    'line-height-page-title': p.$line-28,
+    'letter-spacing-page-title': p.$tracking-minus-15,
+    'font-size-section': p.$size-20,
+    'line-height-section': p.$line-24,
+    'letter-spacing-section': p.$tracking-minus-10,
+    'font-size-card': p.$size-16,
+    'line-height-card': p.$line-20,
+    'letter-spacing-card': p.$tracking-minus-5,
+    'font-size-body-large': p.$size-16,
+    'line-height-body-large': p.$line-24,
+    'font-size-body': p.$size-14,
+    'line-height-body': p.$line-20,
+    'font-size-body-small': p.$size-12,
+    'line-height-body-small': p.$line-16,
+    'font-size-label': p.$size-11,
+    'line-height-label': p.$line-16,
+    'letter-spacing-label': p.$tracking-40,
+    'font-size-code': p.$size-13,
+    'line-height-code': p.$line-20,
+  ),
+  'Tipografia · atalhos (shorthand `font`)': (
+    'font-hero': string.unquote('var(--font-weight-bold) var(--font-size-hero)/var(--line-height-hero) var(--font-family-heading)'),
+    'font-page-title': string.unquote('var(--font-weight-semibold) var(--font-size-page-title)/var(--line-height-page-title) var(--font-family-heading)'),
+    'font-section': string.unquote('var(--font-weight-semibold) var(--font-size-section)/var(--line-height-section) var(--font-family-heading)'),
+    'font-card': string.unquote('var(--font-weight-semibold) var(--font-size-card)/var(--line-height-card) var(--font-family-heading)'),
+    'font-body-large': string.unquote('var(--font-weight-regular) var(--font-size-body-large)/var(--line-height-body-large) var(--font-family-body)'),
+    'font-body': string.unquote('var(--font-weight-regular) var(--font-size-body)/var(--line-height-body) var(--font-family-body)'),
+    'font-body-small': string.unquote('var(--font-weight-regular) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body)'),
+    'font-label': string.unquote('var(--font-weight-semibold) var(--font-size-label)/var(--line-height-label) var(--font-family-body)'),
+    'font-code': string.unquote('var(--font-weight-regular) var(--font-size-code)/var(--line-height-code) var(--font-family-code)'),
+  ),
+);

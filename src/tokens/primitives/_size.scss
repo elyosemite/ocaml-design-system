@@ -1,0 +1,21 @@
+// Nível 1 · Primitivos · tamanho
+// Alturas e larguras de peças e colunas. O número é o valor em px.
+
+// Em rem: acompanham o tamanho do texto do sistema
+$size-24: 1.5rem;
+$size-32: 2rem;
+$size-36: 2.25rem;
+$size-56: 3.5rem;
+$size-64: 4rem;
+$size-76: 4.75rem;
+$size-240: 15rem;
+$size-400: 25rem;
+$size-560: 35rem;
+$size-600: 37.5rem;
+$size-672: 42rem;
+
+// Em px: ícones do sprite, que não escalam com o texto
+$icon-12: 12px;
+$icon-16: 16px;
+$icon-20: 20px;
+$icon-24: 24px;

@@ -1,0 +1,19 @@
+// Padrões · Arrastar mensagens para uma pasta (L29)
+// Veio de components.css (linhas 730–746) na migração para o EpistulaDesignSystem.
+
+/* L29 · Arrastar mensagens para uma pasta */
+.nav-item.is-drop-target {
+  background: var(--color-bg-selected); color: var(--color-text-selected);
+  box-shadow: inset 0 0 0 2px var(--color-border-selected);
+}
+.nav-item.is-drop-target > .i { color: var(--color-icon-brand); }
+.nav-item.is-drop-blocked { cursor: no-drop; }
+.drag-ghost {
+  display: inline-flex; align-items: center; gap: var(--space-075);
+  padding: var(--space-050) var(--space-100) var(--space-050) var(--space-075);
+  border-radius: var(--radius-medium);
+  background: var(--color-bg-brand-bold); color: var(--color-text-inverse);
+  box-shadow: var(--shadow-overlay);
+  font: var(--font-weight-semibold) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body);
+  pointer-events: none; white-space: nowrap;
+}

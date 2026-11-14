@@ -1,0 +1,54 @@
+// EpistulaDesignSystem · tokens
+// Entrada de dist/tokens.css. Inspirado no Atlassian Design System (ADS).
+//
+// Três níveis, uma pasta cada:
+//   primitives/   valores brutos (paleta, escalas). Só o nível semântico usa.
+//   semantic/     o significado (--color-text-subtle, --space-100). É o que componentes, app e site usam.
+//   components/   ajustes de UM componente (--btn-bg), raros, sempre apontando para semânticos.
+// O tema (claro/escuro) existe só no nível semântico: cada token de cor traz os dois valores lado a lado,
+// e themes() gera o claro, o escuro do sistema e o escuro forçado da mesma fonte.
+// Temas extras: alto contraste e movimento reduzido (themes/).
+@use 'sass:map';
+@use 'config';
+@use 'emit';
+@use 'primitives/color' as palette;
+@use 'semantic/color/text';
+@use 'semantic/color/surface';
+@use 'semantic/color/canvas';
+@use 'semantic/color/background';
+@use 'semantic/color/border';
+@use 'semantic/color/icon';
+@use 'semantic/color/label';
+@use 'semantic/color/gradient';
+@use 'semantic/elevation';
+@use 'semantic/typography';
+@use 'semantic/space';
+@use 'semantic/shape';
+@use 'semantic/layout';
+@use 'semantic/density';
+@use 'semantic/layer';
+@use 'semantic/motion';
+@use 'semantic/focus';
+@use 'semantic/opacity';
+@use 'semantic/icon-size';
+@use 'semantic/breakpoint';
+@use 'themes/high-contrast';
+@use 'themes/reduced-motion';
+
+$_sources: (
+  text.$groups, surface.$groups, canvas.$groups, background.$groups, border.$groups, icon.$groups,
+  label.$groups, elevation.$groups, typography.$groups, space.$groups, shape.$groups, layout.$groups,
+  density.$groups, layer.$groups, motion.$groups, focus.$groups, opacity.$groups, icon-size.$groups,
+  breakpoint.$groups, gradient.$groups,
+);
+$_all: if(config.$emit-primitives, palette.$groups, ());
+@each $groups in $_sources {
+  @each $name, $tokens in $groups {
+    @if map.has-key($_all, $name) { @error 'Grupo de tokens repetido: #{$name}'; }
+    $_all: map.set($_all, $name, $tokens);
+  }
+}
+
+@include emit.themes($_all);
+@include high-contrast.emit;
+@include reduced-motion.emit;

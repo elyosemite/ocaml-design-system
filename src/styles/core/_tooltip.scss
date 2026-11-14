@@ -1,0 +1,20 @@
+// Core · Tooltip
+// Veio de components.css (linhas 1423–1440) na migração para o EpistulaDesignSystem.
+
+.tooltip {
+  display: inline-flex; align-items: center; gap: var(--space-100);
+  max-width: 15rem; padding: var(--space-025) var(--space-075);
+  border-radius: var(--radius-small);
+  background: var(--color-bg-neutral-bold); color: var(--color-text-inverse);
+  font: var(--font-body-small);
+}
+.tooltip .kbd { background: transparent; color: inherit; border-color: currentColor; opacity: var(--opacity-soft); height: 1rem; }
+
+/* Tooltip flutuante: uma camada fixa posicionada por script a partir de [data-tip],
+   para não ser cortada por containers com overflow e respeitar os limites do card. */
+.tooltip--floating {
+  position: fixed; top: 0; left: 0; z-index: var(--z-tooltip); /* físico: posicionado por coordenadas do ponteiro */
+  white-space: nowrap; pointer-events: none;
+}
+/* O display de .tooltip anularia o atributo hidden: sem esta regra, a camada vazia aparece no canto. */
+.tooltip--floating[hidden] { display: none; }

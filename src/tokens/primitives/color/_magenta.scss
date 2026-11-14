@@ -1,0 +1,14 @@
+// Nível 1 · Primitivos · cor · magenta
+// Valor bruto, sem intenção de uso. O nome diz a família e o quanto é escuro (25 claro … 1000 escuro);
+// o sufixo -aNN é a opacidade em %. Só os tokens semânticos usam estes valores, pela função palette().
+
+$groups: (
+  'Paleta · magenta': (
+    'magenta-25': #FFECF8,
+    'magenta-75': #F5DFEE,
+    'magenta-100': #FDD0EC,
+    'magenta-600': #943D73,
+    'magenta-775': #50253F,
+    'magenta-950': #120710,
+  ),
+);

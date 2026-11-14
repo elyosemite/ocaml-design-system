@@ -1,0 +1,44 @@
+// Core · Navegação lateral (ADS Side Navigation)
+// Veio de components.css (linhas 353–394) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Sidebar (ADS Side Navigation)
+   ========================================================================== */
+.sidebar {
+  display: flex; flex-direction: column; gap: var(--space-200);
+  width: var(--layout-sidebar-width); max-width: 100%;
+  padding: var(--space-150) var(--space-100);
+  background: var(--color-surface-sunken);
+  border-inline-end: var(--border-width) solid var(--color-border);
+}
+.nav-group { display: grid; gap: var(--space-025); }
+.nav-heading {
+  padding: var(--space-100) var(--space-100) var(--space-050);
+  font: var(--font-label); letter-spacing: var(--letter-spacing-label); text-transform: uppercase;
+  color: var(--color-text-subtlest);
+}
+.nav-item {
+  display: flex; align-items: center; gap: var(--space-150);
+  height: var(--control-height); padding-inline: var(--space-100);
+  border-radius: var(--radius-small); border: 0; width: 100%;
+  background: transparent; color: var(--color-text-subtle);
+  font: var(--font-weight-medium) var(--font-size-body)/var(--line-height-body) var(--font-family-body);
+  text-align: start; cursor: pointer; text-decoration: none;
+}
+.nav-item > .i { color: var(--color-icon); }
+.nav-item__text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav-item__count { font: var(--font-body-small); font-variant-numeric: tabular-nums; color: var(--color-text-subtlest); }
+.nav-item:hover, .nav-item.is-hover { background: var(--color-bg-neutral-subtle-hovered); color: var(--color-text); }
+.nav-item:active, .nav-item.is-active { background: var(--color-bg-neutral-subtle-pressed); }
+.nav-item.is-selected, .nav-item[aria-current="page"] { background: var(--color-bg-selected); color: var(--color-text-selected); }
+.nav-item.is-selected > .i, .nav-item[aria-current="page"] > .i { color: var(--color-icon-brand); }
+.nav-item.is-selected:hover, .nav-item[aria-current="page"]:hover { background: var(--color-bg-selected-hovered); }
+.nav-item.has-unread .nav-item__text { font-weight: var(--font-weight-semibold); color: var(--color-text); }
+.nav-item.has-unread .nav-item__count { font-weight: var(--font-weight-semibold); color: var(--color-text); }
+.nav-item.is-disabled { color: var(--color-text-disabled); cursor: not-allowed; background: transparent; }
+.nav-item.is-disabled > .i { color: var(--color-text-disabled); }
+
+.meter { display: grid; gap: var(--space-050); padding-inline: var(--space-100); font: var(--font-body-small); color: var(--color-text-subtlest); }
+.progress { height: 4px; border-radius: var(--radius-round); background: var(--color-bg-neutral-hovered); overflow: hidden; }
+.progress > span { display: block; height: 100%; border-radius: inherit; background: var(--color-bg-brand-bold); }
+.progress--warning > span { background: var(--color-bg-warning-bold-hovered); }

@@ -1,0 +1,67 @@
+// Layouts e páginas · Casca em blocos (L25–L27)
+// Veio de components.css (linhas 667–729) na migração para o EpistulaDesignSystem.
+
+@use '../../tokens/components/app-shell';
+
+/* ==========================================================================
+   Layout em blocos e configurações (L25–L34, US5)
+   ========================================================================== */
+/* L25 · Casca em blocos: contas | pastas | lista | gap (divisor) | leitura, sobre o fundo.
+   Use com --with-rail. Os comandos ficam dentro do bloco do header (D1). */
+.app-shell.app-shell--blocks {
+  @include app-shell.set('blocks');
+  grid-template-columns: var(--layout-sidebar-collapsed) var(--app-shell-sidebar) clamp(20rem, var(--app-shell-list), 35rem) var(--app-shell-gap) minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-areas:
+    "rail header header header header"
+    "rail banner banner banner banner"
+    "rail nav    nav    gap    reader";
+  padding: var(--app-shell-gap) var(--app-shell-gap) var(--app-shell-gap) 0;
+  /* L26 · Fundo: tema, cor ou imagem trocam só esta propriedade */
+  background: var(--app-background, var(--color-canvas));
+  background-size: cover; background-position: center;
+}
+.app-shell__block {
+  min-width: 0; min-height: 0;
+  border-radius: var(--radius-large);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+  overflow: hidden;
+}
+.app-shell--blocks .app-shell__banner { margin-bottom: var(--app-shell-gap); }
+.app-shell--blocks .app-shell__center { grid-row: 3; grid-column: 2 / -1; }
+
+/* Coluna de contas sobre o fundo, do topo ao rodapé */
+.app-shell--blocks .app-shell__rail { grid-row: 1 / -1; padding-top: var(--space-150); background: transparent; border-inline-end: 0; }
+.app-shell--blocks .account-rail__item:hover .avatar,
+.app-shell--blocks .account-rail__item.is-hover .avatar { box-shadow: 0 0 0 2px var(--color-canvas), 0 0 0 4px var(--color-border-bold); }
+.app-shell--blocks .account-rail__item[aria-current="true"] .avatar { box-shadow: 0 0 0 2px var(--color-canvas), 0 0 0 4px var(--color-border-selected); }
+.app-shell--blocks .account-rail__badge,
+.app-shell--blocks .account-rail__alert { box-shadow: 0 0 0 2px var(--color-canvas); }
+
+/* Bloco do header: marca sobre as pastas, busca + configurações sobre a lista, conta sobre a leitura */
+.app-shell__block--header { grid-area: header; display: grid; grid-template-columns: subgrid; margin-bottom: var(--app-shell-gap); }
+.app-shell__block--header > .appbar { grid-column: 1 / -1; background: transparent; }
+.app-shell__block--header > .commandbar { grid-column: 1 / -1; background: transparent; border-bottom: 0; }
+.app-shell--blocks .appbar--shell .appbar__brand { grid-column: 1; }
+.app-shell--blocks .appbar--shell .appbar__search { grid-column: 2; display: flex; align-items: center; gap: var(--space-050); }
+.app-shell--blocks .appbar--shell .appbar__search > .input { flex: 1; }
+.app-shell--blocks .appbar--shell .appbar__actions { grid-column: 3 / -1; }
+
+/* Bloco de navegação: pastas + lista */
+.app-shell__block--nav { grid-area: nav; display: grid; grid-template-columns: subgrid; grid-template-rows: minmax(0, 1fr); }
+.app-shell__block--nav > .app-shell__sidebar { grid-area: auto; grid-column: 1; background: transparent; }
+.app-shell__block--nav > .app-shell__list { grid-area: auto; grid-column: 2; border-inline-end: 0; }
+.app-shell--blocks .app-shell__list .toolbar { flex-wrap: nowrap; background: transparent; }
+.app-shell--blocks .app-shell__list .toolbar.is-selecting { background: var(--color-bg-selected); }
+
+/* Bloco de conteúdo; o divisor ocupa o gap entre os blocos */
+/* O bloco corta o que sai dos cantos arredondados (overflow: hidden); a leitura precisa rolar nos dois eixos */
+.app-shell--blocks .app-shell__reader { grid-area: reader; overflow: auto; }
+.app-shell--blocks .app-shell__resizer { grid-area: gap; justify-self: stretch; width: auto; margin: 0; }
+.app-shell--blocks .app-shell__resizer::after { inset-inline-start: calc(50% - 1.5px); }
+
+/* L27 · Leitura na largura do bloco: sem a medida de 672px */
+.reader--fluid .message__body,
+.reader--fluid .message__frame,
+.reader--fluid .compose--inline { max-width: none; }

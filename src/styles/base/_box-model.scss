@@ -1,0 +1,5 @@
+// Base · Modelo de caixa
+// Veio de components.css (linhas 7–9) na migração para o EpistulaDesignSystem.
+
+/* ---------- Modelo de caixa: tamanhos dos tokens incluem padding e borda ---------- */
+*, *::before, *::after { box-sizing: border-box; }

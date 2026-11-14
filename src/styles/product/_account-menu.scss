@@ -1,0 +1,15 @@
+// Produto · Menu da conta (L40)
+// Veio de components.css (linhas 935–947) na migração para o EpistulaDesignSystem.
+
+/* L40 · Menu da conta: (1) foto, nome, e-mail e informações; (2) preferências; (3) sair */
+.account-menu { width: 21rem; max-width: calc(100vw - 2 * var(--space-200)); padding-block: var(--space-050); }
+.account-menu__head { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--space-150); padding: var(--space-150) var(--space-200); }
+.account-menu__name { font: var(--font-card); color: var(--color-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-menu__email { font: var(--font-body-small); color: var(--color-text-subtle); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-menu__info { display: grid; gap: var(--space-100); padding: 0 var(--space-200) var(--space-150); }
+.account-menu__line { display: flex; align-items: center; gap: var(--space-100); font: var(--font-body-small); color: var(--color-text-subtle); }
+.account-menu__line > .i { flex: none; color: var(--color-icon-subtle); }
+.account-menu__line .btn { margin-inline-start: auto; }
+.account-menu__line--warning, .account-menu__line--warning > .i { color: var(--color-text-warning); }
+.account-menu__pref { display: grid; gap: var(--space-075); padding: var(--space-075) var(--space-200); }
+.account-menu__label { font: var(--font-body-small); color: var(--color-text-subtlest); }

@@ -1,0 +1,18 @@
+// Core · Barra de comandos (L19)
+// Veio de components.css (linhas 622–637) na migração para o EpistulaDesignSystem.
+
+/* L19 · Barra de comandos: "Novo e-mail" é o único botão principal; grupos separados por .toolbar__sep */
+.commandbar {
+  display: flex; align-items: center; gap: var(--space-050);
+  min-height: 3rem; padding: var(--space-075) var(--space-150);
+  background: var(--color-surface-sunken);
+  border-bottom: var(--border-width) solid var(--color-border);
+  overflow-x: auto;
+}
+.commandbar__group { display: flex; align-items: center; gap: var(--space-025); flex: none; }
+.commandbar .toolbar__sep { flex: none; }
+.commandbar .btn-split { gap: 0; }
+.commandbar .btn-split > .btn:last-child { padding-inline: var(--space-050); }
+/* Sem espaço, os rótulos somem: o botão mantém aria-label e data-tip */
+.commandbar--compact .commandbar__label { display: none; }
+.commandbar--compact .btn:not(.btn--icon):not(.btn--primary) { padding-inline: var(--space-075); }

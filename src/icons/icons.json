@@ -1,0 +1,334 @@
+[
+  {
+    "name": "inbox",
+    "category": "interface"
+  },
+  {
+    "name": "star",
+    "category": "interface"
+  },
+  {
+    "name": "send",
+    "category": "interface"
+  },
+  {
+    "name": "file",
+    "category": "interface"
+  },
+  {
+    "name": "archive",
+    "category": "interface"
+  },
+  {
+    "name": "trash",
+    "category": "interface"
+  },
+  {
+    "name": "tag",
+    "category": "interface"
+  },
+  {
+    "name": "search",
+    "category": "interface"
+  },
+  {
+    "name": "clip",
+    "category": "interface"
+  },
+  {
+    "name": "reply",
+    "category": "interface"
+  },
+  {
+    "name": "forward",
+    "category": "interface"
+  },
+  {
+    "name": "more",
+    "category": "interface"
+  },
+  {
+    "name": "check",
+    "category": "interface"
+  },
+  {
+    "name": "x",
+    "category": "interface"
+  },
+  {
+    "name": "warning",
+    "category": "interface"
+  },
+  {
+    "name": "info",
+    "category": "interface"
+  },
+  {
+    "name": "success",
+    "category": "interface"
+  },
+  {
+    "name": "error",
+    "category": "interface"
+  },
+  {
+    "name": "sparkle",
+    "category": "interface"
+  },
+  {
+    "name": "spam",
+    "category": "interface"
+  },
+  {
+    "name": "sliders",
+    "category": "interface"
+  },
+  {
+    "name": "pencil",
+    "category": "interface"
+  },
+  {
+    "name": "chevron-down",
+    "category": "interface"
+  },
+  {
+    "name": "chevron-left",
+    "category": "interface"
+  },
+  {
+    "name": "chevron-right",
+    "category": "interface"
+  },
+  {
+    "name": "clock",
+    "category": "interface"
+  },
+  {
+    "name": "mail-open",
+    "category": "interface"
+  },
+  {
+    "name": "mail",
+    "category": "interface"
+  },
+  {
+    "name": "folder",
+    "category": "interface"
+  },
+  {
+    "name": "image",
+    "category": "interface"
+  },
+  {
+    "name": "download",
+    "category": "interface"
+  },
+  {
+    "name": "refresh",
+    "category": "interface"
+  },
+  {
+    "name": "plus",
+    "category": "interface"
+  },
+  {
+    "name": "minus",
+    "category": "interface"
+  },
+  {
+    "name": "expand",
+    "category": "interface"
+  },
+  {
+    "name": "bold",
+    "category": "interface"
+  },
+  {
+    "name": "italic",
+    "category": "interface"
+  },
+  {
+    "name": "list",
+    "category": "interface"
+  },
+  {
+    "name": "link",
+    "category": "interface"
+  },
+  {
+    "name": "help",
+    "category": "interface"
+  },
+  {
+    "name": "grid",
+    "category": "interface"
+  },
+  {
+    "name": "moon",
+    "category": "interface"
+  },
+  {
+    "name": "sun",
+    "category": "interface"
+  },
+  {
+    "name": "copy",
+    "category": "interface"
+  },
+  {
+    "name": "rows",
+    "category": "interface"
+  },
+  {
+    "name": "eye",
+    "category": "interface"
+  },
+  {
+    "name": "log-out",
+    "category": "interface"
+  },
+  {
+    "name": "log-in",
+    "category": "interface"
+  },
+  {
+    "name": "arrow-up",
+    "category": "interface"
+  },
+  {
+    "name": "arrow-down",
+    "category": "interface"
+  },
+  {
+    "name": "droplet",
+    "category": "interface"
+  },
+  {
+    "name": "globe",
+    "category": "interface"
+  },
+  {
+    "name": "flag",
+    "category": "interface"
+  },
+  {
+    "name": "reply-all",
+    "category": "interface"
+  },
+  {
+    "name": "folder-plus",
+    "category": "interface"
+  },
+  {
+    "name": "monitor",
+    "category": "interface"
+  },
+  {
+    "name": "settings",
+    "category": "interface"
+  },
+  {
+    "name": "user",
+    "category": "interface"
+  },
+  {
+    "name": "palette",
+    "category": "interface"
+  },
+  {
+    "name": "folder-move",
+    "category": "interface"
+  },
+  {
+    "name": "sidebar-left",
+    "category": "interface"
+  },
+  {
+    "name": "sidebar-right",
+    "category": "interface"
+  },
+  {
+    "name": "bell",
+    "category": "interface"
+  },
+  {
+    "name": "bell-off",
+    "category": "interface"
+  },
+  {
+    "name": "hard-drive",
+    "category": "interface"
+  },
+  {
+    "name": "lock",
+    "category": "interface"
+  },
+  {
+    "name": "shield",
+    "category": "interface"
+  },
+  {
+    "name": "key",
+    "category": "interface"
+  },
+  {
+    "name": "eye-off",
+    "category": "interface"
+  },
+  {
+    "name": "filter",
+    "category": "interface"
+  },
+  {
+    "name": "grip",
+    "category": "interface"
+  },
+  {
+    "name": "play",
+    "category": "interface"
+  },
+  {
+    "name": "arrow-right",
+    "category": "interface"
+  },
+  {
+    "name": "history",
+    "category": "interface"
+  },
+  {
+    "name": "receipt",
+    "category": "interface"
+  },
+  {
+    "name": "lock-open",
+    "category": "interface"
+  },
+  {
+    "name": "badge-check",
+    "category": "interface"
+  },
+  {
+    "name": "signature",
+    "category": "interface"
+  },
+  {
+    "name": "upload",
+    "category": "interface"
+  },
+  {
+    "name": "github",
+    "category": "marca"
+  },
+  {
+    "name": "x-brand",
+    "category": "marca"
+  },
+  {
+    "name": "discord",
+    "category": "marca"
+  },
+  {
+    "name": "certificate",
+    "category": "interface"
+  }
+]

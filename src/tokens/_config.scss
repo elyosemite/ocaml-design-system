@@ -1,0 +1,8 @@
+// Configuração dos tokens.
+//
+// $emit-primitives
+//   true (padrão): a paleta sai no CSS como --palette-* e os semânticos apontam para ela com var(). É o
+//   comportamento de antes da migração e o que a página de variáveis da documentação lê.
+//   false: a paleta fica só no Sass e os semânticos recebem o valor bruto. Nada de --palette-* no CSS final.
+//   Decisão em aberto (plano, §3.5).
+$emit-primitives: true !default;

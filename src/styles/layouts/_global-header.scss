@@ -1,0 +1,20 @@
+// Layouts e páginas · Header global (ADS Atlassian Navigation, adaptado)
+// Veio de components.css (linhas 1006–1023) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Header global (ADS Atlassian Navigation, adaptado)
+   ========================================================================== */
+.appbar {
+  display: flex; align-items: center; gap: var(--space-150);
+  height: var(--layout-header-height);
+  padding-inline: var(--space-150);
+  background: var(--color-surface);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+.appbar__brand { display: flex; align-items: center; gap: var(--space-100); font: var(--font-card); color: var(--color-text); white-space: nowrap; }
+.appbar__search { flex: 1; max-width: 45rem; min-width: 0; }
+.appbar__actions { display: flex; align-items: center; gap: var(--space-050); margin-inline-start: auto; }
+/* Conta conectada: avatar + "Conectado como <e-mail>". O e-mail corta com reticências, nunca quebra. */
+.appbar__account { display: flex; align-items: center; gap: var(--space-100); min-width: 0; max-width: 22rem; font: var(--font-body-small); color: var(--color-text-subtle); }
+.appbar__account-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.appbar__account-email { font-weight: var(--font-weight-semibold); color: var(--color-text); }

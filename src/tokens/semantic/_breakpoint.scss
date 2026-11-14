@@ -1,0 +1,29 @@
+// Nível 2 · Semânticos · breakpoints
+// Referência para quem lê o CSS: var() não funciona dentro de @media. Os componentes usam a mixin bp(),
+// que lê o mesmo primitivo, então os dois não divergem.
+@use 'sass:map';
+@use '../primitives/breakpoint' as p;
+
+$groups: (
+  'Breakpoints': (
+    'breakpoint-compact': (value: p.$breakpoint-960, desc: 'abaixo: a leitura substitui a lista e a coluna de contas some'),
+    'breakpoint-commands': (value: p.$breakpoint-1280, desc: 'abaixo: os botões da barra de comandos perdem o rótulo'),
+  ),
+);
+
+$_widths: (compact: p.$breakpoint-960, commands: p.$breakpoint-1280);
+
+@function _width($name) {
+  @if not map.has-key($_widths, $name) { @error 'Breakpoint inexistente: #{$name}. Use compact ou commands.'; }
+  @return map.get($_widths, $name);
+}
+
+/// Abaixo do breakpoint. @include down(compact) { … } → @media (max-width: 959px)
+@mixin down($name) {
+  @media (max-width: _width($name) - 1px) { @content; }
+}
+
+/// Do breakpoint para cima. @include up(compact) { … } → @media (min-width: 960px)
+@mixin up($name) {
+  @media (min-width: _width($name)) { @content; }
+}

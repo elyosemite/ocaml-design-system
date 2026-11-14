@@ -1,0 +1,10 @@
+// Produto · Envio (L45)
+// Veio de components.css (linhas 974–981) na migração para o EpistulaDesignSystem.
+
+/* L45 · Envio: citação recolhida, anexos do encaminhamento, motivo do bloqueio e "Enviando…" */
+.compose__quote-toggle { align-self: flex-start; justify-self: start; margin: 0 var(--space-200) var(--space-100); padding-inline: var(--space-100); letter-spacing: .1em; }
+.compose__attachments { display: flex; flex-wrap: wrap; gap: var(--space-100); padding: 0 var(--space-200) var(--space-150); }
+.compose__attachments .attachment { max-width: 16rem; }
+.compose__attachments .attachment__action { display: flex; }
+.compose__hint { display: flex; align-items: center; gap: var(--space-050); font: var(--font-body-small); color: var(--color-text-danger); }
+.compose.is-sending { opacity: var(--opacity-busy); pointer-events: none; }

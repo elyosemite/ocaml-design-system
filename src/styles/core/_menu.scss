@@ -1,0 +1,40 @@
+// Core · Menu (ADS Dropdown Menu)
+// Veio de components.css (linhas 1385–1422) na migração para o EpistulaDesignSystem.
+
+/* ==========================================================================
+   Menu (ADS Dropdown Menu) e Tooltip
+   ========================================================================== */
+.menu {
+  display: grid; min-width: 14rem; max-width: 100%;
+  padding-block: var(--space-075);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface-overlay);
+  box-shadow: var(--shadow-overlay);
+}
+.menu__heading { padding: var(--space-150) var(--space-200) var(--space-050); font: var(--font-label); letter-spacing: var(--letter-spacing-label); text-transform: uppercase; color: var(--color-text-subtlest); }
+.menu__sep { height: 1px; margin-block: var(--space-075); background: var(--color-border); }
+.menu-item {
+  display: flex; align-items: center; gap: var(--space-150);
+  min-height: 2.25rem; padding: var(--space-075) var(--space-200);
+  border: 0; background: transparent; color: var(--color-text);
+  font: var(--font-body); text-align: start; cursor: pointer; width: 100%;
+  box-shadow: inset 2px 0 0 transparent;
+}
+.menu-item > .i { color: var(--color-icon); }
+.menu-item__text { flex: 1; }
+.menu-item:hover, .menu-item.is-hover { background: var(--color-bg-neutral-subtle-hovered); box-shadow: inset 2px 0 0 var(--color-border-bold); }
+.menu-item:active { background: var(--color-bg-neutral-subtle-pressed); }
+.menu-item[aria-checked="true"], .menu-item.is-selected { background: var(--color-bg-selected); color: var(--color-text-selected); box-shadow: inset 2px 0 0 var(--color-border-selected); }
+.menu-item[aria-checked="true"] > .i, .menu-item.is-selected > .i { color: var(--color-icon-brand); }
+.menu-item:disabled, .menu-item.is-disabled { color: var(--color-text-disabled); background: transparent; box-shadow: none; cursor: not-allowed; }
+.menu-item:disabled > .i { color: var(--color-text-disabled); }
+.menu-item--danger, .menu-item--danger > .i { color: var(--color-text-danger); }
+.menu-item .kbd { margin-inline-start: auto; }
+/* L21 · Menu com busca, criação inline e mensagem de vazio (ex.: "Mover para") */
+.menu--wide { min-width: 18rem; }
+.menu__search { padding: var(--space-075) var(--space-150) var(--space-050); }
+.menu__form { display: flex; gap: var(--space-075); align-items: center; padding: var(--space-050) var(--space-150) var(--space-075); }
+.menu__form .input { flex: 1; min-width: 0; }
+.menu__empty { padding: var(--space-075) var(--space-200); font: var(--font-body-small); color: var(--color-text-subtlest); }
+/* L24 · Informação à direita do item (ex.: data do prazo) */
+.menu-item__meta { margin-inline-start: auto; font: var(--font-body-small); color: var(--color-text-subtlest); font-variant-numeric: tabular-nums; }

@@ -1,0 +1,36 @@
+// Nível 2 · Semânticos · cor · fundos de componente (neutro, marca, estados)
+// Cada token tem o valor do tema claro e o do escuro lado a lado (light/dark). O que é igual nos dois
+// temas de propósito usa value. A compilação falha se faltar um dos temas.
+
+@use '../../primitives/color' as p;
+
+$groups: (
+  'Cor · fundos de componente': (
+    'color-bg-input': (light: p.palette('white'), dark: p.palette('slate-900')),
+    'color-bg-input-hovered': (light: p.palette('slate-25'), dark: p.palette('slate-875')),
+    'color-bg-neutral': (light: p.palette('blue-860-a06'), dark: p.palette('white-a07')),
+    'color-bg-neutral-hovered': (light: p.palette('blue-860-a14'), dark: p.palette('white-a12')),
+    'color-bg-neutral-pressed': (light: p.palette('blue-860-a31'), dark: p.palette('white-a20')),
+    'color-bg-neutral-subtle-hovered': (light: p.palette('blue-860-a06'), dark: p.palette('white-a06')),
+    'color-bg-neutral-subtle-pressed': (light: p.palette('blue-860-a14'), dark: p.palette('white-a12')),
+    'color-bg-neutral-bold': (light: p.palette('slate-650'), dark: p.palette('slate-325')),
+    'color-bg-disabled': (light: p.palette('blue-860-a03'), dark: p.palette('blue-150-a04')),
+    'color-bg-selected': (light: p.palette('blue-50'), dark: p.palette('blue-850')),
+    'color-bg-selected-hovered': (light: p.palette('blue-100'), dark: p.palette('blue-795')),
+    'color-bg-brand-bold': (light: p.palette('blue-525'), dark: p.palette('blue-300')),
+    'color-bg-brand-bold-hovered': (light: p.palette('blue-600'), dark: p.palette('blue-225')),
+    'color-bg-brand-bold-pressed': (light: p.palette('blue-775'), dark: p.palette('blue-100')),
+    'color-bg-danger': (light: p.palette('red-50'), dark: p.palette('red-800')),
+    'color-bg-danger-bold': (light: p.palette('red-525'), dark: p.palette('red-300')),
+    'color-bg-danger-bold-hovered': (light: p.palette('red-600'), dark: p.palette('red-225')),
+    'color-bg-warning': (light: p.palette('yellow-75'), dark: p.palette('yellow-825')),
+    'color-bg-warning-bold': (light: p.palette('yellow-375'), dark: p.palette('yellow-375')),
+    'color-bg-warning-bold-hovered': (light: p.palette('yellow-550'), dark: p.palette('yellow-550')),
+    'color-bg-success': (light: p.palette('green-75'), dark: p.palette('green-800')),
+    'color-bg-success-bold': (light: p.palette('green-675'), dark: p.palette('green-450')),
+    'color-bg-information': (light: p.palette('blue-50'), dark: p.palette('blue-820')),
+    'color-bg-information-bold': (light: p.palette('blue-525'), dark: p.palette('blue-300')),
+    'color-bg-discovery': (light: p.palette('blue-25'), dark: p.palette('blue-725')),
+    'color-bg-discovery-bold': (light: p.palette('blue-425'), dark: p.palette('blue-260')),
+  ),
+);

@@ -1,0 +1,37 @@
+// Core · Banner e Section message (ADS Banner / Section Message)
+// Veio de components.css (linhas 1279–1311) na migração para o EpistulaDesignSystem.
+
+@use '../../tokens/components/section-message';
+
+/* ==========================================================================
+   Banner (ADS Banner) e Section message (ADS Section Message)
+   ========================================================================== */
+.banner {
+  display: flex; align-items: center; justify-content: center; gap: var(--space-100);
+  min-height: 3rem; padding: var(--space-150) var(--space-200);
+  font: var(--font-weight-medium) var(--font-size-body)/var(--line-height-body) var(--font-family-body);
+  text-align: center;
+}
+.banner a { color: inherit; text-decoration: underline; font-weight: var(--font-weight-semibold); }
+.banner--warning { background: var(--color-bg-warning-bold); color: var(--color-text-warning-inverse); }
+.banner--error { background: var(--color-bg-danger-bold); color: var(--color-text-inverse); }
+.banner--announcement { background: var(--color-bg-neutral-bold); color: var(--color-text-inverse); }
+
+.section-message {
+  @include section-message.set('information');
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-150);
+  padding: var(--space-200);
+  border-radius: var(--radius-small);
+  background: var(--sm-bg); color: var(--color-text);
+  font: var(--font-body);
+}
+.section-message > .i { color: var(--sm-icon); width: 20px; height: 20px; }
+.section-message__title { margin: 0 0 var(--space-050); font: var(--font-weight-semibold) var(--font-size-body)/var(--line-height-body) var(--font-family-body); }
+.section-message p { margin: 0; }
+.section-message__actions { display: flex; flex-wrap: wrap; gap: var(--space-200); margin-top: var(--space-100); }
+.section-message__actions button { padding: 0; border: 0; background: none; color: var(--color-link); font: var(--font-weight-medium) var(--font-size-body)/var(--line-height-body) var(--font-family-body); cursor: pointer; }
+.section-message__actions button:hover { text-decoration: underline; }
+.section-message--warning { @include section-message.set('warning'); }
+.section-message--error { @include section-message.set('error'); }
+.section-message--success { @include section-message.set('success'); }
+.section-message--discovery { @include section-message.set('discovery'); }

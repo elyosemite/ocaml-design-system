@@ -1,0 +1,6 @@
+// Layouts e páginas · Linha de controles
+// Veio de components.css (linhas 190–193) na migração para o EpistulaDesignSystem.
+
+/* Linha de controles (botões, campos curtos) lado a lado, quebrando quando falta espaço. Usada nas páginas do DS
+   e no app (criptografia, chaves, certificados, regras); antes só existia em docs.css, que o app não carrega. */
+.row { display: flex; flex-wrap: wrap; gap: var(--space-150); align-items: center; }

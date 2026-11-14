@@ -1,0 +1,10 @@
+// Layouts e páginas · Fim do header (L42)
+// Veio de components.css (linhas 899–906) na migração para o EpistulaDesignSystem.
+
+/* L42 · Fim do header: botões das colunas e, por último, a foto da conta (extrema direita) */
+.appbar__end { justify-content: flex-end; gap: var(--space-025); }
+.appbar__end .account-trigger { margin-inline-start: var(--space-075); }
+.account-trigger { display: grid; place-items: center; flex: none; width: var(--control-height); height: var(--control-height); padding: 0; border: 0; border-radius: var(--radius-round); background: transparent; cursor: pointer; }
+.account-trigger:hover .avatar, .account-trigger.is-hover .avatar { box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-border-bold); }
+.account-trigger[aria-expanded="true"] .avatar { box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-border-selected); }
+.account-trigger:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }

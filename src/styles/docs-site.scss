@@ -1,0 +1,6 @@
+// EpistulaDesignSystem · peças do site de documentação
+// Entrada de dist/docs-site.css: só o trecho que o docs.epistulamail.com carrega inline (gradiente, brilho,
+// ícones de marca, idioma e timeline). O mesmo trecho também está em dist/components.css, entre os marcadores
+// @docs-site:start e @docs-site:end.
+
+@use 'docs-site/docs-site';

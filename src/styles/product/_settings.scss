@@ -1,0 +1,78 @@
+// Produto · Configurações (L32, L34, L49)
+// Veio de components.css (linhas 761–835) na migração para o EpistulaDesignSystem.
+@use '../../tokens/semantic/breakpoint' as bp;
+
+/* L32 · Configurações (D2): cobre as duas colunas (bloco de navegação e conteúdo), sem cobrir
+   a coluna de contas nem o header. Com --embedded, num contêiner da documentação. */
+.app-shell__sheet { grid-row: 3; grid-column: 2 / -1; z-index: 2; display: flex; min-height: 0; }
+.settings-sheet {
+  flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 0;
+  border-radius: var(--radius-large);
+  background: var(--color-surface-overlay); color: var(--color-text);
+  box-shadow: var(--shadow-overlay);
+}
+.settings-sheet__head {
+  display: flex; align-items: center; gap: var(--space-100);
+  padding: var(--space-200) var(--space-300);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+.settings-sheet__head > .i { width: 20px; height: 20px; color: var(--color-icon); }
+.settings-sheet__head > .btn { margin-inline-start: auto; }
+.settings { flex: 1; min-height: 0; display: grid; grid-template-columns: 13rem minmax(0, 1fr); }
+.settings__nav {
+  display: grid; align-content: start; gap: var(--space-025);
+  padding: var(--space-150) var(--space-100);
+  border-inline-end: var(--border-width) solid var(--color-border);
+  background: var(--color-surface-sunken);
+  border-end-start-radius: var(--radius-large);
+}
+.settings__nav .nav-item[aria-selected="true"] { background: var(--color-bg-selected); color: var(--color-text-selected); }
+.settings__nav .nav-item[aria-selected="true"] > .i { color: var(--color-icon-brand); }
+.settings__panel { min-height: 0; overflow-y: auto; padding: var(--space-300); display: grid; align-content: start; gap: var(--space-300); }
+.settings__title { margin: 0; font: var(--font-section); letter-spacing: var(--letter-spacing-section); color: var(--color-text); }
+.settings__group { display: grid; gap: var(--space-150); max-width: 48rem; }
+.settings__group-title { margin: 0; font: var(--font-card); letter-spacing: var(--letter-spacing-card); color: var(--color-text); }
+.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-100) var(--space-300); }
+.setting__label { font: var(--font-weight-medium) var(--font-size-body)/var(--line-height-body) var(--font-family-body); color: var(--color-text); }
+.setting__desc { margin: var(--space-025) 0 0; font: var(--font-body-small); color: var(--color-text-subtlest); }
+
+/* L34 · Lista de contas com um controle por linha e ação em lote no cabeçalho */
+.setting-list { border: var(--border-width) solid var(--color-border); border-radius: var(--radius-medium); overflow: hidden; }
+.setting-list__head, .setting-list__row { display: grid; align-items: center; gap: var(--space-150); padding: var(--space-100) var(--space-150); }
+.setting-list__head {
+  grid-template-columns: auto minmax(0, 1fr) auto; min-height: 3rem;
+  background: var(--color-surface-sunken); border-bottom: var(--border-width) solid var(--color-border);
+  font: var(--font-label); letter-spacing: var(--letter-spacing-label); text-transform: uppercase; color: var(--color-text-subtlest);
+}
+.setting-list__head.is-selecting {
+  background: var(--color-bg-selected); color: var(--color-text-selected);
+  font: var(--font-weight-semibold) var(--font-size-body)/var(--line-height-body) var(--font-family-body); letter-spacing: 0; text-transform: none;
+}
+.setting-list__bulk { display: flex; align-items: center; gap: var(--space-100); }
+.setting-list__row { grid-template-columns: auto auto minmax(0, 1fr) 13rem; }
+/* L49 · Linha com um toggle no fim (notificações por conta) */
+.setting-list__row--toggle { grid-template-columns: auto minmax(0, 1fr) auto; }
+.setting-list__row + .setting-list__row { border-top: var(--border-width) solid var(--color-border); }
+.setting-list__row.is-checked { background: var(--color-bg-selected); }
+.setting-list__name { display: grid; min-width: 0; }
+.setting-list__title { font: var(--font-weight-semibold) var(--font-size-body)/var(--line-height-body) var(--font-family-body); color: var(--color-text); }
+.setting-list__sub { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--font-body-small); color: var(--color-text-subtlest); }
+.setting-list__row.is-disabled .setting-list__title { color: var(--color-text-subtlest); }
+.setting-list__row.is-disabled .avatar { opacity: var(--opacity-disabled); filter: grayscale(1); }
+
+@include bp.down(compact) {
+  .app-shell.app-shell--blocks {
+    grid-template-columns: var(--app-shell-sidebar) minmax(0, 1fr);
+    grid-template-areas: "header header" "banner banner" "nav nav";
+    padding-inline-start: var(--app-shell-gap);
+  }
+  .app-shell--blocks .app-shell__center, .app-shell__sheet { grid-column: 1 / -1; }
+  .app-shell--blocks .app-shell__reader { grid-area: nav; display: none; }
+  .app-shell--blocks.has-reader .app-shell__reader { display: block; }
+  .app-shell--blocks.has-reader .app-shell__block--nav { display: none; }
+  .app-shell--blocks .app-shell__list { display: flex; }
+  .settings { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .settings__nav { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; border-inline-end: 0; border-bottom: var(--border-width) solid var(--color-border); border-radius: 0; }
+  .setting-list__row { grid-template-columns: auto auto minmax(0, 1fr); }
+  .setting-list__row > .select { grid-column: 2 / -1; }
+}
