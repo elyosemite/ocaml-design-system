@@ -117,4 +117,66 @@
     const sync = () => { out.textContent = `${ta.value.length} de ${ta.maxLength} caracteres`; };
     ta.addEventListener('input', sync); sync();
   });
+
+  /* ---------- A história: linhas do token até a parte do card ----------
+     Cada <li data-target data-edge> da lista de um capítulo vira uma linha que sai do nome do token e
+     termina numa bolinha sobre o alvo. data-edge diz onde no alvo: near (a borda voltada para o texto),
+     center, corner, fill, pad, surface (dentro do card, no respiro de baixo) e shadow (logo abaixo do card).
+     Abaixo de 60rem as linhas somem e a lista continua dizendo o mesmo. */
+  const NS = 'http://www.w3.org/2000/svg';
+  const wide = matchMedia('(min-width: 60rem)');
+  function point(edge, t, flip) {
+    // near: logo fora da borda voltada para o texto, no respiro em volta do elemento, sem cobrir o conteúdo
+    const nearX = flip ? t.right + 8 : t.left - 8;
+    const cy = t.top + t.height / 2;
+    switch (edge) {
+      case 'center': return [t.left + t.width / 2, cy];
+      case 'top': return [t.left + t.width / 2, t.top - 6];
+      case 'corner': return [flip ? t.right - 2 : t.left + 2, t.top + 2];
+      case 'fill': return [flip ? t.left + 10 : t.right - 10, t.bottom - 7];
+      case 'pad': return [flip ? t.right - 5 : t.left + 5, cy];
+      case 'surface': return [flip ? t.right - 12 : t.left + 12, t.bottom - 10];
+      case 'shadow': return [flip ? t.right - 48 : t.left + 48, t.bottom + 9];
+      default: return [nearX, cy];
+    }
+  }
+  function drawRow(row) {
+    let svg = row.querySelector(':scope > .callout-lines');
+    if (!svg) {
+      svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('class', 'callout-lines diagram');
+      svg.setAttribute('aria-hidden', 'true');
+      row.prepend(svg);
+    }
+    svg.replaceChildren();
+    if (!wide.matches) return;
+    const box = row.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+    const flip = row.classList.contains('showcase__row--flip');
+    $$('.callouts li[data-target]', row).forEach((li) => {
+      const target = row.querySelector(li.dataset.target);
+      const label = li.querySelector('code');
+      if (!target || !label) return;
+      const l = label.getBoundingClientRect();
+      const [tx, ty] = point(li.dataset.edge, target.getBoundingClientRect(), flip);
+      const x1 = (flip ? l.left - 6 : l.right + 6) - box.left, y1 = l.top + l.height / 2 - box.top;
+      const x2 = tx - box.left, y2 = ty - box.top;
+      // curva suave: sai na horizontal do nome do token e chega na horizontal ao alvo
+      const dx = (x2 - x1) * 0.5;
+      const line = document.createElementNS(NS, 'path');
+      line.setAttribute('d', `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`);
+      const dot = document.createElementNS(NS, 'circle');
+      dot.setAttribute('cx', x2); dot.setAttribute('cy', y2); dot.setAttribute('r', 4);
+      svg.append(line, dot);
+    });
+  }
+  const rows = $$('.showcase__row');
+  const drawAll = () => rows.forEach(drawRow);
+  let frame = 0;
+  const schedule = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(drawAll); };
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(schedule); rows.forEach((r) => ro.observe(r)); }
+  wide.addEventListener('change', schedule);
+  window.addEventListener('resize', schedule);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  schedule();
 })();

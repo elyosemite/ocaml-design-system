@@ -11,6 +11,7 @@
 /* Hallmark · answered F15 · the extra column gaps come from dist/components.css, loaded for the live specimen */
 /* Hallmark · reworded the hero paragraph to "Tokens, componentes e padrões prontos para qualquer produto." · 58 named its 53 words; its facts moved to the layers, themes, use and footer sections */
 /* Hallmark · dismissed 23 · the blue past 5% at 1280 is the sample screens' own primary buttons from components.css, the product, not page accent */
+/* Hallmark · waive 80 · the curved lines are a labelled diagram (class "diagram") tying each token name to the part of the card it paints · the story section explains tokens by pointing at them */
 /* Hallmark · polish 14 nov 2026 · responsive for phone and tablet: tilts drop under 60rem, actions stack under 40rem, coarse-pointer targets 44px */
 /* Hallmark · dropped the version lozenge from the masthead · 66 names a version badge in the hero; "Versão 3.0" now closes the footer */
 @import url("./tokens.css");
@@ -266,6 +267,37 @@
 .demo-option > span > span { color: var(--color-text-subtle); font: var(--font-body-small); }
 /* O campo de busca do DS não tem borda, só fundo; dentro do card ganha a borda dos outros campos (gate 40) */
 .demo-card .input--search { border-color: var(--color-border-input); }
+
+/* ---------- A história: chamadas de token ----------
+   Cada capítulo lista os tokens que pintam o card principal; uma linha sem ponta, só com uma bolinha no fim,
+   liga o nome do token à parte do card (o texto, o botão, a superfície, a sombra). As linhas são desenhadas por
+   home.js a partir das posições reais e somem abaixo de 60rem, onde a lista continua dizendo o mesmo. */
+.showcase__row { position: relative; }
+.showcase__row--flip .showcase__cards > :first-child { grid-column: 2; grid-row: 1 / span 2; }
+.showcase__row--flip .showcase__cards > :not(:first-child) { grid-column: 1; }
+.demo-card { background: var(--color-surface-raised); }
+.demo-row--start { justify-content: flex-start; flex-wrap: wrap; gap: var(--space-xs); }
+.demo-tags--start { justify-content: flex-start; }
+.demo-atoms { gap: var(--space-sm); }
+.callouts { display: grid; gap: var(--space-xs); margin: var(--space-2xs) 0; padding: 0; list-style: none; }
+.callouts li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-sm); }
+.callouts li > span { order: -1; text-align: end; }
+.showcase__row--flip .callouts li { grid-template-columns: auto minmax(0, 1fr); }
+.showcase__row--flip .callouts li > span { order: 0; text-align: start; }
+.callouts code { padding: var(--space-3xs) var(--space-xs); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-paper-2); color: var(--color-ink); font: 500 var(--text-sm)/1.4 var(--font-outlier); white-space: nowrap; }
+.callouts span { color: var(--color-ink-2); font-size: var(--text-sm); }
+.callout-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 2; }
+.callout-lines path { fill: none; stroke: var(--color-accent); stroke-width: 1.25; }
+.callout-lines circle { fill: var(--color-accent); stroke: var(--color-paper); stroke-width: 2; }
+@media (max-width: 60rem) {
+  .callout-lines { display: none; }
+  .showcase__row--flip .showcase__cards > :first-child, .showcase__row--flip .showcase__cards > :not(:first-child) { grid-column: auto; grid-row: auto; }
+  .callouts li, .showcase__row--flip .callouts li { grid-template-columns: auto minmax(0, 1fr); }
+  .callouts li > span, .showcase__row--flip .callouts li > span { order: 0; text-align: start; }
+}
+@media (max-width: 40rem) {
+  .showcase__cards > :first-child { grid-row: auto; }
+}
 
 /* ---------- Telas estreitas ---------- */
 @media (max-width: 60rem) {
