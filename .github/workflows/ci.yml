@@ -4,7 +4,7 @@
 #   2. gera dist/ a partir de src/ (Sass, sprite, fontes, registro de páginas);
 #   3. confere o resultado contra baseline/ (tokens em todos os temas, regras do CSS e sprite);
 #   4. confere tokens, temas, registro de páginas e uso da paleta (pnpm check).
-# O dist/ gerado fica como artefato da execução por 14 dias.
+# O dist/ gerado fica como artefato da execução por 14 dias. Na main, o job "pages" publica a documentação no GitHub Pages.
 name: CI
 
 on:
@@ -57,3 +57,52 @@ jobs:
           path: dist/
           retention-days: 14
           if-no-files-found: error
+
+  # Publica a documentação no GitHub Pages: só em push para a main e só depois que a verificação passa.
+  # _site/ é site/ na raiz com o dist/ gerado ao lado (scripts/pages.mjs).
+  pages:
+    name: Publicar no GitHub Pages
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Instalar o pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Instalar o Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar as dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Montar o site
+        run: pnpm pages
+
+      - name: Configurar o Pages
+        uses: actions/configure-pages@v5
+
+      - name: Enviar o site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site/
+
+      - name: Publicar
+        id: deploy
+        uses: actions/deploy-pages@v4

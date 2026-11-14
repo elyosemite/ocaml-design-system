@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/elyosemite/ocaml-design-system/actions/workflows/ci.yml/badge.svg)](https://github.com/elyosemite/ocaml-design-system/actions/workflows/ci.yml)
 
+Documentação: **https://elyosemite.github.io/ocaml-design-system/**
+
 Um design system para qualquer produto: tokens, componentes CSS, ícones e a documentação de cada peça. Feito para telas densas, que se leem rápido e se usam com um gesto. Meta de **WCAG 2.2 AA**, com temas claro, escuro e alto contraste.
 
 CSS puro no resultado: quem consome não precisa de Sass nem de framework. Nenhuma página carrega nada de terceiros (fontes, ícones e scripts são locais).
@@ -20,6 +22,7 @@ pnpm dev        # gera dist/ e abre a documentação em http://localhost:4400/
 | `pnpm check` | Tokens, temas, registro de páginas, uso da paleta e métricas (`--metrics`, `--metrics --list`). |
 | `pnpm verify` | `build` + `compare` + `check`. Rode antes de cada commit. |
 | `pnpm serve` | Só o servidor da documentação, sem gerar de novo. |
+| `pnpm pages` | Gera `dist/` e monta `_site/`, a pasta que o CI publica no GitHub Pages. |
 
 ## Usar
 

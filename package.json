@@ -10,7 +10,8 @@
     "compare": "node scripts/compare.mjs",
     "verify": "node scripts/build.mjs && node scripts/compare.mjs && node scripts/check.mjs",
     "dev": "node scripts/build.mjs && node scripts/serve.mjs",
-    "serve": "node scripts/serve.mjs"
+    "serve": "node scripts/serve.mjs",
+    "pages": "node scripts/build.mjs && node scripts/pages.mjs"
   },
   "devDependencies": {
     "@fontsource/inter": "5.2.5",
