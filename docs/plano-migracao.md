@@ -1,8 +1,8 @@
-# Plano de ação · EpistulaDesignSystem
+# Plano de ação · OCamlDesignSystem
 
-Plano para tirar o design system de `epistulamail/design-system/` e transformá-lo num projeto próprio, **EpistulaDesignSystem**, com tokens em Sass divididos por nível e assunto, documentação escrita em MDX e publicada como site estático, e um pacote versionado que o app, o site e as docs consomem.
+Plano para tirar o design system de `epistulamail/design-system/` e transformá-lo num projeto próprio, **OCamlDesignSystem**, com tokens em Sass divididos por nível e assunto, documentação escrita em MDX e publicada como site estático, e um pacote versionado que o app, o site e as docs consomem.
 
-> Estado em 14 nov 2026: **fases 0 a 4 executadas** no repositório `C:\Users\Alfredo\Projects\epistulads`. Faltam as fases 5 a 8. As decisões marcadas **[decidir]** continuam esperando o OK de quem mantém o DS.
+> Estado em 14 nov 2026: **fases 0 a 4 executadas** neste repositório. Faltam as fases 5 a 8. As decisões marcadas **[decidir]** continuam esperando o OK de quem mantém o DS.
 
 ### O que foi feito
 
@@ -36,7 +36,7 @@ Medido no repositório em 14 nov 2026.
 | `tokens.css` | 596 linhas, 466 declarações: 117 primitivos `--palette-*`, ~190 semânticos, 80 linhas do tema escuro **escritas duas vezes** (por `@media` e por `data-theme`) e 20 de alto contraste, também duplicadas |
 | `components.css` | 1886 linhas. Parte é organizada por componente ("Botões", "Avatar"), parte por entrega ("Aparência, rolagem, arrastar e sinalizadas (L35–L39, US6)"), misturando peças sem relação |
 | Tokens de componente | 7 famílias declaradas soltas no `components.css`: `--btn-*`, `--av-*`, `--lb-*`, `--app-shell-*`, `--sm-*`, `--tt-*`, `--post-*` |
-| `docs.js` | 1095 linhas: casca das páginas, registro `EPISTULA_PAGES`, demonstrações interativas e o sprite de ícones numa string só |
+| `docs.js` | 1095 linhas: casca das páginas, registro `OCAML_PAGES`, demonstrações interativas e o sprite de ícones numa string só |
 | `fichas.js` | 928 linhas de dados em JS; o campo `usadoEm` aponta para arquivos de `src/` do app |
 | Consumidores | `index.html` e `vite.config.ts` (app), `site/build.mjs`, `docs-site/scripts/sync-ds.mjs`, `scripts/check-design-system.mjs`. Os três primeiros extraem o sprite do `docs.js` por regex |
 
@@ -45,7 +45,7 @@ Medido no repositório em 14 nov 2026.
 1. **Falta suporte a `forced-colors`.** O DS trata `prefers-contrast: more`, mas o Alto Contraste do Windows ativa `forced-colors: active`, que substitui as cores por cores do sistema. Hoje não há nenhuma regra para isso, e num app que é principalmente para Windows esse é o modo de contraste que as pessoas de fato usam. Bordas feitas só com `background`, selos coloridos e o ponto de "não lida" podem sumir.
 2. **O tema escuro é duplicado à mão.** São 80 linhas idênticas em dois blocos, e a paridade só é garantida pelo `ds:check`. Uma mixin Sass gera os dois blocos a partir de uma fonte só.
 3. **Os primitivos existem em tempo de execução.** `--palette-*` está no CSS publicado, por isso precisa de uma regra que proíba o uso. Se os primitivos forem variáveis Sass, eles somem do CSS final e a regra passa a ser garantida pelo compilador.
-4. **Não há `@layer`.** Quem consome o DS (o Starlight, por exemplo) briga com a especificidade. Com camadas de cascata (`@layer epistula.base, epistula.components`), qualquer CSS sem camada do consumidor vence sem `!important`.
+4. **Não há `@layer`.** Quem consome o DS (o Starlight, por exemplo) briga com a especificidade. Com camadas de cascata (`@layer ocaml.base, ocaml.components`), qualquer CSS sem camada do consumidor vence sem `!important`.
 5. **Acoplamentos que quebram ao separar o repositório:**
    - `fichas.js > usadoEm` lista arquivos do app;
    - o `ds:check` confere se os comentários `// DS: x.html` de `src/` apontam para páginas existentes;
@@ -78,10 +78,10 @@ A única referência externa é o **Atlassian Design System (ADS)**, base do pro
 | **Faça / Não faça** com rótulo e exemplo lado a lado. | Só em texto, na ficha. | Componente `<DoDont>` com exemplo ao vivo, rótulo e ícone (nunca só a cor). | 5, 6 |
 | **Acessibilidade por componente,** com o comportamento de teclado. | Atalhos globais em `acessibilidade.html`; por componente, não. | Seção Acessibilidade em cada página, com tabela de teclado e os atributos ARIA. | 5, 6 |
 | **Fundamentos de conteúdo:** voz e tom, escrita inclusiva, linguagem e gramática, e textos de mensagens (erro, vazio, sucesso). | Parcial: `conteudo.html`. | Uma seção Conteúdo com essas quatro páginas, em pt-BR. | 6 |
-| **Status dos componentes** com lozenge. | Já existe (`EPISTULA_STATUS`). | Escrever critérios do que cada status exige (adaptação nossa, porque o ADS mostra o status mas não publica os critérios). | 7 |
+| **Status dos componentes** com lozenge. | Já existe (`OCAML_STATUS`). | Escrever critérios do que cada status exige (adaptação nossa, porque o ADS mostra o status mas não publica os critérios). | 7 |
 | **Meta WCAG AA,** claro e escuro. | Já existe (WCAG 2.2 AA). | Contraste conferido no build. | 7 |
 
-O que **não** se pega do ADS: o CSS-em-JS (Compiled) e os pacotes React por componente (o EpistulaDS é CSS puro), a marca Atlassian e o prefixo `--ds-` nos tokens (mudaria todos os nomes; fica como possibilidade para uma 2.0).
+O que **não** se pega do ADS: o CSS-em-JS (Compiled) e os pacotes React por componente (o OCamlDS é CSS puro), a marca Atlassian e o prefixo `--ds-` nos tokens (mudaria todos os nomes; fica como possibilidade para uma 2.0).
 
 ### O que é necessidade nossa, não do ADS
 
@@ -95,8 +95,8 @@ O que **não** se pega do ADS: o CSS-em-JS (Compiled) e os pacotes React por com
 ## 2. Estrutura do novo repositório
 
 ```
-EpistulaDesignSystem/
-├─ package.json                 # pacote @epistula/design-system (nome [decidir])
+OCamlDesignSystem/
+├─ package.json                 # pacote ocaml-design-system (nome [decidir])
 ├─ LICENSE                      # [decidir] MIT para código, CC BY 4.0 para documentação
 ├─ README.md / README.pt-BR.md
 ├─ CHANGELOG.md                 # Keep a Changelog, semver
@@ -368,14 +368,14 @@ Cada fase termina num estado que funciona e pode ser publicado. Uma fase só com
 
 ### Fase 3 · Componentes em Sass
 
-1. Quebrar o `components.css` em partials por componente, nas pastas da camada (`base/`, `core/`, `patterns/`, `product/`, `layouts/`), com a mesma camada que a página tem em `EPISTULA_PAGES`. As seções organizadas por entrega se desfazem. Por exemplo, "Aparência, rolagem, arrastar e sinalizadas" vira:
+1. Quebrar o `components.css` em partials por componente, nas pastas da camada (`base/`, `core/`, `patterns/`, `product/`, `layouts/`), com a mesma camada que a página tem em `OCAML_PAGES`. As seções organizadas por entrega se desfazem. Por exemplo, "Aparência, rolagem, arrastar e sinalizadas" vira:
    - `base/_scrollbar.scss`;
    - `product/_theme-picker.scss`;
    - `product/_color-swatch.scss`;
    - `patterns/_drag.scss`;
    - `product/_folders.scss`.
 2. Tokens de componente em `tokens/components/` (§3.4), gerados por `@each`.
-3. Envolver tudo em `@layer epistula.base, epistula.components, epistula.utilities`.
+3. Envolver tudo em `@layer ocaml.base, ocaml.components, ocaml.utilities`.
 4. Prefixo configurável `$prefix` **[decidir]**:
    - padrão `''` na 1.0, para o app não precisar mudar nada;
    - a mudança para `ep-` fica para uma 2.0, com guia de migração.
@@ -494,8 +494,8 @@ Prioridade por uso no app: botões, campos, menus, modais, toasts, lista de conv
 
    | Arquivo | Muda para |
    |---|---|
-   | `package.json` | dependência `@epistula/design-system@1.0.0` |
-   | `index.html` | `node_modules/@epistula/design-system/dist/{tokens,components}.css` (via import no Vite) |
+   | `package.json` | dependência `ocaml-design-system@1.0.0` |
+   | `index.html` | `node_modules/ocaml-design-system/dist/{tokens,components}.css` (via import no Vite) |
    | `vite.config.ts` | `virtual:ds-icons` lê `dist/sprite.svg`; sai a regex do `docs.js` |
    | `site/build.mjs` | copia de `dist/`; sai a regex |
    | `docs-site/scripts/sync-ds.mjs` | lê `dist/tokens.css` e `dist/docs-site.css`; saem as duas regex |
@@ -514,8 +514,8 @@ Prioridade por uso no app: botões, campos, menus, modais, toasts, lista de conv
 
 | Opção | Prós | Contras |
 |---|---|---|
-| **A · npm público** `@epistula/design-system` | padrão, versões claras, qualquer um usa | exige conta npm; o pacote fica público |
-| **B · dependência Git por tag** (`github:<org>/EpistulaDesignSystem#v1.0.0`) | sem registro externo; combina com "nada de terceiros" | o `dist/` precisa ir versionado ou ser gerado no `prepare` |
+| **A · npm público** `ocaml-design-system` | padrão, versões claras, qualquer um usa | exige conta npm; o pacote fica público |
+| **B · dependência Git por tag** (`github:<org>/OCamlDesignSystem#v1.0.0`) | sem registro externo; combina com "nada de terceiros" | o `dist/` precisa ir versionado ou ser gerado no `prepare` |
 | **C · workspace pnpm** (os dois repositórios lado a lado em desenvolvimento) | iteração rápida enquanto as fases 2 a 5 andam | não serve para o CI do app sozinho |
 
 **Recomendação:** C durante a migração, B na 1.0 e A quando o DS for público e estável.
@@ -574,7 +574,7 @@ Registradas em 14 nov 2026:
 
 | # | Decisão | Substitui |
 |---|---|---|
-| 0015 | O DS vira o repositório EpistulaDesignSystem | — |
+| 0015 | O DS vira o repositório OCamlDesignSystem | — |
 | 0016 | Tokens em Sass, em três pastas por nível e um arquivo por assunto; o tema só no nível semântico | 0003 (`tokens.css` como fonte) |
 | 0017 | A paleta continua saindo no CSS por enquanto (`$emit-primitives: true`); a decisão de §3.5 segue em aberto | — |
 | 0018 | O sprite é gerado de `src/icons/*.svg` | 0002 (L2) |

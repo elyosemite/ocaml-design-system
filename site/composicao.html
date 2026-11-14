@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Composição · Epistula Design System</title>
+<title>Composição · OCaml Design System</title>
 <meta name="description" content="Janela de nova mensagem com desfazer envio.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="composicao">
 <div class="doc">
@@ -17,7 +19,7 @@
   <main>
     <section class="ds-section" id="composicao">
         <div class="ds-head">
-          <p class="eyebrow">Específico do Epistula · composto de Textfield, Tag, Button</p>
+          <p class="eyebrow">Específico de e-mail · composto de Textfield, Tag, Button</p>
           <h1>Composição</h1>
           <p class="lede">Janela flutuante de 560px com elevação overlay. Os campos usam o estilo de linha, e o corpo usa Body large. "Enviar" segura a mensagem por 5 segundos, com opção de desfazer. Clique para ver o toast.</p>
         </div>
@@ -33,7 +35,7 @@
               <div class="input input--line chip-input"><span class="input__prefix">Para</span><span class="chip"><span class="avatar avatar--purple">MC<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><span class="chip__name">Marina Couto</span></span><span class="chip is-external"><span class="avatar avatar--orange">J<img class="avatar__img" alt="" src="images/people/pessoa-1.webp"></span><span class="chip__name">joao@lumen.com.br</span></span><input id="compose-to" aria-label="Adicionar destinatário"><button class="btn btn--link btn--compact" type="button">Cc Cco</button></div>
               <label class="input input--line" for="compose-subject"><span class="input__prefix">Assunto</span><input id="compose-subject" value="Re: Revisão do contrato: Fornecedor Lumen"></label>
             </div>
-            <div class="compose__body" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Corpo da mensagem" id="compose-body">Marina, aprovado da minha parte. Pode enviar à Lumen.<br><br>Yuri</div>
+            <div class="compose__body" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Corpo da mensagem" id="compose-body">Marina, aprovado da minha parte. Pode enviar à Lumen.<br><br>Ana</div>
             <div class="compose__format" role="toolbar" aria-label="Formatação">
               <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Negrito" aria-pressed="false"><svg class="i"><use href="#i-bold"/></svg></button>
               <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Itálico" aria-pressed="false"><svg class="i"><use href="#i-italic"/></svg></button>

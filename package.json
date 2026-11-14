@@ -1,8 +1,8 @@
 {
-  "name": "@epistula/design-system",
+  "name": "ocaml-design-system",
   "version": "0.1.0",
   "private": true,
-  "description": "Design system do EpistulaMail: tokens, componentes CSS, ícones e documentação.",
+  "description": "OCaml Design System: tokens, componentes CSS, ícones e documentação para qualquer produto.",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",

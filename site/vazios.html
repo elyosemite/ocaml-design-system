@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Empty states · Epistula Design System</title>
+<title>Empty states · OCaml Design System</title>
 <meta name="description" content="Caixa zerada, busca sem resultado e erro.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="vazios">
 <div class="doc">
@@ -17,7 +19,6 @@
   <main>
     <section class="ds-section" id="vazios">
         <div class="ds-head">
-          <p class="eyebrow">ADS · Empty State</p>
           <h1>Empty states</h1>
           <p class="lede">Cada vazio diz por que está vazio e o que fazer a seguir. Uma caixa de entrada zerada é uma conquista, e um erro precisa de saída.</p>
         </div>
@@ -51,12 +52,12 @@
           <div class="stage stage--flush"><div class="empty" aria-live="polite">
             <span class="spinner spinner--lg empty__spinner" role="status" aria-label="Aguardando autorização do Google"></span>
             <h3 class="empty__title">Continue no navegador</h3>
-            <p class="empty__desc">Abrimos a página de login do Google. Autorize o acesso do Epistula ao Gmail e volte para cá.</p>
+            <p class="empty__desc">Abrimos a página de login do Google. Autorize o acesso do Correio ao Gmail e volte para cá.</p>
             <div class="empty__actions"><button class="btn btn--subtle" type="button">Cancelar</button></div>
           </div></div>
         </div>
         <dl class="guidance">
-          <div><dt>Aguardando</dt><dd>Quando o próximo passo acontece fora do Epistula (login no navegador, confirmação por e-mail), o spinner de 48px substitui a ilustração. O título diz onde continuar, e a única ação é "Cancelar", no estilo sutil, que volta ao estado anterior sem mensagem de erro.</dd></div>
+          <div><dt>Aguardando</dt><dd>Quando o próximo passo acontece fora do Correio (login no navegador, confirmação por e-mail), o spinner de 48px substitui a ilustração. O título diz onde continuar, e a única ação é "Cancelar", no estilo sutil, que volta ao estado anterior sem mensagem de erro.</dd></div>
         </dl>
       <p class="classes"><span>Classes</span> <code>.empty</code> <code>.empty__spinner</code></p>
 

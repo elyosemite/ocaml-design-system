@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="Maturidade, tokens, gates de revisão, definição de pronto, anti-patterns, métricas e decisões.">
-<title>Governança · Epistula Design System</title>
+<title>Governança · OCaml Design System</title>
 <meta name="description" content="Pessoas e contas, com inicial, cor e foto.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="governanca">
 <div class="doc">
@@ -22,7 +24,7 @@
         <p class="lede">Como uma peça entra no design system e como saber se ele está saudável. A arquitetura está em <a href="arquitetura.html">Arquitetura</a>; o fluxo operacional, em <code>CONTRIBUTING.md</code>; as decisões, em <code>DECISIONS.md</code>; a ordem de trabalho, em <code>ROADMAP.md</code>.</p>
       </div>
       <dl class="guidance">
-        <div><dt>Princípios</dt><dd>Cada elemento mora na camada mais baixa que expressa a sua responsabilidade. Só entra o que resolve um problema do EpistulaMail. Acessibilidade e segurança fazem parte do comportamento. Token antes de estilo local. A documentação acompanha a implementação.</dd></div>
+        <div><dt>Princípios</dt><dd>Cada elemento mora na camada mais baixa que expressa a sua responsabilidade. Só entra o que resolve um problema do produto. Acessibilidade e segurança fazem parte do comportamento. Token antes de estilo local. A documentação acompanha a implementação.</dd></div>
         <div><dt>Regra de ouro dos tokens</dt><dd>Componentes e telas usam só tokens semânticos. A paleta bruta (<code>--palette-*</code>) é só de <code>tokens.css</code>, e o <code>pnpm check</code> falha se alguém a usar de fora.</dd></div>
       </dl>
     </section>
@@ -35,7 +37,7 @@
       </div>
       <div class="stage"><figure class="state"><div class="row">
         <span class="lozenge">Rascunho</span><span class="lozenge lozenge--moved">Experimental</span><span class="lozenge lozenge--inprogress">Beta</span><span class="lozenge lozenge--success">Estável</span><span class="lozenge lozenge--overdue">Descontinuado</span><span class="lozenge lozenge--removed">Removido</span>
-      </div><figcaption><b>Os seis status</b>no registro <code>EPISTULA_PAGES</code>, em <code>docs.js</code></figcaption></figure></div>
+      </div><figcaption><b>Os seis status</b>no registro <code>OCAML_PAGES</code>, em <code>docs.js</code></figcaption></figure></div>
       <dl class="guidance">
         <div><dt>Rascunho</dt><dd>Proposta em elaboração, como os arquivos <code>rascunho-*.html</code>. Não vai para o app.</dd></div>
         <div><dt>Experimental e Beta</dt><dd>Já existe, mas a API ou o visual ainda podem mudar. Beta tem limitações conhecidas e espera retorno.</dd></div>
@@ -92,7 +94,7 @@
         <h2>O que evitar</h2>
         <p class="lede">Os quinze anti-patterns do v3, como lista de revisão. O <code>pnpm check</code> pega os que dá para medir; os outros dependem de olhar.</p>
       </div>
-      <table class="tier-table"><thead><tr><th scope="col">#</th><th scope="col">Anti-pattern</th><th scope="col">Como se pega</th></tr></thead><tbody><tr><th scope="row">1</th><td>Criar componente só para reproduzir uma biblioteca externa.</td><td>Gate de reuso (três usos).</td></tr><tr><th scope="row">2</th><td>Pôr regra do EpistulaMail em componente Core.</td><td>Gate de camada.</td></tr><tr><th scope="row">3</th><td>Duplicar o mesmo componente em categorias diferentes.</td><td>Registro com um id só por peça.</td></tr><tr><th scope="row">4</th><td>Usar cor, espaço ou tamanho solto, sem token.</td><td><code>ds:check</code>: valores fixos em <code>components.css</code> e uso da paleta.</td></tr><tr><th scope="row">5</th><td>Criar token de componente quando um semântico serve.</td><td>Gate de tokens.</td></tr><tr><th scope="row">6</th><td>Construir um primitive próprio sem lacuna demonstrada.</td><td>Mapa de primitives em <a href="arquitetura.html">Arquitetura</a>.</td></tr><tr><th scope="row">7</th><td>Pôr lógica de página em Padrão ou Core.</td><td>Gate de camada.</td></tr><tr><th scope="row">8</th><td>Mudar o visual sem atualizar exemplos, ficha e conferência.</td><td>Definição de pronto.</td></tr><tr><th scope="row">9</th><td>Usar só a cor para estado, erro, criptografia ou confiança.</td><td>Gate de acessibilidade; <a href="criptografia.html">Estados de segurança</a>.</td></tr><tr><th scope="row">10</th><td>Mostrar "seguro" sem dizer o que foi verificado.</td><td>Gate de conteúdo.</td></tr><tr><th scope="row">11</th><td>Ignorar teclado, foco, carregando, erro, vazio e texto longo.</td><td>Gate de API e acessibilidade.</td></tr><tr><th scope="row">12</th><td>Mudar a API sem plano de migração.</td><td>Política de descontinuação.</td></tr><tr><th scope="row">13</th><td>Criar abstração para um único uso.</td><td>Regra dos três usos.</td></tr><tr><th scope="row">14</th><td>Mudar um token global para resolver um problema local.</td><td>Gate de tokens; revisão obrigatória.</td></tr><tr><th scope="row">15</th><td>Tratar o teste automático de acessibilidade como prova.</td><td>Conferência manual com teclado e leitor de tela.</td></tr></tbody></table>
+      <table class="tier-table"><thead><tr><th scope="col">#</th><th scope="col">Anti-pattern</th><th scope="col">Como se pega</th></tr></thead><tbody><tr><th scope="row">1</th><td>Criar componente só para reproduzir uma biblioteca externa.</td><td>Gate de reuso (três usos).</td></tr><tr><th scope="row">2</th><td>Pôr regra de um produto em componente Core.</td><td>Gate de camada.</td></tr><tr><th scope="row">3</th><td>Duplicar o mesmo componente em categorias diferentes.</td><td>Registro com um id só por peça.</td></tr><tr><th scope="row">4</th><td>Usar cor, espaço ou tamanho solto, sem token.</td><td><code>ds:check</code>: valores fixos em <code>components.css</code> e uso da paleta.</td></tr><tr><th scope="row">5</th><td>Criar token de componente quando um semântico serve.</td><td>Gate de tokens.</td></tr><tr><th scope="row">6</th><td>Construir um primitive próprio sem lacuna demonstrada.</td><td>Mapa de primitives em <a href="arquitetura.html">Arquitetura</a>.</td></tr><tr><th scope="row">7</th><td>Pôr lógica de página em Padrão ou Core.</td><td>Gate de camada.</td></tr><tr><th scope="row">8</th><td>Mudar o visual sem atualizar exemplos, ficha e conferência.</td><td>Definição de pronto.</td></tr><tr><th scope="row">9</th><td>Usar só a cor para estado, erro, criptografia ou confiança.</td><td>Gate de acessibilidade; <a href="criptografia.html">Estados de segurança</a>.</td></tr><tr><th scope="row">10</th><td>Mostrar "seguro" sem dizer o que foi verificado.</td><td>Gate de conteúdo.</td></tr><tr><th scope="row">11</th><td>Ignorar teclado, foco, carregando, erro, vazio e texto longo.</td><td>Gate de API e acessibilidade.</td></tr><tr><th scope="row">12</th><td>Mudar a API sem plano de migração.</td><td>Política de descontinuação.</td></tr><tr><th scope="row">13</th><td>Criar abstração para um único uso.</td><td>Regra dos três usos.</td></tr><tr><th scope="row">14</th><td>Mudar um token global para resolver um problema local.</td><td>Gate de tokens; revisão obrigatória.</td></tr><tr><th scope="row">15</th><td>Tratar o teste automático de acessibilidade como prova.</td><td>Conferência manual com teclado e leitor de tela.</td></tr></tbody></table>
     </section>
 
     <section class="ds-section" id="metricas">

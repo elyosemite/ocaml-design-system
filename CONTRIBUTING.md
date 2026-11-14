@@ -1,6 +1,6 @@
 # Como contribuir com o design system
 
-Este arquivo é o fluxo operacional do EpistulaDesignSystem, o design system do EpistulaMail. A arquitetura, as camadas e os critérios estão em `docs/fundamentos-v3.md` e na página `site/governanca.html`. A única referência externa é o Atlassian Design System. As decisões com impacto duradouro ficam em `DECISIONS.md`, e a ordem de trabalho em `ROADMAP.md`.
+Este arquivo é o fluxo operacional do OCaml Design System, um design system para qualquer produto. A arquitetura, as camadas e os critérios estão em `docs/fundamentos-v3.md` e na página `site/governanca.html`. As decisões com impacto duradouro ficam em `DECISIONS.md`, e a ordem de trabalho em `ROADMAP.md`.
 
 ## Quando uma mudança passa por revisão
 
@@ -20,8 +20,8 @@ Correção de erro de digitação e ajuste de texto de uma página só não prec
 ## Fluxo
 
 1. **Rascunho.** Crie `site/rascunho-<tema>.html` só com tokens e componentes que já existem, mostrando todos os estados nos dois temas. O CSS novo vai num partial de `src/styles/<camada>/`, só com tokens semânticos; um token novo vai no arquivo do assunto em `src/tokens/` (veja "Onde fica cada coisa").
-2. **Aprovação.** Mostre o rascunho a quem mantém o design system. Nada vai para o app, o site ou as docs do EpistulaMail antes disso.
-3. **Incorporação.** Mova as peças para a página do componente (ou crie `site/<id>.html` e registre em `EPISTULA_PAGES`, em `site/docs.js`, com camada e status). Apague o rascunho e registre o que foi decidido em <code>DECISIONS.md</code>.
+2. **Aprovação.** Mostre o rascunho a quem mantém o design system. Nada vai para o app, o site ou as docs de um produto antes disso.
+3. **Incorporação.** Mova as peças para a página do componente (ou crie `site/<id>.html` e registre em `OCAML_PAGES`, em `site/docs.js`, com camada e status). Apague o rascunho e registre o que foi decidido em <code>DECISIONS.md</code>.
 4. **Implementação.** Use as mesmas classes no app, no site e nas docs.
 5. **Conferência.** Rode `pnpm verify` (build, comparação e conferência) e deixe tudo sem erro. Se a mudança altera o resultado de propósito, atualize `baseline/` no mesmo commit e diga por quê.
 

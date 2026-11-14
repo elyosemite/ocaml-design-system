@@ -1,0 +1,86 @@
+/* Tokens do site de documentação do OCamlDesignSystem (página principal e páginas de cada peça).
+   Cores do site: Cream #f3eee3 e Ink Black #111111 em quase tudo, e o azul principal do design system
+   (#0C66E4 no claro, #6AA7FF no escuro) como o único sinal. Escritas em OKLCH.
+   Os nomes não colidem com os de dist/tokens.css: os componentes de verdade continuam lendo os tokens do DS. */
+:root {
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-toast: 500;
+
+  /* Claro: papel creme, tinta preta, o azul do DS como sinal */
+  --color-paper: oklch(95% 0.0156 86.4);      /* Cream #f3eee3 */
+  --color-paper-2: oklch(91.5% 0.019 84);
+  --color-paper-3: oklch(87.5% 0.021 82);
+  --color-ink: oklch(17.8% 0 0);              /* Ink Black #111111 */
+  --color-ink-2: oklch(33% 0.008 80);
+  --color-muted: oklch(46% 0.012 78);
+  --color-rule: oklch(82% 0.02 80);
+  --color-accent: oklch(54.2% 0.2065 259.4);  /* azul principal #0C66E4 */
+  --color-accent-hover: oklch(48.6% 0.1976 259.9);
+  --color-accent-ink: oklch(98.5% 0.0054 95); /* sobre o azul: 5.0:1 */
+  --color-accent-text: oklch(48.6% 0.1976 259.9); /* azul como texto sobre o creme: 5.7:1 */
+  --color-focus: oklch(54.2% 0.2065 259.4);
+  /* A faixa escura: tinta preta com texto creme */
+  --color-band: oklch(17.8% 0 0);
+  --color-band-ink: oklch(95% 0.0156 86.4);
+  --color-band-muted: oklch(78% 0.018 84);
+  --color-band-rule: oklch(34% 0.006 80);
+  --color-band-accent: oklch(72.5% 0.1437 257.6); /* #6AA7FF sobre o preto: 7.7:1 */
+  /* A sombra das telas empilhadas */
+  --shadow-screen: 0 24px 48px -16px oklch(20% 0.02 80 / 0.22), 0 0 0 1px oklch(20% 0.02 80 / 0.06);
+
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-text: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-outlier: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --display-weight: 700;
+  --radius-card: 6px; --radius-pill: 999px; --radius-input: 6px; --radius-screen: 10px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.035em;
+}
+
+/* Escuro: a paleta do GitHub Dark (fundo #161b22, faixas #0d1117, bordas #30363d, texto #e6edf3); o azul do DS clareia */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-paper: oklch(22% 0.0157 256.8);       /* #161b22 */
+    --color-paper-2: oklch(26.7% 0.015 256.8);    /* #21262d */
+    --color-paper-3: oklch(31.9% 0.0165 255.6);   /* #2d333b */
+    --color-ink: oklch(94.3% 0.0111 243.7);       /* #e6edf3 */
+    --color-ink-2: oklch(85.7% 0.0141 248);       /* #c9d1d9 */
+    --color-muted: oklch(66.2% 0.0181 250.9);     /* #8b949e: 5.6:1 sobre o fundo */
+    --color-rule: oklch(33% 0.0149 252.3);        /* #30363d */
+    --color-accent: oklch(72.5% 0.1437 257.6);
+    --color-accent-hover: oklch(77.5% 0.1158 256.8);
+    --color-accent-ink: oklch(17.8% 0 0);
+    --color-accent-text: oklch(77.5% 0.1158 256.8);
+    --color-focus: oklch(77.5% 0.1158 256.8);
+    --color-band: oklch(17.6% 0.014 258.4);       /* #0d1117 */
+    --color-band-ink: oklch(94.3% 0.0111 243.7);
+    --color-band-muted: oklch(67.7% 0.0155 254.6); /* #9198a1: 6.5:1 sobre a faixa */
+    --color-band-rule: oklch(33% 0.0149 252.3);
+    --shadow-screen: 0 24px 48px -16px oklch(5% 0.01 258 / 0.55), 0 0 0 1px oklch(100% 0 0 / 0.08);
+  }
+}
+:root[data-theme="dark"] {
+  --color-paper: oklch(22% 0.0157 256.8);
+  --color-paper-2: oklch(26.7% 0.015 256.8);
+  --color-paper-3: oklch(31.9% 0.0165 255.6);
+  --color-ink: oklch(94.3% 0.0111 243.7);
+  --color-ink-2: oklch(85.7% 0.0141 248);
+  --color-muted: oklch(66.2% 0.0181 250.9);
+  --color-rule: oklch(33% 0.0149 252.3);
+  --color-accent: oklch(72.5% 0.1437 257.6);
+  --color-accent-hover: oklch(77.5% 0.1158 256.8);
+  --color-accent-ink: oklch(17.8% 0 0);
+  --color-accent-text: oklch(77.5% 0.1158 256.8);
+  --color-focus: oklch(77.5% 0.1158 256.8);
+  --color-band: oklch(17.6% 0.014 258.4);
+  --color-band-ink: oklch(94.3% 0.0111 243.7);
+  --color-band-muted: oklch(67.7% 0.0155 254.6);
+  --color-band-rule: oklch(33% 0.0149 252.3);
+  --shadow-screen: 0 24px 48px -16px oklch(5% 0.01 258 / 0.55), 0 0 0 1px oklch(100% 0 0 / 0.08);
+}

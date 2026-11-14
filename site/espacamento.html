@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Espaçamento e layout · Epistula Design System</title>
+<title>Espaçamento e layout · OCaml Design System</title>
 <meta name="description" content="Escala de 2 a 80px e o layout de três painéis.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="espacamento">
 <div class="doc">
@@ -17,7 +19,6 @@
   <main>
     <section class="ds-section" id="espacamento">
         <div class="ds-head">
-          <p class="eyebrow">ADS · Space tokens</p>
           <h1>Espaçamento e layout</h1>
           <p class="lede">A escala tem base 8, com meios-passos de 2, 4 e 6px para ajustes finos dentro de componentes. O nome do token é o múltiplo de 8px: <code>--space-150</code> = 1,5 × 8 = 12px.</p>
         </div>
@@ -44,9 +45,9 @@
         <div class="stage stage--flush scroll-x">
           <div class="app-shell app-shell--embedded" style="min-width:60rem">
             <header class="appbar app-shell__header">
-              <span class="appbar__brand"><span class="wordmark wordmark--sm"><img class="wordmark__logo" src="images/epistulamail-logo-120.png" alt="">EpistulaMail</span></span>
+              <span class="appbar__brand"><span class="wordmark wordmark--sm"><span class="wordmark__glyph"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></span>Correio</span></span>
               <div class="appbar__actions">
-                <div class="appbar__account" role="status"><span class="avatar avatar--sm avatar--purple" aria-hidden="true">YM<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="appbar__account-text">Conectado como <span class="appbar__account-email">yuri@gmail.com</span></span></div>
+                <div class="appbar__account" role="status"><span class="avatar avatar--sm avatar--purple" aria-hidden="true">AL<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="appbar__account-text">Conectado como <span class="appbar__account-email">ana@gmail.com</span></span></div>
               </div>
             </header>
             <nav class="sidebar app-shell__sidebar" aria-label="Pastas">
@@ -71,7 +72,7 @@
             <section class="app-shell__reader" aria-label="Mensagem">
               <article class="reader">
                 <div class="reader__head"><button class="btn btn--subtle btn--icon app-shell__back" type="button" aria-label="Voltar para a lista" data-tip="Voltar"><svg class="i"><use href="#i-chevron-left"/></svg></button><h3 class="reader__subject">Revisão do contrato: Fornecedor Lumen</h3></div>
-                <div class="message"><div class="message__head"><span class="avatar avatar--lg avatar--purple" aria-hidden="true">MC<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><div style="min-width:0"><div class="message__from">Marina Couto <span class="message__addr">&lt;marina.couto@epistula.com.br&gt;</span></div></div><div class="message__time">Hoje, 10:42</div></div>
+                <div class="message"><div class="message__head"><span class="avatar avatar--lg avatar--purple" aria-hidden="true">MC<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><div style="min-width:0"><div class="message__from">Marina Couto <span class="message__addr">&lt;marina.couto@exemplo.com.br&gt;</span></div></div><div class="message__time">Hoje, 10:42</div></div>
                 <div class="message__body"><p>Segue a versão 3 do contrato com os ajustes da cláusula 7.2.</p></div></div>
               </article>
             </section>
@@ -94,7 +95,7 @@
         <div class="stage stage--flush scroll-x">
           <div class="app-shell app-shell--embedded app-shell--with-rail" style="min-width:64rem" data-rail-demo>
             <header class="appbar app-shell__header">
-              <span class="appbar__brand"><span class="wordmark wordmark--sm"><img class="wordmark__logo" src="images/epistulamail-logo-120.png" alt="">EpistulaMail</span></span>
+              <span class="appbar__brand"><span class="wordmark wordmark--sm"><span class="wordmark__glyph"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></span>Correio</span></span>
               <div class="appbar__actions">
                 <div class="appbar__account" role="status" data-rail-account><span class="avatar avatar--sm avatar--purple" aria-hidden="true">T<img class="avatar__img" alt="" src="images/people/pessoa-6.webp"></span><span class="appbar__account-text"><span class="appbar__account-name">Trabalho</span> · joao.silva.empresa@gmail.com</span></div>
               </div>
@@ -147,7 +148,7 @@
       <div class="stage stage--flush scroll-x">
         <div class="app-shell app-shell--embedded app-shell--with-rail app-shell--commands" style="min-width:60rem;height:44rem" data-resize-demo>
           <header class="appbar appbar--shell app-shell__header">
-            <span class="appbar__brand"><span class="wordmark wordmark--sm"><img class="wordmark__logo" src="images/epistulamail-logo-120.png" alt="">EpistulaMail</span></span>
+            <span class="appbar__brand"><span class="wordmark wordmark--sm"><span class="wordmark__glyph"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></span>Correio</span></span>
             <div class="appbar__search"><div class="input input--search"><svg class="i"><use href="#i-search"/></svg><input placeholder="Buscar" aria-label="Buscar e-mails"><kbd>/</kbd></div></div>
             <div class="appbar__actions">
               <div class="appbar__account" role="status"><span class="avatar avatar--sm avatar--purple" aria-hidden="true">T<img class="avatar__img" alt="" src="images/people/pessoa-6.webp"></span><span class="appbar__account-text"><span class="appbar__account-name">Trabalho</span> · joao.silva.empresa@gmail.com</span></div>
@@ -264,7 +265,7 @@
 
           <div class="app-shell__block app-shell__block--header">
             <header class="appbar appbar--shell">
-              <span class="appbar__brand"><span class="wordmark wordmark--sm"><img class="wordmark__logo" src="images/epistulamail-logo-120.png" alt="">EpistulaMail</span></span>
+              <span class="appbar__brand"><span class="wordmark wordmark--sm"><span class="wordmark__glyph"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></span>Correio</span></span>
               <div class="appbar__search">
                 <div class="input input--search"><svg class="i"><use href="#i-search"/></svg><input placeholder="Buscar em Trabalho" aria-label="Buscar e-mails"><kbd>/</kbd></div>
               </div>

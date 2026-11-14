@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="Campo, sugestões, filtros, resultados e nenhum resultado.">
-<title>Busca · Epistula Design System</title>
+<title>Busca · OCaml Design System</title>
 <meta name="description" content="Pessoas e contas, com inicial, cor e foto.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="padrao-busca">
 <div class="doc">
@@ -45,7 +47,7 @@
         <div><dt>Fluxo</dt><dd>1) A pessoa foca o campo e vê sugestões. 2) Escolhe uma sugestão ou digita um operador; os dois viram o mesmo chip. 3) Os resultados mudam a cada chip. 4) A barra mostra quantos achou e onde buscou. 5) Sem resultado, o estado vazio oferece ampliar a busca.</dd></div>
         <div><dt>Variações</dt><dd>Texto livre. Com chips de pessoa, período e filtro. Em todas as contas. Busca salva.</dd></div>
         <div><dt>Estados</dt><dd>Padrão, foco com sugestões, com chips, carregando (skeleton nos resultados), com resultados e sem resultados.</dd></div>
-        <div><dt>Acessibilidade</dt><dd>O campo tem rótulo e abre com <kbd>/</kbd>. As sugestões são <code>role="listbox"</code>: setas escolhem, <kbd>Enter</kbd> confirma, <kbd>Esc</kbd> fecha. Cada chip tem um botão com nome ("Tirar o filtro De Yuri Melo"). A contagem é anunciada.</dd></div>
+        <div><dt>Acessibilidade</dt><dd>O campo tem rótulo e abre com <kbd>/</kbd>. As sugestões são <code>role="listbox"</code>: setas escolhem, <kbd>Enter</kbd> confirma, <kbd>Esc</kbd> fecha. Cada chip tem um botão com nome ("Tirar o filtro De Ana Lima"). A contagem é anunciada.</dd></div>
       </dl>
       <dl class="guidance">
         <div><dt>Conteúdo</dt><dd>O que a pessoa digita vira algo que ela vê. Diga quantos resultados e onde buscou. Sem resultado, diga o termo e o que fazer. A busca é local e funciona sem internet; isso fica claro no texto.</dd></div>

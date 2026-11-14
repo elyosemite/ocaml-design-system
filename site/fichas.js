@@ -1,8 +1,8 @@
-/* Epistula Design System · fichas.js
+/* OCaml Design System · fichas.js
    A ficha de cada componente (v3 §7): onde é usado, fazer e não fazer, texto e tradução, testes, plataforma,
    relacionados e histórico. O docs.js monta a ficha no fim da página; a camada, o status e os tokens vêm de lá.
    Para um componente novo, acrescente uma entrada com o mesmo id da página. Texto sem classes CSS. */
-const EPISTULA_FICHAS = {
+const OCAML_FICHAS = {
   "botoes": {
     "usadoEm": [
       "src/features/accounts/AccountDialogs.tsx",
@@ -555,7 +555,7 @@ const EPISTULA_FICHAS = {
     "historico": [
       [
         "L76",
-        "Logo do EpistulaMail sem fundo."
+        "Logo do Correio sem fundo."
       ]
     ]
   },

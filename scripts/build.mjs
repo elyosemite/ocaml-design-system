@@ -20,7 +20,7 @@ rmSync(dist, { recursive: true, force: true });
 mkdirSync(join(dist, "fonts"), { recursive: true });
 
 // ---- CSS ----
-const HEADER = "/* EpistulaDesignSystem · gerado por scripts/build.mjs a partir de src/. Não edite este arquivo. */\n";
+const HEADER = "/* OCamlDesignSystem · gerado por scripts/build.mjs a partir de src/. Não edite este arquivo. */\n";
 for (const [entry, out] of [["src/tokens/index.scss", "tokens.css"], ["src/styles/index.scss", "components.css"], ["src/styles/docs-site.scss", "docs-site.css"]]) {
   const { css } = sass.compile(join(root, entry), { style: "expanded", charset: true });
   // o @charset tem de ser a primeira coisa do arquivo; o aviso de "gerado" vem logo depois
@@ -40,7 +40,7 @@ const symbols = icons.map(({ name }) => {
 });
 const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden="true">\n${symbols.join("\n")}\n</svg>`;
 writeFileSync(join(dist, "sprite.svg"), sprite);
-writeFileSync(join(dist, "sprite.js"), `/* Gerado por scripts/build.mjs a partir de src/icons/. Não edite. */\nwindow.EPISTULA_SPRITE = ${JSON.stringify(sprite)};\n`);
+writeFileSync(join(dist, "sprite.js"), `/* Gerado por scripts/build.mjs a partir de src/icons/. Não edite. */\nwindow.OCAML_SPRITE = ${JSON.stringify(sprite)};\n`);
 writeFileSync(join(dist, "icons.json"), JSON.stringify(icons, null, 2) + "\n");
 
 // ---- fontes ----
@@ -62,7 +62,7 @@ writeFileSync(join(dist, "fonts.css"), `/* Gerado por scripts/build.mjs a partir
 
 // ---- registro de páginas ----
 const docsJs = readFileSync(join(root, "site/docs.js"), "utf8");
-const registry = (0, eval)(docsJs.match(/const EPISTULA_PAGES = (\[[\s\S]*?\n\]);/)[1]);
+const registry = (0, eval)(docsJs.match(/const OCAML_PAGES = (\[[\s\S]*?\n\]);/)[1]);
 const pages = registry.flatMap((g) => g.items.map(([id, title, description, status]) => ({ id, title, description, layer: g.group, status })));
 writeFileSync(join(dist, "pages.json"), JSON.stringify(pages, null, 2) + "\n");
 

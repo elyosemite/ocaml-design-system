@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Busca · Epistula Design System</title>
+<title>Busca · OCaml Design System</title>
 <meta name="description" content="Busca com pessoas, período, filtros, todas as contas e regras nos resultados.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="busca">
 <div class="doc">
@@ -22,7 +24,7 @@
         <p class="lede">Pessoas, período e filtros como chips no próprio campo, busca em todas as contas, ações em lote e regras aplicadas aos resultados. Reúne componentes que já existem, mais três peças novas: <b>L73</b> chip de filtro, <b>L74</b> barra dos resultados e <b>L75</b> conta de cada resultado.</p>
       </div>
       <dl class="guidance">
-        <div><dt>Ideia central</dt><dd>O que a pessoa digita vira algo que ela vê: "de: Yuri Melo" vira o chip de Yuri, "últimos 30 dias" vira um chip de período. Cada chip se edita com um clique e sai com o x ou com Backspace.</dd></div>
+        <div><dt>Ideia central</dt><dd>O que a pessoa digita vira algo que ela vê: "de: Ana Lima" vira o chip de Ana, "últimos 30 dias" vira um chip de período. Cada chip se edita com um clique e sai com o x ou com Backspace.</dd></div>
         <div><dt>Dois jeitos de chegar</dt><dd>Digitando operadores (<code>de:</code>, <code>para:</code>, <code>depois:</code>…) ou escolhendo nas sugestões que aparecem ao focar o campo. Os dois dão o mesmo chip.</dd></div>
         <div><dt>Nada vai para a rede</dt><dd>A busca é nas mensagens guardadas neste computador, em todas as pastas, e funciona sem internet.</dd></div>
       </dl>
@@ -40,11 +42,11 @@
         <div style="display:grid;gap:var(--space-300);max-width:45rem">
           <figure class="state" style="justify-items:stretch">
             <div class="input input--search chip-input is-focus"><svg class="i"><use href="#i-search"/></svg>
-              <span class="chip"><span class="chip__op">De</span><span class="avatar avatar--purple">YM<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="chip__name">Yuri Melo</span><button class="chip__remove" type="button" aria-label="Tirar o filtro De Yuri Melo"><svg class="i i--sm"><use href="#i-x"/></svg></button></span>
+              <span class="chip"><span class="chip__op">De</span><span class="avatar avatar--purple">AL<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="chip__name">Ana Lima</span><button class="chip__remove" type="button" aria-label="Tirar o filtro De Ana Lima"><svg class="i i--sm"><use href="#i-x"/></svg></button></span>
               <span class="chip chip--filter"><svg class="i"><use href="#i-clock"/></svg><span class="chip__name">Últimos 30 dias</span><button class="chip__remove" type="button" aria-label="Tirar o período"><svg class="i i--sm"><use href="#i-x"/></svg></button></span>
               <span class="chip chip--filter"><svg class="i"><use href="#i-clip"/></svg><span class="chip__name">Com anexo</span><button class="chip__remove" type="button" aria-label="Tirar o filtro com anexo"><svg class="i i--sm"><use href="#i-x"/></svg></button></span>
               <input value="contrato" aria-label="Buscar"><button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Limpar a busca"><svg class="i"><use href="#i-x"/></svg></button></div>
-            <figcaption><b>Pessoa, período, anexo e texto</b>"de: Yuri Melo" virou o chip de pessoa (com o rótulo "De"); os filtros usam o L73</figcaption>
+            <figcaption><b>Pessoa, período, anexo e texto</b>"de: Ana Lima" virou o chip de pessoa (com o rótulo "De"); os filtros usam o L73</figcaption>
           </figure>
           <figure class="state" style="justify-items:stretch">
             <div class="input input--search chip-input is-focus"><svg class="i"><use href="#i-search"/></svg>
@@ -57,7 +59,7 @@
           </figure>
           <figure class="state" style="justify-items:stretch">
             <div class="input input--search chip-input"><svg class="i"><use href="#i-search"/></svg>
-              <span class="chip is-selected"><span class="chip__op">De</span><span class="avatar avatar--purple">YM<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="chip__name">Yuri Melo</span><button class="chip__remove" type="button" aria-label="Remover"><svg class="i i--sm"><use href="#i-x"/></svg></button></span>
+              <span class="chip is-selected"><span class="chip__op">De</span><span class="avatar avatar--purple">AL<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="chip__name">Ana Lima</span><button class="chip__remove" type="button" aria-label="Remover"><svg class="i i--sm"><use href="#i-x"/></svg></button></span>
               <input aria-label="Buscar"></div>
             <figcaption><b>Backspace</b>com o campo vazio, o último chip fica selecionado; na segunda vez, sai (como no "Para")</figcaption>
           </figure>
@@ -65,7 +67,7 @@
       </div>
       <dl class="guidance">
         <div><dt>Rótulo do chip</dt><dd>O rótulo diz o papel da pessoa: De, Para ou Cc. Sem rótulo, a pessoa vale em qualquer campo ("com: Ana").</dd></div>
-        <div><dt>Nome ou e-mail</dt><dd>"de: Yuri", "de: yuri@exemplo.com" e "de: Yuri Melo" chegam ao mesmo chip quando há um contato só; com mais de um, a sugestão pede para escolher.</dd></div>
+        <div><dt>Nome ou e-mail</dt><dd>"de: Ana", "de: ana@exemplo.com" e "de: Ana Lima" chegam ao mesmo chip quando há um contato só; com mais de um, a sugestão pede para escolher.</dd></div>
       </dl>
       <p class="classes"><span>Classes</span> <code>.input.input--search.chip-input</code> <code>.chip__op</code></p>
     </section>
@@ -83,9 +85,9 @@
             <div class="input input--search chip-input is-focus"><svg class="i"><use href="#i-search"/></svg><input value="de: yu" aria-label="Buscar"></div>
             <div class="menu menu--wide" role="listbox" aria-label="Pessoas" style="position:static;margin-top:var(--space-050)">
               <div class="menu__heading">Pessoas</div>
-              <button class="menu-item is-selected" type="button" role="option" aria-selected="true"><span class="avatar avatar--sm avatar--purple">YM<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="menu-item__text">Yuri Melo</span><span class="menu-item__meta">yuri@exemplo.com · 214</span></button>
+              <button class="menu-item is-selected" type="button" role="option" aria-selected="true"><span class="avatar avatar--sm avatar--purple">AL<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="menu-item__text">Ana Lima</span><span class="menu-item__meta">ana@exemplo.com · 214</span></button>
               <button class="menu-item" type="button" role="option"><span class="avatar avatar--sm avatar--teal">YS<img class="avatar__img" alt="" src="images/people/pessoa-1.webp"></span><span class="menu-item__text">Yumi Sato</span><span class="menu-item__meta">yumi.sato@lumen.com.br · 9</span></button>
-              <button class="menu-item" type="button" role="option"><span class="avatar avatar--sm">Y<img class="avatar__img" alt="" src="images/people/pessoa-1.webp"></span><span class="menu-item__text">yuri.melo@empresa.com</span><span class="menu-item__meta">3</span></button>
+              <button class="menu-item" type="button" role="option"><span class="avatar avatar--sm">Y<img class="avatar__img" alt="" src="images/people/pessoa-1.webp"></span><span class="menu-item__text">ana.lima@empresa.com</span><span class="menu-item__meta">3</span></button>
               <div class="menu__sep" role="separator"></div>
               <button class="menu-item" type="button" role="option"><svg class="i"><use href="#i-search"/></svg><span class="menu-item__text">Buscar "yu" no remetente</span></button>
             </div>
@@ -95,7 +97,7 @@
             <div class="input input--search chip-input is-focus"><svg class="i"><use href="#i-search"/></svg><input placeholder="Buscar em todas as pastas" aria-label="Buscar"></div>
             <div class="menu menu--wide" role="listbox" aria-label="Sugestões" style="position:static;margin-top:var(--space-050)">
               <div class="menu__heading">Recentes</div>
-              <button class="menu-item" type="button" role="option"><svg class="i"><use href="#i-history"/></svg><span class="menu-item__text">contrato · de Yuri Melo · com anexo</span></button>
+              <button class="menu-item" type="button" role="option"><svg class="i"><use href="#i-history"/></svg><span class="menu-item__text">contrato · de Ana Lima · com anexo</span></button>
               <button class="menu-item" type="button" role="option"><svg class="i"><use href="#i-history"/></svg><span class="menu-item__text">nota fiscal · este ano</span></button>
               <div class="menu__sep" role="separator"></div>
               <div class="menu__heading">Filtros</div>
@@ -160,9 +162,9 @@
             </div>
           </div>
           <div class="thread-list thread-list--standard" role="list" aria-label="Resultados">
-            <div class="thread is-unread" role="listitem"><input type="checkbox" class="checkbox thread__check" aria-label="Selecionar"><span class="star-btn thread__star" aria-pressed="false"><svg class="i"><use href="#i-star"/></svg></span><div class="thread__from"><span class="thread__from-name">Yuri Melo</span></div><div class="thread__meta"><span class="thread__date">10:42</span></div><div class="thread__subject"><span class="avatar avatar--xs avatar--purple thread__account" aria-label="Conta Trabalho">T<img class="avatar__img" alt="" src="images/people/pessoa-6.webp"></span><span class="label">Caixa de entrada</span><span class="thread__subject-text">Revisão do contrato: Fornecedor Lumen</span><span class="thread__icons"><svg class="i i--sm"><use href="#i-clip"/></svg></span></div></div>
-            <div class="thread" role="listitem"><input type="checkbox" class="checkbox thread__check" aria-label="Selecionar"><span class="star-btn thread__star" aria-pressed="true"><svg class="i"><use href="#i-star"/></svg></span><div class="thread__from"><span class="thread__from-name">Yuri Melo</span></div><div class="thread__meta"><span class="thread__date">2 set</span></div><div class="thread__subject"><span class="avatar avatar--xs thread__account" aria-label="Conta Pessoal">P<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><span class="label label--purple">Jurídico</span><span class="thread__subject-text">Contrato do apartamento assinado</span><span class="thread__icons"><svg class="i i--sm"><use href="#i-clip"/></svg></span></div></div>
-            <div class="thread" role="listitem"><input type="checkbox" class="checkbox thread__check" aria-label="Selecionar"><span class="star-btn thread__star" aria-pressed="false"><svg class="i"><use href="#i-star"/></svg></span><div class="thread__from"><span class="thread__from-name">Yuri Melo</span></div><div class="thread__meta"><span class="thread__date">2015</span></div><div class="thread__subject"><span class="avatar avatar--xs avatar--archive thread__account" aria-label="Arquivo Caixa de 2015"><svg class="i"><use href="#i-archive"/></svg></span><span class="label">Enviados</span><span class="thread__subject-text">Minuta do contrato antigo</span><span class="thread__icons"><svg class="i i--sm"><use href="#i-clip"/></svg></span></div></div>
+            <div class="thread is-unread" role="listitem"><input type="checkbox" class="checkbox thread__check" aria-label="Selecionar"><span class="star-btn thread__star" aria-pressed="false"><svg class="i"><use href="#i-star"/></svg></span><div class="thread__from"><span class="thread__from-name">Ana Lima</span></div><div class="thread__meta"><span class="thread__date">10:42</span></div><div class="thread__subject"><span class="avatar avatar--xs avatar--purple thread__account" aria-label="Conta Trabalho">T<img class="avatar__img" alt="" src="images/people/pessoa-6.webp"></span><span class="label">Caixa de entrada</span><span class="thread__subject-text">Revisão do contrato: Fornecedor Lumen</span><span class="thread__icons"><svg class="i i--sm"><use href="#i-clip"/></svg></span></div></div>
+            <div class="thread" role="listitem"><input type="checkbox" class="checkbox thread__check" aria-label="Selecionar"><span class="star-btn thread__star" aria-pressed="true"><svg class="i"><use href="#i-star"/></svg></span><div class="thread__from"><span class="thread__from-name">Ana Lima</span></div><div class="thread__meta"><span class="thread__date">2 set</span></div><div class="thread__subject"><span class="avatar avatar--xs thread__account" aria-label="Conta Pessoal">P<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><span class="label label--purple">Jurídico</span><span class="thread__subject-text">Contrato do apartamento assinado</span><span class="thread__icons"><svg class="i i--sm"><use href="#i-clip"/></svg></span></div></div>
+            <div class="thread" role="listitem"><input type="checkbox" class="checkbox thread__check" aria-label="Selecionar"><span class="star-btn thread__star" aria-pressed="false"><svg class="i"><use href="#i-star"/></svg></span><div class="thread__from"><span class="thread__from-name">Ana Lima</span></div><div class="thread__meta"><span class="thread__date">2015</span></div><div class="thread__subject"><span class="avatar avatar--xs avatar--archive thread__account" aria-label="Arquivo Caixa de 2015"><svg class="i"><use href="#i-archive"/></svg></span><span class="label">Enviados</span><span class="thread__subject-text">Minuta do contrato antigo</span><span class="thread__icons"><svg class="i i--sm"><use href="#i-clip"/></svg></span></div></div>
           </div>
         </div>
       </div>
@@ -208,8 +210,8 @@
               <p class="rule-preview__count">Pegaria 41 dos 128</p>
               <p class="rule-preview__hint">A regra só age nos resultados que cumprem as condições dela.</p>
               <ul class="rule-preview__list">
-                <li class="rule-preview__item"><b>Yuri Melo</b><span>Revisão do contrato: Fornecedor Lumen</span><span>10:42</span></li>
-                <li class="rule-preview__item"><b>Yuri Melo</b><span>Contrato do apartamento assinado</span><span>2 set</span></li>
+                <li class="rule-preview__item"><b>Ana Lima</b><span>Revisão do contrato: Fornecedor Lumen</span><span>10:42</span></li>
+                <li class="rule-preview__item"><b>Ana Lima</b><span>Contrato do apartamento assinado</span><span>2 set</span></li>
               </ul>
             </aside>
           </div>
@@ -239,7 +241,7 @@
           </div>
           <div class="nav-group">
             <div class="nav-heading">Buscas salvas</div>
-            <span class="nav-item has-unread" aria-current="page"><svg class="i"><use href="#i-search"/></svg><span class="nav-item__text">Contratos com o Yuri</span><span class="nav-item__count">3</span></span>
+            <span class="nav-item has-unread" aria-current="page"><svg class="i"><use href="#i-search"/></svg><span class="nav-item__text">Contratos com o Ana</span><span class="nav-item__count">3</span></span>
             <span class="nav-item"><svg class="i"><use href="#i-search"/></svg><span class="nav-item__text">Notas fiscais deste ano</span></span>
           </div>
         </nav>

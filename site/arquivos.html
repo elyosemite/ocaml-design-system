@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Arquivos de e-mail · Epistula Design System</title>
+<title>Arquivos de e-mail · OCaml Design System</title>
 <meta name="description" content="Abrir arquivos de e-mail de outros programas, sem conta.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="arquivos">
 <div class="doc">
@@ -40,7 +42,7 @@
         <div style="display:grid;gap:var(--space-300);max-width:44rem;margin-inline:auto">
           <div class="empty" style="padding-block:var(--space-300) 0">
             <h2 class="empty__title">Conecte seu e-mail ou abra um arquivo</h2>
-            <p class="empty__desc">Escolha o serviço do seu e-mail. O login acontece no navegador, na página do provedor; o Epistula nunca vê sua senha.</p>
+            <p class="empty__desc">Escolha o serviço do seu e-mail. O login acontece no navegador, na página do provedor; o Correio nunca vê sua senha.</p>
           </div>
           <ul class="provider-grid" role="list">
             <li><button class="provider-card" type="button"><span class="provider-card__icon" aria-hidden="true"><svg class="i"><use href="#i-mail"/></svg></span><span class="provider-card__text"><span class="provider-card__name">Gmail</span><span class="provider-card__desc">Entrar com o Google</span></span></button></li>
@@ -55,7 +57,7 @@
       </div>
       <dl class="guidance">
         <div><dt>Com contas</dt><dd>O mesmo item fica no menu da conta ("Abrir arquivo de e-mail…") e em Configurações → Geral, grupo "Arquivos de e-mail". Arrastar um arquivo para a janela abre o mesmo fluxo (L70).</dd></div>
-        <div><dt>Sem a rede</dt><dd>Esse caminho funciona com o computador sem internet e sem o servidor de login do Epistula.</dd></div>
+        <div><dt>Sem a rede</dt><dd>Esse caminho funciona com o computador sem internet e sem o servidor de login do Correio.</dd></div>
       </dl>
 
       <h3 class="sub" id="soltar">L70 · Área de soltar</h3>
@@ -63,7 +65,7 @@
       <div class="stage">
         <div class="drop-zone" role="status">
           <svg class="i" aria-hidden="true"><use href="#i-upload"/></svg>
-          <p class="drop-zone__title">Solte para abrir no Epistula</p>
+          <p class="drop-zone__title">Solte para abrir no Correio</p>
           <p class="drop-zone__desc">.mbox, .pst, .msg, .olm, .eml, .emlx, ou uma pasta do Thunderbird, do Apple Mail ou Maildir.</p>
         </div>
       </div>
@@ -82,7 +84,7 @@
           <div class="modal__head"><h3 class="modal__title" id="w1-title">Abrir arquivo de e-mail</h3></div>
           <div class="modal__body" style="display:grid;gap:var(--space-200)">
             <p class="wizard-steps" style="margin:0">Passo 1 de 3</p>
-            <p style="margin:0;color:var(--color-text-subtle)">O arquivo é lido neste computador e copiado para o banco cifrado do Epistula. Nada vai para a internet, e o original não é alterado.</p>
+            <p style="margin:0;color:var(--color-text-subtle)">O arquivo é lido neste computador e copiado para o banco cifrado do Correio. Nada vai para a internet, e o original não é alterado.</p>
             <div class="row" style="gap:var(--space-100)">
               <button class="btn btn--primary" type="button"><svg class="i"><use href="#i-file"/></svg>Escolher arquivo…</button>
               <button class="btn" type="button"><svg class="i"><use href="#i-folder"/></svg>Escolher pasta…</button>
@@ -122,7 +124,7 @@
             <div class="setting-list">
               <div class="setting-list__row"><span class="avatar avatar--lg avatar--archive" aria-hidden="true"><svg class="i"><use href="#i-archive"/></svg></span><div class="setting-list__name"><span class="setting-list__title">Todos os e-mails, incluindo Spam e Lixeira.mbox</span><span class="setting-list__sub"><span class="lozenge lozenge--success">mbox do Google Takeout</span></span></div><span class="setting-list__end"><span class="setting-list__size">6,4 GB</span></span></div>
             </div>
-            <div class="field"><label class="field__label" for="w2-name">Nome no Epistula</label><div class="input"><input id="w2-name" value="Gmail antigo" maxlength="32"></div><span class="field__help">Aparece na coluna de contas. Dá para trocar depois.</span></div>
+            <div class="field"><label class="field__label" for="w2-name">Nome no Correio</label><div class="input"><input id="w2-name" value="Gmail antigo" maxlength="32"></div><span class="field__help">Aparece na coluna de contas. Dá para trocar depois.</span></div>
             <div class="setting-list">
               <div class="setting-list__head"><input type="checkbox" class="checkbox" aria-label="Marcar todas as pastas" checked><span>9 de 11 pastas · 47.130 de cerca de 48.200 mensagens</span></div>
               <div class="setting-list__row is-checked"><input type="checkbox" class="checkbox" aria-label="Caixa de entrada" checked><svg class="i" aria-hidden="true"><use href="#i-inbox"/></svg><div class="setting-list__name"><span class="setting-list__title">Caixa de entrada</span><span class="setting-list__sub">31.402 mensagens</span></div><span class="setting-list__end"><span class="setting-list__size">4,1 GB</span></span></div>
@@ -132,7 +134,7 @@
               <div class="setting-list__row"><input type="checkbox" class="checkbox" aria-label="Lixeira"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg><div class="setting-list__name"><span class="setting-list__title">Lixeira</span><span class="setting-list__sub">458 mensagens</span></div><span class="setting-list__end"><span class="setting-list__size">95 MB</span></span></div>
             </div>
             <div class="meter" style="padding:0"><div class="progress"><span style="width:42%"></span></div>Vai ocupar cerca de 5,6 GB · 13 GB livres no disco</div>
-            <div class="section-message section-message--warning" role="note"><svg class="i"><use href="#i-warning"/></svg><div><p class="section-message__title">O original continua sem cifra</p><p>O Epistula guarda uma cópia cifrada e não mexe no arquivo. Ele continua legível onde está; apague-o você mesmo quando não precisar mais dele.</p></div></div>
+            <div class="section-message section-message--warning" role="note"><svg class="i"><use href="#i-warning"/></svg><div><p class="section-message__title">O original continua sem cifra</p><p>O Correio guarda uma cópia cifrada e não mexe no arquivo. Ele continua legível onde está; apague-o você mesmo quando não precisar mais dele.</p></div></div>
           </div>
           <div class="modal__foot modal__foot--split"><button class="btn btn--subtle" type="button">Voltar</button><button class="btn btn--subtle" type="button">Cancelar</button><button class="btn btn--primary" type="button">Importar 47.130 mensagens</button></div>
         </div>
@@ -154,7 +156,7 @@
 
       <h3 class="sub" id="nao-reconhecido">Arquivo não reconhecido</h3>
       <div class="stage">
-        <div class="section-message section-message--error" role="alert" style="max-width:36rem"><svg class="i"><use href="#i-error"/></svg><div><p class="section-message__title">Este arquivo não parece ser de e-mail</p><p>O Epistula abre .mbox, .pst, .msg, .olm, .eml, .emlx e pastas Maildir. Se é um backup compactado (.zip do Takeout), descompacte antes.</p><div class="section-message__actions"><button class="btn btn--link" type="button">Escolher outro arquivo</button></div></div></div>
+        <div class="section-message section-message--error" role="alert" style="max-width:36rem"><svg class="i"><use href="#i-error"/></svg><div><p class="section-message__title">Este arquivo não parece ser de e-mail</p><p>O Correio abre .mbox, .pst, .msg, .olm, .eml, .emlx e pastas Maildir. Se é um backup compactado (.zip do Takeout), descompacte antes.</p><div class="section-message__actions"><button class="btn btn--link" type="button">Escolher outro arquivo</button></div></div></div>
       </div>
       <p class="classes"><span>Classes</span> <code>.lozenge</code> <code>.setting-list</code> <code>.meter</code></p>
     </section>
@@ -272,7 +274,7 @@
       <div class="ds-head">
         <p class="eyebrow">CA3</p>
         <h2>Menu do arquivo e remover</h2>
-        <p class="lede">O menu da foto (à direita do header) com o arquivo local ativo: renomear, importar mais e remover. Remover usa o botão de perigo, porque as mensagens saem de vez do Epistula (o original continua onde está).</p>
+        <p class="lede">O menu da foto (à direita do header) com o arquivo local ativo: renomear, importar mais e remover. Remover usa o botão de perigo, porque as mensagens saem de vez do Correio (o original continua onde está).</p>
       </div>
       <div class="stage stage--sunken">
         <div class="row" style="align-items:flex-start;gap:var(--space-300);flex-wrap:wrap;justify-content:center">
@@ -282,7 +284,7 @@
             <button class="menu-item" type="button" role="menuitem"><svg class="i"><use href="#i-upload"/></svg><span class="menu-item__text">Importar mais neste arquivo…</span></button>
             <button class="menu-item" type="button" role="menuitem"><svg class="i"><use href="#i-archive"/></svg><span class="menu-item__text">Abrir outro arquivo de e-mail…</span></button>
             <div class="menu__sep" role="separator"></div>
-            <button class="menu-item menu-item--danger" type="button" role="menuitem"><svg class="i"><use href="#i-trash"/></svg><span class="menu-item__text">Remover do Epistula…</span></button>
+            <button class="menu-item menu-item--danger" type="button" role="menuitem"><svg class="i"><use href="#i-trash"/></svg><span class="menu-item__text">Remover do Correio…</span></button>
           </div>
           <div class="modal" role="dialog" aria-labelledby="rm-title">
             <div class="modal__head"><svg class="i"><use href="#i-trash"/></svg><h3 class="modal__title" id="rm-title">Remover Gmail antigo?</h3></div>

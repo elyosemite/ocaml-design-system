@@ -1,6 +1,6 @@
 # Roteiro do design system
 
-A ordem de trabalho do design system do EpistulaMail, na sequência do v3 (§14). As decisões que sustentam cada item estão em `DECISIONS.md`; o fluxo para fazer uma mudança, em `CONTRIBUTING.md`. A linha de base das métricas está na página Governança e sai de `pnpm ds:check --metrics`.
+A ordem de trabalho do OCaml Design System, na sequência do v3 (§14). As decisões que sustentam cada item estão em `DECISIONS.md`; o fluxo para fazer uma mudança, em `CONTRIBUTING.md`. A linha de base das métricas está na página Governança e sai de `pnpm ds:check --metrics`.
 
 ## Feito em 28 out 2026 (US21)
 
@@ -47,7 +47,7 @@ Cada item tem uma evidência e pode virar uma proposta futura em <code>userstory
 | 9 | Conferir o alto contraste com um sistema de verdade e a seta do ícone no RTL. | Só foi testado por atributo. | Temas |
 | 10 | Revisar os status de maturidade. | Os status Beta de `arquivos` e `criptografia` e os quatro padrões novos são estimativas. | Governança |
 | 11 | Alinhar o `@media (max-width: 960px)` do índice do blog aos outros (959px, `down(compact)`). | Único `@media` que difere 1px do token; ficou igual na migração para não mudar o resultado. | Layouts |
-| 12 | Fases 5 a 8 do plano: documentação em Astro + MDX, conteúdo no modelo do ADS, testes e a troca no app. | `docs/plano-migracao.md`. | Governança |
+| 12 | Fases 5 a 8 do plano: documentação em Astro + MDX, conteúdo no modelo novo de página, testes e a troca no app. | `docs/plano-migracao.md`. | Governança |
 
 ## Como priorizar
 

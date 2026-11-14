@@ -33,7 +33,7 @@ As decisões 0001 e 0002 vêm de antes do v3 e estão aqui para o registro ficar
 
 ## 0005 · Camadas e maturidade por página
 
-- **Decisão:** cada página do design system mora numa de cinco camadas (Fundamentos, Core, Padrões, Produto, Layouts e páginas) e declara um status (Rascunho, Experimental, Beta, Estável, Descontinuado, Removido) no registro `EPISTULA_PAGES`.
+- **Decisão:** cada página do design system mora numa de cinco camadas (Fundamentos, Core, Padrões, Produto, Layouts e páginas) e declara um status (Rascunho, Experimental, Beta, Estável, Descontinuado, Removido) no registro `OCAML_PAGES`.
 - **Efeito:** o status aparece no índice e ao lado do título. Páginas novas começam em Beta ou abaixo. Os status atuais de `arquivos` e `criptografia` (Beta) são uma estimativa e podem ser corrigidos no registro.
 
 ## 0006 · A navegação lateral se separa de pastas e de contas
@@ -85,7 +85,7 @@ As decisões 0001 e 0002 vêm de antes do v3 e estão aqui para o registro ficar
 
 As decisões 0015 a 0020 são de 14 nov 2026, da migração para o repositório próprio (`docs/plano-migracao.md`).
 
-## 0015 · Repositório próprio: EpistulaDesignSystem
+## 0015 · Repositório próprio: OCamlDesignSystem
 
 - **Contexto:** o design system morava em `epistulamail/design-system/` e vai servir a mais de um projeto.
 - **Decisão:** repositório próprio, com o histórico de `design-system/` trazido por `git subtree split`. As páginas ficam em `site/`, os fontes em `src/`, o resultado em `dist/` (gerado, fora do Git) e o CSS de antes da migração em `baseline/`, como referência.
@@ -115,3 +115,9 @@ As decisões 0015 a 0020 são de 14 nov 2026, da migração para o repositório 
 ## 0020 · Só o Atlassian como referência externa
 
 - **Decisão:** o plano e as páginas se baseiam só no Atlassian Design System. O que não vem dele é necessidade própria do EpistulaMail (Alto Contraste do Windows, Sass, densidade) e é marcado como tal.
+
+## 0021 · O nome é OCaml Design System
+
+- **Data:** 14 nov 2026.
+- **Decisão:** o design system passa a se chamar OCaml Design System e serve a qualquer produto. O EpistulaMail foi o primeiro produto a usá-lo; os exemplos das páginas usam um app fictício ("Correio") e dados de exemplo.
+- **Efeito:** o nome aparece no topo e nos títulos das páginas, no pacote (`ocaml-design-system`) e no README. As constantes internas viraram `OCAML_PAGES`, `OCAML_STATUS`, `OCAML_FICHAS` e `OCAML_SPRITE`, e a preferência de tema guardada no navegador virou `ocaml-ds-theme` (quem já tinha escolhido um tema volta ao padrão uma vez). As entradas anteriores deste registro continuam citando o EpistulaMail porque contam a história.

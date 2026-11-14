@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="Camadas, regra de classificação, primitives, utilities e a ordem de adoção.">
-<title>Arquitetura · Epistula Design System</title>
+<title>Arquitetura · OCaml Design System</title>
 <meta name="description" content="Pessoas e contas, com inicial, cor e foto.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="arquitetura">
 <div class="doc">
@@ -23,12 +25,12 @@
       </div>
       <h2 id="camadas">As cinco camadas</h2>
       <p class="demo-hint">Cada peça fica na camada mais baixa que expressa a sua responsabilidade, sem carregar regra de negócio nem decisão de uma tela.</p>
-      <table class="tier-table"><thead><tr><th scope="col">Camada</th><th scope="col">O que contém</th><th scope="col">O que não contém</th><th scope="col">Nesta documentação</th></tr></thead><tbody><tr><th scope="row">Fundamentos</th><td>Tokens, temas, acessibilidade, tipografia, conteúdo e princípios de layout.</td><td>CSS de um componente, classe de página, lógica de negócio.</td><td><a href="cores.html">Cores</a>, <a href="tipografia.html">Tipografia</a>, <a href="variaveis.html">Variáveis</a>, <a href="temas.html">Temas</a></td></tr><tr><th scope="row">Core</th><td>Componentes genéricos, com API e estados definidos.</td><td>Regra do EpistulaMail ou layout de página.</td><td><a href="botoes.html">Botões</a>, <a href="campos.html">Campos</a>, <a href="modais.html">Modais</a>, <a href="navegacao.html">Navegação lateral</a></td></tr><tr><th scope="row">Padrões</th><td>Composições de dois ou mais componentes Core que resolvem uma tarefa que se repete.</td><td>Um componente genérico novo disfarçado, ou algo de uma tela só.</td><td><a href="padrao-validacao.html">Validação</a>, <a href="padrao-confirmacao.html">Confirmação</a>, <a href="padrao-busca.html">Busca</a>, <a href="padrao-selecao-em-lote.html">Seleção em lote</a></td></tr><tr><th scope="row">Produto</th><td>Conceitos e fluxos do cliente de e-mail.</td><td>Token global e abstração genérica disfarçada.</td><td><a href="contas.html">Contas</a>, <a href="threads.html">Lista de mensagens</a>, <a href="composicao.html">Composição</a>, <a href="criptografia.html">Criptografia</a></td></tr><tr><th scope="row">Layouts e páginas</th><td>A estrutura das telas e a composição dos fluxos.</td><td>Redefinição local de token ou de componente.</td><td><a href="layouts.html">Layouts</a>, <a href="documentacao.html">Documentação</a></td></tr></tbody></table>
+      <table class="tier-table"><thead><tr><th scope="col">Camada</th><th scope="col">O que contém</th><th scope="col">O que não contém</th><th scope="col">Nesta documentação</th></tr></thead><tbody><tr><th scope="row">Fundamentos</th><td>Tokens, temas, acessibilidade, tipografia, conteúdo e princípios de layout.</td><td>CSS de um componente, classe de página, lógica de negócio.</td><td><a href="cores.html">Cores</a>, <a href="tipografia.html">Tipografia</a>, <a href="variaveis.html">Variáveis</a>, <a href="temas.html">Temas</a></td></tr><tr><th scope="row">Core</th><td>Componentes genéricos, com API e estados definidos.</td><td>Regra do produto ou layout de página.</td><td><a href="botoes.html">Botões</a>, <a href="campos.html">Campos</a>, <a href="modais.html">Modais</a>, <a href="navegacao.html">Navegação lateral</a></td></tr><tr><th scope="row">Padrões</th><td>Composições de dois ou mais componentes Core que resolvem uma tarefa que se repete.</td><td>Um componente genérico novo disfarçado, ou algo de uma tela só.</td><td><a href="padrao-validacao.html">Validação</a>, <a href="padrao-confirmacao.html">Confirmação</a>, <a href="padrao-busca.html">Busca</a>, <a href="padrao-selecao-em-lote.html">Seleção em lote</a></td></tr><tr><th scope="row">Produto</th><td>Conceitos e fluxos do cliente de e-mail.</td><td>Token global e abstração genérica disfarçada.</td><td><a href="contas.html">Contas</a>, <a href="threads.html">Lista de mensagens</a>, <a href="composicao.html">Composição</a>, <a href="criptografia.html">Criptografia</a></td></tr><tr><th scope="row">Layouts e páginas</th><td>A estrutura das telas e a composição dos fluxos.</td><td>Redefinição local de token ou de componente.</td><td><a href="layouts.html">Layouts</a>, <a href="documentacao.html">Documentação</a></td></tr></tbody></table>
       <h2 id="tres-usos">Regra dos três usos</h2>
       <dl class="guidance">
         <div><dt>A regra</dt><dd>Um componente genérico só sobe para o Core depois de três usos reais. Antes disso ele fica no Produto, ou na tela que o usa.</dd></div>
         <div><dt>Exceções</dt><dd>Fundamentos, acessibilidade, segurança e peças essenciais da plataforma podem entrar antes. A exceção é registrada em <code>DECISIONS.md</code>.</dd></div>
-        <div><dt>Por quê</dt><dd>O design system existe para resolver problemas que se repetem no EpistulaMail, não para reproduzir um catálogo de UI kit. Carrossel, avaliação por estrelas e deslizante não entram só porque existem em uma biblioteca.</dd></div>
+        <div><dt>Por quê</dt><dd>O design system existe para resolver problemas que se repetem nos produtos, não para reproduzir um catálogo de UI kit. Carrossel, avaliação por estrelas e deslizante não entram só porque existem em uma biblioteca.</dd></div>
       </dl>
       <h2 id="exemplo">Exemplo: navegação lateral e contas</h2>
       <p class="demo-hint">Antes havia uma página só, "Sidebar", que misturava a estrutura de navegação, a árvore de pastas e a coluna de contas. O v3 manda separar:</p>

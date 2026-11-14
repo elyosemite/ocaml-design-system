@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Painel de leitura · Epistula Design System</title>
+<title>Painel de leitura · OCaml Design System</title>
 <meta name="description" content="Assunto, mensagem e conversa recolhida.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="leitura">
 <div class="doc">
@@ -17,7 +19,7 @@
   <main>
     <section class="ds-section" id="leitura">
         <div class="ds-head">
-          <p class="eyebrow">Específico do Epistula · composto de Avatar, Button, Tag, Section message</p>
+          <p class="eyebrow">Específico de e-mail · composto de Avatar, Button, Tag, Section message</p>
           <h1>Painel de leitura</h1>
           <p class="lede">O assunto usa Page title. O corpo usa Body large, com largura limitada a cerca de 70 caracteres. As mensagens anteriores da conversa ficam recolhidas numa linha cada.</p>
         </div>
@@ -35,7 +37,7 @@
               </div>
             </div>
             <div class="message--collapsed" tabindex="0"><span class="avatar avatar--sm avatar--teal">RD<img class="avatar__img" alt="" src="images/people/pessoa-3.webp"></span><span class="snip"><b style="color:var(--color-text);font-weight:600">Rafael Dias</b> · Marina, mandei as observações do financeiro em anexo.</span><span class="message__time">20 out</span></div>
-            <div class="message--collapsed" tabindex="0"><span class="avatar avatar--sm">YM<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="snip"><b style="color:var(--color-text);font-weight:600">Você</b> · Combinado. Fico no aguardo da versão final.</span><span class="message__time">21 out</span></div>
+            <div class="message--collapsed" tabindex="0"><span class="avatar avatar--sm">AL<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="snip"><b style="color:var(--color-text);font-weight:600">Você</b> · Combinado. Fico no aguardo da versão final.</span><span class="message__time">21 out</span></div>
             <div class="section-message section-message--warning" role="note">
               <svg class="i"><use href="#i-warning"/></svg>
               <div><p class="section-message__title">Remetente externo com anexo</p><p>Esta mensagem tem um destinatário de fora da organização. Confira o anexo antes de abrir.</p></div>
@@ -44,13 +46,13 @@
               <div class="message__head">
                 <span class="avatar avatar--lg avatar--purple">MC<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span>
                 <div style="min-width:0">
-                  <div class="message__from">Marina Couto <span class="message__addr">&lt;marina.couto@epistula.com.br&gt;</span></div>
+                  <div class="message__from">Marina Couto <span class="message__addr">&lt;marina.couto@exemplo.com.br&gt;</span></div>
                   <button class="message__to" type="button">para mim, Rafael, joao@lumen.com.br<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
                 </div>
                 <div class="message__time">Hoje, 10:42 <button class="star-btn" type="button" aria-pressed="true" aria-label="Com estrela"><svg class="i"><use href="#i-star"/></svg></button><button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Responder"><svg class="i"><use href="#i-reply"/></svg></button></div>
               </div>
               <div class="message__body">
-                <p>Olá, Yuri.</p>
+                <p>Olá, Ana.</p>
                 <p>Segue a versão 3 do contrato com os ajustes da cláusula 7.2. O prazo de pagamento passou para 45 dias, e a multa por rescisão agora é proporcional ao período restante do contrato.</p>
                 <p>Preciso da sua aprovação até quinta, 30 de outubro, para enviarmos à Lumen na mesma semana.</p>
                 <p>Obrigada,<br>Marina</p>
@@ -72,11 +74,11 @@
           <div class="message__head">
             <span class="avatar avatar--lg avatar--purple" aria-hidden="true">MC<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span>
             <div style="min-width:0">
-              <div class="message__from">Marina Couto <span class="message__addr">&lt;marina.couto@epistula.com.br&gt;</span></div>
+              <div class="message__from">Marina Couto <span class="message__addr">&lt;marina.couto@exemplo.com.br&gt;</span></div>
               <button class="message__to" type="button" aria-expanded="true" aria-controls="recipients-demo">para mim, Rafael, joao@lumen.com.br<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
               <dl class="message__recipients" id="recipients-demo">
-                <dt>De</dt><dd>Marina Couto &lt;marina.couto@epistula.com.br&gt;</dd>
-                <dt>Para</dt><dd>Yuri Melo &lt;yuri@epistula.com.br&gt;, Rafael Dias &lt;rafael.dias@epistula.com.br&gt;</dd>
+                <dt>De</dt><dd>Marina Couto &lt;marina.couto@exemplo.com.br&gt;</dd>
+                <dt>Para</dt><dd>Ana Lima &lt;ana@exemplo.com.br&gt;, Rafael Dias &lt;rafael.dias@exemplo.com.br&gt;</dd>
                 <dt>Cc</dt><dd>joao@lumen.com.br</dd>
                 <dt>Data</dt><dd>23 out 2026, 10:42</dd>
               </dl>
@@ -88,7 +90,7 @@
         <h3 class="sub">Corpo em HTML</h3>
         <div class="stage">
           <div class="message__body">
-            <iframe class="message__frame" title="Conteúdo da mensagem" sandbox="" style="height:15rem" srcdoc="&lt;!doctype html&gt;&lt;meta charset=utf-8&gt;&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src 'none'; style-src 'unsafe-inline'&quot;&gt;&lt;body style=&quot;margin:0;padding:24px;font-family:Arial,sans-serif;color:#222&quot;&gt;&lt;h2 style=&quot;margin:0 0 12px;color:#0b5394&quot;&gt;Newsletter Lumen · Outubro&lt;/h2&gt;&lt;p&gt;Olá, Yuri. Estas são as novidades do mês.&lt;/p&gt;&lt;table style=&quot;border-collapse:collapse;width:100%&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding:8px;background:#f1f5f9&quot;&gt;Novo contrato padrão&lt;/td&gt;&lt;td style=&quot;padding:8px;background:#f1f5f9&quot;&gt;Prazo de 45 dias&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p style=&quot;color:#666;font-size:12px&quot;&gt;Você recebe este e-mail porque é cliente Lumen.&lt;/p&gt;"></iframe>
+            <iframe class="message__frame" title="Conteúdo da mensagem" sandbox="" style="height:15rem" srcdoc="&lt;!doctype html&gt;&lt;meta charset=utf-8&gt;&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src 'none'; style-src 'unsafe-inline'&quot;&gt;&lt;body style=&quot;margin:0;padding:24px;font-family:Arial,sans-serif;color:#222&quot;&gt;&lt;h2 style=&quot;margin:0 0 12px;color:#0b5394&quot;&gt;Newsletter Lumen · Outubro&lt;/h2&gt;&lt;p&gt;Olá, Ana. Estas são as novidades do mês.&lt;/p&gt;&lt;table style=&quot;border-collapse:collapse;width:100%&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding:8px;background:#f1f5f9&quot;&gt;Novo contrato padrão&lt;/td&gt;&lt;td style=&quot;padding:8px;background:#f1f5f9&quot;&gt;Prazo de 45 dias&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p style=&quot;color:#666;font-size:12px&quot;&gt;Você recebe este e-mail porque é cliente Lumen.&lt;/p&gt;"></iframe>
           </div>
         </div>
         <dl class="guidance">
@@ -105,7 +107,7 @@
             <button class="conversation__more" type="button" aria-expanded="false"><span class="badge">3</span>mensagens anteriores</button>
             <div hidden style="display:contents">
               <div class="message--collapsed" tabindex="0" role="button"><span class="avatar avatar--sm avatar--teal" aria-hidden="true">RD<img class="avatar__img" alt="" src="images/people/pessoa-3.webp"></span><span class="snip"><b style="color:var(--color-text);font-weight:600">Rafael Dias</b> · Marina, mandei as observações do financeiro em anexo.</span><span class="message__time">24 out</span></div>
-              <div class="message--collapsed" tabindex="0" role="button"><span class="avatar avatar--sm avatar--purple" aria-hidden="true">YM<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="snip"><b style="color:var(--color-text);font-weight:600">Você</b> · Combinado. Fico no aguardo da versão final.</span><span class="message__time">24 out</span></div>
+              <div class="message--collapsed" tabindex="0" role="button"><span class="avatar avatar--sm avatar--purple" aria-hidden="true">AL<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="snip"><b style="color:var(--color-text);font-weight:600">Você</b> · Combinado. Fico no aguardo da versão final.</span><span class="message__time">24 out</span></div>
               <div class="message--collapsed" tabindex="0" role="button"><span class="avatar avatar--sm avatar--teal" aria-hidden="true">RD<img class="avatar__img" alt="" src="images/people/pessoa-3.webp"></span><span class="snip"><b style="color:var(--color-text);font-weight:600">Rafael Dias</b> · Ajustei a planilha de custos, está no drive.</span><span class="message__time">24 out</span></div>
             </div>
             <div class="message--collapsed" tabindex="0" role="button"><span class="avatar avatar--sm avatar--magenta" aria-hidden="true">MC<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><span class="snip"><b style="color:var(--color-text);font-weight:600">Marina Couto</b> · Perfeito, a cláusula 7.2 ficou ótima. Só falta a sua assinatura.</span><span class="message__time">Ontem</span></div>

@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Carregamento · Epistula Design System</title>
+<title>Carregamento · OCaml Design System</title>
 <meta name="description" content="Skeleton, spinner e progresso.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="carregamento">
 <div class="doc">
@@ -17,7 +19,6 @@
   <main>
     <section class="ds-section" id="carregamento">
         <div class="ds-head">
-          <p class="eyebrow">ADS · Spinner, Skeleton</p>
           <h1>Carregamento</h1>
           <p class="lede">O skeleton é usado quando a forma do conteúdo é conhecida, como a lista e o painel de leitura. O spinner é usado em ações curtas sem forma definida, como enviar, sincronizar ou anexar.</p>
         </div>
@@ -80,11 +81,11 @@
           <div class="unlock">
             <div class="unlock__card">
               <span class="unlock__icon" aria-hidden="true"><svg class="i"><use href="#i-lock"/></svg></span>
-              <h2 class="unlock__title">O Epistula está bloqueado</h2>
-              <p class="unlock__text">Digite a senha do Epistula para ver as suas mensagens.</p>
+              <h2 class="unlock__title">O Correio está bloqueado</h2>
+              <p class="unlock__text">Digite a senha do Correio para ver as suas mensagens.</p>
               <form class="unlock__form" onsubmit="return false">
                 <div class="field">
-                  <label class="field__label" for="u1">Senha do Epistula</label>
+                  <label class="field__label" for="u1">Senha do Correio</label>
                   <div class="input input--password is-focus"><input id="u1" type="password" value="frase-secreta" autocomplete="current-password"><button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Mostrar a senha" data-tip="Mostrar a senha"><svg class="i"><use href="#i-eye"/></svg></button></div>
                 </div>
                 <button class="btn btn--primary btn--block" type="submit">Desbloquear</button>
@@ -92,18 +93,18 @@
               </form>
             </div>
           </div>
-          <figcaption><b>Bloqueado</b>o app só mostra isto; a bandeja continua com "Abrir o Epistula"</figcaption>
+          <figcaption><b>Bloqueado</b>o app só mostra isto; a bandeja continua com "Abrir o Correio"</figcaption>
         </figure>
 
         <figure class="state" style="justify-items:stretch">
           <div class="unlock">
             <div class="unlock__card">
               <span class="unlock__icon" aria-hidden="true"><svg class="i"><use href="#i-lock"/></svg></span>
-              <h2 class="unlock__title">O Epistula está bloqueado</h2>
-              <p class="unlock__text">Digite a senha do Epistula para ver as suas mensagens.</p>
+              <h2 class="unlock__title">O Correio está bloqueado</h2>
+              <p class="unlock__text">Digite a senha do Correio para ver as suas mensagens.</p>
               <form class="unlock__form" onsubmit="return false">
                 <div class="field">
-                  <label class="field__label" for="u2">Senha do Epistula</label>
+                  <label class="field__label" for="u2">Senha do Correio</label>
                   <div class="input input--password is-invalid"><input id="u2" type="password" value="errada" aria-invalid="true" aria-describedby="u2-err"><button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Mostrar a senha"><svg class="i"><use href="#i-eye"/></svg></button></div>
                   <span class="field__help field__help--error" id="u2-err" role="alert"><svg class="i i--sm"><use href="#i-error"/></svg>Senha incorreta. Tente de novo em 8 segundos.</span>
                 </div>

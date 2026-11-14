@@ -1,10 +1,10 @@
-// Core · Botões (ADS Button)
-// Veio de components.css (linhas 32–102) na migração para o EpistulaDesignSystem.
+// Core · Botões
+// Veio de components.css (linhas 32–102) na migração para o OCamlDesignSystem.
 
 @use '../../tokens/components/button';
 
 /* ==========================================================================
-   Botões (ADS Button)
+   Botões
    ========================================================================== */
 .btn {
   @include button.set('default');

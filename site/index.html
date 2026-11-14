@@ -1,37 +1,410 @@
-<title>Epistula Design System</title>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OCaml Design System</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Fundamentos, componentes e tokens CSS do cliente de e-mail Epistula, baseados no Atlassian Design System.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<meta name="description" content="Tokens, componentes e padrões prontos para qualquer produto.">
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}document.documentElement.classList.add('js');</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
-<link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/home.css">
+</head>
+<body class="home">
 
-<div class="doc">
-  <nav class="doc-nav" id="doc-nav" aria-label="Índice"></nav>
-  <main>
-    <header class="masthead">
-      <div class="masthead__top">
-        <span class="wordmark"><img class="wordmark__logo" src="images/epistulamail-logo-120.png" alt="">EpistulaMail</span>
-        <span class="lozenge lozenge--inprogress">v3.0</span>
-        <button class="btn btn--subtle theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema">
-          <svg class="i"><use href="#i-moon"/></svg><span>Tema escuro</span>
-        </button>
+<header class="mast">
+  <div class="container mast__bar">
+    <details class="mast__index">
+      <summary class="mast__link"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg><span>Todas as páginas</span></summary>
+      <div class="mast__panel">
+        <nav class="doc-nav" id="doc-nav" aria-label="Índice"></nav>
       </div>
-      <h1>Design System</h1>
-      <p>Fundamentos, componentes, padrões e tokens do cliente de e-mail EpistulaMail, organizados em cinco camadas, cada peça com a sua maturidade. A base é o Atlassian Design System: estrutura azul nítida, superfícies neutras e tipografia pensada para telas densas, adaptadas a uma caixa de entrada que precisa ser lida rápido e respondida com um gesto.</p>
-      <ul class="facts">
-        <li><strong>Referência</strong> Atlassian Design System</li>
-        <li><strong>Conformidade</strong> WCAG 2.2 AA</li>
-        <li><strong>Temas</strong> claro, escuro e alto contraste</li>
-        <li><strong>Camadas</strong> Fundamentos · Core · Padrões · Produto · Layouts</li>
-        <li><strong>Arquivos</strong> <code>tokens.css</code> · <code>components.css</code></li>
-        <li><strong>Atualizado</strong> 28 out 2026</li>
+    </details>
+    <a class="mast__mark" href="index.html" aria-label="OCaml Design System, início">OCaml Design System</a>
+    <button class="mast__link mast__theme" id="theme-toggle" type="button" aria-label="Usar o tema escuro" title="Usar o tema escuro">
+      <svg class="i" aria-hidden="true"><use href="#i-moon"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <h1 id="hero-title">Design System</h1>
+        <p class="lead">Tokens, componentes e padrões prontos para qualquer produto.</p>
+        <div class="hero__actions">
+          <a class="btn-home" href="#paginas">Ver todas as páginas</a>
+          <a class="btn-home btn-home--quiet" href="#usar">Usar os tokens</a>
+        </div>
+      </div>
+
+      <figure class="stack">
+        <div class="stack__screens">
+          <div class="screen screen--left" inert aria-hidden="true">
+            <div class="screen__bar"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Tarefas da semana</span></div>
+            <ul class="demo-tasks">
+              <li><label class="choice"><input type="checkbox" class="checkbox" checked>Revisar a proposta</label><span class="lozenge lozenge--success">Feito</span></li>
+              <li><label class="choice"><input type="checkbox" class="checkbox" checked>Aprovar o orçamento</label><span class="lozenge lozenge--success">Feito</span></li>
+              <li><label class="choice"><input type="checkbox" class="checkbox">Publicar a página nova</label><span class="lozenge lozenge--inprogress">Em andamento</span></li>
+              <li><label class="choice"><input type="checkbox" class="checkbox">Chamar a equipe de design</label><span class="lozenge">A fazer</span></li>
+              <li><label class="choice"><input type="checkbox" class="checkbox">Fechar o relatório</label><span class="lozenge lozenge--overdue">Atrasada</span></li>
+            </ul>
+          </div>
+          <div class="screen screen--right" inert aria-hidden="true">
+            <div class="screen__bar"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg><span>Criar conta</span></div>
+            <div class="screen__body">
+              <div class="field"><label class="field__label" for="dm-name">Nome</label><div class="input"><input id="dm-name" value="Ana Lima"></div></div>
+              <div class="field"><label class="field__label" for="dm-mail">E-mail</label><div class="input is-invalid"><input id="dm-mail" value="ana@exemplo" aria-invalid="true"></div><span class="field__help field__help--error"><svg class="i i--sm" aria-hidden="true"><use href="#i-error"/></svg>Escreva o e-mail completo, como ana@exemplo.com.br.</span></div>
+              <label class="choice" for="dm-news"><input type="checkbox" class="toggle" id="dm-news" checked>Receber novidades</label>
+              <button class="btn btn--primary btn--block" type="button">Criar conta</button>
+            </div>
+          </div>
+          <div class="screen screen--center">
+            <div class="screen__bar"><svg class="i" aria-hidden="true"><use href="#i-grid"/></svg><span>Painel</span>
+              <div class="segmented screen__seg" role="radiogroup" aria-label="Período"><button class="btn btn--compact" type="button" role="radio" aria-checked="true">Semana</button><button class="btn btn--compact" type="button" role="radio" aria-checked="false">Mês</button></div>
+            </div>
+            <div class="screen__body">
+              <div class="demo-stats">
+                <div class="demo-stat"><span class="demo-stat__label">Pedidos</span><b class="demo-stat__value">1.200</b><span class="lozenge lozenge--success">Subiu 8%</span></div>
+                <div class="demo-stat"><span class="demo-stat__label">Entregas no prazo</span><b class="demo-stat__value">96%</b><span class="progress"><span style="width:96%"></span></span></div>
+              </div>
+              <div class="section-message section-message--warning" role="note"><svg class="i" aria-hidden="true"><use href="#i-warning"/></svg><div><p class="section-message__title">Estoque baixo em 3 itens</p><p>Reponha antes de sexta para não perder pedidos.</p><div class="section-message__actions"><button type="button">Ver os itens</button></div></div></div>
+              <div class="demo-team">
+                <div class="avatar-group"><span class="avatar avatar--sm avatar--purple">AL<img class="avatar__img" alt="" src="images/people/pessoa-2.webp" width="160" height="160"></span><span class="avatar avatar--sm avatar--teal">PH<img class="avatar__img" alt="" src="images/people/pessoa-6.webp" width="160" height="160"></span><span class="avatar avatar--sm avatar--orange">RD<img class="avatar__img" alt="" src="images/people/pessoa-3.webp" width="160" height="160"></span></div>
+                <span class="demo-team__text">3 pessoas na equipe</span>
+                <button class="btn btn--primary" type="button"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>Convidar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Telas possíveis, montadas só com peças do <code>components.css</code>. Troque o tema e veja elas mudarem.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="layers" aria-labelledby="layers-title">
+    <div class="container layers__grid">
+      <div class="layers__head">
+        <h2 id="layers-title">Cinco camadas, de baixo para cima</h2>
+        <p class="lead">Cada peça mora na camada mais baixa que serve, com a sua maturidade.</p>
+      </div>
+      <ol class="layers__rows">
+        <li><a href="principios.html"><h3>Fundamentos</h3><p>Tokens, temas, acessibilidade, tipografia, conteúdo e princípios de layout.</p><span class="layers__count num">11 páginas</span></a></li>
+        <li><a href="botoes.html"><h3>Core</h3><p>Componentes genéricos, com API e estados definidos.</p><span class="layers__count num">11 páginas</span></a></li>
+        <li><a href="padrao-validacao.html"><h3>Padrões</h3><p>Composições de dois ou mais componentes Core que resolvem uma tarefa que se repete.</p><span class="layers__count num">7 páginas</span></a></li>
+        <li><a href="contas.html"><h3>Produto</h3><p>Conceitos e fluxos de cada produto. O primeiro é um cliente de e-mail.</p><span class="layers__count num">13 páginas</span></a></li>
+        <li><a href="layouts.html"><h3>Layouts e páginas</h3><p>A estrutura das telas e a composição dos fluxos.</p><span class="layers__count num">2 páginas</span></a></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="showcase" aria-labelledby="showcase-title">
+    <div class="container">
+      <div class="showcase__head">
+        <h2 id="showcase-title">Peças combinadas em telas</h2>
+        <p class="lead">Quinze cards montados só com componentes do sistema. Mexa neles: são de verdade.</p>
+      </div>
+
+      <!-- 1 · Acesso e conta: texto à esquerda, cards à direita -->
+      <div class="showcase__row">
+        <div class="showcase__text">
+          <h3>Acesso e conta</h3>
+          <p>Entrar, escolher um plano de uso e mostrar quem é a pessoa. Campos, seleção e botões, com o erro dito em palavras.</p>
+          <ul class="showcase__links"><li><a href="campos.html">Campos de texto</a></li><li><a href="selecao.html">Seleção</a></li><li><a href="avatar.html">Avatar</a></li><li><a href="padrao-validacao.html">Validação</a></li></ul>
+        </div>
+        <div class="showcase__cards">
+          <article class="demo-card" aria-labelledby="c1">
+            <header class="demo-card__head"><h4 id="c1">Entrar</h4></header>
+            <div class="demo-card__body">
+              <div class="section-message section-message--error" role="note"><svg class="i" aria-hidden="true"><use href="#i-error"/></svg><div><p class="section-message__title">E-mail ou senha não conferem</p><p>Confira os dois e tente de novo.</p></div></div>
+              <div class="field"><label class="field__label" for="c1-mail">E-mail</label><div class="input"><input id="c1-mail" type="email" value="ana@exemplo.com.br" autocomplete="email"></div></div>
+              <div class="field"><label class="field__label" for="c1-pass">Senha</label><div class="input input--password"><input id="c1-pass" type="password" value="frase-secreta" autocomplete="current-password"><button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Mostrar a senha" data-show-pass="c1-pass"><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg></button></div></div>
+              <div class="demo-row"><label class="choice" for="c1-keep"><input type="checkbox" class="checkbox" id="c1-keep" checked>Lembrar de mim</label><button class="btn btn--link" type="button">Esqueci a senha</button></div>
+              <button class="btn btn--primary btn--block" type="button">Entrar</button>
+            </div>
+          </article>
+          <article class="demo-card" aria-labelledby="c15">
+            <header class="demo-card__head"><h4 id="c15">Para quem é a conta?</h4><span class="demo-muted">Passo 2 de 3</span></header>
+            <div class="demo-card__body">
+              <span class="progress" aria-label="Passo 2 de 3"><span style="width:66%"></span></span>
+              <div class="choice-list" role="radiogroup" aria-label="Tipo de conta">
+                <label class="choice-card"><input type="radio" name="c15-kind"><span class="choice-card__icon"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span><span><span class="choice-card__title">Pessoal</span><span class="choice-card__desc">Para você e a sua família.</span></span></label>
+                <label class="choice-card is-selected"><input type="radio" name="c15-kind" checked><span class="choice-card__icon"><svg class="i" aria-hidden="true"><use href="#i-grid"/></svg></span><span><span class="choice-card__title">Equipe</span><span class="choice-card__desc">Para até 20 pessoas.</span></span></label>
+              </div>
+            </div>
+            <footer class="demo-card__foot"><button class="btn btn--subtle" type="button">Voltar</button><button class="btn btn--primary" type="button">Continuar</button></footer>
+          </article>
+          <article class="demo-card" aria-labelledby="c11">
+            <div class="demo-card__body demo-profile">
+              <span class="avatar avatar--lg avatar--green">AL<img class="avatar__img" alt="" src="images/people/pessoa-5.webp" width="160" height="160"></span>
+              <div class="demo-profile__who"><h4 id="c11">Ana Lima</h4><span class="demo-muted">Designer de produto</span></div>
+              <div class="demo-tags"><span class="lozenge lozenge--bold">Admin</span><span class="lozenge lozenge--new">Nova na equipe</span></div>
+              <dl class="demo-facts"><div><dt>Projetos</dt><dd>12</dd></div><div><dt>Equipes</dt><dd>4</dd></div><div><dt>Revisões</dt><dd>38</dd></div></dl>
+              <div class="btn-split"><button class="btn btn--primary" type="button">Seguir</button><button class="btn btn--primary" type="button" aria-label="Mais opções"><svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></button></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 2 · Painéis e dados: cards à esquerda, texto à direita -->
+      <div class="showcase__row showcase__row--flip">
+        <div class="showcase__text">
+          <h3>Painéis e dados</h3>
+          <p>Números que se comparam, metas, o estado de cada serviço e o dia na agenda. Selos dizem a tendência com palavra, não só com cor.</p>
+          <ul class="showcase__links"><li><a href="lozenge.html">Lozenge</a></li><li><a href="carregamento.html">Carregamento</a></li><li><a href="mensagens.html">Banners e avisos</a></li><li><a href="botoes.html">Botões</a></li></ul>
+        </div>
+        <div class="showcase__cards">
+          <article class="demo-card" aria-labelledby="c3">
+            <header class="demo-card__head"><h4 id="c3">Vendas</h4><span class="select"><select aria-label="Período"><option>Últimos 7 dias</option><option>Últimos 30 dias</option></select><svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></span></header>
+            <div class="demo-card__body">
+              <div class="demo-stats demo-stats--3">
+                <div class="demo-stat"><span class="demo-stat__label">Receita (R$)</span><b class="demo-stat__value">48 mil</b><span class="lozenge lozenge--success">Subiu 8%</span></div>
+                <div class="demo-stat"><span class="demo-stat__label">Pedidos</span><b class="demo-stat__value">1.200</b><span class="lozenge lozenge--success">Subiu 5%</span></div>
+                <div class="demo-stat"><span class="demo-stat__label">Ticket (R$)</span><b class="demo-stat__value">40</b><span class="lozenge lozenge--overdue">Caiu 2%</span></div>
+              </div>
+              <div class="demo-chart" role="img" aria-label="Gráfico de pedidos por dia, de segunda a domingo: 140, 170, 150, 210, 190, 160, 180">
+                <span style="height:56%"></span><span style="height:68%"></span><span style="height:60%"></span><span style="height:84%"></span><span style="height:76%"></span><span style="height:64%"></span><span style="height:72%"></span>
+              </div>
+              <div class="demo-chart__days" aria-hidden="true"><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span><span>D</span></div>
+              <div class="meter"><div class="demo-row"><span>Meta do mês</span><b>72%</b></div><span class="progress"><span style="width:72%"></span></span></div>
+            </div>
+          </article>
+          <article class="demo-card" aria-labelledby="c12">
+            <header class="demo-card__head"><h4 id="c12">Status do sistema</h4></header>
+            <div class="banner banner--warning" role="status"><svg class="i" aria-hidden="true"><use href="#i-warning"/></svg>Fila de envios mais lenta desde 14h.</div>
+            <ul class="demo-lines">
+              <li><span>API</span><span class="lozenge lozenge--success">Operando</span></li>
+              <li><span>Pagamentos</span><span class="lozenge lozenge--success">Operando</span></li>
+              <li><span>Fila de envios</span><span class="lozenge lozenge--inprogress">Instável</span></li>
+              <li><span>Busca</span><span class="lozenge lozenge--overdue">Fora do ar</span></li>
+            </ul>
+          </article>
+          <article class="demo-card" aria-labelledby="c10">
+            <header class="demo-card__head"><h4 id="c10">Hoje</h4><div class="segmented" role="radiogroup" aria-label="Visão da agenda"><button class="btn btn--compact" type="button" role="radio" aria-checked="true">Dia</button><button class="btn btn--compact" type="button" role="radio" aria-checked="false">Semana</button><button class="btn btn--compact" type="button" role="radio" aria-checked="false">Mês</button></div></header>
+            <ul class="demo-lines demo-agenda">
+              <li><time>09:00</time><span class="demo-grow">Planejamento da semana</span><div class="avatar-group"><span class="avatar avatar--xs avatar--purple">AL<img class="avatar__img" alt="" src="images/people/pessoa-2.webp" width="160" height="160"></span><span class="avatar avatar--xs avatar--teal">PH<img class="avatar__img" alt="" src="images/people/pessoa-6.webp" width="160" height="160"></span></div></li>
+              <li><time>11:30</time><span class="demo-grow">Revisão de design</span><span class="lozenge lozenge--new">On-line</span></li>
+              <li><time>15:00</time><span class="demo-grow">Entrevista com cliente</span><span class="lozenge">Sala 2</span></li>
+            </ul>
+            <footer class="demo-card__foot"><div class="btn-split"><button class="btn btn--primary" type="button"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>Novo evento</button><button class="btn btn--primary" type="button" aria-label="Escolher o tipo de evento"><svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></button></div></footer>
+          </article>
+        </div>
+      </div>
+
+      <!-- 3 · Trabalho em equipe: texto à esquerda -->
+      <div class="showcase__row">
+        <div class="showcase__text">
+          <h3>Trabalho em equipe</h3>
+          <p>Tarefas com filtros, quem faz parte e o que cada um quer receber. Abas com contagem, papéis por pessoa e toggles que só pedem para salvar quando algo mudou.</p>
+          <ul class="showcase__links"><li><a href="threads.html">Listas</a></li><li><a href="menus.html">Menus</a></li><li><a href="selecao.html">Seleção</a></li><li><a href="badge.html">Badge</a></li></ul>
+        </div>
+        <div class="showcase__cards">
+          <article class="demo-card" aria-labelledby="c4">
+            <header class="demo-card__head"><h4 id="c4">Tarefas</h4><button class="btn btn--subtle btn--icon" type="button" aria-label="Nova tarefa"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button></header>
+            <div class="tabs demo-tabs" role="tablist" aria-label="Filtrar tarefas">
+              <button class="tab" role="tab" aria-selected="true" type="button">Todas <span class="badge">8</span></button>
+              <button class="tab" role="tab" aria-selected="false" type="button">Abertas <span class="badge badge--primary">5</span></button>
+              <button class="tab" role="tab" aria-selected="false" type="button">Feitas <span class="badge">3</span></button>
+            </div>
+            <ul class="demo-lines">
+              <li><label class="choice demo-grow"><input type="checkbox" class="checkbox" checked>Revisar a proposta</label><span class="avatar avatar--xs avatar--purple">AL<img class="avatar__img" alt="" src="images/people/pessoa-2.webp" width="160" height="160"></span><span class="lozenge lozenge--success">Feito</span></li>
+              <li><label class="choice demo-grow"><input type="checkbox" class="checkbox">Publicar a página nova</label><span class="avatar avatar--xs avatar--teal">PH<img class="avatar__img" alt="" src="images/people/pessoa-6.webp" width="160" height="160"></span><span class="lozenge lozenge--inprogress">Em andamento</span></li>
+              <li><label class="choice demo-grow"><input type="checkbox" class="checkbox">Testar no celular</label><span class="avatar avatar--xs avatar--orange">RD<img class="avatar__img" alt="" src="images/people/pessoa-3.webp" width="160" height="160"></span><span class="lozenge">A fazer</span></li>
+              <li><label class="choice demo-grow"><input type="checkbox" class="checkbox">Fechar o relatório</label><span class="avatar avatar--xs avatar--green">MS<img class="avatar__img" alt="" src="images/people/pessoa-4.webp" width="160" height="160"></span><span class="lozenge lozenge--overdue">Atrasada</span></li>
+            </ul>
+          </article>
+          <article class="demo-card" aria-labelledby="c5">
+            <header class="demo-card__head"><h4 id="c5">Equipe</h4><button class="btn btn--primary btn--compact" type="button">Convidar</button></header>
+            <ul class="demo-lines">
+              <li><span class="avatar avatar--sm avatar--purple">AL<img class="avatar__img" alt="" src="images/people/pessoa-2.webp" width="160" height="160"></span><span class="demo-grow demo-person"><b>Ana Lima</b><span>ana@exemplo.com.br</span></span><span class="select"><select aria-label="Papel de Ana Lima"><option selected>Admin</option><option>Editor</option><option>Leitor</option></select><svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></span></li>
+              <li><span class="avatar avatar--sm avatar--teal">PH<img class="avatar__img" alt="" src="images/people/pessoa-6.webp" width="160" height="160"></span><span class="demo-grow demo-person"><b>Paulo Henrique</b><span>paulo@exemplo.com.br</span></span><span class="select"><select aria-label="Papel de Paulo Henrique"><option>Admin</option><option selected>Editor</option><option>Leitor</option></select><svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></span></li>
+              <li><span class="avatar avatar--sm avatar--orange">RD<img class="avatar__img" alt="" src="images/people/pessoa-3.webp" width="160" height="160"></span><span class="demo-grow demo-person"><b>Rafael Dias</b><span>rafael@exemplo.com.br</span></span><span class="select"><select aria-label="Papel de Rafael Dias"><option>Admin</option><option>Editor</option><option selected>Leitor</option></select><svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></span></li>
+            </ul>
+          </article>
+          <article class="demo-card" aria-labelledby="c6">
+            <header class="demo-card__head"><h4 id="c6">Notificações</h4></header>
+            <div class="demo-card__body demo-settings" data-dirty-form>
+              <label class="demo-setting" for="c6-mail"><span><b>Por e-mail</b><span>Quando alguém citar você.</span></span><input type="checkbox" class="toggle" id="c6-mail" checked></label>
+              <label class="demo-setting" for="c6-push"><span><b>No celular</b><span>Tarefas que vencem hoje.</span></span><input type="checkbox" class="toggle" id="c6-push"></label>
+              <label class="demo-setting" for="c6-week"><span><b>Resumo semanal</b><span>Toda segunda, às 8h.</span></span><input type="checkbox" class="toggle" id="c6-week" checked></label>
+            </div>
+            <footer class="demo-card__foot"><span class="demo-muted demo-grow" data-dirty-help aria-live="polite">Nada mudou ainda.</span><button class="btn btn--primary" type="button" data-dirty-save disabled>Salvar</button></footer>
+          </article>
+        </div>
+      </div>
+
+      <!-- 4 · Compra e decisões: cards à esquerda -->
+      <div class="showcase__row showcase__row--flip">
+        <div class="showcase__text">
+          <h3>Compra e decisões</h3>
+          <p>Escolher um plano, ajustar o carrinho e confirmar o que não tem volta. A ação perigosa só acende depois de a pessoa dizer que entendeu.</p>
+          <ul class="showcase__links"><li><a href="modais.html">Modais</a></li><li><a href="padrao-confirmacao.html">Confirmação</a></li><li><a href="campos.html">Campos de texto</a></li><li><a href="botoes.html">Botões</a></li></ul>
+        </div>
+        <div class="showcase__cards">
+          <article class="demo-card" aria-labelledby="c2">
+            <header class="demo-card__head"><h4 id="c2">Plano Equipe</h4><span class="lozenge lozenge--new">Mais escolhido</span></header>
+            <div class="demo-card__body">
+              <div class="segmented segmented--fill" role="radiogroup" aria-label="Cobrança" data-price-toggle><button class="btn btn--compact" type="button" role="radio" aria-checked="false" data-price="59">Mensal</button><button class="btn btn--compact" type="button" role="radio" aria-checked="true" data-price="49">Anual</button></div>
+              <p class="demo-price"><b data-price-value>R$ 49</b><span>por pessoa, por mês</span></p>
+              <ul class="demo-features">
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Projetos sem limite</li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Até 20 pessoas</li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Histórico de 1 ano</li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Suporte em até um dia útil</li>
+              </ul>
+              <button class="btn btn--primary btn--block" type="button">Assinar o plano Equipe</button>
+              <p class="demo-muted demo-center">Cancele quando quiser.</p>
+            </div>
+          </article>
+          <article class="demo-card" aria-labelledby="c14">
+            <header class="demo-card__head"><h4 id="c14">Carrinho</h4><span class="badge badge--primary" data-cart-count>3</span></header>
+            <ul class="demo-lines" data-cart>
+              <li data-unit="32"><span class="demo-grow">Caderno pontilhado</span><span class="demo-qty"><button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Tirar um caderno" data-qty="-1"><svg class="i" aria-hidden="true"><use href="#i-minus"/></svg></button><output>2</output><button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Pôr mais um caderno" data-qty="1"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button></span></li>
+              <li data-unit="12"><span class="demo-grow">Caneta gel 0,5</span><span class="demo-qty"><button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Tirar uma caneta" data-qty="-1"><svg class="i" aria-hidden="true"><use href="#i-minus"/></svg></button><output>1</output><button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Pôr mais uma caneta" data-qty="1"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button></span></li>
+            </ul>
+            <div class="demo-card__body">
+              <div class="field"><label class="field__label" for="c14-coupon">Cupom</label><div class="input is-invalid"><input id="c14-coupon" value="PRIMAVERA" aria-invalid="true" aria-describedby="c14-coupon-err"></div><span class="field__help field__help--error" id="c14-coupon-err"><svg class="i i--sm" aria-hidden="true"><use href="#i-error"/></svg>Este cupom venceu em 30 de setembro.</span></div>
+              <div class="demo-row demo-total"><span>Total</span><b data-cart-total>R$ 76</b></div>
+              <button class="btn btn--primary btn--block" type="button">Finalizar compra</button>
+            </div>
+          </article>
+          <div class="modal modal--warning demo-modal" role="dialog" aria-labelledby="c8">
+            <div class="modal__head"><svg class="i" aria-hidden="true"><use href="#i-warning"/></svg><h4 class="modal__title" id="c8">Excluir o projeto?</h4></div>
+            <div class="modal__body">
+              <p>O projeto “Site novo”, as 24 tarefas e os arquivos somem para todas as pessoas da equipe.</p>
+              <label class="choice" for="c8-ok"><input type="checkbox" class="checkbox" id="c8-ok" data-confirm-check>Entendo que não dá para desfazer</label>
+            </div>
+            <div class="modal__foot"><button class="btn btn--subtle" type="button">Cancelar</button><button class="btn btn--danger" type="button" data-confirm-action disabled>Excluir projeto</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 · Conteúdo e arquivos: texto à esquerda -->
+      <div class="showcase__row">
+        <div class="showcase__text">
+          <h3>Conteúdo e arquivos</h3>
+          <p>Escrever, mandar arquivos e procurar. A barra de formatação, o progresso de cada envio e o esqueleto enquanto os resultados chegam.</p>
+          <ul class="showcase__links"><li><a href="composicao.html">Composição</a></li><li><a href="vazios.html">Estados vazios</a></li><li><a href="busca.html">Busca</a></li><li><a href="toasts.html">Toasts</a></li></ul>
+        </div>
+        <div class="showcase__cards">
+          <article class="demo-card" aria-labelledby="c13">
+            <header class="demo-card__head"><h4 id="c13">Novo artigo</h4><span class="lozenge">Rascunho</span></header>
+            <div class="demo-toolbar" role="toolbar" aria-label="Formatação">
+              <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Negrito" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-bold"/></svg></button>
+              <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Itálico" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-italic"/></svg></button>
+              <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Lista" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg></button>
+              <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Inserir link"><svg class="i" aria-hidden="true"><use href="#i-link"/></svg></button>
+              <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Inserir imagem"><svg class="i" aria-hidden="true"><use href="#i-image"/></svg></button>
+            </div>
+            <div class="demo-card__body">
+              <div class="field"><label class="field__label" for="c13-title">Título</label><div class="input"><input id="c13-title" value="Como organizamos a semana"></div></div>
+              <div class="field"><label class="field__label" for="c13-text">Texto</label><div class="input input--textarea"><textarea id="c13-text" rows="5" maxlength="500" data-count="c13-count">Toda segunda a equipe abre o quadro, escolhe três prioridades e deixa o resto para depois. Funciona porque cabe numa tela.</textarea></div><span class="field__help" id="c13-count">121 de 500 caracteres</span></div>
+            </div>
+            <footer class="demo-card__foot"><button class="btn btn--subtle" type="button">Salvar rascunho</button><button class="btn btn--primary" type="button">Publicar</button></footer>
+          </article>
+          <article class="demo-card" aria-labelledby="c7">
+            <header class="demo-card__head"><h4 id="c7">Enviar arquivos</h4></header>
+            <div class="demo-drop"><svg class="i i--xl" aria-hidden="true"><use href="#i-upload"/></svg><p><b>Solte os arquivos aqui</b> ou <button class="btn btn--link" type="button">escolha no computador</button></p></div>
+            <ul class="demo-lines">
+              <li><svg class="i" aria-hidden="true"><use href="#i-file"/></svg><span class="demo-grow">briefing.pdf</span><span class="lozenge lozenge--success">Enviado</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-image"/></svg><span class="demo-grow demo-file">capa.png<span class="progress"><span style="width:45%"></span></span></span><span class="demo-muted">45%</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-file"/></svg><span class="demo-grow">planilha.xlsx</span><span class="spinner spinner--sm" role="status" aria-label="Preparando"></span></li>
+            </ul>
+            <div class="demo-card__body"><div class="toast" role="status"><svg class="i" aria-hidden="true"><use href="#i-success"/></svg><div><p class="toast__title">1 arquivo enviado</p></div></div></div>
+          </article>
+          <article class="demo-card" aria-labelledby="c9">
+            <header class="demo-card__head"><h4 id="c9">Buscar</h4></header>
+            <div class="demo-card__body">
+              <div class="input input--search"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><input aria-label="Buscar" value="relatório"></div>
+              <div class="chip-group">
+                <span class="chip chip--filter"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><span class="chip__name">Últimos 30 dias</span><button class="chip__remove" type="button" aria-label="Tirar o período"><svg class="i i--sm" aria-hidden="true"><use href="#i-x"/></svg></button></span>
+                <span class="chip chip--filter"><svg class="i" aria-hidden="true"><use href="#i-clip"/></svg><span class="chip__name">Com anexo</span><button class="chip__remove" type="button" aria-label="Tirar o filtro de anexo"><svg class="i i--sm" aria-hidden="true"><use href="#i-x"/></svg></button></span>
+              </div>
+              <p class="demo-muted" role="status">Procurando em 24 resultados…</p>
+              <div class="demo-skeleton" aria-hidden="true">
+                <span class="skeleton skeleton--title" style="width:70%"></span><span class="skeleton skeleton--line"></span><span class="skeleton skeleton--line" style="width:85%"></span>
+                <span class="skeleton skeleton--title" style="width:55%"></span><span class="skeleton skeleton--line"></span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="index" id="paginas" aria-labelledby="index-title">
+    <div class="container">
+      <div class="index__head">
+        <h2 id="index-title">Cada página, com o seu estado</h2>
+        <p class="lead">Estável já está em produção. Beta ainda pode mudar.</p>
+      </div>
+      <div id="overview-grid" class="index__body"></div>
+    </div>
+  </section>
+
+  <section class="themes" aria-labelledby="themes-title">
+    <div class="container themes__grid">
+      <div class="themes__head">
+        <h2 id="themes-title">Claro, escuro e alto contraste</h2>
+        <p class="lead">Os três temas seguem a WCAG 2.2 AA. Escolha um e a página inteira troca.</p>
+        <div class="seg" role="group" aria-label="Tema">
+          <button type="button" data-set-theme="light" aria-pressed="false">Claro</button>
+          <button type="button" data-set-theme="dark" aria-pressed="false">Escuro</button>
+          <button type="button" data-set-theme="contrast" aria-pressed="false">Alto contraste</button>
+        </div>
+      </div>
+      <ul class="swatches" aria-label="Tokens semânticos no tema atual">
+        <li><span class="swatch" style="--sw: var(--color-surface)"></span><code>--color-surface</code><span class="swatch__val" data-token="--color-surface"></span></li>
+        <li><span class="swatch" style="--sw: var(--color-text)"></span><code>--color-text</code><span class="swatch__val" data-token="--color-text"></span></li>
+        <li><span class="swatch" style="--sw: var(--color-text-subtle)"></span><code>--color-text-subtle</code><span class="swatch__val" data-token="--color-text-subtle"></span></li>
+        <li><span class="swatch" style="--sw: var(--color-bg-brand-bold)"></span><code>--color-bg-brand-bold</code><span class="swatch__val" data-token="--color-bg-brand-bold"></span></li>
+        <li><span class="swatch" style="--sw: var(--color-border)"></span><code>--color-border</code><span class="swatch__val" data-token="--color-border"></span></li>
+        <li><span class="swatch" style="--sw: var(--color-icon-danger)"></span><code>--color-icon-danger</code><span class="swatch__val" data-token="--color-icon-danger"></span></li>
       </ul>
-    </header>
-    <div id="overview-grid"></div>
-  </main>
-</div>
+    </div>
+  </section>
+
+  <section class="use" id="usar" aria-labelledby="use-title">
+    <div class="container use__grid">
+      <div class="use__head">
+        <h2 id="use-title">Dois arquivos e um token</h2>
+        <p class="lead">Importe os tokens antes dos componentes. Depois, só o token semântico.</p>
+      </div>
+      <figure class="code">
+        <figcaption class="code__bar"><span>index.html</span><button class="code__copy" type="button" data-copy="#use-code">Copiar</button></figcaption>
+<pre id="use-code"><code>&lt;link rel="stylesheet" href="dist/tokens.css"&gt;
+&lt;link rel="stylesheet" href="dist/components.css"&gt;
+
+&lt;style&gt;
+  .minha-linha {
+    color: var(--color-text-subtlest);
+    font: var(--font-body);
+    padding: var(--space-150) var(--space-200);
+  }
+&lt;/style&gt;</code></pre>
+      </figure>
+    </div>
+  </section>
+</main>
+
+<footer class="close">
+  <div class="container close__grid">
+    <p class="close__line">Feito para telas densas, que se leem rápido e se usam com um gesto.</p>
+    <p class="close__sign">Versão 3.0, atualizada em <time datetime="2026-10-28">28 out 2026</time>. Conformidade WCAG 2.2 AA.</p>
+    <ul class="close__links">
+      <li><a href="principios.html">Princípios</a></li>
+      <li><a href="variaveis.html">Variáveis CSS</a></li>
+      <li><a href="governanca.html">Governança</a></li>
+      <li><a href="acessibilidade.html">Acessibilidade</a></li>
+    </ul>
+  </div>
+</footer>
 
 <script src="../dist/sprite.js"></script>
 <script src="docs.js"></script>
+<script src="home/home.js"></script>
+</body>
+</html>

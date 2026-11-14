@@ -1,8 +1,8 @@
 // Produto · Marca (wordmark) e logo (L76)
-// Veio de components.css (linhas 982–1005) na migração para o EpistulaDesignSystem.
+// Veio de components.css (linhas 982–1005) na migração para o OCamlDesignSystem.
 
 /* ==========================================================================
-   Marca (wordmark): a logo do EpistulaMail + nome do produto
+   Marca (wordmark): a logo do produto + o nome
    Padrão 32px para capas e telas de boas-vindas; --sm 24px para o header. O glyph azul com o envelope
    (.wordmark__glyph) fica para ícones de "e-mail"; a marca é a logo (L76).
    ========================================================================== */
@@ -18,7 +18,7 @@
 }
 .wordmark--sm { font: var(--font-card); letter-spacing: var(--letter-spacing-card); }
 .wordmark--sm .wordmark__glyph { width: 1.5rem; height: 1.5rem; border-radius: var(--radius-small); }
-/* L76 · Logo do EpistulaMail no wordmark: a imagem sem fundo no lugar do glyph, do mesmo tamanho (32px; 24px no
+/* L76 · Logo do produto no wordmark: a imagem sem fundo no lugar do glyph, do mesmo tamanho (32px; 24px no
    --sm), igual nos temas claro e escuro. Decorativa (alt=""): o nome fica como texto ao lado. */
 .wordmark__logo { display: block; flex: none; width: 2rem; height: 2rem; object-fit: contain; }
 .wordmark--sm .wordmark__logo { width: 1.5rem; height: 1.5rem; }

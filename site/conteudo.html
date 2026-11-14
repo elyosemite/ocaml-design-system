@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="Tom de voz, microtexto, tradução e leitura da direita para a esquerda.">
-<title>Conteúdo e tradução · Epistula Design System</title>
+<title>Conteúdo e tradução · OCaml Design System</title>
 <meta name="description" content="Pessoas e contas, com inicial, cor e foto.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="conteudo">
 <div class="doc">
@@ -19,7 +21,7 @@
       <div class="ds-head">
         <p class="eyebrow">v3 · §6.2 e §6.3</p>
         <h1>Conteúdo e tradução</h1>
-        <p class="lede">Como o EpistulaMail fala, como o texto fica pronto para ser traduzido e como a interface se comporta quando a leitura vai da direita para a esquerda.</p>
+        <p class="lede">Como o produto fala, como o texto fica pronto para ser traduzido e como a interface se comporta quando a leitura vai da direita para a esquerda.</p>
       </div>
       <h2 id="tom">Tom de voz</h2>
       <dl class="guidance">
@@ -27,12 +29,12 @@
         <div><dt>Em erros</dt><dd>O que houve, o que isso muda e a ação disponível. Não culpe a pessoa e não mostre código de erro.</dd></div>
         <div><dt>Em operações sensíveis</dt><dd>Diga a consequência antes da confirmação, e dê ao botão o mesmo verbo do título.</dd></div>
       </dl>
-      <table class="tier-table"><thead><tr><th scope="col">Em vez de…</th><th scope="col">Escreva…</th><th scope="col">Por quê</th></tr></thead><tbody><tr><th scope="row">"Erro 550 5.1.1"</th><td>"O endereço ana.lima@lumen.com não existe. A mensagem não foi entregue."</td><td>Diz o que houve, não o código.</td></tr><tr><th scope="row">"E-mail inválido"</th><td>"Inclua o domínio completo, por exemplo yuri@epistula.com.br."</td><td>Diz o que corrigir.</td></tr><tr><th scope="row">"Tem certeza?" / "OK"</th><td>"Esvaziar a lixeira?" / "Esvaziar lixeira"</td><td>Pergunta e botão dizem a ação.</td></tr><tr><th scope="row">"Seguro"</th><td>"Assinatura válida" ou "Protegida em trânsito"</td><td>Só afirma o que o app consegue comprovar.</td></tr><tr><th scope="row">"Sua conta foi desconectada"</th><td>"Você saiu desta conta. Estas são as mensagens salvas neste computador."</td><td>Diz o que continua valendo.</td></tr></tbody></table>
+      <table class="tier-table"><thead><tr><th scope="col">Em vez de…</th><th scope="col">Escreva…</th><th scope="col">Por quê</th></tr></thead><tbody><tr><th scope="row">"Erro 550 5.1.1"</th><td>"O endereço ana.lima@lumen.com não existe. A mensagem não foi entregue."</td><td>Diz o que houve, não o código.</td></tr><tr><th scope="row">"E-mail inválido"</th><td>"Inclua o domínio completo, por exemplo ana@exemplo.com.br."</td><td>Diz o que corrigir.</td></tr><tr><th scope="row">"Tem certeza?" / "OK"</th><td>"Esvaziar a lixeira?" / "Esvaziar lixeira"</td><td>Pergunta e botão dizem a ação.</td></tr><tr><th scope="row">"Seguro"</th><td>"Assinatura válida" ou "Protegida em trânsito"</td><td>Só afirma o que o app consegue comprovar.</td></tr><tr><th scope="row">"Sua conta foi desconectada"</th><td>"Você saiu desta conta. Estas são as mensagens salvas neste computador."</td><td>Diz o que continua valendo.</td></tr></tbody></table>
       <h2 id="microtexto">Microtexto</h2>
       <dl class="guidance">
         <div><dt>Botões</dt><dd>Verbo no infinitivo que diz o resultado ("Arquivar", "Enviar", "Excluir permanentemente"). Nunca "OK" ou "Confirmar".</dd></div>
         <div><dt>Vazios</dt><dd>Dizem por que está vazio e o que fazer a seguir. A caixa de entrada zerada é uma conquista.</dd></div>
-        <div><dt>Palavras do produto</dt><dd>Fale "arquivos anexados", não "payload de anexos"; "criptografar", "assinar", "chave" e "certificado", sem sigla onde a pessoa não precisa dela. O produto se chama EpistulaMail.</dd></div>
+        <div><dt>Palavras do produto</dt><dd>Fale "arquivos anexados", não "payload de anexos"; "criptografar", "assinar", "chave" e "certificado", sem sigla onde a pessoa não precisa dela. O produto tem um nome só, sempre escrito igual.</dd></div>
         <div><dt>Provedor</dt><dd>Nenhum texto cita o provedor da conta (Google, Microsoft). Fala-se do nome que a pessoa deu à conta.</dd></div>
       </dl>
       <h2 id="traducao">Tradução</h2>

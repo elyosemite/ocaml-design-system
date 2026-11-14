@@ -1,0 +1,115 @@
+/* Visual das páginas de cada peça (site/*.html, menos a principal), no mesmo idioma da página principal:
+   papel creme, tinta preta e o azul do DS como sinal. Carregado depois de docs.css e de home/tokens.css.
+   Só a moldura muda: os exemplos ficam sobre a superfície do design system (o "palco"), com os tokens dele,
+   então cada componente aparece exatamente como no app, no tema escolhido. */
+
+/* ---------- Página ---------- */
+body { background: var(--color-paper); color: var(--color-ink); font: 400 var(--text-md)/1.6 var(--font-text); }
+body::before { background: var(--color-paper); }
+a { color: var(--color-accent-text); text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+::selection { background: color-mix(in oklab, var(--color-accent) 24%, transparent); color: var(--color-ink); }
+.doc { max-width: 88rem; gap: var(--space-2xl); }
+main { padding-bottom: var(--space-3xl); }
+
+/* ---------- Índice lateral ---------- */
+.doc-nav { padding-block: var(--space-lg) var(--space-xl); scrollbar-width: thin; }
+.doc-nav .nav-heading { margin: var(--space-md) 0 var(--space-2xs); padding: 0 var(--space-xs); font: 600 var(--text-sm)/1.4 var(--font-text); color: var(--color-muted); text-transform: none; letter-spacing: 0; }
+.doc-nav a { padding: var(--space-2xs) var(--space-xs); border-radius: var(--radius-input); color: var(--color-ink-2); font: 400 var(--text-sm)/1.45 var(--font-text); transition: background-color var(--dur-short) var(--ease-out); }
+.doc-nav a:hover { background: var(--color-paper-2); color: var(--color-ink); }
+.doc-nav a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.doc-nav a.is-current { background: var(--color-ink); color: var(--color-paper); font-weight: 600; }
+.doc-nav__home { font-weight: 600 !important; color: var(--color-ink) !important; }
+.doc-nav__home.is-current { color: var(--color-paper) !important; }
+
+/* ---------- Topo de cada página ---------- */
+.page-top { padding-block: var(--space-lg) 0; gap: var(--space-sm); }
+.page-top .wordmark { color: var(--color-ink); font: 700 var(--text-lg)/1 var(--font-display); letter-spacing: -0.02em; }
+.page-top .wordmark__logo { width: 2rem; height: 2rem; }
+.crumb { color: var(--color-muted); font: 400 var(--text-sm)/1.4 var(--font-text); }
+.crumb::before { color: var(--color-rule); }
+.theme-toggle.btn { min-height: 44px; width: 44px; justify-content: center; padding: 0; border-radius: var(--radius-input); background: transparent; color: var(--color-ink); font: 600 var(--text-sm)/1 var(--font-text); }
+.theme-toggle.btn:hover { background: var(--color-paper-2); }
+.theme-toggle.btn:active { background: var(--color-paper-3); }
+
+/* ---------- Títulos e texto ---------- */
+.ds-section { gap: var(--space-xl); padding-block: var(--space-xl) var(--space-2xl); }
+.ds-section + .ds-section { border-top: var(--rule-hair) solid var(--color-rule); }
+.ds-head { gap: var(--space-sm); }
+.ds-head h1 { margin: var(--space-xs) 0 0; color: var(--color-ink); font: var(--display-weight) clamp(2.5rem, 2.6vw + 1.25rem, 3.75rem)/1.02 var(--font-display); letter-spacing: var(--tracking-display); }
+.ds-head h2 { color: var(--color-ink); font: var(--display-weight) clamp(1.75rem, 1.4vw + 1rem, 2.5rem)/1.1 var(--font-display); letter-spacing: -0.025em; }
+.ds-head .lede { max-width: 62ch; color: var(--color-ink-2); font: 400 var(--text-lead)/1.5 var(--font-text); }
+.eyebrow { color: var(--color-muted); font: 400 var(--text-sm)/1.4 var(--font-text); }
+.eyebrow code { background: var(--color-paper-2); color: var(--color-ink-2); }
+h3.sub { margin-top: var(--space-lg); color: var(--color-ink); font: 700 var(--text-title)/1.2 var(--font-display); letter-spacing: -0.02em; }
+.part__title { color: var(--color-ink); font: 600 var(--text-sm)/1.4 var(--font-text); text-transform: none; letter-spacing: 0; }
+.layer-note, .demo-hint, .token-count, .token-loading { color: var(--color-ink-2); }
+
+/* ---------- O palco: onde o DS aparece como no app ---------- */
+.stage { padding: var(--space-xl); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-screen); background: var(--color-surface); color: var(--color-text); box-shadow: 0 1px 2px oklch(20% 0.02 80 / 0.05); }
+.stage--flush { padding: 0; }
+.stage--sunken { background: var(--color-surface-sunken); }
+.state figcaption { color: var(--color-text-subtlest); }
+.state figcaption b { color: var(--color-text); }
+.matrix__h { color: var(--color-text-subtle); font: 600 var(--text-xs)/1.4 var(--font-text); text-transform: none; letter-spacing: 0; }
+
+/* ---------- Orientações ---------- */
+.guidance { gap: var(--space-lg) var(--space-xl); padding-top: var(--space-lg); border-top: var(--rule-hair) solid var(--color-rule); }
+.guidance dt { color: var(--color-ink); font: 700 var(--text-md)/1.4 var(--font-text); text-transform: none; letter-spacing: 0; }
+.guidance dd { color: var(--color-ink-2); font: 400 var(--text-md)/1.6 var(--font-text); }
+.guidance dd code, .classes code, .ficha code, .tk-desc code { padding: 0 var(--space-2xs); border-radius: 4px; background: var(--color-paper-2); color: var(--color-ink); font: 400 0.9em/1.4 var(--font-outlier); }
+.classes { color: var(--color-muted); border-top-color: var(--color-rule); font: 400 var(--text-sm)/1.5 var(--font-text); }
+.classes > span { color: var(--color-ink-2); }
+
+/* ---------- Princípios ---------- */
+.principles { gap: var(--space-lg); }
+.principles li { padding: var(--space-lg); border: 0; border-radius: var(--radius-screen); background: var(--color-paper-2); }
+.principles h3 { color: var(--color-ink); font: 700 var(--text-title)/1.2 var(--font-display); letter-spacing: -0.02em; }
+.principles p { color: var(--color-ink-2); }
+.principles .i { color: var(--color-accent); }
+
+/* ---------- Tabelas da documentação ---------- */
+.space-table th, .contrast-table th, .tk-table thead th, .tier-table thead th { color: var(--color-muted); font: 600 var(--text-sm)/1.4 var(--font-text); text-transform: none; letter-spacing: 0; }
+.space-table th, .space-table td, .contrast-table th, .contrast-table td, .tier-table th, .tier-table td, .tk-table th, .tk-table td, .shortcut-grid > div, .type-row, .ficha__tk-group { border-color: var(--color-rule); }
+.space-table td, .contrast-table td, .tier-table td, .tk-table td { color: var(--color-ink); }
+.space-bar, .tk-space { background: var(--color-accent); }
+
+/* ---------- Tokens (variaveis.html) ---------- */
+.tk-group__title { color: var(--color-ink); font: 700 var(--text-2xl)/1.15 var(--font-display); letter-spacing: -0.025em; }
+.tk-group__n { background: var(--color-paper-2); color: var(--color-ink-2); font: 600 var(--text-xs)/1.6 var(--font-text); }
+.tk-group__blurb, .tk-desc, .tk-val { color: var(--color-ink-2); }
+.tk-name { color: var(--color-accent-text); }
+.tk-name:focus-visible { outline-color: var(--color-focus); }
+.tk-table tr:target { background: var(--color-paper-2); }
+.token-source > summary { color: var(--color-accent-text); }
+
+/* ---------- Código: a faixa preta da página principal ---------- */
+.code-block pre { border: 0; border-radius: var(--radius-screen); background: var(--color-band); color: var(--color-band-ink); font: 400 var(--text-sm)/1.7 var(--font-outlier); }
+.code-block .btn { border: var(--rule-hair) solid var(--color-band-rule); background: transparent; color: var(--color-band-ink); }
+.code-block .btn:hover { background: var(--color-band-rule); }
+
+/* ---------- Ficha do componente ---------- */
+.ficha__do, .ficha__dont { padding: var(--space-lg); border: 0; border-radius: var(--radius-screen); background: var(--color-paper-2); }
+.ficha__do h3, .ficha__dont h3, .ficha__tokens h3 { color: var(--color-ink); font: 700 var(--text-lg)/1.25 var(--font-display); letter-spacing: -0.015em; }
+.ficha__do ul, .ficha__dont ul, .ficha__hist, .ficha__tk-n, .ficha__tk-group > b { color: var(--color-ink-2); }
+.ficha__used summary { color: var(--color-accent-text); }
+
+/* ---------- Anterior e próxima ---------- */
+.pager { margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top-color: var(--color-rule); gap: var(--space-lg); }
+.pager__link { padding: var(--space-md) var(--space-lg); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-screen); background: transparent; color: var(--color-ink); transition: background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out); }
+.pager__link span { color: var(--color-muted); font: 400 var(--text-sm)/1.4 var(--font-text); }
+.pager__link b { color: var(--color-ink); font: 700 var(--text-title)/1.2 var(--font-display); letter-spacing: -0.02em; }
+.pager__link:hover { box-shadow: none; border-color: var(--color-ink); background: var(--color-paper-2); }
+.pager__link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+@media (max-width: 960px) {
+  .doc { gap: 0; }
+  .doc-nav { padding-block: var(--space-md) var(--space-xs); border-bottom: var(--rule-hair) solid var(--color-rule); }
+  .doc-nav .nav-heading { margin: 0; }
+}
+@media (max-width: 640px) {
+  .stage { padding: var(--space-md); }
+  .stage--flush { padding: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .doc-nav a, .pager__link { transition: none; }
+}

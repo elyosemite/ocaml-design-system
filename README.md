@@ -1,6 +1,6 @@
-# EpistulaDesignSystem
+# OCaml Design System
 
-O design system do [EpistulaMail](https://epistulamail.com): tokens, componentes CSS, ícones e a documentação de cada peça. A base é o **Atlassian Design System (ADS)**, adaptado a uma caixa de entrada densa. Meta de **WCAG 2.2 AA**, com temas claro, escuro e alto contraste.
+Um design system para qualquer produto: tokens, componentes CSS, ícones e a documentação de cada peça. Feito para telas densas, que se leem rápido e se usam com um gesto. Meta de **WCAG 2.2 AA**, com temas claro, escuro e alto contraste.
 
 CSS puro no resultado: quem consome não precisa de Sass nem de framework. Nenhuma página carrega nada de terceiros (fontes, ícones e scripts são locais).
 

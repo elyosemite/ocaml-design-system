@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Criptografia · Epistula Design System</title>
+<title>Criptografia · OCaml Design System</title>
 <meta name="description" content="Chaves, certificados e mensagens criptografadas.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="criptografia">
 <div class="doc">
@@ -57,7 +59,7 @@
                 <h3 class="settings__title">Criptografia</h3>
                 <div class="row" style="gap:var(--space-100)">
                   <span id="c-acc" style="font:var(--font-body);color:var(--color-text-subtle)">Conta</span>
-                  <span class="select"><select aria-labelledby="c-acc"><option selected>Pessoal · yuri@exemplo.com</option><option>Trabalho</option></select><svg class="i"><use href="#i-chevron-down"/></svg></span>
+                  <span class="select"><select aria-labelledby="c-acc"><option selected>Pessoal · ana@exemplo.com</option><option>Trabalho</option></select><svg class="i"><use href="#i-chevron-down"/></svg></span>
                 </div>
 
                 <div class="settings__group">
@@ -65,8 +67,8 @@
                   <p class="setting__desc" style="margin:0">A chave que esta conta usa para assinar e para quem quiser escrever para você com criptografia.</p>
                   <div class="choice-list" role="radiogroup" aria-label="Chave OpenPGP desta conta">
                     <label class="choice-card"><input type="radio" name="pgp-key"><span class="choice-card__icon"><svg class="i"><use href="#i-x"/></svg></span><span><span class="choice-card__title">Nenhuma</span><span class="choice-card__desc">Sem OpenPGP nesta conta.</span></span></label>
-                    <label class="choice-card"><input type="radio" name="pgp-key" checked><span class="choice-card__icon"><svg class="i"><use href="#i-key"/></svg></span><span><span class="choice-card__title">Yuri Melo · Curve25519 <span class="lozenge lozenge--success">Minha</span></span><span class="choice-card__desc"><span class="fingerprint fingerprint--compact"><span>7A3F</span><span>91C2</span><span>0BD4</span><span>55E8</span><span>A1C0</span><span>…</span><span>3D9E</span><span>2F17</span></span>Vale até 26 out 2029</span></span></label>
-                    <label class="choice-card"><input type="radio" name="pgp-key"><span class="choice-card__icon"><svg class="i"><use href="#i-key"/></svg></span><span><span class="choice-card__title">Yuri Melo · pós-quântica <span class="lozenge lozenge--new">Experimental</span></span><span class="choice-card__desc">ML-KEM-768 + X25519. Só quem também tem uma chave assim consegue ler.</span></span></label>
+                    <label class="choice-card"><input type="radio" name="pgp-key" checked><span class="choice-card__icon"><svg class="i"><use href="#i-key"/></svg></span><span><span class="choice-card__title">Ana Lima · Curve25519 <span class="lozenge lozenge--success">Minha</span></span><span class="choice-card__desc"><span class="fingerprint fingerprint--compact"><span>7A3F</span><span>91C2</span><span>0BD4</span><span>55E8</span><span>A1C0</span><span>…</span><span>3D9E</span><span>2F17</span></span>Vale até 26 out 2029</span></span></label>
+                    <label class="choice-card"><input type="radio" name="pgp-key"><span class="choice-card__icon"><svg class="i"><use href="#i-key"/></svg></span><span><span class="choice-card__title">Ana Lima · pós-quântica <span class="lozenge lozenge--new">Experimental</span></span><span class="choice-card__desc">ML-KEM-768 + X25519. Só quem também tem uma chave assim consegue ler.</span></span></label>
                   </div>
                   <div class="row" style="gap:var(--space-100)">
                     <button class="btn btn--subtle" type="button"><svg class="i"><use href="#i-plus"/></svg>Adicionar chave…</button>
@@ -78,7 +80,7 @@
                   <h4 class="settings__group-title">S/MIME</h4>
                   <div class="setting">
                     <div><div class="setting__label" id="sm-cert">Certificado pessoal</div><p class="setting__desc">Emitido por uma autoridade certificadora. Assina e permite receber mensagens criptografadas.</p></div>
-                    <span class="select"><select aria-labelledby="sm-cert"><option>Nenhum</option><option selected>Yuri Melo · Actalis · até 10 out 2027</option></select><svg class="i"><use href="#i-chevron-down"/></svg></span>
+                    <span class="select"><select aria-labelledby="sm-cert"><option>Nenhum</option><option selected>Ana Lima · Actalis · até 10 out 2027</option></select><svg class="i"><use href="#i-chevron-down"/></svg></span>
                   </div>
                   <div class="row" style="gap:var(--space-100);flex-wrap:wrap">
                     <button class="btn btn--subtle" type="button"><svg class="i"><use href="#i-certificate"/></svg>Pedir um certificado (CSR)…</button>
@@ -101,7 +103,7 @@
                     <div><div class="setting__label">Assinar mensagens sem criptografia</div><p class="setting__desc">A assinatura mostra que foi você e que nada mudou. Quem não usa criptografia vê um anexo a mais. Mensagens criptografadas são sempre assinadas.</p></div>
                     <input type="checkbox" class="toggle" aria-label="Assinar mensagens sem criptografia">
                   </div>
-                  <div class="section-message"><svg class="i"><use href="#i-info"/></svg><div><p class="section-message__title">Respostas a mensagens criptografadas são criptografadas</p><p>Responder sem criptografia mostraria o texto citado. Se algum destinatário não tiver chave, o Epistula pergunta antes de enviar.</p></div></div>
+                  <div class="section-message"><svg class="i"><use href="#i-info"/></svg><div><p class="section-message__title">Respostas a mensagens criptografadas são criptografadas</p><p>Responder sem criptografia mostraria o texto citado. Se algum destinatário não tiver chave, o Correio pergunta antes de enviar.</p></div></div>
                 </div>
 
                 <div class="settings__group">
@@ -123,7 +125,7 @@
       </div>
       <dl class="guidance">
         <div><dt>Escolha da chave (L64)</dt><dd>Lista de cartões com rádio: nome, tipo, os primeiros e os últimos grupos da impressão digital (L65) e a validade.</dd></div>
-        <div><dt>Fora do Thunderbird</dt><dd>"Criptografar sozinho quando todos tiverem chave", a resposta sempre criptografada e "Buscar chaves na internet" são do Epistula. "Guardar rascunhos criptografados" ficou de fora.</dd></div>
+        <div><dt>Fora do Thunderbird</dt><dd>"Criptografar sozinho quando todos tiverem chave", a resposta sempre criptografada e "Buscar chaves na internet" são do Correio. "Guardar rascunhos criptografados" ficou de fora.</dd></div>
       </dl>
       <p class="classes"><span>Classes</span> <code>.choice-card</code></p>
     </section>
@@ -142,9 +144,9 @@
             <div class="modal__body">
               <p class="wizard-steps">Passo 1 de 3</p>
               <div class="choice-list" role="radiogroup" aria-label="Como adicionar">
-                <label class="choice-card is-selected"><input type="radio" name="w1" checked><span class="choice-card__icon"><svg class="i"><use href="#i-sparkle"/></svg></span><span><span class="choice-card__title">Criar uma chave nova</span><span class="choice-card__desc">Para yuri@exemplo.com. Leva alguns segundos.</span></span></label>
+                <label class="choice-card is-selected"><input type="radio" name="w1" checked><span class="choice-card__icon"><svg class="i"><use href="#i-sparkle"/></svg></span><span><span class="choice-card__title">Criar uma chave nova</span><span class="choice-card__desc">Para ana@exemplo.com. Leva alguns segundos.</span></span></label>
                 <label class="choice-card"><input type="radio" name="w1"><span class="choice-card__icon"><svg class="i"><use href="#i-upload"/></svg></span><span><span class="choice-card__title">Importar uma chave que já tenho</span><span class="choice-card__desc">Arquivo .asc, .gpg ou .key, de outro programa ou computador.</span></span></label>
-                <label class="choice-card"><input type="radio" name="w1"><span class="choice-card__icon"><svg class="i"><use href="#i-download"/></svg></span><span><span class="choice-card__title">Restaurar um backup do Epistula</span><span class="choice-card__desc">O arquivo que você salvou ao criar a chave.</span></span></label>
+                <label class="choice-card"><input type="radio" name="w1"><span class="choice-card__icon"><svg class="i"><use href="#i-download"/></svg></span><span><span class="choice-card__title">Restaurar um backup do Correio</span><span class="choice-card__desc">O arquivo que você salvou ao criar a chave.</span></span></label>
               </div>
             </div>
             <div class="modal__foot"><button class="btn btn--subtle" type="button">Cancelar</button><button class="btn btn--primary" type="button">Continuar</button></div>
@@ -155,9 +157,9 @@
             <div class="modal__head"><h3 class="modal__title" id="w2">Criar uma chave nova</h3></div>
             <div class="modal__body" style="display:grid;gap:var(--space-200)">
               <p class="wizard-steps" style="margin:0">Passo 2 de 3</p>
-              <div class="field"><label class="field__label" for="w2n">Nome</label><div class="input"><input id="w2n" value="Yuri Melo"></div></div>
-              <div class="field"><span class="field__label">E-mail</span><span style="font:var(--font-body)">yuri@exemplo.com</span></div>
-              <div class="field"><label class="field__label" for="w2v">Validade</label><span class="select"><select id="w2v"><option>1 ano</option><option>2 anos</option><option selected>3 anos</option><option>Sem validade</option></select><svg class="i"><use href="#i-chevron-down"/></svg></span><span class="field__help">Antes de vencer, o Epistula avisa e você estende sem trocar de chave.</span></div>
+              <div class="field"><label class="field__label" for="w2n">Nome</label><div class="input"><input id="w2n" value="Ana Lima"></div></div>
+              <div class="field"><span class="field__label">E-mail</span><span style="font:var(--font-body)">ana@exemplo.com</span></div>
+              <div class="field"><label class="field__label" for="w2v">Validade</label><span class="select"><select id="w2v"><option>1 ano</option><option>2 anos</option><option selected>3 anos</option><option>Sem validade</option></select><svg class="i"><use href="#i-chevron-down"/></svg></span><span class="field__help">Antes de vencer, o Correio avisa e você estende sem trocar de chave.</span></div>
               <div style="display:grid;gap:var(--space-100)">
                 <span class="field__label">Tipo</span>
                 <div class="choice-list" role="radiogroup" aria-label="Tipo da chave">
@@ -214,7 +216,7 @@
                   <table class="key-table">
                     <thead><tr><th>Nome e e-mail</th><th>ID</th><th>Validade</th><th>Situação</th></tr></thead>
                     <tbody>
-                      <tr><td><span class="key-table__who"><b>Yuri Melo</b>yuri@exemplo.com</span></td><td class="key-table__id">A1C0 3D9E 2F17</td><td>26 out 2029</td><td><span class="lozenge lozenge--success">Minha</span></td></tr>
+                      <tr><td><span class="key-table__who"><b>Ana Lima</b>ana@exemplo.com</span></td><td class="key-table__id">A1C0 3D9E 2F17</td><td>26 out 2029</td><td><span class="lozenge lozenge--success">Minha</span></td></tr>
                       <tr aria-selected="true"><td><span class="key-table__who"><b>Ana Ribeiro</b>ana@lumen.com.br</span></td><td class="key-table__id">5C21 08AA 91F3</td><td>2 mar 2028</td><td><span class="lozenge">Ainda não aceita</span></td></tr>
                       <tr><td><span class="key-table__who"><b>Marina Couto</b>marina.couto@lumen.com.br</span></td><td class="key-table__id">E7D0 44B1 0C9A</td><td>Sem validade</td><td><span class="lozenge lozenge--success">Verificada</span></td></tr>
                       <tr><td><span class="key-table__who"><b>Paulo Henrique</b>paulo@exemplo.org</span></td><td class="key-table__id">19FE 7A02 BB65</td><td>14 jan 2027</td><td><span class="lozenge lozenge--inprogress">Aceita</span> <span class="lozenge lozenge--new">Pós-quântica</span></td></tr>
@@ -262,7 +264,7 @@
         </figure>
         <figure class="state" style="justify-items:stretch">
           <div class="key-details">
-            <h3 class="key-details__title">Yuri Melo <span class="lozenge lozenge--success">Minha</span></h3>
+            <h3 class="key-details__title">Ana Lima <span class="lozenge lozenge--success">Minha</span></h3>
             <div class="row" style="gap:var(--space-075);flex-wrap:wrap">
               <button class="btn btn--subtle btn--compact" type="button"><svg class="i"><use href="#i-download"/></svg>Exportar pública</button>
               <button class="btn btn--subtle btn--compact" type="button"><svg class="i"><use href="#i-shield"/></svg>Backup da secreta…</button>
@@ -285,15 +287,15 @@
       <div class="ds-head">
         <p class="eyebrow">L69 · CA4 · CA5</p>
         <h2>S/MIME: pedir certificado e gerenciar</h2>
-        <p class="lede">O par de chaves nasce no computador; só o pedido (CSR) vai para a autoridade certificadora. Quando o certificado chegar, o Epistula o casa com a chave guardada.</p>
+        <p class="lede">O par de chaves nasce no computador; só o pedido (CSR) vai para a autoridade certificadora. Quando o certificado chegar, o Correio o casa com a chave guardada.</p>
       </div>
       <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(26rem,1fr));align-items:start">
         <div class="stage stage--sunken">
           <div class="modal" role="dialog" aria-labelledby="csr1" style="margin-inline:auto;max-width:32rem">
             <div class="modal__head"><h3 class="modal__title" id="csr1">Pedir um certificado S/MIME</h3></div>
             <div class="modal__body" style="display:grid;gap:var(--space-200)">
-              <div class="field"><span class="field__label">E-mail</span><span style="font:var(--font-body)">yuri@exemplo.com</span></div>
-              <div class="field"><label class="field__label" for="csr-n">Nome</label><div class="input"><input id="csr-n" value="Yuri Melo"></div></div>
+              <div class="field"><span class="field__label">E-mail</span><span style="font:var(--font-body)">ana@exemplo.com</span></div>
+              <div class="field"><label class="field__label" for="csr-n">Nome</label><div class="input"><input id="csr-n" value="Ana Lima"></div></div>
               <div class="field"><label class="field__label" for="csr-o">Organização <span style="font-weight:var(--font-weight-regular);color:var(--color-text-subtlest)">(opcional)</span></label><div class="input"><input id="csr-o"></div></div>
               <div class="field"><label class="field__label" for="csr-c">País</label><span class="select"><select id="csr-c"><option selected>Brasil (BR)</option><option>Portugal (PT)</option></select><svg class="i"><use href="#i-chevron-down"/></svg></span></div>
               <div class="field"><label class="field__label" for="csr-a">Algoritmo</label><span class="select"><select id="csr-a"><option selected>RSA 3072 (recomendado, aceito por todas as autoridades)</option><option>ECDSA P-256</option></select><svg class="i"><use href="#i-chevron-down"/></svg></span></div>
@@ -337,14 +339,14 @@ BQADggEPADCCAQoCggEBAL3n0Z1mXk…
                 <table class="key-table">
                   <thead><tr><th>Titular</th><th>Emissor</th><th>Validade</th><th>Uso</th></tr></thead>
                   <tbody>
-                    <tr aria-selected="true"><td><span class="key-table__who"><b>Yuri Melo</b>yuri@exemplo.com</span></td><td>Actalis Client Authentication CA</td><td>10 out 2027</td><td><span class="lozenge lozenge--success">Assinar e criptografar</span></td></tr>
+                    <tr aria-selected="true"><td><span class="key-table__who"><b>Ana Lima</b>ana@exemplo.com</span></td><td>Actalis Client Authentication CA</td><td>10 out 2027</td><td><span class="lozenge lozenge--success">Assinar e criptografar</span></td></tr>
                   </tbody>
                 </table>
                 </div>
                 <aside class="key-details">
-                  <h3 class="key-details__title">Yuri Melo</h3>
+                  <h3 class="key-details__title">Ana Lima</h3>
                   <dl>
-                    <dt>E-mail</dt><dd>yuri@exemplo.com</dd>
+                    <dt>E-mail</dt><dd>ana@exemplo.com</dd>
                     <dt>Emissor</dt><dd>Actalis Client Authentication CA G3</dd>
                     <dt>Cadeia</dt><dd>Confiável (raiz do sistema)</dd>
                     <dt>Algoritmo</dt><dd>RSA 3072</dd>
@@ -503,7 +505,7 @@ BQADggEPADCCAQoCggEBAL3n0Z1mXk…
             <div><dt>Identidade</dt><dd><span class="sec-badge sec-badge--unverified"><svg class="i"><use href="#i-signature"/></svg>Identidade não verificada</span></dd><dd>Você ainda não conferiu a impressão digital desta chave.</dd></div>
             <div><dt>Neste computador</dt><dd><span class="sec-badge sec-badge--neutral"><svg class="i"><use href="#i-hard-drive"/></svg>Guardada com proteção</span></dd><dd>No banco cifrado, dentro do computador.</dd></div>
           </dl>
-          <div class="section-message section-message--warning" role="note"><svg class="i"><use href="#i-warning"/></svg><div><p class="section-message__title">O Epistula foi bloqueado por inatividade</p><p>As mensagens continuam cifradas neste computador. Digite a senha para voltar a lê-las.</p><div class="section-message__actions"><button type="button">Desbloquear</button></div></div></div>
+          <div class="section-message section-message--warning" role="note"><svg class="i"><use href="#i-warning"/></svg><div><p class="section-message__title">O Correio foi bloqueado por inatividade</p><p>As mensagens continuam cifradas neste computador. Digite a senha para voltar a lê-las.</p><div class="section-message__actions"><button type="button">Desbloquear</button></div></div></div>
         </div>
       </div>
       <dl class="guidance">

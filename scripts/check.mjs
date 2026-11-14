@@ -88,7 +88,7 @@ for (const m of componentsCss.replace(/\/\*[\s\S]*?\*\//g, "").matchAll(/@media\
 
 // ---- 3. páginas e registro ----
 const docsJs = read("docs.js");
-const registry = (0, eval)(docsJs.match(/const EPISTULA_PAGES = (\[[\s\S]*?\n\]);/)[1]);
+const registry = (0, eval)(docsJs.match(/const OCAML_PAGES = (\[[\s\S]*?\n\]);/)[1]);
 const STATUS = new Set(["draft", "experimental", "beta", "stable", "deprecated", "removed"]);
 const ids = [];
 for (const g of registry) for (const [id, title, desc, status] of g.items) {
@@ -99,7 +99,7 @@ for (const g of registry) for (const [id, title, desc, status] of g.items) {
   if (!title || !desc) errors.push(`registro: ${id} sem título ou descrição`);
 }
 for (const f of readdirSync(ds).filter((n) => n.endsWith(".html") && n !== "index.html" && !n.startsWith("rascunho"))) {
-  if (!ids.includes(f.slice(0, -5))) errors.push(`${f} não está em EPISTULA_PAGES`);
+  if (!ids.includes(f.slice(0, -5))) errors.push(`${f} não está em OCAML_PAGES`);
 }
 
 

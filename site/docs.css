@@ -1,4 +1,4 @@
-/* Epistula Design System · docs.css · estilos da documentação (não usar no produto) */
+/* OCaml Design System · docs.css · estilos da documentação (não usar no produto) */
   /* Layout da documentação: índice fixo à esquerda + coluna de conteúdo; empilha abaixo de 960px.
      Todas as cores vêm de tokens.css. */
   html { scroll-behavior: smooth; scroll-padding-top: var(--space-300); }

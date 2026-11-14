@@ -1,10 +1,10 @@
-// Core · Toast (ADS Flag)
-// Veio de components.css (linhas 1312–1346) na migração para o EpistulaDesignSystem.
+// Core · Toast
+// Veio de components.css (linhas 1312–1346) na migração para o OCamlDesignSystem.
 
 @use '../../tokens/components/toast';
 
 /* ==========================================================================
-   Toast (ADS Flag)
+   Toast
    ========================================================================== */
 .toast {
   @include toast.set('success');

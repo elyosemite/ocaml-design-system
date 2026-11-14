@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Avatar · Epistula Design System</title>
+<title>Avatar · OCaml Design System</title>
 <meta name="description" content="Pessoas e contas, com inicial, cor e foto.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="avatar">
 <div class="doc">
@@ -17,13 +19,12 @@
   <main>
     <section class="ds-section" id="avatar">
       <div class="ds-head">
-        <p class="eyebrow">ADS · Avatar</p>
         <h1>Avatar</h1>
         <p class="lede">O avatar identifica pessoas e contas. Mostra a inicial na cor da conta e, quando existe, a foto por cima. Não serve para contar nem para dar status: para isso use o <a href="badge.html">badge</a> e o <a href="lozenge.html">lozenge</a>.</p>
       </div>
       <div class="stage">
         <div class="states">
-          <figure class="state"><div class="row"><span class="avatar avatar--xs">YM<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="avatar avatar--sm avatar--teal">PH<img class="avatar__img" alt="" src="images/people/pessoa-6.webp"></span><span class="avatar avatar--purple">MC<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><span class="avatar avatar--lg avatar--green">BA<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span></div><figcaption><b>Avatar</b>20 · 24 · 32 · 40px</figcaption></figure>
+          <figure class="state"><div class="row"><span class="avatar avatar--xs">AL<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><span class="avatar avatar--sm avatar--teal">PH<img class="avatar__img" alt="" src="images/people/pessoa-6.webp"></span><span class="avatar avatar--purple">MC<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><span class="avatar avatar--lg avatar--green">BA<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span></div><figcaption><b>Avatar</b>20 · 24 · 32 · 40px</figcaption></figure>
           <figure class="state"><div class="row"><span class="avatar avatar--sm avatar--purple" aria-hidden="true">T<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><span class="avatar" aria-hidden="true">P<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><span class="avatar avatar--lg avatar--purple" aria-hidden="true">T<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span></div><figcaption><b>Com foto</b>a foto cobre a inicial</figcaption></figure>
           <figure class="state"><div class="avatar-group"><span class="avatar avatar--sm avatar--purple">MC<img class="avatar__img" alt="" src="images/people/pessoa-2.webp"></span><span class="avatar avatar--sm avatar--teal">PH<img class="avatar__img" alt="" src="images/people/pessoa-6.webp"></span><span class="avatar avatar--sm avatar--orange">RD<img class="avatar__img" alt="" src="images/people/pessoa-3.webp"></span><span class="avatar avatar--sm">+4</span></div><figcaption><b>Grupo</b>participantes da conversa</figcaption></figure>
         </div>

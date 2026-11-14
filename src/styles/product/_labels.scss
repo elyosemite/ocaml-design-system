@@ -1,10 +1,10 @@
-// Produto · Etiquetas de e-mail (ADS Tag colorida)
-// Veio de components.css (linhas 332–352) na migração para o EpistulaDesignSystem.
+// Produto · Etiquetas de e-mail
+// Veio de components.css (linhas 332–352) na migração para o OCamlDesignSystem.
 
 @use '../../tokens/components/label';
 
 /* ==========================================================================
-   Etiquetas de e-mail (ADS Tag colorida)
+   Etiquetas de e-mail
    ========================================================================== */
 .label {
   @include label.set('default');

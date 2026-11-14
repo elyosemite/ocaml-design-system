@@ -1,10 +1,10 @@
-// Core · Avatar (ADS Avatar)
-// Veio de components.css (linhas 270–295) na migração para o EpistulaDesignSystem.
+// Core · Avatar
+// Veio de components.css (linhas 270–295) na migração para o OCamlDesignSystem.
 
 @use '../../tokens/components/avatar';
 
 /* ==========================================================================
-   Avatar (ADS Avatar)
+   Avatar
    ========================================================================== */
 .avatar {
   @include avatar.set('blue');

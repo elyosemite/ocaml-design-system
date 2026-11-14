@@ -1,9 +1,9 @@
-/* Epistula Design System · docs.js
+/* OCaml Design System · docs.js
    Casca compartilhada da documentação: ícones, índice, paginação, tema, toasts, tooltips
    e as demonstrações interativas (cada uma só roda na página que tem o elemento dela).
-   Para adicionar uma página: crie <id>.html com <body data-page="<id>"> e registre em EPISTULA_PAGES. */
+   Para adicionar uma página: crie <id>.html com <body data-page="<id>"> e registre em OCAML_PAGES. */
 /* Maturidade (v3 §9): draft, experimental, beta, stable, deprecated, removed. Quarto item de cada página. */
-const EPISTULA_STATUS = {
+const OCAML_STATUS = {
   draft: ['Rascunho', ''],
   experimental: ['Experimental', ' lozenge--moved'],
   beta: ['Beta', ' lozenge--inprogress'],
@@ -11,8 +11,8 @@ const EPISTULA_STATUS = {
   deprecated: ['Descontinuado', ' lozenge--overdue'],
   removed: ['Removido', ' lozenge--removed']
 };
-const maturityBadge = (st, extra = '') => { const [label, cls] = EPISTULA_STATUS[st] || EPISTULA_STATUS.stable; return `<span class="lozenge${cls}${extra}">${label}</span>`; };
-const EPISTULA_PAGES = [
+const maturityBadge = (st, extra = '') => { const [label, cls] = OCAML_STATUS[st] || OCAML_STATUS.stable; return `<span class="lozenge${cls}${extra}">${label}</span>`; };
+const OCAML_PAGES = [
   {
     "group": "Fundamentos",
     "items": [
@@ -297,7 +297,7 @@ const EPISTULA_PAGES = [
       [
         "documentacao",
         "Documentação",
-        "Gradientes, ícones de marca, idioma, timeline e o layout de docs.epistulamail.com.",
+        "Gradientes, ícones de marca, idioma, timeline e o layout de docs.exemplo.com.br.",
         "stable"
       ]
     ]
@@ -305,21 +305,21 @@ const EPISTULA_PAGES = [
 ];
 
 (() => {
-  document.body.insertAdjacentHTML('afterbegin', window.EPISTULA_SPRITE || ''); // gerado de src/icons/ (dist/sprite.js)
+  document.body.insertAdjacentHTML('afterbegin', window.OCAML_SPRITE || ''); // gerado de src/icons/ (dist/sprite.js)
   const page = document.body.dataset.page || 'index';
   const href = (id) => id + '.html';
-  const flat = EPISTULA_PAGES.flatMap(g => g.items.map(([id, title, desc, status]) => ({ id, title, desc, status, group: g.group })));
+  const flat = OCAML_PAGES.flatMap(g => g.items.map(([id, title, desc, status]) => ({ id, title, desc, status, group: g.group })));
 
   document.getElementById('doc-nav').innerHTML =
     `<a class="doc-nav__home${page === 'index' ? ' is-current' : ''}" href="index.html"${page === 'index' ? ' aria-current="page"' : ''}>Visão geral</a>` +
-    EPISTULA_PAGES.map(g => `<div class="doc-nav__group"><div class="nav-heading">${g.group}</div>${g.items.map(([id, title]) =>
+    OCAML_PAGES.map(g => `<div class="doc-nav__group"><div class="nav-heading">${g.group}</div>${g.items.map(([id, title]) =>
       `<a href="${href(id)}"${id === page ? ' class="is-current" aria-current="page"' : ''}>${title}</a>`).join('')}</div>`).join('');
 
   const main = document.querySelector('main');
   const i = flat.findIndex(p => p.id === page);
   if (i >= 0) {
     main.insertAdjacentHTML('afterbegin', `<div class="page-top">
-      <a class="wordmark" href="index.html"><img class="wordmark__logo" src="images/epistulamail-logo-120.png" alt="">EpistulaMail</a>
+      <a class="wordmark" href="index.html">OCaml Design System</a>
       <span class="crumb">${flat[i].group}</span>
       <button class="btn btn--subtle theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema"></button>
     </div>`);
@@ -333,7 +333,7 @@ const EPISTULA_PAGES = [
   }
 
   const grid = document.getElementById('overview-grid');
-  if (grid) grid.innerHTML = EPISTULA_PAGES.map(g => `<section class="ov-group"><h2 class="part__title">${g.group}</h2><div class="ov-grid">${g.items.map(([id, title, desc, status]) =>
+  if (grid) grid.innerHTML = OCAML_PAGES.map(g => `<section class="ov-group"><h3 class="part__title">${g.group}</h3><div class="ov-grid">${g.items.map(([id, title, desc, status]) =>
     `<a class="ov-card" href="${href(id)}"><span class="ov-card__head"><b>${title}</b>${maturityBadge(status)}</span><span>${desc}</span></a>`).join('')}</div></section>`).join('');
 
   document.body.insertAdjacentHTML('beforeend', '<div class="toast-region" id="toast-region" aria-live="polite"></div>');
@@ -348,7 +348,7 @@ const EPISTULA_PAGES = [
     document.head.appendChild(fichaScript);
   }
   function renderFicha() {
-    const data = (typeof EPISTULA_FICHAS !== 'undefined') && EPISTULA_FICHAS[page];
+    const data = (typeof OCAML_FICHAS !== 'undefined') && OCAML_FICHAS[page];
     if (!data) return;
     const me = flat.find(p => p.id === page);
     const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -434,14 +434,16 @@ const EPISTULA_PAGES = [
   const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
   function syncThemeButton() {
     const dark = isDark();
-    themeBtn.innerHTML = icon(dark ? 'sun' : 'moon') + `<span>${dark ? 'Tema claro' : 'Tema escuro'}</span>`;
+    themeBtn.innerHTML = icon(dark ? 'sun' : 'moon');
+    const label = dark ? 'Usar o tema claro' : 'Usar o tema escuro';
+    themeBtn.setAttribute('aria-label', label); themeBtn.title = label;
   }
   themeBtn.addEventListener('click', () => {
     root.dataset.theme = isDark() ? 'light' : 'dark';
-    try { localStorage.setItem('epistula-ds-theme', root.dataset.theme); } catch (e) {}
+    try { localStorage.setItem('ocaml-ds-theme', root.dataset.theme); } catch (e) {}
     syncThemeButton(); refreshThemeValues();
   });
-  try { const saved = localStorage.getItem('epistula-ds-theme'); if (saved) root.dataset.theme = saved; } catch (e) {}
+  try { const saved = localStorage.getItem('ocaml-ds-theme'); if (saved) root.dataset.theme = saved; } catch (e) {}
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { syncThemeButton(); refreshThemeValues(); });
   new MutationObserver(() => { syncThemeButton(); refreshThemeValues(); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 
@@ -766,10 +768,10 @@ const EPISTULA_PAGES = [
   $$('[data-indeterminate]').forEach(c => c.indeterminate = true);
 
   /* ---------------- Chips de destinatário ---------------- */
-  const ORG = 'epistula.com.br';
-  const contacts = { 'marina.couto@epistula.com.br': 'Marina Couto', 'rafael.dias@epistula.com.br': 'Rafael Dias' };
+  const ORG = 'exemplo.com.br';
+  const contacts = { 'marina.couto@exemplo.com.br': 'Marina Couto', 'rafael.dias@exemplo.com.br': 'Rafael Dias' };
   const avatarTone = ['purple', 'teal', 'green', 'magenta', 'blue'];
-  let recipients = ['marina.couto@epistula.com.br', 'joao@lumen.com.br', 'ana.lima@'];
+  let recipients = ['marina.couto@exemplo.com.br', 'joao@lumen.com.br', 'ana.lima@'];
   let selectedChip = -1;
   const chipBox = $('#chip-box'), chipEntry = $('#chip-entry'), chipHelp = $('#chip-help');
   const validEmail = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s);
@@ -817,12 +819,12 @@ const EPISTULA_PAGES = [
   /* ---------------- Lista de threads ---------------- */
   const seed = () => [
     { id: 1, from: 'Marina Couto', count: 3, subject: 'Revisão do contrato: Fornecedor Lumen', snippet: 'Segue a versão 3 com os ajustes da cláusula 7.2. Preciso da sua aprovação até quinta.', date: '10:42', unread: true, attach: true, labels: [['purple', 'Jurídico']] },
-    { id: 2, from: 'GitHub', subject: '[epistula/web] PR #482: Corrige sincronização IMAP em pastas grandes', snippet: 'rafael-dias pediu sua revisão. 4 arquivos alterados, +128 −41.', date: '09:15', unread: true, labels: [['teal', 'Dev']] },
+    { id: 2, from: 'GitHub', subject: '[lumen/web] PR #482: Corrige sincronização IMAP em pastas grandes', snippet: 'rafael-dias pediu sua revisão. 4 arquivos alterados, +128 −41.', date: '09:15', unread: true, labels: [['teal', 'Dev']] },
     { id: 3, from: 'Rafael Dias', subject: 'Plantão do fim de semana', snippet: 'Consegue trocar comigo o sábado? Fico com o domingo de 2 de novembro.', date: '08:03', unread: true },
-    { id: 4, from: 'Yuri Melo', draft: true, subject: 'Proposta Q4 para a diretoria', snippet: 'Olá a todos, como combinamos na reunião de segunda, segue o resumo…', date: 'Ontem' },
+    { id: 4, from: 'Ana Lima', draft: true, subject: 'Proposta Q4 para a diretoria', snippet: 'Olá a todos, como combinamos na reunião de segunda, segue o resumo…', date: 'Ontem' },
     { id: 5, from: 'Banco Atlântico', subject: 'Seu extrato de outubro está disponível', snippet: 'Acesse o extrato consolidado da conta empresarial final 4471.', date: '21 out', attach: true, labels: [['green', 'Financeiro']] },
     { id: 6, from: 'Paulo Henrique, eu', count: 4, subject: 'Almoço de sexta?', snippet: 'Fechado então, 12:30 no lugar de sempre.', date: '20 out', starred: true },
-    { id: 7, from: 'Equipe Epistula', subject: 'Novo no Epistula: adiar conversas', snippet: 'Tire uma conversa da caixa e traga de volta na hora certa.', date: '18 out', labels: [['blue', 'Novidades']] },
+    { id: 7, from: 'Equipe Correio', subject: 'Novo no Correio: adiar conversas', snippet: 'Tire uma conversa da caixa e traga de volta na hora certa.', date: '18 out', labels: [['blue', 'Novidades']] },
   ];
   let threads = seed(), checked = new Set(), openId = null;
   const list = $('#thread-list');

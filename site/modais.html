@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Modais · Epistula Design System</title>
+<title>Modais · OCaml Design System</title>
 <meta name="description" content="Decisões que não têm desfazer.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="modais">
 <div class="doc">
@@ -17,7 +19,6 @@
   <main>
     <section class="ds-section" id="modais">
         <div class="ds-head">
-          <p class="eyebrow">ADS · Modal Dialog</p>
           <h1>Modais</h1>
           <p class="lede">Reservados para decisões que não têm desfazer. O título é uma pergunta ou uma ação. O botão de confirmação repete o verbo, e o foco abre em "Cancelar". <kbd>Esc</kbd> fecha.</p>
         </div>
@@ -35,7 +36,7 @@
         <div class="stage stage--sunken">
           <div class="modal modal--warning" role="dialog" aria-labelledby="signout-title" style="margin-inline:auto">
             <div class="modal__head"><svg class="i"><use href="#i-log-out"/></svg><h3 class="modal__title" id="signout-title">Sair de Trabalho?</h3></div>
-            <div class="modal__body" style="display:grid;gap:var(--space-150)"><p style="margin:0">O Epistula deixa de acessar <b>joao.silva.empresa@gmail.com</b>. As mensagens já salvas continuam neste computador e você pode lê-las sem entrar. Nada muda no servidor.</p><label class="confirm-check"><input type="checkbox" class="checkbox">Apagar também os e-mails desta conta guardados neste computador (310 MB).</label></div>
+            <div class="modal__body" style="display:grid;gap:var(--space-150)"><p style="margin:0">O Correio deixa de acessar <b>joao.silva.empresa@gmail.com</b>. As mensagens já salvas continuam neste computador e você pode lê-las sem entrar. Nada muda no servidor.</p><label class="confirm-check"><input type="checkbox" class="checkbox">Apagar também os e-mails desta conta guardados neste computador (310 MB).</label></div>
             <div class="modal__foot"><button class="btn btn--subtle" type="button">Cancelar</button><button class="btn btn--warning" type="button">Sair</button></div>
           </div>
         </div>
@@ -223,7 +224,7 @@
                 </div>
                 <div class="settings__group">
                   <h4 class="settings__group-title">Privacidade</h4>
-                  <div class="setting"><div><div class="setting__label" id="priv">O que aparece na notificação</div><p class="setting__desc">As notificações aparecem na tela bloqueada, e o sistema guarda o texto delas sem cifra. "Só a conta" não deixa assunto nem remetente fora do Epistula.</p></div>
+                  <div class="setting"><div><div class="setting__label" id="priv">O que aparece na notificação</div><p class="setting__desc">As notificações aparecem na tela bloqueada, e o sistema guarda o texto delas sem cifra. "Só a conta" não deixa assunto nem remetente fora do Correio.</p></div>
                     <div class="segmented" role="radiogroup" aria-labelledby="priv"><button class="btn btn--compact" type="button" role="radio" aria-checked="true">Só a conta</button><button class="btn btn--compact" type="button" role="radio" aria-checked="false">Remetente e assunto</button></div></div>
                 </div>
                 <div class="settings__group">
@@ -233,7 +234,7 @@
                 <div class="settings__group">
                   <h4 class="settings__group-title">Ao fechar a janela</h4>
                   <div class="setting"><div><div class="setting__label">Continuar na bandeja do sistema</div><p class="setting__desc">Para receber notificações com a janela fechada. Para sair, use Sair no ícone da bandeja.</p></div><input type="checkbox" class="toggle" checked aria-label="Continuar na bandeja do sistema"></div>
-                  <div class="setting"><div><div class="setting__label">Abrir o Epistula ao iniciar o Windows</div><p class="setting__desc">Abre direto na bandeja, sem mostrar a janela.</p></div><input type="checkbox" class="toggle" aria-label="Abrir o Epistula ao iniciar o Windows"></div>
+                  <div class="setting"><div><div class="setting__label">Abrir o Correio ao iniciar o Windows</div><p class="setting__desc">Abre direto na bandeja, sem mostrar a janela.</p></div><input type="checkbox" class="toggle" aria-label="Abrir o Correio ao iniciar o Windows"></div>
                 </div>
               </div>
             </div>
@@ -269,13 +270,13 @@
                 <h3 class="settings__title">Privacidade</h3>
 
                 <div class="settings__group">
-                  <h4 class="settings__group-title">Senha do Epistula</h4>
+                  <h4 class="settings__group-title">Senha do Correio</h4>
                   <div class="setting">
-                    <div><div class="setting__label">Pedir uma senha ao abrir o Epistula</div><p class="setting__desc">Protege as mensagens guardadas neste computador até de quem usa o seu computador. Desligada, quem entra no seu computador abre o Epistula.</p></div>
-                    <input type="checkbox" class="toggle" checked aria-label="Pedir uma senha ao abrir o Epistula">
+                    <div><div class="setting__label">Pedir uma senha ao abrir o Correio</div><p class="setting__desc">Protege as mensagens guardadas neste computador até de quem usa o seu computador. Desligada, quem entra no seu computador abre o Correio.</p></div>
+                    <input type="checkbox" class="toggle" checked aria-label="Pedir uma senha ao abrir o Correio">
                   </div>
                   <div class="setting">
-                    <div><div class="setting__label" id="p-lock">Bloquear depois de</div><p class="setting__desc">Sem mexer no Epistula por esse tempo.</p></div>
+                    <div><div class="setting__label" id="p-lock">Bloquear depois de</div><p class="setting__desc">Sem mexer no Correio por esse tempo.</p></div>
                     <span class="select"><select aria-labelledby="p-lock"><option>5 minutos</option><option selected>15 minutos</option><option>30 minutos</option><option>1 hora</option><option>Nunca</option></select><svg class="i"><use href="#i-chevron-down"/></svg></span>
                   </div>
                   <div class="setting">
@@ -298,7 +299,7 @@
                     <svg class="i"><use href="#i-warning"/></svg>
                     <div>
                       <p class="section-message__title">Este disco não está cifrado</p>
-                      <p>O sistema pode copiar partes da memória do Epistula para o disco ao hibernar ou com pouca memória. Ligue a criptografia do disco (BitLocker no Windows, LUKS no Linux).</p>
+                      <p>O sistema pode copiar partes da memória do Correio para o disco ao hibernar ou com pouca memória. Ligue a criptografia do disco (BitLocker no Windows, LUKS no Linux).</p>
                     </div>
                   </div>
                 </div>
@@ -319,7 +320,7 @@
       </div>
       <dl class="guidance">
         <div><dt>Senha desligada</dt><dd>Só aparece o primeiro ajuste; "Bloquear depois de", "Bloquear junto com o Windows" (só no Windows) e "Senha" surgem quando ela é ligada.</dd></div>
-        <div><dt>Disco cifrado</dt><dd>O aviso só aparece quando o disco do Epistula não está cifrado. É só recomendação: não bloqueia nada.</dd></div>
+        <div><dt>Disco cifrado</dt><dd>O aviso só aparece quando o disco do Correio não está cifrado. É só recomendação: não bloqueia nada.</dd></div>
         <div><dt>Apagar</dt><dd>Só nas contas de que você saiu: a linha fica desabilitada, mas o "Apagar" continua ativo. Apagar o conteúdo de uma conta em uso não adiantaria, porque o download em segundo plano o traria de volta; para isso, sair com "Apagar também".</dd></div>
       </dl>
       <p class="classes"><span>Classes</span> <code>.is-disabled</code></p>
@@ -347,7 +348,7 @@
         <div class="stage stage--sunken">
           <div class="modal" role="dialog" aria-labelledby="m2" style="margin-inline:auto">
             <div class="modal__head"><h3 class="modal__title" id="m2">Trocar a chave de proteção?</h3></div>
-            <div class="modal__body"><p>Tudo que está guardado neste computador é cifrado de novo com uma chave nova. Cópias antigas do arquivo do Epistula deixam de abrir. Nada é apagado e nada muda no servidor.</p></div>
+            <div class="modal__body"><p>Tudo que está guardado neste computador é cifrado de novo com uma chave nova. Cópias antigas do arquivo do Correio deixam de abrir. Nada é apagado e nada muda no servidor.</p></div>
             <div class="modal__foot"><button class="btn btn--subtle" type="button">Cancelar</button><button class="btn btn--primary" type="button">Trocar chave</button></div>
           </div>
         </div>
@@ -356,7 +357,7 @@
           <div class="modal modal--warning" role="dialog" aria-labelledby="m3" style="margin-inline:auto">
             <div class="modal__head"><svg class="i"><use href="#i-log-out"/></svg><h3 class="modal__title" id="m3">Sair de Trabalho?</h3></div>
             <div class="modal__body" style="display:grid;gap:var(--space-150)">
-              <p style="margin:0">O Epistula deixa de acessar <b>joao.silva.empresa@exemplo.com</b>. Nada muda no servidor.</p>
+              <p style="margin:0">O Correio deixa de acessar <b>joao.silva.empresa@exemplo.com</b>. Nada muda no servidor.</p>
               <label class="confirm-check"><input type="checkbox" class="checkbox">Apagar também os e-mails desta conta guardados neste computador (310 MB).</label>
             </div>
             <div class="modal__foot"><button class="btn btn--subtle" type="button">Cancelar</button><button class="btn btn--warning" type="button">Sair</button></div>
@@ -417,7 +418,7 @@
           <div class="settings__group">
             <h4 class="settings__group-title">Notificações → Privacidade</h4>
             <div class="setting">
-              <div><div class="setting__label" id="t1">O que aparece na notificação</div><p class="setting__desc">As notificações aparecem na tela bloqueada, e o sistema guarda o texto delas sem cifra. "Só a conta" não deixa assunto nem remetente fora do Epistula.</p></div>
+              <div><div class="setting__label" id="t1">O que aparece na notificação</div><p class="setting__desc">As notificações aparecem na tela bloqueada, e o sistema guarda o texto delas sem cifra. "Só a conta" não deixa assunto nem remetente fora do Correio.</p></div>
               <div class="segmented" role="radiogroup" aria-labelledby="t1"><button class="btn btn--compact" type="button" role="radio" aria-checked="true">Só a conta</button><button class="btn btn--compact" type="button" role="radio" aria-checked="false">Remetente e assunto</button></div>
             </div>
           </div>

@@ -1,10 +1,10 @@
-// Core · Banner e Section message (ADS Banner / Section Message)
-// Veio de components.css (linhas 1279–1311) na migração para o EpistulaDesignSystem.
+// Core · Banner e Section message
+// Veio de components.css (linhas 1279–1311) na migração para o OCamlDesignSystem.
 
 @use '../../tokens/components/section-message';
 
 /* ==========================================================================
-   Banner (ADS Banner) e Section message (ADS Section Message)
+   Banner e Section message
    ========================================================================== */
 .banner {
   display: flex; align-items: center; justify-content: center; gap: var(--space-100);

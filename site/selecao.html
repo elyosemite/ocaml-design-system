@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Seleção · Epistula Design System</title>
+<title>Seleção · OCaml Design System</title>
 <meta name="description" content="Seleção na lista e configurações imediatas.">
-<script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../dist/fonts.css">
 <link rel="stylesheet" href="../dist/tokens.css">
 <link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
 <link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
 </head>
 <body data-page="selecao">
 <div class="doc">
@@ -17,7 +19,6 @@
   <main>
     <section class="ds-section" id="selecao">
         <div class="ds-head">
-          <p class="eyebrow">ADS · Checkbox, Toggle</p>
           <h1>Seleção</h1>
           <p class="lede">O checkbox seleciona conversas na lista e opções em formulários. O toggle liga e desliga uma configuração com efeito imediato, como a resposta automática.</p>
         </div>
@@ -35,7 +36,7 @@
         <div class="stage">
           <div class="states">
             <figure class="state"><label class="choice" for="tg-1"><input type="checkbox" class="toggle" id="tg-1">Resposta automática</label><figcaption><b>Desligado</b></figcaption></figure>
-            <figure class="state"><label class="choice" for="tg-2"><input type="checkbox" class="toggle" id="tg-2" checked>Agrupar por conversa</label><figcaption><b>Ligado</b>verde, como no ADS</figcaption></figure>
+            <figure class="state"><label class="choice" for="tg-2"><input type="checkbox" class="toggle" id="tg-2" checked>Agrupar por conversa</label><figcaption><b>Ligado</b>verde</figcaption></figure>
             <figure class="state"><label class="choice" for="tg-3"><input type="checkbox" class="toggle is-focus" id="tg-3" checked>Notificações</label><figcaption><b>Foco</b></figcaption></figure>
             <figure class="state"><label class="choice" for="tg-4" style="color:var(--color-text-disabled)"><input type="checkbox" class="toggle" id="tg-4" disabled>Criptografia S/MIME</label><figcaption><b>Desabilitado</b>requer certificado</figcaption></figure>
           </div>
@@ -53,7 +54,7 @@
             <li><button class="provider-card" type="button" disabled aria-describedby="provider-soon"><span class="provider-card__icon" aria-hidden="true"><svg class="i"><use href="#i-mail"/></svg></span><span class="provider-card__text"><span class="provider-card__name">AOL Mail <span class="lozenge">Em breve</span></span><span class="provider-card__desc">AOL Mail</span></span></button></li>
             <li><button class="provider-card" type="button" disabled aria-describedby="provider-soon"><span class="provider-card__icon" aria-hidden="true"><svg class="i"><use href="#i-globe"/></svg></span><span class="provider-card__text"><span class="provider-card__name">Outro <span class="lozenge">Em breve</span></span><span class="provider-card__desc">Domínio próprio (IMAP e SMTP)</span></span></button></li>
           </ul>
-          <span class="visually-hidden" id="provider-soon">Ainda não disponível no Epistula.</span>
+          <span class="visually-hidden" id="provider-soon">Ainda não disponível no Correio.</span>
         </div>
         <div class="stage">
           <div class="states">
