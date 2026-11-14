@@ -137,7 +137,7 @@
         <h2>Adicionar chave OpenPGP</h2>
         <p class="lede">Assistente em três passos, num modal: escolher o caminho, preencher, guardar a impressão digital e fazer o backup.</p>
       </div>
-      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(26rem,1fr));align-items:start">
+      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(min(100%,26rem),1fr));align-items:start">
         <div class="stage stage--sunken">
           <div class="modal" role="dialog" aria-labelledby="w1" style="margin-inline:auto;max-width:32rem">
             <div class="modal__head"><h3 class="modal__title" id="w1">Adicionar chave OpenPGP</h3></div>
@@ -253,7 +253,7 @@
           </div>
         </div>
       </div>
-      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));align-items:start;margin-top:var(--space-300)">
+      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));align-items:start;margin-top:var(--space-300)">
         <figure class="state" style="justify-items:stretch">
           <div class="menu" role="menu" aria-label="Importar" style="max-width:18rem">
             <button class="menu-item" role="menuitem" type="button"><svg class="i"><use href="#i-file"/></svg><span class="menu-item__text">De um arquivo…</span></button>
@@ -289,7 +289,7 @@
         <h2>S/MIME: pedir certificado e gerenciar</h2>
         <p class="lede">O par de chaves nasce no computador; só o pedido (CSR) vai para a autoridade certificadora. Quando o certificado chegar, o Correio o casa com a chave guardada.</p>
       </div>
-      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(26rem,1fr));align-items:start">
+      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(min(100%,26rem),1fr));align-items:start">
         <div class="stage stage--sunken">
           <div class="modal" role="dialog" aria-labelledby="csr1" style="margin-inline:auto;max-width:32rem">
             <div class="modal__head"><h3 class="modal__title" id="csr1">Pedir um certificado S/MIME</h3></div>
@@ -378,7 +378,7 @@ BQADggEPADCCAQoCggEBAL3n0Z1mXk…
         <h2>Escrever com criptografia</h2>
         <p class="lede">Uma faixa entre o texto e o rodapé do composer: cadeado, assinatura e a tecnologia. Cada destinatário mostra se tem chave.</p>
       </div>
-      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(28rem,1fr));align-items:start">
+      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(min(100%,28rem),1fr));align-items:start">
         <div class="stage">
           <form class="compose compose--inline" aria-label="Responder" onsubmit="return false">
             <div class="compose__bar"><span class="compose__title">Responder</span></div>
@@ -432,7 +432,7 @@ BQADggEPADCCAQoCggEBAL3n0Z1mXk…
         <h2>Ler mensagens criptografadas e assinadas</h2>
         <p class="lede">Selos no cabeçalho da mensagem, logo abaixo do remetente. Clicar abre os detalhes.</p>
       </div>
-      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(26rem,1fr));align-items:start">
+      <div style="display:grid;gap:var(--space-300);grid-template-columns:repeat(auto-fit,minmax(min(100%,26rem),1fr));align-items:start">
         <figure class="state" style="justify-items:stretch">
           <div class="message message--card"><div class="message__head"><span class="avatar avatar--lg avatar--green" aria-hidden="true">AR<img class="avatar__img" alt="" src="images/people/pessoa-5.webp"></span><div style="min-width:0"><div class="message__from">Ana Ribeiro <span class="message__addr">&lt;ana@lumen.com.br&gt;</span></div>
             <div class="sec-status"><button class="sec-badge" type="button"><svg class="i"><use href="#i-lock"/></svg>Criptografada</button><button class="sec-badge" type="button"><svg class="i"><use href="#i-badge-check"/></svg>Assinatura verificada</button></div></div><span class="message__time">10:42</span></div></div>

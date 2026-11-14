@@ -71,7 +71,7 @@
                 <div class="demo-stat"><span class="demo-stat__label">Pedidos</span><b class="demo-stat__value">1.200</b><span class="lozenge lozenge--success">Subiu 8%</span></div>
                 <div class="demo-stat"><span class="demo-stat__label">Entregas no prazo</span><b class="demo-stat__value">96%</b><span class="progress"><span style="width:96%"></span></span></div>
               </div>
-              <div class="section-message section-message--warning" role="note"><svg class="i" aria-hidden="true"><use href="#i-warning"/></svg><div><p class="section-message__title">Estoque baixo em 3 itens</p><p>Reponha antes de sexta para não perder pedidos.</p><div class="section-message__actions"><button type="button">Ver os itens</button></div></div></div>
+              <div class="section-message section-message--warning" role="note"><svg class="i" aria-hidden="true"><use href="#i-warning"/></svg><div><p class="section-message__title">Estoque baixo em 3 itens</p><p>Reponha antes de sexta para não perder pedidos.</p></div></div>
               <div class="demo-team">
                 <div class="avatar-group"><span class="avatar avatar--sm avatar--purple">AL<img class="avatar__img" alt="" src="images/people/pessoa-2.webp" width="160" height="160"></span><span class="avatar avatar--sm avatar--teal">PH<img class="avatar__img" alt="" src="images/people/pessoa-6.webp" width="160" height="160"></span><span class="avatar avatar--sm avatar--orange">RD<img class="avatar__img" alt="" src="images/people/pessoa-3.webp" width="160" height="160"></span></div>
                 <span class="demo-team__text">3 pessoas na equipe</span>
@@ -130,10 +130,10 @@
             <header class="demo-card__head"><h4 id="c15">Para quem é a conta?</h4><span class="demo-muted">Passo 2 de 3</span></header>
             <div class="demo-card__body">
               <span class="progress" aria-label="Passo 2 de 3"><span style="width:66%"></span></span>
-              <div class="choice-list" role="radiogroup" aria-label="Tipo de conta">
-                <label class="choice-card"><input type="radio" name="c15-kind"><span class="choice-card__icon"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span><span><span class="choice-card__title">Pessoal</span><span class="choice-card__desc">Para você e a sua família.</span></span></label>
-                <label class="choice-card is-selected"><input type="radio" name="c15-kind" checked><span class="choice-card__icon"><svg class="i" aria-hidden="true"><use href="#i-grid"/></svg></span><span><span class="choice-card__title">Equipe</span><span class="choice-card__desc">Para até 20 pessoas.</span></span></label>
-              </div>
+              <fieldset class="demo-options"><legend class="visually-hidden">Tipo de conta</legend>
+                <label class="demo-option"><input type="radio" name="c15-kind"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg><span><b>Pessoal</b><span>Para você e a sua família.</span></span></label>
+                <label class="demo-option"><input type="radio" name="c15-kind" checked><svg class="i" aria-hidden="true"><use href="#i-grid"/></svg><span><b>Equipe</b><span>Para até 20 pessoas.</span></span></label>
+              </fieldset>
             </div>
             <footer class="demo-card__foot"><button class="btn btn--subtle" type="button">Voltar</button><button class="btn btn--primary" type="button">Continuar</button></footer>
           </article>

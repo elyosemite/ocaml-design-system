@@ -113,3 +113,38 @@ h3.sub { margin-top: var(--space-lg); color: var(--color-ink); font: 700 var(--t
 @media (prefers-reduced-motion: reduce) {
   .doc-nav a, .pager__link { transition: none; }
 }
+
+/* ---------- Celular e tablet: nada passa da largura da tela ----------
+   A coluna de conteúdo é uma trilha minmax(0, 1fr): um exemplo largo não alarga mais o título e o texto ao lado.
+   O que é largo por natureza (matrizes de estado, telas inteiras, tabelas) rola dentro do próprio palco. */
+.doc > main, .ds-section, .ds-head, .stage, .state, .part, .two-col > *, .guidance > div { min-width: 0; }
+.ds-section, .ds-head { grid-template-columns: minmax(0, 1fr); }
+.stage, .state, .stage > *, .state > * { max-width: 100%; }
+.states > .state { flex-shrink: 1; }
+.stage > .matrix, .stage > .layout-map, .stage > table { max-width: none; width: max-content; }
+.state, .stack { grid-template-columns: minmax(0, 1fr); }
+.stage .unlock, .state .unlock { grid-template-columns: minmax(0, 1fr); }
+.stage .unlock__card, .state .unlock__card { max-width: 100%; grid-template-columns: minmax(0, 1fr); }
+.state .notice-panel__head { flex-wrap: wrap; }
+.state > .toast, .state > .os-toast, .state > .menu { width: 100%; max-width: min(100%, 25rem); }
+.stage .toast, .stage .os-toast, .stage .modal, .stage .menu, .stage .unlock, .stage .input--search, .state .toast, .state .modal, .state .menu { max-width: 100%; }
+.ds-head code, .lede code, .guidance code, .classes code, .state figcaption code, .tk-desc code, .ficha code, p code, td code { overflow-wrap: anywhere; }
+.code-block pre { max-width: 100%; }
+@media (max-width: 60rem) {
+  .stage { overflow-x: auto; overscroll-behavior-x: contain; }
+  .tier-table, .space-table, .contrast-table { display: block; overflow-x: auto; }
+  .page-top { flex-wrap: nowrap; }
+  .page-top .wordmark { white-space: nowrap; }
+  .crumb { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pager { gap: var(--space-sm); }
+}
+@media (max-width: 40rem) {
+  .ds-section { gap: var(--space-lg); padding-block: var(--space-lg) var(--space-xl); }
+  .ds-head h1 { font-size: clamp(2.125rem, 9vw, 2.75rem); }
+  .stage { padding: var(--space-md); border-radius: var(--radius-card); }
+  .guidance { grid-template-columns: minmax(0, 1fr); }
+  .state .unlock { padding-inline: 0; }
+}
+@media (pointer: coarse) {
+  .doc-nav a { display: flex; align-items: center; min-height: 44px; }
+}

@@ -10,6 +10,8 @@
 /* Hallmark · answered F4 · one filled primary on the page; the pressed theme button is a state, the blue ones belong to the specimen */
 /* Hallmark · answered F15 · the extra column gaps come from dist/components.css, loaded for the live specimen */
 /* Hallmark · reworded the hero paragraph to "Tokens, componentes e padrões prontos para qualquer produto." · 58 named its 53 words; its facts moved to the layers, themes, use and footer sections */
+/* Hallmark · dismissed 23 · the blue past 5% at 1280 is the sample screens' own primary buttons from components.css, the product, not page accent */
+/* Hallmark · polish 14 nov 2026 · responsive for phone and tablet: tilts drop under 60rem, actions stack under 40rem, coarse-pointer targets 44px */
 /* Hallmark · dropped the version lozenge from the masthead · 66 names a version badge in the hero; "Versão 3.0" now closes the footer */
 @import url("./tokens.css");
 @import url("./base.css");
@@ -132,7 +134,7 @@
 .swatches li { display: grid; gap: var(--space-2xs); min-width: 0; }
 .swatch { display: block; aspect-ratio: 4 / 3; min-height: 120px; margin-bottom: var(--space-xs); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-card); background: var(--sw); }
 .swatches code { font-family: var(--font-outlier); font-size: var(--text-xs); color: var(--color-ink); overflow-wrap: anywhere; }
-.swatch__val { min-height: 1lh; font-family: var(--font-outlier); font-size: var(--text-xs); color: var(--color-muted); }
+.swatch__val { min-height: 1lh; font-family: var(--font-outlier); font-size: var(--text-xs); color: var(--color-muted); overflow-wrap: anywhere; }
 
 /* ---------- Usar: o fecho é o código ---------- */
 .use { padding-block: var(--section-gap-s); background: var(--color-paper-2); }
@@ -240,6 +242,21 @@
   .demo-stats--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+/* Opções de rádio dentro de um card: linhas com divisória, nunca uma caixa dentro da caixa (gate 4) */
+.demo-options { display: grid; margin: 0; padding: 0; border: 0; min-width: 0; }
+.demo-option { display: flex; align-items: center; gap: var(--space-sm); min-height: 56px; padding: var(--space-xs) var(--space-2xs); border-bottom: var(--rule-hair) solid var(--color-border); cursor: pointer; }
+.demo-option:last-child { border-bottom: 0; }
+.demo-option:has(input:checked) { color: var(--color-text-selected); }
+.demo-option:has(input:checked) b { color: var(--color-text-selected); }
+.demo-option input { margin: 0; accent-color: var(--color-bg-brand-bold); }
+.demo-option input:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.demo-option .i { color: var(--color-icon-subtle); flex-shrink: 0; }
+.demo-option > span { display: grid; }
+.demo-option b { font-weight: var(--font-weight-semibold); color: var(--color-text); }
+.demo-option > span > span { color: var(--color-text-subtle); font: var(--font-body-small); }
+/* O campo de busca do DS não tem borda, só fundo; dentro do card ganha a borda dos outros campos (gate 40) */
+.demo-card .input--search { border-color: var(--color-border-input); }
+
 /* ---------- Telas estreitas ---------- */
 @media (max-width: 60rem) {
   .hero__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); min-height: 0; }
@@ -269,4 +286,36 @@
   .stack:hover .screen--left { transform: translate(-4%, -64%) rotate(-7deg); }
   .stack:hover .screen--right { transform: translate(5%, -30%) rotate(6deg); }
   .btn-home:active, .code__copy:active { transform: none; }
+}
+
+/* ---------- Celular e tablet ----------
+   Abaixo de 60rem as inclinações saem (só a tela do meio fica, reta e centrada), os cards de três métricas
+   viram duas colunas e os controles de toque ganham 44px. */
+@media (max-width: 60rem) {
+  .stack__screens { min-height: 0; }
+  .screen--left, .screen--right { display: none; }
+  .screen--center { width: 100%; max-width: 36rem; }
+  .stack figcaption { margin-top: var(--space-md); }
+  .hero__grid { padding-block: var(--space-xl) var(--space-2xl); }
+  .showcase__cards { gap: var(--space-md); }
+  .demo-stats--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .demo-stats--3 .demo-stat:last-child { grid-column: 1 / -1; }
+  .themes__grid { row-gap: var(--space-xl); }
+  .use__grid { row-gap: var(--space-xl); }
+  .index__body .ov-group { row-gap: var(--space-md); padding-block: var(--space-xl); }
+}
+@media (max-width: 40rem) {
+  .mast__bar { min-height: 64px; gap: var(--space-xs); }
+  .hero .lead { margin-top: var(--space-md); }
+  .hero__actions { flex-direction: column; align-items: stretch; }
+  .btn-home { justify-content: center; }
+  .layers__rows a { min-height: 0; padding-block: var(--space-md); }
+  .seg { display: flex; width: 100%; }
+  .swatch { min-height: 0; }
+  .seg button { flex: 1; padding-inline: var(--space-xs); }
+  .demo-card__head { flex-wrap: wrap; }
+  .close__line { font-size: var(--text-lg); }
+}
+@media (pointer: coarse) {
+  .mast__panel .doc-nav a { display: flex; align-items: center; min-height: 44px; }
 }
