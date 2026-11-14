@@ -102,6 +102,21 @@ for (const f of readdirSync(ds).filter((n) => n.endsWith(".html") && n !== "inde
   if (!ids.includes(f.slice(0, -5))) errors.push(`${f} não está em OCAML_PAGES`);
 }
 
+// ---- 3a. índice lateral: toda página do registro aparece em OCAML_NAV, e todo alvo do índice existe ----
+const navMatch = docsJs.match(/const OCAML_NAV = (\[[\s\S]*?\n\]);/);
+if (!navMatch) errors.push("docs.js: OCAML_NAV não encontrado");
+else {
+  const nav = (0, eval)(navMatch[1]);
+  const targets = nav.flatMap((c) => c.items || c.groups.flatMap((g) => g.items)).map(([, t]) => t).filter(Boolean);
+  const navIds = new Set(targets.map((t) => t.split("#")[0]));
+  for (const id of ids) if (!navIds.has(id)) errors.push(`índice: ${id} está em OCAML_PAGES mas não aparece em OCAML_NAV`);
+  for (const t of targets) {
+    const [id, anchor] = t.split("#");
+    if (id !== "index" && !ids.includes(id)) { errors.push(`índice: ${t} aponta para uma página fora do registro`); continue; }
+    if (anchor && !read(`${id}.html`).includes(`id="${anchor}"`)) errors.push(`índice: ${t} aponta para uma âncora que não existe`);
+  }
+}
+
 
 // ---- 4. métricas (v3 §12) ----
 const clean = componentsCss.replace(/\/\*(?![^*]*físico)[\s\S]*?\*\//g, "");

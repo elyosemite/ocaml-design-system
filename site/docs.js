@@ -310,23 +310,88 @@ const OCAML_PAGES = [
   }
 ];
 
+/* Índice lateral por categoria. O registro acima (camadas e status) continua sendo a fonte de verdade das
+   páginas; isto só diz onde cada uma aparece na navegação. Toda página do registro precisa aparecer aqui
+   (o pnpm check confere), e um alvo null é um item planejado, mostrado como "em breve". */
+const OCAML_NAV = [
+  { title: 'Começar', items: [
+    ['Visão geral', 'index'], ['Princípios', 'principios'], ['Acessibilidade', 'acessibilidade'], ['Temas e densidade', 'temas'],
+    ['Variáveis CSS', 'variaveis'], ['Arquitetura', 'arquitetura'], ['Governança', 'governanca'],
+  ] },
+  { title: 'Fundamentos', items: [
+    ['Tokens', 'tokens'], ['Conteúdo', 'conteudo'], ['Espaçamento', 'espacamento'], ['Grid', 'layouts'], ['Cor', 'cores'],
+    ['Tipografia', 'tipografia'], ['Movimento', 'tokens#outros'], ['Elevação', 'forma#elevacao'], ['Borda', 'tokens#outros'], ['Raio', 'forma#raio'],
+  ] },
+  { title: 'Componentes', groups: [
+    { title: 'Formulários e entrada', items: [
+      ['Botão', 'botoes'], ['Calendário', null], ['Checkbox', 'selecao'], ['Comentário', null], ['Data e hora', null],
+      ['Menu suspenso', 'menus'], ['Formulário', 'padrao-validacao'], ['Rádio', 'selecao'], ['Intervalo', null],
+      ['Lista de opções', 'campos'], ['Área de texto', 'campos'], ['Campo de texto', 'campos'], ['Toggle', 'selecao'],
+    ] },
+    { title: 'Imagens e ícones', items: [['Avatar', 'avatar'], ['Ícones', null]] },
+    { title: 'Rótulos', items: [['Etiquetas', 'etiquetas'], ['Chips', 'destinatarios']] },
+    { title: 'Layout e estrutura', items: [['Layouts', 'layouts'], ['Header', 'header']] },
+    { title: 'Carregamento', items: [['Spinner e skeleton', 'carregamento']] },
+    { title: 'Mensagens', items: [['Banners e avisos', 'mensagens'], ['Toasts', 'toasts'], ['Estados vazios', 'vazios']] },
+    { title: 'Navegação', items: [['Navegação lateral', 'navegacao'], ['Abas', null], ['Busca', 'padrao-busca']] },
+    { title: 'Sobreposições e camadas', items: [['Modais', 'modais'], ['Menus e tooltips', 'menus']] },
+    { title: 'Primitivos', items: [['Mapa de primitivos', 'arquitetura#primitives'], ['Box, Stack e Inline', null]] },
+    { title: 'Indicadores de status', items: [['Lozenge', 'lozenge'], ['Badge', 'badge'], ['Selos de segurança', 'criptografia'], ['Progresso', null]] },
+  ] },
+  { title: 'Padrões', items: [
+    ['Validação de formulário', 'padrao-validacao'], ['Confirmação', 'padrao-confirmacao'], ['Busca', 'padrao-busca'],
+    ['Seleção em lote', 'padrao-selecao-em-lote'], ['Blog e artigos', 'padrao-blog'],
+  ] },
+  { title: 'Produto: e-mail', items: [
+    ['Contas', 'contas'], ['Pastas', 'pastas'], ['Lista de conversas', 'threads'], ['Leitura', 'leitura'], ['Composição', 'composicao'],
+    ['Anexos', 'anexos'], ['Busca', 'busca'], ['Regras', 'regras'], ['Criptografia', 'criptografia'], ['Arquivos de e-mail', 'arquivos'],
+    ['Documentação', 'documentacao'],
+  ] },
+];
+
 (() => {
   document.body.insertAdjacentHTML('afterbegin', window.OCAML_SPRITE || ''); // gerado de src/icons/ (dist/sprite.js)
   const page = document.body.dataset.page || 'index';
   const href = (id) => id + '.html';
   const flat = OCAML_PAGES.flatMap(g => g.items.map(([id, title, desc, status]) => ({ id, title, desc, status, group: g.group })));
 
-  document.getElementById('doc-nav').innerHTML =
-    `<a class="doc-nav__home${page === 'index' ? ' is-current' : ''}" href="index.html"${page === 'index' ? ' aria-current="page"' : ''}>Visão geral</a>` +
-    OCAML_PAGES.map(g => `<div class="doc-nav__group"><div class="nav-heading">${g.group}</div>${g.items.map(([id, title]) =>
-      `<a href="${href(id)}"${id === page ? ' class="is-current" aria-current="page"' : ''}>${title}</a>`).join('')}</div>`).join('');
+  /* Índice lateral: categorias (OCAML_NAV) em vez das camadas do registro. Cada item é [rótulo, alvo];
+     o alvo é "pagina" ou "pagina#ancora", ou null para o que ainda não tem página ("em breve").
+     Em Componentes, cada subcategoria recolhe; abre a que tem a página atual (na principal, todas). */
+  let currentMarked = false;
+  const navItem = ([label, target]) => {
+    if (!target) return `<span class="doc-nav__soon">${label}<small>em breve</small></span>`;
+    const id = target.split('#')[0];
+    const current = id === page && !currentMarked;
+    if (current) currentMarked = true;
+    return `<a href="${target.includes('#') ? target.replace(id, href(id)) : href(id)}"${current ? ' class="is-current" aria-current="page"' : ''}>${label}</a>`;
+  };
+  // Onde a página mora no índice ("Componentes / Formulários e entrada"), para o caminho no topo da página
+  const navPath = (id) => {
+    for (const cat of OCAML_NAV) {
+      if (cat.items && cat.items.some(([, t]) => t && t.split('#')[0] === id)) return cat.title;
+      for (const g of cat.groups || []) if (g.items.some(([, t]) => t && t.split('#')[0] === id)) return cat.title + ' / ' + g.title;
+    }
+    return '';
+  };
+  const hasPage = (items) => items.some(([, t]) => t && t.split('#')[0] === page);
+  const navHtml = OCAML_NAV.map(cat => `<div class="doc-nav__cat"><p class="doc-nav__title">${cat.title}</p>${cat.items
+    ? cat.items.map(navItem).join('')
+    : cat.groups.map(g => `<details class="doc-nav__sub"${page === 'index' || hasPage(g.items) ? ' open' : ''}><summary>${g.title}</summary>${g.items.map(navItem).join('')}</details>`).join('')
+  }</div>`).join('');
+  const navEl = document.getElementById('doc-nav');
+  navEl.innerHTML = `<button class="doc-nav__toggle" type="button" aria-expanded="false" aria-controls="doc-nav-list"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg>Todas as páginas</button><div class="doc-nav__list" id="doc-nav-list">${navHtml}</div>`;
+  navEl.querySelector('.doc-nav__toggle').addEventListener('click', (e) => {
+    const open = navEl.classList.toggle('is-open');
+    e.currentTarget.setAttribute('aria-expanded', String(open));
+  });
 
   const main = document.querySelector('main');
   const i = flat.findIndex(p => p.id === page);
   if (i >= 0) {
     main.insertAdjacentHTML('afterbegin', `<div class="page-top">
       <a class="wordmark" href="index.html">OCaml Design System</a>
-      <span class="crumb">${flat[i].group}</span>
+      <span class="crumb">${navPath(page) || flat[i].group}</span>
       <button class="btn btn--subtle theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema"></button>
     </div>`);
     const h1 = main.querySelector('h1');
