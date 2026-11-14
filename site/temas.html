@@ -6,11 +6,9 @@
 <title>Temas e densidade · Epistula Design System</title>
 <meta name="description" content="Pessoas e contas, com inicial, cor e foto.">
 <script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
 <link rel="stylesheet" href="docs.css">
 </head>
 <body data-page="temas">
@@ -40,7 +38,7 @@
       </div>
       <dl class="guidance">
         <div><dt>O que muda</dt><dd>As bordas passam para a borda forte; o texto de apoio e o desabilitado sobem um nível; os ícones sutis viram ícones comuns; o anel de foco passa de 2 para 3px.</dd></div>
-        <div><dt>Como funciona</dt><dd>Um bloco no fim de <code>tokens.css</code> reaponta os tokens. Como os componentes só usam tokens semânticos, nenhum precisa saber do alto contraste.</dd></div>
+        <div><dt>Como funciona</dt><dd>Um bloco gerado de <code>src/tokens/themes/_high-contrast.scss</code> reaponta os tokens. Como os componentes só usam tokens semânticos, nenhum precisa saber do alto contraste.</dd></div>
         <div><dt>Combina com o escuro</dt><dd>O mesmo bloco vale no claro e no escuro, porque aponta para outros tokens, e não para cores.</dd></div>
       </dl>
       <h2 id="densidade">Densidade</h2>
@@ -58,12 +56,13 @@
       <h2 id="verificar">Como cada componente é verificado</h2>
       <dl class="guidance">
         <div><dt>Contraste</dt><dd>Medido ao vivo, em cada tema, em <a href="acessibilidade.html">Acessibilidade</a>: texto 4,5:1; ícones, bordas de campo e foco 3:1.</dd></div>
-        <div><dt>Paridade dos temas</dt><dd>O <code>pnpm ds:check</code> confere que o tema escuro do sistema e o forçado têm os mesmos valores, e que todo token escuro tem um claro.</dd></div>
+        <div><dt>Paridade dos temas</dt><dd>O <code>pnpm check</code> confere que o tema escuro do sistema e o forçado têm os mesmos valores, e que todo token escuro tem um claro.</dd></div>
         <div><dt>Estado sem cor</dt><dd>Foco, seleção, desabilitado, erro e segurança sempre mudam também forma, texto ou peso. Nunca só a cor.</dd></div>
       </dl>
     </section>
   </main>
 </div>
+<script src="../dist/sprite.js"></script>
 <script src="docs.js"></script>
 <script>
 (() => {

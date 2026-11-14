@@ -6,11 +6,9 @@
 <title>Variáveis CSS · Epistula Design System</title>
 <meta name="description" content="Todas as custom properties de tokens.css.">
 <script>try{var t=localStorage.getItem('epistula-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
 <link rel="stylesheet" href="docs.css">
 </head>
 <body data-page="variaveis">
@@ -50,11 +48,12 @@
     <section class="ds-section" id="instalar">
       <div class="ds-head">
         <h2>Usar no projeto</h2>
-        <p class="lede">Importe <code>tokens.css</code> antes de <code>components.css</code>. As fontes vêm dos pacotes <code>@fontsource</code> no app, no site e nas docs; só estas páginas de documentação carregam do Google Fonts.</p>
+        <p class="lede">Importe <code>tokens.css</code> antes de <code>components.css</code>. As fontes vêm dos pacotes <code>@fontsource</code>, copiadas para <code>dist/fonts/</code>: nenhuma página carrega nada de terceiros.</p>
       </div>
       <div class="code-block snippet">
-        <pre><code>&lt;link rel="stylesheet" href="design-system/tokens.css"&gt;
-&lt;link rel="stylesheet" href="design-system/components.css"&gt;
+        <pre><code>&lt;link rel="stylesheet" href="dist/fonts.css"&gt;
+&lt;link rel="stylesheet" href="dist/tokens.css"&gt;
+&lt;link rel="stylesheet" href="dist/components.css"&gt;
 
 /* Uso: sempre o token semântico */
 .minha-linha { color: var(--color-text-subtlest); font: var(--font-body); padding: var(--space-150) var(--space-200); }</code></pre>
@@ -69,6 +68,7 @@
     </section>
   </main>
 </div>
+<script src="../dist/sprite.js"></script>
 <script src="docs.js"></script>
 </body>
 </html>

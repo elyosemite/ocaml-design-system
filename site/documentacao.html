@@ -14,11 +14,9 @@
     if (q.get('so')) document.documentElement.dataset.solo = q.get('so');
   })();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
 <link rel="stylesheet" href="docs.css">
 <style>
 /* Composição da documentação: não é peça do DS; o equivalente vive no tema do Starlight (docs-site). */
@@ -382,6 +380,7 @@ html[data-solo] .docs-demo { border-radius: 0; border: 0; min-width: 0; }
     </section>
   </main>
 </div>
+<script src="../dist/sprite.js"></script>
 <script src="docs.js"></script>
 </body>
 </html>

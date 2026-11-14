@@ -23,7 +23,7 @@ const EPISTULA_FICHAS = {
       "Não dependa só da cor para o estado: desabilitado também perde o contraste e o cursor."
     ],
     "conteudo": "O botão cresce com o texto: nunca fixe a largura. Rótulos curtos, no infinitivo; sem juntar pedaços de frase. Botão só com ícone leva <code>aria-label</code> e dica.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Usado em todo o app; o comportamento de cada ação é testado na lógica de cada tela. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Usado em todo o app; o comportamento de cada ação é testado na lógica de cada tela. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica: igual no Windows e no Linux. O botão dividido de download escolhe o pacote pelo sistema detectado (L81).",
     "relacionados": [
       "campos",
@@ -63,7 +63,7 @@ const EPISTULA_FICHAS = {
       "Não desligue o gerenciador de senhas: use <code>current-password</code> e <code>new-password</code>."
     ],
     "conteudo": "Mensagens de erro em frases completas e específicas, sem códigos. Evite montar o texto por pedaços ('Campo ' + nome + ' inválido'), porque isso quebra na tradução. Endereços de e-mail e números não têm formato fixo entre idiomas.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica: o campo é o nativo do navegador do sistema.",
     "relacionados": [
       "padrao-validacao",
@@ -96,7 +96,7 @@ const EPISTULA_FICHAS = {
       "Não peça confirmação para um toggle: o efeito é imediato e reversível."
     ],
     "conteudo": "O texto do toggle descreve o estado ligado ('Bloquear junto com o sistema'). Nomes de cor são traduzíveis e também são o nome acessível.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A escolha de aparência é coberta em <code>src/lib/us6.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A escolha de aparência é coberta em <code>src/lib/us6.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "O toggle 'Bloquear junto com o Windows' só existe no Windows; no Linux o bloqueio por inatividade continua.",
     "relacionados": [
       "campos",
@@ -129,7 +129,7 @@ const EPISTULA_FICHAS = {
       "Não use foto como única pista de quem é a conta."
     ],
     "conteudo": "A inicial vem do nome que a pessoa deu à conta, em qualquer alfabeto. O avatar é decorativo para leitor de tela; o nome fica em texto.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "badge",
@@ -167,7 +167,7 @@ const EPISTULA_FICHAS = {
       "Não coloque badge em tudo: só onde a contagem muda a decisão."
     ],
     "conteudo": "Números seguem o formato do idioma (separador de milhar). O texto do badge não é traduzido; o rótulo do item que o contém é.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "lozenge",
@@ -192,7 +192,7 @@ const EPISTULA_FICHAS = {
       "Não use o forte se o status não é o assunto principal da tela."
     ],
     "conteudo": "Uma palavra, no tempo certo ('Enviando', 'Enviada'). Traduza como palavra solta, sem depender de gênero ou plural de outra frase.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "badge",
@@ -229,7 +229,7 @@ const EPISTULA_FICHAS = {
       "Não esconda uma ação essencial só num menu."
     ],
     "conteudo": "Itens começam com verbo ('Mover para', 'Renomear'). O atalho mostra a tecla do sistema. Reticências quando abre outra janela ('Selecionar outra pasta…').",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A montagem do menu da conta é testada em <code>src/lib/us7.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A montagem do menu da conta é testada em <code>src/lib/us7.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "O atalho mostra Ctrl no Windows e no Linux.",
     "relacionados": [
       "navegacao",
@@ -263,7 +263,7 @@ const EPISTULA_FICHAS = {
       "Não dependa só da cor: há ícone e título."
     ],
     "conteudo": "Frases completas, calmas e concretas. Evite jargão. O botão de ação repete o verbo ('Reconectar').",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "toasts",
@@ -289,7 +289,7 @@ const EPISTULA_FICHAS = {
       "Não cite o provedor da conta no texto."
     ],
     "conteudo": "Quem ou o quê, depois o assunto e o começo do texto, e por último o nome que a pessoa deu à conta.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A lógica de notificações é testada em <code>src/lib/us8.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A lógica de notificações é testada em <code>src/lib/us8.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "As notificações nativas funcionam no Windows. No Linux elas chegam na US18.",
     "relacionados": [
       "modais",
@@ -343,7 +343,7 @@ const EPISTULA_FICHAS = {
       "Não empilhe modais."
     ],
     "conteudo": "Título curto e botão com o mesmo verbo ('Excluir permanentemente'). Explique a consequência antes da confirmação.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. O foco preso e o Esc estão em <code>src/ui/Modal.tsx</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. O foco preso e o Esc estão em <code>src/ui/Modal.tsx</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "padrao-confirmacao",
@@ -369,7 +369,7 @@ const EPISTULA_FICHAS = {
       "Não leve regra de e-mail para o componente: isso é de Pastas e Contas."
     ],
     "conteudo": "Nomes curtos, no singular ou no plural que faça sentido para o grupo. Evite abreviar: o texto precisa caber traduzido.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "pastas",
@@ -404,7 +404,7 @@ const EPISTULA_FICHAS = {
       "Não culpe a pessoa."
     ],
     "conteudo": "Título curto e uma frase de apoio. A ação principal repete o verbo.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "carregamento",
@@ -438,7 +438,7 @@ const EPISTULA_FICHAS = {
       "Não mostre progresso falso."
     ],
     "conteudo": "Texto de espera só quando há ação ('Sincronizando…'). Tempo de espera depois de um erro mostra a contagem no texto de ajuda.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A espera depois de erros de senha é testada em <code>src/lib/us10.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A espera depois de erros de senha é testada em <code>src/lib/us10.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "vazios",
@@ -464,7 +464,7 @@ const EPISTULA_FICHAS = {
       "Não cite o provedor da conta nos textos."
     ],
     "conteudo": "O nome da conta é da pessoa ('Pessoal', 'Trabalho'). O nome acessível junta nome, e-mail e não lidas.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A lógica de contas é testada em <code>src/lib/accounts.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A lógica de contas é testada em <code>src/lib/accounts.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "navegacao",
@@ -504,7 +504,7 @@ const EPISTULA_FICHAS = {
       "Não pinte 'Atrasadas' só de vermelho: o texto diz."
     ],
     "conteudo": "Nomes de pasta do sistema são traduzidos; os das pastas da pessoa não. 'Mover 3 conversas' deve ter plural correto.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. As sinalizadas são testadas em <code>src/lib/us6.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. As sinalizadas são testadas em <code>src/lib/us6.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "navegacao",
@@ -544,7 +544,7 @@ const EPISTULA_FICHAS = {
       "Não use mais de um botão primário."
     ],
     "conteudo": "Comandos com verbo ('Arquivar', 'Mover para'). O atalho aparece na dica.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "menus",
@@ -578,7 +578,7 @@ const EPISTULA_FICHAS = {
       "Não mostre ações rápidas sem alternativa por teclado."
     ],
     "conteudo": "A data segue o formato do idioma e do dia ('10:42', 'ontem', '23 out'). 'você' nos participantes é traduzido. O trecho corta com reticências; não corte no meio de uma palavra ao traduzir.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A seleção é testada em <code>src/lib/selection.test.ts</code> e as datas em <code>src/lib/format.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A seleção é testada em <code>src/lib/selection.test.ts</code> e as datas em <code>src/lib/format.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "padrao-selecao-em-lote",
@@ -616,7 +616,7 @@ const EPISTULA_FICHAS = {
       "Não rode script do e-mail."
     ],
     "conteudo": "Datas e horas no formato do idioma. Endereços completos nos destinatários. O texto do e-mail é de terceiros e nunca é traduzido pelo app.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A limpeza do HTML tem corpus de ataque e <code>proptest</code> em <code>src-tauri/src/sanitize.rs</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A limpeza do HTML tem corpus de ataque e <code>proptest</code> em <code>src-tauri/src/sanitize.rs</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "composicao",
@@ -648,7 +648,7 @@ const EPISTULA_FICHAS = {
       "Não prometa criptografia que não está ligada."
     ],
     "conteudo": "Prefixos 'Re:' e 'Fw:' são editáveis. A citação segue a convenção do idioma da mensagem original.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. O envio é testado em <code>src/lib/us7.test.ts</code> e a tecnologia de envio em <code>src/lib/us14.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. O envio é testado em <code>src/lib/us7.test.ts</code> e a tecnologia de envio em <code>src/lib/us14.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "destinatarios",
@@ -678,7 +678,7 @@ const EPISTULA_FICHAS = {
       "Não use o chip de filtro da busca no lugar do chip de pessoa."
     ],
     "conteudo": "O chip mostra o nome e, na dica, o endereço. Endereços de e-mail podem ter caracteres de qualquer alfabeto.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A leitura de destinatários é testada em <code>src/lib/us4.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A leitura de destinatários é testada em <code>src/lib/us4.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "campos",
@@ -704,7 +704,7 @@ const EPISTULA_FICHAS = {
       "Não aceite anexo acima do limite sem avisar."
     ],
     "conteudo": "O tamanho segue o formato do idioma. O nome do arquivo é do usuário e não é traduzido.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "composicao",
@@ -728,7 +728,7 @@ const EPISTULA_FICHAS = {
       "Não misture fundo de um par com o texto de outro."
     ],
     "conteudo": "O nome da etiqueta é da pessoa e não é traduzido.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. O contraste é medido ao vivo em <a href=\"acessibilidade.html\">Acessibilidade</a>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. O contraste é medido ao vivo em <a href=\"acessibilidade.html\">Acessibilidade</a>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "avatar",
@@ -759,7 +759,7 @@ const EPISTULA_FICHAS = {
       "Não esconda 'Salvar busca' nem 'Todas as contas'."
     ],
     "conteudo": "Os operadores (<code>de:</code>, <code>para:</code>, <code>depois:</code>) são traduzidos junto com a interface. Datas aceitam o formato do idioma.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A busca é testada em <code>src/lib/us16.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A busca é testada em <code>src/lib/us16.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica: a busca é local em qualquer sistema.",
     "relacionados": [
       "padrao-busca",
@@ -794,7 +794,7 @@ const EPISTULA_FICHAS = {
       "Não esconda por que uma regra foi desligada."
     ],
     "conteudo": "A frase é montada por partes; ao traduzir, monte a frase inteira por idioma, não junte pedaços.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A frase e os campos são testados em <code>src/lib/us12.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A frase e os campos são testados em <code>src/lib/us12.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "busca",
@@ -833,7 +833,7 @@ const EPISTULA_FICHAS = {
       "Não use o nome do programa de origem fora da ajuda de onde achar o backup."
     ],
     "conteudo": "Os nomes dos programas de origem aparecem só onde a pessoa os procura. O resto do texto fala de 'arquivo de e-mail'.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. A importação é testada em <code>src/lib/us15.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. A importação é testada em <code>src/lib/us15.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Arrastar um arquivo para a janela e o diálogo de escolha usam o sistema; o resultado é o mesmo no Windows e no Linux.",
     "relacionados": [
       "contas",
@@ -877,7 +877,7 @@ const EPISTULA_FICHAS = {
       "Não afirme o que o sistema não consegue comprovar."
     ],
     "conteudo": "Linguagem simples para quem não é técnico. Impressão digital em grupos, sempre em fonte mono. Os estados têm frase própria, nunca 'seguro' sozinho.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. As chaves e o envio criptografado são testados em <code>src/lib/us13.test.ts</code> e <code>src/lib/us14.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. As chaves e o envio criptografado são testados em <code>src/lib/us13.test.ts</code> e <code>src/lib/us14.test.ts</code>. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "As chaves ficam no cofre do sistema: Credential Manager no Windows, Secret Service (GNOME Keyring ou KWallet) no Linux.",
     "relacionados": [
       "leitura",
@@ -912,7 +912,7 @@ const EPISTULA_FICHAS = {
       "Não use o gradiente no app de e-mail."
     ],
     "conteudo": "As docs existem em cinco idiomas.",
-    "testes": "Automático: <code>pnpm ds:check</code> confere tokens, temas e o registro de páginas. O site de docs tem build próprio no CI (<code>docs.yml</code>). Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. O site de docs tem build próprio no CI (<code>docs.yml</code>). Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
     "plataforma": "Não se aplica.",
     "relacionados": [
       "layouts",
