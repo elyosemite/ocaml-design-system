@@ -30,6 +30,13 @@ Fases 0 a 4 do `docs/plano-migracao.md`:
 5. **Páginas.** Fontes locais (`@fontsource`) no lugar do Google Fonts; nenhuma requisição a terceiros; o rascunho `rascunho-us16.html` apagado.
 6. **Conferência.** `pnpm compare` (resultado contra `baseline/`) e `pnpm check` adaptado.
 
+## Feito em 17 nov 2026 (0.2.0, visual neutro para todos os produtos)
+
+1. **Tokens.** Claro e escuro em cinza neutro; `--radius-xlarge`, `--color-border-brand` e `--color-border-information`.
+2. **Componentes.** Peças de `examples/` promovidas a componente: pill, chip de filtro, abas elevadas, stepper, segmentos, composer, a casca `.workspace`, painel, cartão de uso e identidade. Cada uma tem página e ficha.
+3. **Plataformas.** `dist/platforms/` com JSON (DTCG), TypeScript, SwiftUI, Compose e XML do Android; `exports` e `prepare` no `package.json`.
+4. **Ainda não.** A lista de conversas e a leitura do app no estilo de `examples/epistulamail.html` (linhas em cartão) ficam para quando o app adotar a 0.2.0. Também falta o teste visual automático (item 5 abaixo).
+
 ## Próximo
 
 Cada item tem uma evidência e pode virar uma proposta futura em <code>userstory/</code>.

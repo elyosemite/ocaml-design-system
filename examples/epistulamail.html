@@ -9,66 +9,28 @@
   <link rel="stylesheet" href="../dist/tokens.css">
   <link rel="stylesheet" href="../dist/components.css">
   <style>
-    /* Só a montagem desta tela. Tudo passa por tokens semânticos; nenhum valor de cor fixo.
-       As classes .pill, .block, .seg-meter, .composer e .trow são candidatas a componente (plano, fases 3 e 4). */
+    /* Só a montagem desta tela. Casca (.workspace), .panel, .pill, .filter-chip, .segments, .composer, .usage-card e
+       .identity vêm de components.css. As linhas da lista (.trow) e a leitura ficam aqui. Nenhum valor de cor fixo. */
     html, body { height: 100%; }
     body { margin: 0; background: var(--color-surface-sunken); color: var(--color-text); font: var(--font-body); -webkit-font-smoothing: antialiased; }
     button { font: inherit; }
     [hidden] { display: none !important; }
     mark { background: var(--color-bg-warning); color: inherit; border-radius: 2px; padding-inline: 1px; }
 
-    /* ---------- Peças candidatas a componente ---------- */
-    .block { border-radius: var(--radius-large); background: var(--color-surface); box-shadow: var(--shadow-raised); }
-    .pill { display: inline-flex; align-items: center; gap: var(--space-050); height: 1.375rem; padding-inline: var(--space-075); border-radius: var(--radius-round); box-shadow: inset 0 0 0 var(--border-width) var(--color-border); font: var(--font-body-small); color: var(--color-text-subtle); white-space: nowrap; }
-    .pill--success { color: var(--color-text-success); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-success); }
-    .pill--warning { color: var(--color-text-warning); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-warning); }
-    .pill--danger { color: var(--color-text-danger); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-danger); }
-    .agent-dot { display: inline-grid; place-items: center; width: 1.25rem; height: 1.25rem; border-radius: var(--radius-small); background: var(--color-bg-brand-bold); color: var(--color-text-inverse); flex: none; }
-    .seg-meter { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; }
-    .seg-meter > span { height: 6px; border-radius: var(--radius-xsmall); background: var(--color-bg-neutral-hovered); }
-    .seg-meter > span.is-on { background: var(--color-bg-neutral-bold); }
-    .chipf { display: inline-flex; align-items: center; gap: var(--space-050); height: 1.75rem; padding-inline: var(--space-100); border: 0; border-radius: var(--radius-round); background: transparent; color: var(--color-text-subtle); box-shadow: inset 0 0 0 1px var(--color-border); font: var(--font-weight-medium) var(--font-size-body-small)/1 var(--font-family-body); cursor: pointer; white-space: nowrap; }
-    .chipf:hover { background: var(--color-bg-neutral-subtle-hovered); }
-    .chipf[aria-pressed="true"] { background: var(--color-text); color: var(--color-text-inverse); box-shadow: none; }
-    .chipf .i { color: inherit; }
-    .composer { padding: var(--space-150); border-radius: var(--radius-large); background: var(--color-surface); box-shadow: var(--shadow-raised); display: grid; gap: var(--space-100); }
-    .composer textarea { border: 0; resize: none; background: transparent; color: var(--color-text); font: var(--font-body); outline: none; min-height: 1.5rem; }
-    .composer textarea::placeholder { color: var(--color-text-subtlest); }
-    .composer__bar { display: flex; align-items: center; gap: var(--space-025); }
+        .agent-dot { display: inline-grid; place-items: center; width: 1.25rem; height: 1.25rem; border-radius: var(--radius-small); background: var(--color-bg-brand-bold); color: var(--color-text-inverse); flex: none; }
     .grow { margin-inline-start: auto; }
 
     /* ---------- Casca em blocos ---------- */
-    .ws { display: grid; grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr); height: 100vh; padding: var(--space-100) var(--space-100) var(--space-100) 0; }
-    .ws .sidebar { width: auto; background: transparent; border: 0; padding: var(--space-050) var(--space-150); gap: var(--space-150); min-height: 0; overflow-y: auto; }
-    .ws .nav-heading { text-transform: none; letter-spacing: 0; font: var(--font-weight-medium) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body); }
-    .ws .nav-item { gap: var(--space-100); font-weight: var(--font-weight-regular); color: var(--color-text); }
-    .ws .nav-group { gap: 1px; }
+    .workspace__sidebar .nav-group { gap: 1px; }
     .brand { display: flex; align-items: center; gap: var(--space-100); height: var(--control-height); padding-inline: var(--space-050); }
     .brand__mark { display: inline-grid; place-items: center; width: 1.375rem; height: 1.375rem; border-radius: var(--radius-small); background: var(--color-text); color: var(--color-text-inverse); }
     .brand__name { flex: 1; font-weight: var(--font-weight-semibold); letter-spacing: -0.01em; }
     .side-actions { display: flex; gap: var(--space-075); }
     .side-actions .btn--outline:first-child { flex: 1; justify-content: flex-start; }
-    .side-foot { margin-top: auto; display: grid; gap: var(--space-150); }
-    .storage { display: grid; gap: var(--space-100); padding: var(--space-150); }
-    .storage__head { display: flex; align-items: center; gap: var(--space-075); font-weight: var(--font-weight-medium); }
-    .storage__head .label { margin-inline-start: auto; }
-    .storage__value { font: var(--font-body-small); color: var(--color-text-subtlest); }
-    .storage__value strong { font: var(--font-card); color: var(--color-text); margin-inline-end: var(--space-050); }
-    .me { display: flex; align-items: center; gap: var(--space-100); padding-inline: var(--space-050); }
-    .me__text { flex: 1; min-width: 0; display: grid; line-height: 1.25; }
-    .me__name { font-weight: var(--font-weight-medium); }
-    .me__mail { font: var(--font-body-small); color: var(--color-text-subtlest); }
     .acct-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; margin-inline: 4px; }
     .nav-dot { margin-inline: 4px; }
 
-    .main { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; overflow: hidden; }
-    .topbar { display: grid; grid-template-columns: 1fr minmax(12rem, 26rem) 1fr; align-items: center; gap: var(--space-150); height: var(--layout-header-height); padding-inline: var(--space-200) var(--space-150); border-bottom: var(--border-width) solid var(--color-border); }
-    .crumb { display: flex; align-items: center; gap: var(--space-100); min-width: 0; font-weight: var(--font-weight-medium); white-space: nowrap; }
-    .crumb .i { color: var(--color-icon); }
-    .crumb small { font: var(--font-body-small); color: var(--color-text-subtlest); font-weight: var(--font-weight-regular); }
-    .topbar .input--search { min-height: var(--control-height); border-radius: var(--radius-round); }
-    .topbar kbd { font: var(--font-weight-medium) 0.6875rem/1 var(--font-family-code); color: var(--color-text-subtlest); padding: 2px 6px; border-radius: var(--radius-xsmall); box-shadow: inset 0 0 0 1px var(--color-border); }
-    .topbar__end { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-075); }
+    .workspace__topbar kbd { font: var(--font-weight-medium) 0.6875rem/1 var(--font-family-code); color: var(--color-text-subtlest); padding: 2px 6px; border-radius: var(--radius-xsmall); box-shadow: inset 0 0 0 1px var(--color-border); }
 
     /* ---------- Caixa de entrada ---------- */
     .panes { display: grid; grid-template-columns: minmax(20rem, 25rem) minmax(0, 1fr); min-height: 0; }
@@ -128,7 +90,7 @@
     .search__q h2 { margin: 0; font: var(--font-weight-semibold) 1.375rem/1.25 var(--font-family-heading); letter-spacing: -0.015em; }
     .search__q h2 span { color: var(--color-text-subtlest); font-weight: var(--font-weight-regular); }
     .search__filters { display: flex; flex-wrap: wrap; gap: var(--space-075); align-items: center; }
-    .search__filters .chipf[aria-pressed="true"] .i:last-child { margin-inline-start: 2px; }
+    .search__filters .filter-chip[aria-pressed="true"] .i:last-child { margin-inline-start: 2px; }
     .search__grid { display: grid; grid-template-columns: minmax(0, 1fr) 18rem; gap: var(--space-200); align-items: start; }
     .sec-title { display: flex; align-items: center; gap: var(--space-100); margin: 0 0 var(--space-100); font: var(--font-weight-semibold) var(--font-size-body)/1.4 var(--font-family-body); }
     .sec-title small { font: var(--font-body-small); color: var(--color-text-subtlest); font-weight: var(--font-weight-regular); }
@@ -175,13 +137,10 @@
     .theme-picker { margin: 0; }
 
     @media (max-width: 1100px) {
-      .ws { grid-template-columns: minmax(0, 1fr); padding: var(--space-100); }
-      .ws > .sidebar { display: none; }
+      .workspace > .workspace__sidebar { display: none; }
       .search__grid { grid-template-columns: minmax(0, 1fr); }
     }
     @media (max-width: 760px) {
-      .topbar { grid-template-columns: 1fr auto; }
-      .topbar .input--search { display: none; }
       .panes { grid-template-columns: minmax(0, 1fr); }
       .reader { display: none; }
       .settings { grid-template-columns: minmax(0, 1fr); }
@@ -192,8 +151,8 @@
   </style>
 </head>
 <body>
-  <div class="ws">
-    <nav class="sidebar" aria-label="Navegação principal">
+  <div class="workspace">
+    <nav class="sidebar workspace__sidebar" aria-label="Navegação principal">
       <div class="brand">
         <span class="brand__mark" aria-hidden="true"><svg class="i i--sm"><use href="#i-mail"/></svg></span>
         <span class="brand__name">EpistulaMail</span>
@@ -223,25 +182,25 @@
         <a class="nav-item" href="#busca" data-view="busca"><svg class="i"><use href="#i-search"/></svg><span class="nav-item__text">Busca</span></a>
         <a class="nav-item" href="#ajustes" data-view="ajustes"><svg class="i"><use href="#i-settings"/></svg><span class="nav-item__text">Configurações</span></a>
       </div>
-      <div class="side-foot">
-        <section class="storage block" aria-label="Armazenamento">
-          <div class="storage__head"><svg class="i i--sm"><use href="#i-hard-drive"/></svg>Armazenamento<span class="label">Plus</span></div>
-          <div class="storage__value"><strong>6,2 GB</strong>de 15 GB</div>
-          <div class="seg-meter" data-on="10" role="meter" aria-valuemin="0" aria-valuemax="15" aria-valuenow="6.2" aria-label="Armazenamento usado"></div>
+      <div class="workspace__sidebar-foot">
+        <section class="usage-card" aria-label="Armazenamento">
+          <div class="usage-card__head"><svg class="i i--sm"><use href="#i-hard-drive"/></svg>Armazenamento<span class="label">Plus</span></div>
+          <div class="usage-card__value"><strong>6,2 GB</strong>de 15 GB</div>
+          <div class="segments" data-on="10" role="meter" aria-valuemin="0" aria-valuemax="15" aria-valuenow="6.2" aria-label="Armazenamento usado"></div>
         </section>
-        <div class="me">
+        <div class="identity">
           <span class="avatar avatar--sm avatar--purple"><img class="avatar__img" src="../site/images/people/pessoa-5.webp" alt="">JR</span>
-          <span class="me__text"><span class="me__name">Joana Ribeiro</span><span class="me__mail">joana@epistula.app</span></span>
+          <span class="identity__text"><span class="identity__name">Joana Ribeiro</span><span class="identity__meta">joana@epistula.app</span></span>
           <button class="btn btn--subtle btn--icon btn--compact" id="theme" aria-label="Alternar tema claro e escuro"><svg class="i"><use href="#i-moon"/></svg></button>
         </div>
       </div>
     </nav>
 
-    <main class="main block">
-      <header class="topbar">
-        <div class="crumb" id="crumb"></div>
-        <label class="input input--search"><svg class="i"><use href="#i-search"/></svg><input type="search" id="q" placeholder="Buscar e-mails, pessoas, anexos" aria-label="Buscar"><kbd>Ctrl K</kbd></label>
-        <div class="topbar__end">
+    <main class="workspace__main">
+      <header class="workspace__topbar">
+        <div class="workspace__crumb" id="crumb"></div>
+        <label class="input input--search input--round"><svg class="i"><use href="#i-search"/></svg><input type="search" id="q" placeholder="Buscar e-mails, pessoas, anexos" aria-label="Buscar"><kbd>Ctrl K</kbd></label>
+        <div class="workspace__topbar-end">
           <button class="btn btn--subtle btn--icon" aria-label="Notificações"><svg class="i"><use href="#i-bell"/></svg></button>
           <button class="btn btn--subtle btn--icon" aria-label="Exibição"><svg class="i"><use href="#i-sliders"/></svg></button>
           <button class="btn btn--subtle btn--icon" aria-label="Mais opções"><svg class="i"><use href="#i-more"/></svg></button>
@@ -252,10 +211,10 @@
       <div class="panes" id="view-caixa">
         <section class="list" aria-label="Conversas">
           <div class="list__head">
-            <div class="chipbar">
-              <button class="chipf" aria-pressed="true" data-filter="all">Todas</button>
-              <button class="chipf" aria-pressed="false" data-filter="unread">Não lidas</button>
-              <button class="chipf" aria-pressed="false" data-filter="files"><svg class="i i--sm"><use href="#i-clip"/></svg>Anexos</button>
+            <div class="chipbar filter-chip-group">
+              <button class="filter-chip" aria-pressed="true" data-filter="all">Todas</button>
+              <button class="filter-chip" aria-pressed="false" data-filter="unread">Não lidas</button>
+              <button class="filter-chip" aria-pressed="false" data-filter="files"><svg class="i i--sm"><use href="#i-clip"/></svg>Anexos</button>
             </div>
             <button class="btn btn--subtle btn--icon btn--compact grow" aria-label="Atualizar"><svg class="i"><use href="#i-refresh"/></svg></button>
           </div>
@@ -274,7 +233,7 @@
           <div class="reader__body" id="reader"></div>
           <div class="reader__reply">
             <form class="composer" onsubmit="return false">
-              <textarea rows="1" id="reply" placeholder="Responder…" aria-label="Resposta"></textarea>
+              <textarea class="composer__input" rows="1" id="reply" placeholder="Responder…" aria-label="Resposta"></textarea>
               <div class="composer__bar">
                 <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Anexar"><svg class="i"><use href="#i-clip"/></svg></button>
                 <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Formatação"><svg class="i"><use href="#i-bold"/></svg></button>
@@ -292,11 +251,11 @@
         <div class="search__q">
           <h2>contrato lumen <span>· 14 resultados</span></h2>
           <div class="search__filters" role="group" aria-label="Filtros">
-            <button class="chipf" aria-pressed="true"><svg class="i i--sm"><use href="#i-user"/></svg>De: Marina Couto<svg class="i i--sm"><use href="#i-x"/></svg></button>
-            <button class="chipf" aria-pressed="true"><svg class="i i--sm"><use href="#i-clip"/></svg>Tem anexo<svg class="i i--sm"><use href="#i-x"/></svg></button>
-            <button class="chipf" aria-pressed="false"><svg class="i i--sm"><use href="#i-clock"/></svg>Qualquer data<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
-            <button class="chipf" aria-pressed="false"><svg class="i i--sm"><use href="#i-folder"/></svg>Todas as pastas<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
-            <button class="chipf" aria-pressed="false"><svg class="i i--sm"><use href="#i-tag"/></svg>Etiqueta<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+            <button class="filter-chip" aria-pressed="true"><svg class="i i--sm"><use href="#i-user"/></svg>De: Marina Couto<svg class="i i--sm"><use href="#i-x"/></svg></button>
+            <button class="filter-chip" aria-pressed="true"><svg class="i i--sm"><use href="#i-clip"/></svg>Tem anexo<svg class="i i--sm"><use href="#i-x"/></svg></button>
+            <button class="filter-chip" aria-pressed="false"><svg class="i i--sm"><use href="#i-clock"/></svg>Qualquer data<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+            <button class="filter-chip" aria-pressed="false"><svg class="i i--sm"><use href="#i-folder"/></svg>Todas as pastas<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+            <button class="filter-chip" aria-pressed="false"><svg class="i i--sm"><use href="#i-tag"/></svg>Etiqueta<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
             <button class="btn btn--link btn--compact">Limpar filtros</button>
           </div>
         </div>
@@ -304,11 +263,11 @@
           <div style="display:grid; gap: var(--space-250); min-width: 0">
             <section>
               <h3 class="sec-title">Mensagens <small>9</small></h3>
-              <div class="results block" id="results"></div>
+              <div class="results panel" id="results"></div>
             </section>
             <section>
               <h3 class="sec-title">Anexos <small>5</small><button class="btn btn--subtle btn--compact">Ver todos</button></h3>
-              <div class="files block">
+              <div class="files panel">
                 <div class="attachment"><span class="attachment__icon attachment__icon--pdf"><svg class="i i--lg"><use href="#i-file"/></svg></span><span style="min-width:0;display:grid"><span class="attachment__name"><mark>Contrato</mark>_<mark>Lumen</mark>_v3.pdf</span><span class="attachment__meta">PDF · 1,8 MB · hoje</span></span></div>
                 <div class="attachment"><span class="attachment__icon attachment__icon--pdf"><svg class="i i--lg"><use href="#i-file"/></svg></span><span style="min-width:0;display:grid"><span class="attachment__name"><mark>Contrato</mark>_<mark>Lumen</mark>_v2.pdf</span><span class="attachment__meta">PDF · 1,7 MB · 10 nov</span></span></div>
                 <div class="attachment"><span class="attachment__icon attachment__icon--doc"><svg class="i i--lg"><use href="#i-file"/></svg></span><span style="min-width:0;display:grid"><span class="attachment__name">Alteracoes_v2_v3.docx</span><span class="attachment__meta">Word · 88 KB · hoje</span></span></div>
@@ -319,13 +278,13 @@
           <aside style="display:grid; gap: var(--space-200)">
             <section>
               <h3 class="sec-title">Pessoas</h3>
-              <div class="people block">
+              <div class="people panel">
                 <div class="person"><span class="avatar avatar--teal"><img class="avatar__img" src="../site/images/people/pessoa-2.webp" alt="">MC</span><span><b style="font-weight:var(--font-weight-medium)">Marina Couto</b><small>marina@lumen.com.br</small></span></div>
                 <div class="person"><span class="avatar avatar--orange">JL</span><span><b style="font-weight:var(--font-weight-medium)">Jurídico Lumen</b><small>juridico@lumen.com.br</small></span></div>
                 <div class="person"><span class="avatar"><img class="avatar__img" src="../site/images/people/pessoa-6.webp" alt="">RB</span><span><b style="font-weight:var(--font-weight-medium)">Rafael Brandão</b><small>rafael@lojaribeiro.com.br</small></span></div>
               </div>
             </section>
-            <section class="tip block">
+            <section class="tip panel">
               <span style="display:flex;gap:var(--space-075);align-items:center;color:var(--color-text);font-weight:var(--font-weight-medium)"><svg class="i i--sm"><use href="#i-info"/></svg>Busca no aparelho</span>
               <span>As mensagens criptografadas são buscadas aqui, sem sair do seu computador.</span>
               <span>Atalhos: <code>de:</code> <code>tem:anexo</code> <code>antes:2026-11-01</code></span>
@@ -347,7 +306,7 @@
         <div class="settings__body">
           <section class="set-sec">
             <header><h2>Contas</h2><p>As caixas que o EpistulaMail sincroniza neste computador.</p></header>
-            <div class="block">
+            <div class="panel">
               <div class="acct"><span class="acct__mark" style="background: var(--color-label-teal-text)">T</span><span><b style="font-weight:var(--font-weight-medium)">Trabalho</b><small>joana@lojaribeiro.com.br · IMAP</small></span><span class="pill pill--success"><svg class="i i--sm"><use href="#i-check"/></svg>Sincronizada</span><button class="btn btn--subtle btn--icon btn--compact" aria-label="Opções da conta Trabalho"><svg class="i"><use href="#i-more"/></svg></button></div>
               <div class="acct"><span class="acct__mark" style="background: var(--color-label-purple-text)">P</span><span><b style="font-weight:var(--font-weight-medium)">Pessoal</b><small>joana@epistula.app · Epistula</small></span><span class="pill pill--success"><svg class="i i--sm"><use href="#i-check"/></svg>Sincronizada</span><button class="btn btn--subtle btn--icon btn--compact" aria-label="Opções da conta Pessoal"><svg class="i"><use href="#i-more"/></svg></button></div>
               <div class="acct"><span class="acct__mark" style="background: var(--color-label-orange-text)">A</span><span><b style="font-weight:var(--font-weight-medium)">Antiga</b><small>joana.r@provedor.com · POP3</small></span><span class="pill pill--warning"><svg class="i i--sm"><use href="#i-warning"/></svg>Senha expirada</span><button class="btn btn--outline btn--compact">Entrar de novo</button></div>
@@ -357,7 +316,7 @@
 
           <section class="set-sec">
             <header><h2>Aparência</h2><p>Vale para todas as contas.</p></header>
-            <div class="block" style="padding: var(--space-200)">
+            <div class="panel" style="padding: var(--space-200)">
               <fieldset class="theme-picker" id="picker">
                 <legend class="visually-hidden">Tema</legend>
                 <label class="theme-option"><input type="radio" name="tema" value="light"><span class="theme-option__icon"><svg class="i i--lg"><use href="#i-sun"/></svg></span><span class="theme-option__name">Claro</span><span class="theme-option__desc">Sempre claro</span></label>
@@ -369,7 +328,7 @@
 
           <section class="set-sec">
             <header><h2>Segurança</h2><p>Chaves e criptografia da conta Pessoal.</p></header>
-            <div class="block">
+            <div class="panel">
               <div class="opt"><b>Criptografar sozinho quando todos tiverem chave</b><p>Se algum destinatário não tiver chave, você escolhe na hora.</p><input type="checkbox" class="toggle" checked aria-label="Criptografar sozinho quando todos tiverem chave"></div>
               <div class="opt"><b>Assinar todas as mensagens</b><p>Quem recebe confere que foi você quem enviou.</p><input type="checkbox" class="toggle" checked aria-label="Assinar todas as mensagens"></div>
               <div class="opt"><b>Carregar imagens remotas</b><p>Imagens de fora podem avisar ao remetente que você abriu.</p><input type="checkbox" class="toggle" aria-label="Carregar imagens remotas"></div>
@@ -387,7 +346,7 @@
     const $ = (s) => document.querySelector(s);
     const img = (n) => `../site/images/people/pessoa-${n}.webp`;
 
-    document.querySelectorAll('.seg-meter').forEach((m) => {
+    document.querySelectorAll('.segments[data-on]').forEach((m) => {
       m.innerHTML = Array.from({ length: 24 }, (_, i) => `<span class="${i < +m.dataset.on ? 'is-on' : ''}"></span>`).join('');
     });
 
@@ -445,9 +404,9 @@
           ${t.label ? `<span class="label label--${t.label[0]}">${t.label[1]}</span>` : ''}
           ${t.secure ? '<span class="sec-ok"><svg class="i i--sm"><use href="#i-lock"/></svg>Criptografado de ponta a ponta</span>' : ''}
         </div></div>
-        ${t.summary ? `<section class="summary block" aria-label="Resumo da conversa"><div class="summary__head"><span class="agent-dot"><svg class="i i--sm"><use href="#i-sparkle"/></svg></span>Resumo da conversa<small>gerado no aparelho</small></div><ul>${t.summary.map((s) => `<li>${s}</li>`).join('')}</ul></section>` : ''}
-        ${t.before ? `<article class="msg--collapsed block"><div class="msg__head">${av(['purple', 'JR', 5])}<span class="msg__who"><b>Você</b><span>${t.before}</span></span><span class="msg__when">14 nov</span></div></article>` : ''}
-        <article class="block">
+        ${t.summary ? `<section class="summary panel" aria-label="Resumo da conversa"><div class="summary__head"><span class="agent-dot"><svg class="i i--sm"><use href="#i-sparkle"/></svg></span>Resumo da conversa<small>gerado no aparelho</small></div><ul>${t.summary.map((s) => `<li>${s}</li>`).join('')}</ul></section>` : ''}
+        ${t.before ? `<article class="msg--collapsed panel"><div class="msg__head">${av(['purple', 'JR', 5])}<span class="msg__who"><b>Você</b><span>${t.before}</span></span><span class="msg__when">14 nov</span></div></article>` : ''}
+        <article class="panel">
           <div class="msg__head">${av(t.av)}<span class="msg__who"><b>${t.from}</b><span>${t.to}</span></span>
             <span class="msg__when">${t.when}<button class="btn btn--subtle btn--icon btn--compact" aria-label="Responder"><svg class="i"><use href="#i-reply"/></svg></button><button class="btn btn--subtle btn--icon btn--compact" aria-label="Mais"><svg class="i"><use href="#i-more"/></svg></button></span></div>
           <div class="msg__text">${t.body.map((p) => `<p>${p}</p>`).join('')}</div>

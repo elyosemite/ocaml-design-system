@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Área de trabalho · OCaml Design System</title>
+<meta name="description" content="A casca genérica: navegação sobre o fundo, bloco principal, painel, identidade.">
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
+<link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
+</head>
+<body data-page="area-de-trabalho">
+<div class="doc">
+  <nav class="doc-nav" id="doc-nav" aria-label="Índice"></nav>
+  <main>
+    <section class="ds-section" id="area-de-trabalho">
+      <div class="ds-head">
+        <h1>Área de trabalho</h1>
+        <p class="lede">A casca do visual neutro para qualquer produto: a navegação lateral fica sobre o fundo, sem borda, e o conteúdo vive num bloco branco de cantos grandes. Dentro dele vão painéis, abas elevadas e o composer. O app de e-mail continua com a casca em blocos de <a href="layouts.html">Layouts</a>.</p>
+      </div>
+      <div class="stage stage--sunken">
+        <div class="states">
+          <figure class="state" style="justify-items:stretch;width:100%"><div class="workspace" style="height:30rem;border-radius:var(--radius-large);overflow:hidden;width:100%">
+            <aside class="sidebar workspace__sidebar" aria-label="Navegação">
+              <span class="wordmark wordmark--sm"><span class="wordmark__glyph wordmark__glyph--neutral"><svg class="i i--sm" aria-hidden="true"><use href="#i-grid"/></svg></span>OpenBoard</span>
+              <div class="nav-group"><p class="nav-heading">Quadros</p>
+                <a class="nav-item" href="#" aria-current="page"><svg class="i" aria-hidden="true"><use href="#i-grid"/></svg><span class="nav-item__text">Roadmap</span></a>
+                <a class="nav-item" href="#"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg><span class="nav-item__text">Backlog</span></a>
+                <a class="nav-item" href="#"><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span class="nav-item__text">Lançamentos</span></a>
+              </div>
+              <div class="workspace__sidebar-foot">
+                <div class="usage-card"><div class="usage-card__head"><svg class="i i--sm" aria-hidden="true"><use href="#i-sparkle"/></svg>Créditos</div><div class="usage-card__value"><strong>640</strong>de 1.000</div><div class="segments segments--brand" role="meter" aria-label="Uso" aria-valuenow="15" aria-valuemax="24" style="width:auto"><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+                <div class="identity"><span class="avatar avatar--sm avatar--purple">AL</span><span class="identity__text"><span class="identity__name">Alfredo</span><span class="identity__meta">Time de produto</span></span></div>
+              </div>
+            </aside>
+            <main class="workspace__main">
+              <header class="workspace__topbar">
+                <span class="workspace__crumb"><svg class="i" aria-hidden="true"><use href="#i-grid"/></svg><span class="workspace__crumb-text">Roadmap</span><small>Q1</small></span>
+                <label class="input input--search input--round"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><input placeholder="Buscar" aria-label="Buscar"><kbd class="kbd">/</kbd></label>
+                <span class="workspace__topbar-end"><button class="btn btn--outline" type="button"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg>Compartilhar</button></span>
+              </header>
+              <div style="padding:var(--space-200);background:var(--color-surface-sunken);display:grid;gap:var(--space-150);align-content:start;overflow:auto">
+                <div class="tabs tabs--raised" role="tablist" aria-label="Vistas"><button class="tab" role="tab" aria-selected="true">Quadro</button><button class="tab" role="tab" aria-selected="false">Lista</button></div>
+                <section class="panel panel--clip"><header class="panel__head"><h3 class="panel__title">Em andamento</h3><span class="pill pill--filled">3</span></header>
+                  <div class="panel__row"><span>Login com passkey</span><span class="pill pill--information">Revisão</span></div>
+                  <div class="panel__row"><span>Exportar para PDF</span><span class="pill pill--success"><span class="pill__dot"></span>Pronto</span></div>
+                  <footer class="panel__foot"><span>Atualizado há 2 min</span><button class="btn btn--link btn--compact" type="button">Ver tudo</button></footer>
+                </section>
+              </div>
+            </main>
+          </div><figcaption><b>Exemplo: OpenBoard</b>workspace, sidebar, topbar com busca redonda, painel, cartão de uso e identidade</figcaption></figure>
+        </div>
+      </div>
+      <dl class="guidance">
+        <div><dt>Estrutura</dt><dd><code>.workspace</code> &gt; <code>.sidebar.workspace__sidebar</code> + <code>.workspace__main</code> &gt; <code>.workspace__topbar</code> + conteúdo. O fundo segue <code>--app-background</code>, como na casca do e-mail.</dd></div>
+        <div><dt>Topo</dt><dd>Três colunas: <code>.crumb</code> (onde estou), a busca (<code>.input--search.input--round</code>) e <code>.workspace__topbar-end</code> (ações).</dd></div>
+        <div><dt>Painel</dt><dd><code>.panel</code> com <code>__head</code>, <code>__title</code>, <code>__body</code>, <code>__row</code> e <code>__foot</code>. <code>--clip</code> corta o conteúdo nos cantos.</dd></div>
+        <div><dt>Rodapé da navegação</dt><dd><code>.workspace__sidebar-foot</code> com o <code>.usage-card</code> e a <code>.identity</code> (avatar, nome, detalhe).</dd></div>
+        <div><dt>Marca</dt><dd>Produto sem logo própria usa <code>.wordmark__glyph--neutral</code>: o glyph na cor do texto.</dd></div>
+        <div><dt>Telas estreitas</dt><dd>Abaixo de 1280px a navegação some; abaixo de 960px o topo perde a busca e a página rola inteira.</dd></div>
+        <div><dt>Exemplos</dt><dd><a href="../examples/index.html">Pesquisa com agente</a> e <a href="../examples/epistulamail.html">EpistulaMail</a> montados só com estas peças.</dd></div>
+      </dl>
+    </section>
+  </main>
+</div>
+<script src="../dist/sprite.js"></script>
+<script src="docs.js"></script>
+</body>
+</html>

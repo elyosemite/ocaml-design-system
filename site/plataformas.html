@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Usar em um produto · OCaml Design System</title>
+<meta name="description" content="Como EpistulaMail, OpenBoard e apps nativos consomem tokens e componentes.">
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
+<link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
+</head>
+<body data-page="plataformas">
+<div class="doc">
+  <nav class="doc-nav" id="doc-nav" aria-label="Índice"></nav>
+  <main>
+    <section class="ds-section" id="plataformas">
+      <div class="ds-head">
+        <h1>Usar em um produto</h1>
+        <p class="lede">Uma fonte, vários destinos. Os tokens moram em <code>src/tokens/</code>; o build gera o CSS para a web e os mesmos valores para TypeScript, SwiftUI, Jetpack Compose e Android. Trocar um token aqui muda todos os produtos na próxima versão.</p>
+      </div>
+      <dl class="guidance">
+        <div><dt>Instalar</dt><dd>Pelo git, numa versão fixa: <code>pnpm add github:elyosemite/ocaml-design-system#v0.2.0</code>. O <code>prepare</code> roda o build na instalação e gera <code>dist/</code>.</dd></div>
+        <div><dt>Web (EpistulaMail, OpenBoard, sites)</dt><dd>Importe <code>ocaml-design-system/fonts.css</code>, <code>/tokens.css</code> e <code>/components.css</code>, nessa ordem. Os ícones vêm de <code>/sprite.svg</code>. O tema segue o sistema; force com <code>data-theme="light|dark"</code> no <code>&lt;html&gt;</code>.</dd></div>
+        <div><dt>Sass</dt><dd>Para usar as mixins de breakpoint ou só parte dos componentes: <code>@use "ocaml-design-system/scss/styles/core/pill"</code>.</dd></div>
+        <div><dt>TypeScript e React Native</dt><dd><code>import {{ color, dimension }} from "ocaml-design-system/tokens"</code>. <code>color.light</code> e <code>color.dark</code> têm os mesmos nomes; dimensões em px.</dd></div>
+        <div><dt>iOS e macOS (SwiftUI)</dt><dd>Copie <code>dist/platforms/OCamlTokens.swift</code> para o projeto. <code>OCamlColor.text</code> troca sozinho entre claro e escuro; <code>OCamlSpace.space150</code>, <code>OCamlRadius.large</code>.</dd></div>
+        <div><dt>Android</dt><dd>Compose: <code>dist/platforms/OCamlTokens.kt</code> (<code>OCamlLightColors</code>, <code>OCamlDarkColors</code>, <code>OCamlDimens</code>). Views: <code>android/values/</code> e <code>values-night/</code>, com <code>@color/ocaml_color_text</code>.</dd></div>
+        <div><dt>Ferramentas de design</dt><dd><code>dist/platforms/tokens.json</code> segue o formato DTCG; o valor escuro de cada cor está em <code>$extensions["dev.ocaml.modes"].dark</code>.</dd></div>
+        <div><dt>Produto novo</dt><dd>Comece pela <a href="area-de-trabalho.html">área de trabalho</a>. Nome e logo do produto entram no <code>.wordmark</code>; a cor de marca é a mesma em todos os produtos.</dd></div>
+        <div><dt>Versões</dt><dd>Semver: mudança de valor de token é menor (0.x), remoção de classe ou token é maior. O que mudou fica em <code>CHANGELOG.md</code>.</dd></div>
+      </dl>
+      <div class="code-block"><pre tabindex="0"><code>&lt;link rel="stylesheet" href="node_modules/ocaml-design-system/dist/fonts.css"&gt;
+&lt;link rel="stylesheet" href="node_modules/ocaml-design-system/dist/tokens.css"&gt;
+&lt;link rel="stylesheet" href="node_modules/ocaml-design-system/dist/components.css"&gt;</code></pre></div>
+    </section>
+  </main>
+</div>
+<script src="../dist/sprite.js"></script>
+<script src="docs.js"></script>
+</body>
+</html>

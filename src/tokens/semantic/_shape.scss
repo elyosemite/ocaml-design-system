@@ -8,6 +8,7 @@ $groups: (
     'radius-small': (value: p.$radius-6, desc: 'botões, inputs, lozenges, chips'),
     'radius-medium': (value: p.$radius-8, desc: 'menus, toasts, cartões de anexo'),
     'radius-large': (value: p.$radius-12, desc: 'modais, janela de composição, blocos e cartões'),
+    'radius-xlarge': (value: p.$radius-16, desc: 'bloco principal da área de trabalho e painéis de página inteira'),
     'radius-round': (value: p.$radius-999, desc: 'avatares, badges de contagem'),
     'border-width': p.$width-1,
     'border-width-focused': p.$width-2,

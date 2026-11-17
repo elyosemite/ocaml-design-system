@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Abas · OCaml Design System</title>
+<meta name="description" content="Abas sublinhadas para categorias e abas elevadas para documentos.">
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
+<link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
+</head>
+<body data-page="abas">
+<div class="doc">
+  <nav class="doc-nav" id="doc-nav" aria-label="Índice"></nav>
+  <main>
+    <section class="ds-section" id="abas">
+      <div class="ds-head">
+        <h1>Abas</h1>
+        <p class="lede">As abas trocam a vista sem sair da tela. A sublinhada separa categorias de uma lista. A elevada, do visual neutro, alterna documentos ou vistas dentro de um bloco: a selecionada vira um cartão sobre o fundo afundado.</p>
+      </div>
+      <div class="stage">
+        <div class="states">
+          <figure class="state" style="justify-items:stretch"><div class="tabs" role="tablist" aria-label="Categorias"><button class="tab" role="tab" aria-selected="true">Principal</button><button class="tab" role="tab" aria-selected="false">Promoções</button><button class="tab is-hover" role="tab" aria-selected="false">Social</button></div><figcaption><b>Sublinhada</b>.tabs · categorias da caixa de entrada</figcaption></figure>
+        </div>
+      </div>
+      <div class="stage stage--sunken">
+        <div class="states">
+          <figure class="state"><div class="tabs tabs--raised" role="tablist" aria-label="Documentos" style="background:var(--color-surface-sunken);border-radius:var(--radius-medium)"><button class="tab" role="tab" aria-selected="true"><svg class="i i--sm" aria-hidden="true"><use href="#i-file"/></svg>Leads.xlsx</button><button class="tab" role="tab" aria-selected="false"><svg class="i i--sm" aria-hidden="true"><use href="#i-file"/></svg>Notas</button><button class="tab is-hover" role="tab" aria-selected="false"><svg class="i i--sm" aria-hidden="true"><use href="#i-plus"/></svg>Nova</button></div><figcaption><b>Elevada</b>.tabs.tabs--raised · documentos e vistas</figcaption></figure>
+        </div>
+      </div>
+      <dl class="guidance">
+        <div><dt>Qual usar</dt><dd>Sublinhada no topo de uma lista; elevada dentro de um bloco, sobre <code>--color-surface-sunken</code>.</dd></div>
+        <div><dt>Teclado</dt><dd><code>role="tablist"</code>, <code>role="tab"</code> e <code>aria-selected</code>. Setas trocam de aba; Tab sai do grupo.</dd></div>
+        <div><dt>Classes</dt><dd><code>.tabs</code>, <code>.tab</code>, <code>.tabs--raised</code>.</dd></div>
+      </dl>
+    </section>
+  </main>
+</div>
+<script src="../dist/sprite.js"></script>
+<script src="docs.js"></script>
+</body>
+</html>

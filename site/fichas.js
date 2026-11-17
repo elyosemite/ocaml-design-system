@@ -3,6 +3,179 @@
    relacionados e histórico. O docs.js monta a ficha no fim da página; a camada, o status e os tokens vêm de lá.
    Para um componente novo, acrescente uma entrada com o mesmo id da página. Texto sem classes CSS. */
 const OCAML_FICHAS = {
+  "pill": {
+    "usadoEm": [
+      "examples/index.html",
+      "examples/epistulamail.html"
+    ],
+    "fazer": [
+      "Use a pill para status discreto em listas, cartões e configurações.",
+      "Escolha a variante pelo sentido: sucesso, aviso, perigo, informação.",
+      "Use o chip de filtro como botão com aria-pressed."
+    ],
+    "nao": [
+      "Não use a pill como botão: para isso existe o chip de filtro.",
+      "Não troque a palavra por um ponto colorido.",
+      "Não pinte o chip ligado com a cor de marca."
+    ],
+    "conteudo": "Uma ou duas palavras, sem ponto final. No chip, o nome do filtro ('Com anexo'), não uma ação.",
+    "plataforma": "Web. Nos apps nativos, monte com OCamlColor e OCamlRadius.round.",
+    "relacionados": [
+      "lozenge",
+      "badge",
+      "padrao-busca"
+    ],
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "historico": [
+      [
+        "2026-11-17",
+        "Criado a partir de examples/ (visual neutro, decisão 0022)."
+      ]
+    ]
+  },
+  "abas": {
+    "usadoEm": [
+      "site/abas.html",
+      "examples/index.html"
+    ],
+    "fazer": [
+      "Sublinhada para categorias de uma lista.",
+      "Elevada para documentos ou vistas dentro de um bloco.",
+      "Uma aba sempre selecionada."
+    ],
+    "nao": [
+      "Não use abas para passos em sequência: use o stepper.",
+      "Não misture as duas formas no mesmo grupo."
+    ],
+    "conteudo": "Substantivos curtos ('Principal', 'Notas'). Evite verbos.",
+    "plataforma": "Web; nos nativos use o controle segmentado do sistema com os tokens de cor.",
+    "relacionados": [
+      "navegacao",
+      "progresso"
+    ],
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "historico": [
+      [
+        "2026-11-17",
+        "Criado a partir de examples/ (visual neutro, decisão 0022)."
+      ]
+    ]
+  },
+  "progresso": {
+    "usadoEm": [
+      "examples/index.html",
+      "examples/epistulamail.html"
+    ],
+    "fazer": [
+      "Stepper para tarefas longas com passos nomeados.",
+      "Segmentos para cotas contáveis.",
+      "Diga o estado em texto ao lado da marca."
+    ],
+    "nao": [
+      "Não use o stepper para navegação entre telas.",
+      "Não use segmentos sem role=\"meter\" e rótulo."
+    ],
+    "conteudo": "Passos no infinitivo ('Ler a caixa'); estado no aside ('Agora', 'Na fila', 'Falhou').",
+    "plataforma": "Web.",
+    "relacionados": [
+      "carregamento",
+      "composer"
+    ],
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "historico": [
+      [
+        "2026-11-17",
+        "Criado a partir de examples/ (visual neutro, decisão 0022)."
+      ]
+    ]
+  },
+  "composer": {
+    "usadoEm": [
+      "examples/index.html",
+      "examples/epistulamail.html"
+    ],
+    "fazer": [
+      "Dê aria-label ao campo.",
+      "Uma ação primária (Enviar) no fim da barra.",
+      "Troque Enviar por Parar enquanto o agente gera."
+    ],
+    "nao": [
+      "Não use o placeholder como rótulo.",
+      "Não coloque mais de cinco ações na barra."
+    ],
+    "conteudo": "Placeholder que diz o que escrever ('Responder a Marina…').",
+    "plataforma": "Web.",
+    "relacionados": [
+      "composicao",
+      "campos",
+      "botoes"
+    ],
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "historico": [
+      [
+        "2026-11-17",
+        "Criado a partir de examples/ (visual neutro, decisão 0022)."
+      ]
+    ]
+  },
+  "area-de-trabalho": {
+    "usadoEm": [
+      "examples/index.html",
+      "examples/epistulamail.html"
+    ],
+    "fazer": [
+      "Use para produtos que não são o cliente de e-mail (OpenBoard, painéis).",
+      "Um bloco principal por tela.",
+      "Painéis para agrupar conteúdo dentro do bloco."
+    ],
+    "nao": [
+      "Não ponha borda na navegação lateral.",
+      "Não aninhe .workspace__main."
+    ],
+    "conteudo": "O crumb diz onde a pessoa está, em uma ou duas palavras.",
+    "plataforma": "Web; nos nativos, a mesma hierarquia com OCamlColor.surface e OCamlRadius.xlarge.",
+    "relacionados": [
+      "layouts",
+      "navegacao",
+      "plataformas"
+    ],
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "historico": [
+      [
+        "2026-11-17",
+        "Criado a partir de examples/ (visual neutro, decisão 0022)."
+      ]
+    ]
+  },
+  "plataformas": {
+    "usadoEm": [
+      "package.json",
+      "scripts/platforms.mjs"
+    ],
+    "fazer": [
+      "Fixe a versão na instalação.",
+      "Importe tokens.css antes de components.css.",
+      "Gere os arquivos nativos pelo build, nunca à mão."
+    ],
+    "nao": [
+      "Não copie valores hex para o produto: use o token.",
+      "Não edite dist/."
+    ],
+    "conteudo": "Não se aplica.",
+    "plataforma": "Web, TypeScript, SwiftUI, Jetpack Compose e recursos Android.",
+    "relacionados": [
+      "tokens",
+      "temas",
+      "arquitetura"
+    ],
+    "testes": "Automático: <code>pnpm check</code> confere tokens, temas e o registro de páginas. Teclado, foco e os dois temas são conferidos na mão; ainda não existe teste visual automático.",
+    "historico": [
+      [
+        "2026-11-17",
+        "Criado a partir de examples/ (visual neutro, decisão 0022)."
+      ]
+    ]
+  },
   "botoes": {
     "usadoEm": [
       "src/features/accounts/AccountDialogs.tsx",

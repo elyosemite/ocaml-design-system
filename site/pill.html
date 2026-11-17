@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pill e chip de filtro · OCaml Design System</title>
+<meta name="description" content="Status discreto com contorno e o filtro que liga e desliga.">
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
+<link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
+</head>
+<body data-page="pill">
+<div class="doc">
+  <nav class="doc-nav" id="doc-nav" aria-label="Índice"></nav>
+  <main>
+    <section class="ds-section" id="pill">
+      <div class="ds-head">
+        <h1>Pill e chip de filtro</h1>
+        <p class="lede">A pill é o status discreto do visual neutro: contorno fino, cantos redondos e texto em caixa normal. O chip de filtro é um botão que liga e desliga um filtro numa lista ou numa busca.</p>
+      </div>
+      <div class="stage">
+        <div class="states">
+          <figure class="state"><div class="row" style="flex-wrap:wrap"><span class="pill">Rascunho</span><span class="pill pill--success"><span class="pill__dot"></span>Conectada</span><span class="pill pill--warning"><svg class="i i--sm" aria-hidden="true"><use href="#i-warning"/></svg>Senha expira</span><span class="pill pill--danger"><span class="pill__dot"></span>Falhou</span><span class="pill pill--information"><svg class="i i--sm" aria-hidden="true"><use href="#i-info"/></svg>Sincronizando</span><span class="pill pill--brand"><svg class="i i--sm" aria-hidden="true"><use href="#i-sparkle"/></svg>Agente</span><span class="pill pill--filled">3 de 5</span></div><figcaption><b>Pill</b>neutra, sucesso, aviso, perigo, informação, marca e preenchida</figcaption></figure>
+        </div>
+      </div>
+      <div class="stage stage--sunken">
+        <div class="states">
+          <figure class="state"><div class="filter-chip-group"><button class="filter-chip" type="button" aria-pressed="true">Todas</button><button class="filter-chip" type="button" aria-pressed="false"><svg class="i i--sm" aria-hidden="true"><use href="#i-star"/></svg>Com estrela</button><button class="filter-chip" type="button" aria-pressed="false"><svg class="i i--sm" aria-hidden="true"><use href="#i-clip"/></svg>Com anexo</button><button class="filter-chip is-hover" type="button" aria-pressed="false">Hover</button><button class="filter-chip" type="button" aria-pressed="false" disabled>Desativado</button></div><figcaption><b>Chip de filtro</b>&lt;button aria-pressed&gt;; ligado fica com o fundo do texto</figcaption></figure>
+        </div>
+      </div>
+      <dl class="guidance">
+        <div><dt>Pill ou lozenge</dt><dd>O <a href="lozenge.html">lozenge</a> é o status forte de uma mensagem (maiúsculas, com fundo). A pill é discreta: listas, cabeçalhos de cartão, contas e configurações.</dd></div>
+        <div><dt>Não só cor</dt><dd>A palavra diz o status. O ponto (<code>.pill__dot</code>) e o ícone só reforçam.</dd></div>
+        <div><dt>Chip ligado</dt><dd>O chip ligado usa a cor do texto, e não a da marca: a marca fica para ação principal e progresso (decisão 0022).</dd></div>
+        <div><dt>Acessibilidade</dt><dd>O chip é um <code>&lt;button type="button" aria-pressed&gt;</code>. Agrupe em <code>.filter-chip-group</code> com um rótulo (<code>aria-label</code>) que diga o que é filtrado.</dd></div>
+        <div><dt>Classes</dt><dd><code>.pill</code>, <code>--success</code>, <code>--warning</code>, <code>--danger</code>, <code>--information</code>, <code>--brand</code>, <code>--filled</code>, <code>.pill__dot</code> · <code>.filter-chip</code>, <code>.filter-chip-group</code>.</dd></div>
+      </dl>
+    </section>
+  </main>
+</div>
+<script src="../dist/sprite.js"></script>
+<script src="docs.js"></script>
+</body>
+</html>

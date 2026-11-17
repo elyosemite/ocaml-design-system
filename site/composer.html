@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Composer · OCaml Design System</title>
+<meta name="description" content="A caixa de escrever que cresce, com a barra de ações embaixo.">
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
+<link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
+</head>
+<body data-page="composer">
+<div class="doc">
+  <nav class="doc-nav" id="doc-nav" aria-label="Índice"></nav>
+  <main>
+    <section class="ds-section" id="composer">
+      <div class="ds-head">
+        <h1>Composer</h1>
+        <p class="lede">O composer é a caixa de escrever do visual neutro: um cartão com o campo que cresce com o texto e a barra de ações embaixo. Serve para responder um e-mail, comentar um card ou falar com um agente.</p>
+      </div>
+      <div class="stage stage--sunken">
+        <div class="states">
+          <figure class="state"><form class="composer" style="width:min(100%,32rem)" onsubmit="return false">
+            <textarea class="composer__input" rows="1" aria-label="Mensagem" placeholder="Responder a Marina…"></textarea>
+            <div class="composer__bar">
+              <button class="btn btn--subtle btn--icon" type="button" aria-label="Anexar"><svg class="i" aria-hidden="true"><use href="#i-clip"/></svg></button>
+              <button class="btn btn--subtle btn--icon" type="button" aria-label="Formatação"><svg class="i" aria-hidden="true"><use href="#i-bold"/></svg></button>
+              <span class="composer__spacer composer__hint">Ctrl + Enter envia</span>
+              <button class="btn btn--primary" type="submit"><svg class="i" aria-hidden="true"><use href="#i-send"/></svg>Enviar</button>
+            </div>
+          </form><figcaption><b>Resposta</b>enviar como ação primária</figcaption></figure>
+          <figure class="state"><form class="composer" style="width:min(100%,32rem)" onsubmit="return false">
+            <textarea class="composer__input" rows="1" aria-label="Pedido ao agente" placeholder="Peça algo ao agente…"></textarea>
+            <div class="composer__bar">
+              <button class="btn btn--subtle btn--icon" type="button" aria-label="Anexar"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+              <span class="pill pill--brand"><svg class="i i--sm" aria-hidden="true"><use href="#i-sparkle"/></svg>Pesquisa</span>
+              <span class="composer__spacer"></span>
+              <button class="btn btn--icon composer__stop" type="button" aria-label="Parar"></button>
+            </div>
+          </form><figcaption><b>Agente gerando</b>o botão de parar substitui o de enviar</figcaption></figure>
+        </div>
+      </div>
+      <dl class="guidance">
+        <div><dt>Estrutura</dt><dd><code>&lt;form class="composer"&gt;</code> com <code>&lt;textarea class="composer__input"&gt;</code> e <code>.composer__bar</code>. <code>.composer__spacer</code> empurra o envio para o fim.</dd></div>
+        <div><dt>Crescer</dt><dd>O campo usa <code>field-sizing: content</code> até 12rem. Em navegadores sem suporte, ajuste a altura no <code>input</code>.</dd></div>
+        <div><dt>Rótulo</dt><dd>O placeholder não é rótulo: dê <code>aria-label</code> ao campo. O botão de parar precisa de <code>aria-label="Parar"</code>.</dd></div>
+        <div><dt>Composição completa</dt><dd>A janela de nova mensagem, com destinatários e assunto, continua em <a href="composicao.html">Composição</a>.</dd></div>
+        <div><dt>Classes</dt><dd><code>.composer</code>, <code>__input</code>, <code>__bar</code>, <code>__spacer</code>, <code>__hint</code>, <code>__stop</code>.</dd></div>
+      </dl>
+    </section>
+  </main>
+</div>
+<script src="../dist/sprite.js"></script>
+<script src="docs.js"></script>
+</body>
+</html>

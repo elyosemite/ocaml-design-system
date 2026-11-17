@@ -87,6 +87,12 @@ const OCAML_PAGES = [
         "Governança",
         "Camadas, maturidade, gates de revisão e definição de pronto.",
         "stable"
+      ],
+      [
+        "plataformas",
+        "Usar em um produto",
+        "Instalar e consumir tokens e componentes na web, em TypeScript, SwiftUI e Android.",
+        "beta"
       ]
     ]
   },
@@ -158,6 +164,24 @@ const OCAML_PAGES = [
         "Navegação lateral",
         "Painel e item de navegação, sem nada de e-mail.",
         "stable"
+      ],
+      [
+        "pill",
+        "Pill e chip de filtro",
+        "Status discreto com contorno e o filtro que liga e desliga.",
+        "beta"
+      ],
+      [
+        "abas",
+        "Abas",
+        "Abas sublinhadas para categorias e elevadas para documentos.",
+        "beta"
+      ],
+      [
+        "progresso",
+        "Progresso",
+        "Stepper, barra em segmentos e cartão de uso.",
+        "beta"
       ]
     ]
   },
@@ -205,6 +229,12 @@ const OCAML_PAGES = [
         "Carregamento",
         "Skeleton, spinner e progresso.",
         "stable"
+      ],
+      [
+        "composer",
+        "Composer",
+        "A caixa de escrever que cresce, com a barra de ações embaixo.",
+        "beta"
       ]
     ]
   },
@@ -305,6 +335,12 @@ const OCAML_PAGES = [
         "Documentação",
         "Gradientes, ícones de marca, idioma, timeline e o layout de docs.exemplo.com.br.",
         "stable"
+      ],
+      [
+        "area-de-trabalho",
+        "Área de trabalho",
+        "A casca genérica: navegação sobre o fundo, bloco principal, painel e identidade.",
+        "beta"
       ]
     ]
   }
@@ -316,7 +352,7 @@ const OCAML_PAGES = [
 const OCAML_NAV = [
   { title: 'Começar', items: [
     ['Visão geral', 'index'], ['Princípios', 'principios'], ['Acessibilidade', 'acessibilidade'], ['Temas e densidade', 'temas'],
-    ['Variáveis CSS', 'variaveis'], ['Arquitetura', 'arquitetura'], ['Governança', 'governanca'],
+    ['Variáveis CSS', 'variaveis'], ['Arquitetura', 'arquitetura'], ['Governança', 'governanca'], ['Usar em um produto', 'plataformas'],
   ] },
   { title: 'Fundamentos', items: [
     ['Tokens', 'tokens'], ['Conteúdo', 'conteudo'], ['Espaçamento', 'espacamento'], ['Grid', 'layouts'], ['Cor', 'cores'],
@@ -325,18 +361,18 @@ const OCAML_NAV = [
   { title: 'Componentes', groups: [
     { title: 'Formulários e entrada', items: [
       ['Botão', 'botoes'], ['Calendário', null], ['Checkbox', 'selecao'], ['Comentário', null], ['Data e hora', null],
-      ['Menu suspenso', 'menus'], ['Formulário', 'padrao-validacao'], ['Rádio', 'selecao'], ['Intervalo', null],
+      ['Composer', 'composer'], ['Menu suspenso', 'menus'], ['Formulário', 'padrao-validacao'], ['Rádio', 'selecao'], ['Intervalo', null],
       ['Lista de opções', 'campos'], ['Área de texto', 'campos'], ['Campo de texto', 'campos'], ['Toggle', 'selecao'],
     ] },
     { title: 'Imagens e ícones', items: [['Avatar', 'avatar'], ['Ícones', null]] },
     { title: 'Rótulos', items: [['Etiquetas', 'etiquetas'], ['Chips', 'destinatarios']] },
-    { title: 'Layout e estrutura', items: [['Layouts', 'layouts'], ['Header', 'header']] },
+    { title: 'Layout e estrutura', items: [['Layouts', 'layouts'], ['Área de trabalho', 'area-de-trabalho'], ['Header', 'header']] },
     { title: 'Carregamento', items: [['Spinner e skeleton', 'carregamento']] },
     { title: 'Mensagens', items: [['Banners e avisos', 'mensagens'], ['Toasts', 'toasts'], ['Estados vazios', 'vazios']] },
-    { title: 'Navegação', items: [['Navegação lateral', 'navegacao'], ['Abas', null], ['Busca', 'padrao-busca']] },
+    { title: 'Navegação', items: [['Navegação lateral', 'navegacao'], ['Abas', 'abas'], ['Busca', 'padrao-busca']] },
     { title: 'Sobreposições e camadas', items: [['Modais', 'modais'], ['Menus e tooltips', 'menus']] },
     { title: 'Primitivos', items: [['Mapa de primitivos', 'arquitetura#primitives'], ['Box, Stack e Inline', null]] },
-    { title: 'Indicadores de status', items: [['Lozenge', 'lozenge'], ['Badge', 'badge'], ['Selos de segurança', 'criptografia'], ['Progresso', null]] },
+    { title: 'Indicadores de status', items: [['Lozenge', 'lozenge'], ['Badge', 'badge'], ['Selos de segurança', 'criptografia'], ['Progresso', 'progresso'], ['Pill e chip de filtro', 'pill']] },
   ] },
   { title: 'Padrões', items: [
     ['Validação de formulário', 'padrao-validacao'], ['Confirmação', 'padrao-confirmacao'], ['Busca', 'padrao-busca'],

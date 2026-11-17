@@ -1,0 +1,46 @@
+// Core · Pill (status com contorno) e chip de filtro
+// Vieram de examples/ (decisão 0022): peças do visual neutro que qualquer produto usa.
+
+/* ==========================================================================
+   Pill: status ou metadado curto, com contorno fino e cantos redondos.
+   Convive com o lozenge: o lozenge é o status forte de uma mensagem (maiúsculas, fundo);
+   a pill é discreta, em caixa normal, para listas, cabeçalhos de cartão e configurações.
+   ========================================================================== */
+.pill {
+  display: inline-flex; align-items: center; gap: var(--space-050);
+  height: 1.375rem; padding-inline: var(--space-075);
+  border-radius: var(--radius-round);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border);
+  background: transparent; color: var(--color-text-subtle);
+  font: var(--font-body-small); white-space: nowrap;
+}
+.pill > .i { width: 0.875rem; height: 0.875rem; color: inherit; }
+/* Ponto de cor antes do texto: reforça, não substitui a palavra */
+.pill__dot { width: 0.375rem; height: 0.375rem; border-radius: var(--radius-round); background: currentColor; flex: none; }
+.pill--success { color: var(--color-text-success); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-success); }
+.pill--warning { color: var(--color-text-warning); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-warning); }
+.pill--danger { color: var(--color-text-danger); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-danger); }
+.pill--information { color: var(--color-text-information); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-information); }
+.pill--brand { color: var(--color-text-brand); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-brand); }
+/* Preenchida: sem contorno, fundo neutro (contagem de passos, versão, atalho) */
+.pill--filled { box-shadow: none; background: var(--color-bg-neutral); color: var(--color-text); }
+
+/* ==========================================================================
+   Chip de filtro: liga e desliga um filtro. É um <button aria-pressed>.
+   Ligado, fica com o fundo do texto (contraste máximo) e não com a cor de marca.
+   ========================================================================== */
+.filter-chip {
+  display: inline-flex; align-items: center; gap: var(--space-050);
+  height: 1.75rem; padding-inline: var(--space-100);
+  border: 0; border-radius: var(--radius-round);
+  background: transparent; color: var(--color-text-subtle);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border);
+  font: var(--font-weight-medium) var(--font-size-body-small)/1 var(--font-family-body);
+  white-space: nowrap; cursor: pointer;
+}
+.filter-chip .i { width: 0.875rem; height: 0.875rem; color: inherit; }
+.filter-chip:hover, .filter-chip.is-hover { background: var(--color-bg-neutral-subtle-hovered); color: var(--color-text); }
+.filter-chip[aria-pressed="true"], .filter-chip.is-selected { background: var(--color-text); color: var(--color-text-inverse); box-shadow: none; }
+.filter-chip:focus-visible, .filter-chip.is-focus { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+.filter-chip:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
+.filter-chip-group { display: flex; flex-wrap: wrap; gap: var(--space-050); align-items: center; }

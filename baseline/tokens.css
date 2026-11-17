@@ -200,6 +200,10 @@
   --color-border-input: var(--palette-gray-425);
   --color-border-focused: var(--palette-blue-400);
   --color-border-selected: var(--palette-blue-540);
+  /* contorno na cor da marca (pill de marca) */
+  --color-border-brand: var(--palette-blue-540);
+  /* contorno informativo (pill, aviso neutro) */
+  --color-border-information: var(--palette-blue-540);
   --color-border-danger: var(--palette-red-425);
   --color-border-warning: var(--palette-orange-525);
   --color-border-success: var(--palette-green-625);
@@ -308,6 +312,8 @@
   --radius-medium: 8px;
   /* modais, janela de composição, blocos e cartões */
   --radius-large: 12px;
+  /* bloco principal da área de trabalho e painéis de página inteira */
+  --radius-xlarge: 16px;
   /* avatares, badges de contagem */
   --radius-round: 999px;
   --border-width: 1px;
@@ -462,6 +468,8 @@
     --color-border-input: var(--palette-gray-550);
     --color-border-focused: var(--palette-blue-225);
     --color-border-selected: var(--palette-blue-330);
+    --color-border-brand: var(--palette-blue-330);
+    --color-border-information: var(--palette-blue-330);
     --color-border-danger: var(--palette-red-300);
     --color-border-warning: var(--palette-orange-400);
     --color-border-success: var(--palette-green-550);
@@ -552,6 +560,8 @@
   --color-border-input: var(--palette-gray-550);
   --color-border-focused: var(--palette-blue-225);
   --color-border-selected: var(--palette-blue-330);
+  --color-border-brand: var(--palette-blue-330);
+  --color-border-information: var(--palette-blue-330);
   --color-border-danger: var(--palette-red-300);
   --color-border-warning: var(--palette-orange-400);
   --color-border-success: var(--palette-green-550);

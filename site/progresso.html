@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Progresso · OCaml Design System</title>
+<meta name="description" content="Passos de uma tarefa, barra em segmentos e o cartão de uso.">
+<script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../dist/fonts.css">
+<link rel="stylesheet" href="../dist/tokens.css">
+<link rel="stylesheet" href="../dist/components.css">
+<link rel="stylesheet" href="home/tokens.css">
+<link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="home/pages.css">
+</head>
+<body data-page="progresso">
+<div class="doc">
+  <nav class="doc-nav" id="doc-nav" aria-label="Índice"></nav>
+  <main>
+    <section class="ds-section" id="progresso">
+      <div class="ds-head">
+        <h1>Progresso</h1>
+        <p class="lede">Três jeitos de mostrar quanto falta. O stepper lista os passos de uma tarefa longa. A barra em segmentos mostra uma cota em blocos contáveis. O cartão de uso junta valor, barra e rodapé.</p>
+      </div>
+      <div class="stage">
+        <div class="states">
+          <figure class="state" style="justify-items:stretch"><ol class="stepper" style="width:min(100%,26rem)">
+            <li class="step step--done"><span class="step__mark"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><span class="step__name">Ler a caixa de entrada</span><span class="step__aside">412 mensagens</span></li>
+            <li class="step step--current"><span class="step__mark"></span><span class="step__name">Separar por remetente</span><span class="step__aside">Agora</span>
+              <div class="step__detail"><div class="segments segments--brand" role="meter" aria-label="Remetentes lidos" aria-valuenow="14" aria-valuemax="24"><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><small style="color:var(--color-text-subtlest)">14 de 24 remetentes</small></div></li>
+            <li class="step step--todo"><span class="step__mark"></span><span class="step__name">Criar as regras</span><span class="step__aside">Na fila</span></li>
+            <li class="step step--failed"><span class="step__mark"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></span><span class="step__name">Arquivar antigas</span><span class="step__aside">Falhou</span></li>
+          </ol><figcaption><b>Stepper</b>feito, atual (com detalhe), na fila e falhou</figcaption></figure>
+        </div>
+      </div>
+      <div class="stage" id="segmentos">
+        <div class="states">
+          <figure class="state"><div class="segments" role="meter" aria-label="Uso" aria-valuenow="6" aria-valuemax="24" style="width:16rem"><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><figcaption><b>Neutra</b>uso de uma cota</figcaption></figure>
+          <figure class="state"><div class="segments segments--brand" role="meter" aria-label="Uso" aria-valuenow="14" aria-valuemax="24" style="width:16rem"><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><figcaption><b>Marca</b>progresso de uma tarefa</figcaption></figure>
+          <figure class="state"><div class="segments segments--warning" role="meter" aria-label="Uso" aria-valuenow="21" aria-valuemax="24" style="width:16rem"><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span></span><span></span><span></span></div><figcaption><b>Aviso</b>perto do limite</figcaption></figure>
+          <figure class="state"><div class="segments segments--danger" role="meter" aria-label="Uso" aria-valuenow="24" aria-valuemax="24" style="width:16rem"><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span></div><figcaption><b>Perigo</b>limite atingido</figcaption></figure>
+        </div>
+      </div>
+      <div class="stage stage--sunken" id="uso">
+        <div class="states">
+          <figure class="state"><div class="usage-card" style="width:16rem">
+            <div class="usage-card__head"><svg class="i i--sm" aria-hidden="true"><use href="#i-hard-drive"/></svg>Armazenamento<span class="pill pill--filled">Plano Pro</span></div>
+            <div class="usage-card__value"><strong>9,1 GB</strong>de 15 GB</div>
+            <div class="segments" role="meter" aria-label="Uso" aria-valuenow="15" aria-valuemax="24" style="width:auto"><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span class=is-on></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="usage-card__foot"><span>61% usado</span><span>Renova em 3 dez</span></div>
+          </div><figcaption><b>Cartão de uso</b>créditos, armazenamento, assentos</figcaption></figure>
+        </div>
+      </div>
+      <dl class="guidance">
+        <div><dt>Stepper</dt><dd><code>&lt;ol class="stepper"&gt;</code> com <code>.step--done</code>, <code>--current</code>, <code>--todo</code> ou <code>--failed</code>. O <code>.step__aside</code> diz o estado em texto; o <code>.step__detail</code> abre só no passo atual.</dd></div>
+        <div><dt>Segmentos</dt><dd>Use <code>role="meter"</code> com <code>aria-valuenow</code> e <code>aria-valuemax</code> e um rótulo. Para progresso que só anda para a frente, prefira <code>--brand</code>; para cota, a neutra.</dd></div>
+        <div><dt>Barra contínua</dt><dd>A barra fina <code>.progress</code> (em <a href="carregamento.html">Carregamento</a>) continua valendo para envio e download.</dd></div>
+        <div><dt>Classes</dt><dd><code>.stepper</code>, <code>.step</code>, <code>.step__mark</code>, <code>__name</code>, <code>__aside</code>, <code>__detail</code> · <code>.segments</code>, <code>--brand</code>, <code>--warning</code>, <code>--danger</code> · <code>.usage-card</code>, <code>__head</code>, <code>__value</code>, <code>__foot</code>.</dd></div>
+      </dl>
+    </section>
+  </main>
+</div>
+<script src="../dist/sprite.js"></script>
+<script src="docs.js"></script>
+</body>
+</html>

@@ -9,47 +9,23 @@
   <link rel="stylesheet" href="../dist/tokens.css">
   <link rel="stylesheet" href="../dist/components.css">
   <style>
-    /* Só a montagem desta tela. Tudo passa por tokens semânticos; nenhum valor de cor fixo. */
+    /* Só a montagem desta tela. Casca, pill, stepper, segmentos, composer, abas elevadas, cartão de uso e
+       identidade vêm de components.css (área de trabalho, decisão 0022). Nenhum valor de cor fixo. */
     html, body { height: 100%; }
     body { margin: 0; background: var(--color-surface-sunken); color: var(--color-text); font: var(--font-body); -webkit-font-smoothing: antialiased; }
     button { font: inherit; }
 
-    .ws { display: grid; grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr); height: 100vh; padding: var(--space-100) var(--space-100) var(--space-100) 0; }
 
     /* ---------- Navegação lateral (.sidebar sobre o fundo, sem borda) ---------- */
-    .ws .sidebar { width: auto; overflow: hidden; background: transparent; border: 0; padding: var(--space-050) var(--space-150) var(--space-050); gap: var(--space-150); min-height: 0; }
-    .ws .nav-heading { text-transform: none; letter-spacing: 0; font: var(--font-weight-medium) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body); }
-    .ws .nav-item { gap: var(--space-100); font-weight: var(--font-weight-regular); color: var(--color-text); }
     .brand { display: flex; align-items: center; gap: var(--space-100); height: var(--control-height); padding-inline: var(--space-050); }
     .brand__mark { display: inline-grid; place-items: center; width: 1.375rem; height: 1.375rem; border-radius: var(--radius-small); background: var(--color-text); color: var(--color-text-inverse); }
     .brand__name { flex: 1; font-weight: var(--font-weight-semibold); }
     .side-actions { display: flex; gap: var(--space-075); }
     .side-actions .btn--outline:first-child { flex: 1; justify-content: flex-start; }
-    .side-foot { margin-top: auto; display: grid; gap: var(--space-150); }
 
-    .credits { display: grid; gap: var(--space-100); padding: var(--space-150); border-radius: var(--radius-medium); background: var(--color-surface); box-shadow: var(--shadow-raised); }
-    .credits__head { display: flex; align-items: center; gap: var(--space-075); font-weight: var(--font-weight-medium); }
-    .credits__head .label { margin-inline-start: auto; }
-    .credits__value { font: var(--font-body-small); color: var(--color-text-subtlest); }
-    .credits__value strong { font: var(--font-card); color: var(--color-text); margin-inline-end: var(--space-050); }
-    .credits__foot { white-space: nowrap; display: flex; align-items: center; justify-content: space-between; font: var(--font-body-small); color: var(--color-text-subtlest); }
-    .ticks { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; }
-    .ticks > span { height: 6px; border-radius: var(--radius-xsmall); background: var(--color-bg-neutral-hovered); }
-    .ticks > span.is-on { background: var(--color-bg-brand-bold); }
 
-    .me { display: flex; align-items: center; gap: var(--space-100); padding-inline: var(--space-050); }
-    .me__text { flex: 1; min-width: 0; display: grid; line-height: 1.2; }
-    .me__name { font-weight: var(--font-weight-medium); }
-    .me__mail { font: var(--font-body-small); color: var(--color-text-subtlest); }
 
     /* ---------- Bloco principal ---------- */
-    .main { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; border-radius: var(--radius-large); background: var(--color-surface); box-shadow: var(--shadow-raised); overflow: hidden; }
-    .topbar { display: grid; grid-template-columns: 1fr minmax(12rem, 22rem) 1fr; align-items: center; gap: var(--space-150); height: var(--layout-header-height); padding-inline: var(--space-200) var(--space-150); border-bottom: var(--border-width) solid var(--color-border); }
-    .crumb { display: flex; align-items: center; gap: var(--space-100); min-width: 0; font-weight: var(--font-weight-medium); }
-    .crumb > .i { color: var(--color-icon); }
-    .crumb__text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .topbar .input--search { min-height: var(--control-height); border-radius: var(--radius-round); }
-    .topbar__end { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-100); }
     .agent-dot { display: inline-grid; place-items: center; width: 1.25rem; height: 1.25rem; border-radius: var(--radius-small); background: var(--color-bg-brand-bold); color: var(--color-text-inverse); flex: none; }
 
     .panes { display: grid; grid-template-columns: minmax(20rem, 26rem) minmax(0, 1fr); min-height: 0; }
@@ -70,21 +46,7 @@
     .plan__title { flex: 1; display: grid; }
     .plan__title strong { font: var(--font-card); }
     .plan__title small, .plan__foot { font: var(--font-body-small); color: var(--color-text-subtlest); }
-    .pill { display: inline-flex; align-items: center; gap: var(--space-050); height: 1.375rem; padding-inline: var(--space-075); border-radius: var(--radius-round); box-shadow: inset 0 0 0 var(--border-width) var(--color-border); font: var(--font-body-small); color: var(--color-text-subtle); white-space: nowrap; }
-    .steps { list-style: none; margin: 0; padding: var(--space-150) var(--space-200); display: grid; gap: var(--space-150); }
-    .step { position: relative; display: grid; grid-template-columns: 1.125rem minmax(0, 1fr) auto; column-gap: var(--space-100); align-items: center; }
-    .step:not(:last-child)::before { content: ""; position: absolute; inset-inline-start: calc(0.5625rem - 0.5px); top: 1.25rem; bottom: calc(var(--space-150) * -1 + 2px); width: 1px; background: var(--color-border); }
-    .step__mark { width: 1.125rem; height: 1.125rem; border-radius: var(--radius-round); display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px var(--color-border-bold); background: var(--color-surface); position: relative; }
-    .step--done .step__mark { background: var(--color-bg-success-bold); box-shadow: none; color: var(--color-text-inverse); }
-    .step--current .step__mark { box-shadow: inset 0 0 0 1.5px var(--color-border-selected); }
-    .step--current .step__mark::after { content: ""; width: 0.4375rem; height: 0.4375rem; border-radius: var(--radius-round); background: var(--color-bg-brand-bold); }
-    .step--todo { color: var(--color-text-subtlest); }
-    .step--todo .step__mark { box-shadow: inset 0 0 0 1.5px var(--color-border); }
-    .step__name { font-weight: var(--font-weight-medium); }
-    .step--todo .step__name { font-weight: var(--font-weight-regular); }
-    .step__aside { font: var(--font-body-small); color: var(--color-text-subtlest); }
-    .step--current .step__aside { color: var(--color-text-brand); }
-    .step__detail { min-width: 0; grid-template-columns: minmax(0, 1fr); grid-column: 2 / -1; margin-top: var(--space-100); display: grid; gap: var(--space-100); padding: var(--space-150); border-radius: var(--radius-medium); background: var(--color-surface-sunken); }
+    .steps { padding: var(--space-150) var(--space-200); }
     .lane { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr) 3.75rem; align-items: center; gap: var(--space-150); font: var(--font-body-small); }
     .lane__name { display: flex; align-items: center; gap: var(--space-075); color: var(--color-text); }
     .lane__count { white-space: nowrap; text-align: end; color: var(--color-text-subtlest); font-variant-numeric: tabular-nums; }
@@ -95,21 +57,12 @@
     .plan__foot { display: flex; justify-content: space-between; align-items: center; gap: var(--space-100); padding: var(--space-100) var(--space-200); background: var(--color-surface-sunken); border-top: var(--border-width) solid var(--color-border); }
     .plan__foot span { display: inline-flex; align-items: center; gap: var(--space-050); }
 
-    .composer { margin: 0 var(--space-150) var(--space-150); padding: var(--space-150); border-radius: var(--radius-large); box-shadow: var(--shadow-raised); display: grid; gap: var(--space-150); }
-    .composer textarea { border: 0; resize: none; background: transparent; color: var(--color-text); font: var(--font-body); outline: none; min-height: 1.5rem; }
-    .composer textarea::placeholder { color: var(--color-text-subtlest); }
-    .composer__bar { display: flex; align-items: center; gap: var(--space-025); }
+    .composer { margin: 0 var(--space-150) var(--space-150); }
     .composer__bar .btn--subtle:nth-child(3) { margin-inline-start: auto; }
-    .stop { --btn-bg: var(--color-text); --btn-bg-hover: var(--color-text-subtle); --btn-bg-active: var(--color-text-subtle); --btn-fg: var(--color-text-inverse); }
-    .stop::before { content: ""; width: 0.625rem; height: 0.625rem; border-radius: 2px; background: currentColor; }
 
     /* ---------- Planilha ---------- */
     .board { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; background: var(--color-surface-sunken); }
     .doc-tabs { display: flex; align-items: center; gap: var(--space-050); padding: var(--space-100) var(--space-150); }
-    .doc-tab { display: inline-flex; align-items: center; gap: var(--space-075); height: 1.75rem; padding-inline: var(--space-100); border: 0; border-radius: var(--radius-small); background: transparent; color: var(--color-text-subtle); font: var(--font-weight-medium) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body); cursor: pointer; }
-    .doc-tab:hover { background: var(--color-bg-neutral-subtle-hovered); }
-    .doc-tab[aria-selected="true"] { background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-raised); }
-    .doc-tab .i--sm { color: var(--color-icon-subtle); }
     .ico-sheet { color: var(--color-icon-success); }
 
     .sheet { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto; min-height: 0; margin: 0 var(--space-150) var(--space-150); border-radius: var(--radius-large); background: var(--color-surface); box-shadow: var(--shadow-raised); overflow: hidden; }
@@ -141,24 +94,20 @@
     .grid tr.is-empty td { color: transparent; }
 
     .sheet__foot { display: flex; align-items: center; gap: var(--space-100); padding: var(--space-075) var(--space-150); border-top: var(--border-width) solid var(--color-border); font: var(--font-body-small); color: var(--color-text-subtlest); }
-    .sheet__foot .doc-tab { height: 1.5rem; }
+    .sheet__foot .tab { height: 1.5rem; }
     .sheet__foot > span { margin-inline-start: auto; }
 
     @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
 
     /* ---------- Telas estreitas: a conversa e a planilha empilham, a navegação some ---------- */
     @media (max-width: 1100px) {
-      .ws { grid-template-columns: minmax(0, 1fr); padding: var(--space-100); }
-      .ws > .sidebar { display: none; }
+      .workspace > .workspace__sidebar { display: none; }
     }
     @media (max-width: 860px) {
-      .ws { height: auto; min-height: 100vh; }
-      .topbar { grid-template-columns: 1fr auto; }
-      .topbar { padding-inline: var(--space-150) var(--space-100); gap: var(--space-100); }
-      .topbar .input--search, .topbar .avatar-group, .topbar .agent-dot { display: none; }
-      .topbar .btn--outline { width: var(--control-height); padding: 0; font-size: 0; gap: 0; }
+      .workspace__topbar .input--search, .workspace__topbar .avatar-group, .workspace__topbar .agent-dot { display: none; }
+      .workspace__topbar .btn--outline { width: var(--control-height); padding: 0; font-size: 0; gap: 0; }
       .sheet__head .btn:not(.btn--icon) { font-size: 0; gap: 0; width: var(--control-height-compact); padding: 0; }
-      .lane-status span:last-child, .sheet__head .writing, .sheet__foot .doc-tab + .doc-tab { display: none; }
+      .lane-status span:last-child, .sheet__head .writing, .sheet__foot .tab + .tab { display: none; }
       .panes { grid-template-columns: minmax(0, 1fr); }
       .convo { border-inline-end: 0; border-bottom: var(--border-width) solid var(--color-border); }
       .sheet { min-height: 32rem; }
@@ -167,9 +116,9 @@
   </style>
 </head>
 <body>
-  <div class="ws">
+  <div class="workspace">
     <!-- Navegação lateral: .sidebar, .nav-group, .nav-heading, .nav-item -->
-    <nav class="sidebar" aria-label="Navegação principal">
+    <nav class="sidebar workspace__sidebar" aria-label="Navegação principal">
       <div class="brand">
         <span class="brand__mark" aria-hidden="true"><svg class="i i--sm"><use href="#i-sparkle"/></svg></span>
         <span class="brand__name">Lumen</span>
@@ -204,31 +153,31 @@
         <a class="nav-item" href="#"><svg class="i"><use href="#i-user"/></svg><span class="nav-item__text">Crescimento</span></a>
       </div>
 
-      <div class="side-foot">
-        <section class="credits" aria-label="Créditos">
-          <div class="credits__head"><svg class="i i--sm"><use href="#i-sparkle"/></svg>Créditos<span class="label">Pro</span></div>
-          <div class="credits__value"><strong>760</strong>restantes de 2.000</div>
-          <div class="ticks" role="meter" aria-valuemin="0" aria-valuemax="2000" aria-valuenow="760" aria-label="Créditos restantes"></div>
-          <div class="credits__foot"><span>Renova 1º dez</span><a class="btn btn--link btn--compact" href="#">Fazer upgrade</a></div>
+      <div class="workspace__sidebar-foot">
+        <section class="usage-card" aria-label="Créditos">
+          <div class="usage-card__head"><svg class="i i--sm"><use href="#i-sparkle"/></svg>Créditos<span class="label">Pro</span></div>
+          <div class="usage-card__value"><strong>760</strong>restantes de 2.000</div>
+          <div class="segments segments--brand" role="meter" aria-valuemin="0" aria-valuemax="2000" aria-valuenow="760" aria-label="Créditos restantes"></div>
+          <div class="usage-card__foot"><span>Renova 1º dez</span><a class="btn btn--link btn--compact" href="#">Fazer upgrade</a></div>
         </section>
-        <div class="me">
+        <div class="identity">
           <span class="avatar avatar--sm"><img class="avatar__img" src="../site/images/people/pessoa-5.webp" alt="">MC</span>
-          <span class="me__text"><span class="me__name">Maya Costa</span><span class="me__mail">maya@lumen.app</span></span>
+          <span class="identity__text"><span class="identity__name">Maya Costa</span><span class="identity__meta">maya@lumen.app</span></span>
           <button class="btn btn--subtle btn--icon btn--compact" aria-label="Configurações"><svg class="i"><use href="#i-settings"/></svg></button>
         </div>
       </div>
     </nav>
 
-    <main class="main">
-      <header class="topbar">
-        <div class="crumb"><svg class="i"><use href="#i-folder"/></svg><span class="crumb__text">Lançamento da poupança, T1</span>
+    <main class="workspace__main">
+      <header class="workspace__topbar">
+        <div class="workspace__crumb"><svg class="i"><use href="#i-folder"/></svg><span class="workspace__crumb-text">Lançamento da poupança, T1</span>
           <button class="btn btn--subtle btn--icon btn--compact" aria-label="Favoritar"><svg class="i"><use href="#i-star"/></svg></button></div>
-        <label class="input input--search">
+        <label class="input input--search input--round">
           <svg class="i"><use href="#i-search"/></svg>
           <input type="search" placeholder="Buscar no projeto" aria-label="Buscar no projeto">
           <kbd>⌘K</kbd>
         </label>
-        <div class="topbar__end">
+        <div class="workspace__topbar-end">
           <span class="agent-dot" title="Agente ativo"><svg class="i i--sm"><use href="#i-sparkle"/></svg></span>
           <span class="avatar-group" aria-label="3 pessoas neste projeto">
             <span class="avatar avatar--sm"><img class="avatar__img" src="../site/images/people/pessoa-6.webp" alt="">AL</span>
@@ -262,7 +211,7 @@
                 <div class="plan__title"><strong>Pesquisando 14 apps de poupança</strong><small>Etapa 2 de 4 · cerca de 2 min</small></div>
                 <span class="pill"><svg class="i i--sm"><use href="#i-clock"/></svg>2 min 14 s</span>
               </div>
-              <ol class="steps">
+              <ol class="stepper steps">
                 <li class="step step--done"><span class="step__mark"><svg class="i i--sm"><use href="#i-check"/></svg></span><span class="step__name">Encontrar apps de poupança no Brasil</span><span class="step__aside">14 encontrados</span></li>
                 <li class="step step--current"><span class="step__mark"></span><span class="step__name">Coletar rendimento, tarifas e mínimos</span><span class="step__aside">9 de 14</span>
                   <div class="step__detail">
@@ -280,22 +229,22 @@
           </div>
 
           <form class="composer" onsubmit="return false">
-            <textarea rows="1" placeholder="Adicionar uma nota ao plano…" aria-label="Nota ao plano"></textarea>
+            <textarea class="composer__input" rows="1" placeholder="Adicionar uma nota ao plano…" aria-label="Nota ao plano"></textarea>
             <div class="composer__bar">
               <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Anexar"><svg class="i"><use href="#i-plus"/></svg></button>
               <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Mencionar"><svg class="i"><use href="#i-user"/></svg></button>
               <button class="btn btn--subtle btn--compact" type="button">Agente<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
               <span class="pill"><svg class="i i--sm"><use href="#i-sparkle"/></svg>Máx.</span>
-              <button class="btn btn--icon btn--pill stop" type="button" aria-label="Parar o agente" style="margin-inline-start: var(--space-050)"></button>
+              <button class="btn btn--icon btn--pill composer__stop" type="button" aria-label="Parar o agente" style="margin-inline-start: var(--space-050)"></button>
             </div>
           </form>
         </section>
 
         <!-- Planilha preenchida pelo agente -->
         <section class="board" aria-label="Artefatos">
-          <div class="doc-tabs" role="tablist">
-            <button class="doc-tab" role="tab" aria-selected="false"><svg class="i i--sm"><use href="#i-grid"/></svg>Todos <span class="badge">1</span></button>
-            <button class="doc-tab" role="tab" aria-selected="true"><svg class="i i--sm ico-sheet"><use href="#i-rows"/></svg>Pesquisa de concorrentes<svg class="i i--sm"><use href="#i-x"/></svg></button>
+          <div class="tabs tabs--raised doc-tabs" role="tablist" aria-label="Artefatos">
+            <button class="tab" role="tab" aria-selected="false"><svg class="i i--sm"><use href="#i-grid"/></svg>Todos <span class="badge">1</span></button>
+            <button class="tab" role="tab" aria-selected="true"><svg class="i i--sm ico-sheet"><use href="#i-rows"/></svg>Pesquisa de concorrentes<svg class="i i--sm"><use href="#i-x"/></svg></button>
             <button class="btn btn--subtle btn--icon btn--compact" aria-label="Nova aba"><svg class="i"><use href="#i-plus"/></svg></button>
           </div>
 
@@ -343,10 +292,10 @@
               </table>
             </div>
 
-            <div class="sheet__foot">
+            <div class="sheet__foot tabs tabs--raised">
               <button class="btn btn--subtle btn--icon btn--compact" aria-label="Nova página"><svg class="i i--sm"><use href="#i-plus"/></svg></button>
-              <button class="doc-tab" aria-selected="true"><svg class="i i--sm ico-sheet"><use href="#i-rows"/></svg>Concorrentes</button>
-              <button class="doc-tab"><svg class="i i--sm ico-sheet"><use href="#i-rows"/></svg>Fontes · 42</button>
+              <button class="tab" aria-selected="true"><svg class="i i--sm ico-sheet"><use href="#i-rows"/></svg>Concorrentes</button>
+              <button class="tab"><svg class="i i--sm ico-sheet"><use href="#i-rows"/></svg>Fontes · 42</button>
               <span>14 linhas · 8 colunas</span>
             </div>
           </div>
@@ -360,7 +309,7 @@
     document.body.insertAdjacentHTML('afterbegin', window.OCAML_SPRITE || '');
 
     // Medidor de créditos: 24 marcas, acesas na proporção do saldo
-    const ticks = document.querySelector('.ticks');
+    const ticks = document.querySelector('.usage-card .segments');
     const on = Math.round(24 * 760 / 2000);
     ticks.innerHTML = Array.from({ length: 24 }, (_, i) => `<span class="${i < on ? 'is-on' : ''}"></span>`).join('');
 

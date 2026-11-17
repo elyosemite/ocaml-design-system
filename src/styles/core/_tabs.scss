@@ -18,3 +18,18 @@
 .tab:hover::after, .tab.is-hover::after { background: var(--color-border-bold); }
 .tab[aria-selected="true"] { color: var(--color-text-selected); }
 .tab[aria-selected="true"]::after { background: var(--color-border-selected); }
+
+/* ==========================================================================
+   Abas elevadas (decisão 0022): a selecionada vira um cartão sobre o fundo afundado.
+   Para alternar documentos ou vistas dentro de um bloco; sem a linha de baixo.
+   ========================================================================== */
+.tabs--raised { gap: var(--space-050); border-bottom: 0; padding: var(--space-050); }
+.tabs--raised .tab {
+  height: 1.75rem; padding: 0 var(--space-100);
+  border-radius: var(--radius-small);
+  font: var(--font-weight-medium) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body);
+}
+.tabs--raised .tab::after { content: none; }
+.tabs--raised .tab .i { width: 0.875rem; height: 0.875rem; color: var(--color-icon-subtle); }
+.tabs--raised .tab:hover, .tabs--raised .tab.is-hover { background: var(--color-bg-neutral-subtle-hovered); }
+.tabs--raised .tab[aria-selected="true"] { background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-raised); }

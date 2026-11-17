@@ -1,9 +1,22 @@
 {
   "name": "ocaml-design-system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "OCaml Design System: tokens, componentes CSS, ícones e documentação para qualquer produto.",
   "type": "module",
+  "exports": {
+    "./tokens.css": "./dist/tokens.css",
+    "./components.css": "./dist/components.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./sprite.svg": "./dist/sprite.svg",
+    "./sprite.js": "./dist/sprite.js",
+    "./icons.json": "./dist/icons.json",
+    "./tokens.json": "./dist/platforms/tokens.json",
+    "./tokens": "./dist/platforms/tokens.ts",
+    "./platforms/*": "./dist/platforms/*",
+    "./scss/*": "./src/*",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs",
@@ -11,7 +24,9 @@
     "verify": "node scripts/build.mjs && node scripts/compare.mjs && node scripts/check.mjs",
     "dev": "node scripts/build.mjs && node scripts/serve.mjs",
     "serve": "node scripts/serve.mjs",
-    "pages": "node scripts/build.mjs && node scripts/pages.mjs"
+    "pages": "node scripts/build.mjs && node scripts/pages.mjs",
+    "tokens:platforms": "node scripts/platforms.mjs",
+    "prepare": "node scripts/build.mjs"
   },
   "devDependencies": {
     "@fontsource/inter": "5.2.5",
