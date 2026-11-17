@@ -14,17 +14,22 @@ rmSync(out, { recursive: true, force: true });
 // .hallmark/ (capturas e registros de trabalho) não vai para o site
 cpSync(join(root, "site"), out, { recursive: true, filter: (src) => !src.includes(".hallmark") });
 cpSync(join(root, "dist"), join(out, "dist"), { recursive: true });
+// Exemplos em _site/examples/: "../dist/" continua certo a partir dali; as imagens do site sobem um nível
+cpSync(join(root, "examples"), join(out, "examples"), { recursive: true });
 
 const walk = (d) => readdirSync(d).flatMap((n) => { const p = join(d, n); return statSync(p).isDirectory() ? walk(p) : [p]; });
 let rewritten = 0;
-for (const file of walk(out).filter((p) => [".html", ".js"].includes(extname(p)) && !p.startsWith(join(out, "dist")))) {
+for (const file of walk(out).filter((p) => [".html", ".js"].includes(extname(p)) && !p.startsWith(join(out, "dist")) && !p.startsWith(join(out, "examples")))) {
   const before = readFileSync(file, "utf8");
   const after = before.replace(/(["'(])\.\.\/dist\//g, "$1dist/");
   if (after !== before) { writeFileSync(file, after); rewritten++; }
 }
+for (const file of walk(join(out, "examples")).filter((p) => extname(p) === ".html")) {
+  writeFileSync(file, readFileSync(file, "utf8").replace(/(\.\.\/)site\//g, "$1"));
+}
 // Sem Jekyll: o GitHub Pages serve os arquivos como estão
 writeFileSync(join(out, ".nojekyll"), "");
 
-const left = walk(out).filter((p) => [".html", ".js"].includes(extname(p))).filter((p) => readFileSync(p, "utf8").includes("../dist/"));
+const left = walk(out).filter((p) => [".html", ".js"].includes(extname(p)) && !p.startsWith(join(out, "examples"))).filter((p) => readFileSync(p, "utf8").includes("../dist/"));
 if (left.length) { console.error(`erro: ainda apontam para ../dist/: ${left.join(", ")}`); process.exit(1); }
 console.log(`_site/ pronto: ${walk(out).length} arquivos, ${rewritten} com os caminhos de dist/ ajustados.`);

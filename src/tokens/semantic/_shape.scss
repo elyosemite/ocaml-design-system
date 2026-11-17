@@ -4,10 +4,10 @@
 
 $groups: (
   'Forma': (
-    'radius-xsmall': (value: p.$radius-2, desc: 'checkbox, badge interno'),
-    'radius-small': (value: p.$radius-3, desc: 'botões, inputs, lozenges, chips'),
-    'radius-medium': (value: p.$radius-6, desc: 'menus, toasts, cartões de anexo'),
-    'radius-large': (value: p.$radius-8, desc: 'modais, janela de composição'),
+    'radius-xsmall': (value: p.$radius-4, desc: 'checkbox, badge interno'),
+    'radius-small': (value: p.$radius-6, desc: 'botões, inputs, lozenges, chips'),
+    'radius-medium': (value: p.$radius-8, desc: 'menus, toasts, cartões de anexo'),
+    'radius-large': (value: p.$radius-12, desc: 'modais, janela de composição, blocos e cartões'),
     'radius-round': (value: p.$radius-999, desc: 'avatares, badges de contagem'),
     'border-width': p.$width-1,
     'border-width-focused': p.$width-2,

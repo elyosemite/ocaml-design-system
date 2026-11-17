@@ -1,29 +1,7 @@
-/* ==========================================================================
-   Epistula Design System · tokens.css · v3.0
-   Fundamentos inspirados no Atlassian Design System (ADS). Esta é a fonte de verdade dos tokens.
-
-   Três níveis (v3 §4.1):
-     1. Primitivos  --palette-*   valores brutos, sem intenção de uso. Só tokens.css os usa.
-     2. Semânticos  --color-*, --space-*, --font-*, ...   o significado. É o que componentes e telas usam.
-     3. De componente  --btn-*, --av-*, ...   ajuste de UM componente, declarado no próprio components.css,
-        só quando nenhum semântico serve. Não vira uma segunda paleta.
-
-   Use sempre o token semântico (--color-text-subtle), nunca o hex bruto nem --palette-*.
-   Domínios: cor (por tema) · tipografia · espaço · forma · elevação · layout e densidade · camadas ·
-   movimento · foco · opacidade · ícones · breakpoints.
-   Temas: claro, escuro (segue o sistema) e alto contraste (prefers-contrast: more).
-   Conferência: pnpm ds:check
-   ========================================================================== */
-
+@charset "UTF-8";
+/* OCamlDesignSystem · gerado por scripts/build.mjs a partir de src/. Não edite este arquivo. */
 :root {
   color-scheme: light;
-
-  /* ==========================================================================
-     Nível 1 · Primitivos (v3 §4.1): valores brutos, sem intenção de uso.
-     O nome diz a família e o quanto é escuro (100 claro … 1000 escuro); o sufixo -aNN é a opacidade em %.
-     Os dois temas usam a mesma paleta: o que muda de um tema para o outro é qual primitivo cada
-     token semântico aponta. Componentes e telas NUNCA usam --palette-*; usam os semânticos abaixo.
-     ========================================================================== */
   /* ---------- Paleta · branco ---------- */
   --palette-white: #FFFFFF;
   --palette-white-a06: #FFFFFF0F;
@@ -33,20 +11,12 @@
   --palette-white-a12: #FFFFFF1F;
   --palette-white-a20: #FFFFFF33;
   --palette-white-a30: #FFFFFF4D;
-
   /* ---------- Paleta · ardósia ---------- */
-  --palette-slate-25: #F7F8F9;
-  --palette-slate-75: #E9EBEE;
   --palette-slate-85: #E6EAF0;
   --palette-slate-225: #BCC5D0;
-  --palette-slate-275: #B3B9C4;
   --palette-slate-325: #9FADBC;
   --palette-slate-350: #9AA5B2;
-  --palette-slate-425: #8590A2;
-  --palette-slate-475: #758195;
   --palette-slate-525: #6B7685;
-  --palette-slate-550: #626F86;
-  --palette-slate-650: #44546F;
   --palette-slate-675: #4A535E;
   --palette-slate-800: #2E343B;
   --palette-slate-875: #1B1F24;
@@ -54,7 +24,27 @@
   --palette-slate-925: #0E1013;
   --palette-slate-950: #090A0C;
   --palette-slate-975: #030304;
-
+  /* ---------- Paleta · cinza ---------- */
+  --palette-gray-25: #FAFAFA;
+  --palette-gray-40: #F7F7F8;
+  --palette-gray-75: #F0F0F1;
+  --palette-gray-300: #C9C9CF;
+  --palette-gray-425: #8B8B94;
+  --palette-gray-500: #71717A;
+  --palette-gray-600: #52525B;
+  --palette-gray-900: #18181B;
+  /* ---------- Paleta · preto ---------- */
+  --palette-black-1000: #000000;
+  --palette-black-1000-a03: #00000008;
+  --palette-black-1000-a05: #0000000D;
+  --palette-black-1000-a06: #0000000F;
+  --palette-black-1000-a08: #00000014;
+  --palette-black-1000-a10: #0000001A;
+  --palette-black-1000-a14: #00000024;
+  --palette-black-1000-a30: #0000004D;
+  --palette-black-1000-a40: #00000066;
+  --palette-black-1000-a70: #000000B3;
+  --palette-black-1000-a80: #000000CC;
   /* ---------- Paleta · azul ---------- */
   --palette-blue-25: #F3F0FF;
   --palette-blue-50: #E9F2FF;
@@ -78,7 +68,9 @@
   --palette-blue-400: #388BFF;
   --palette-blue-425: #6E5DC6;
   --palette-blue-500: #5E4DB2;
-  --palette-blue-525: #0C66E4;
+  --palette-blue-540: #2563EB;
+  --palette-blue-640: #1D4ED8;
+  --palette-blue-760: #1E40AF;
   --palette-blue-600: #0055CC;
   --palette-blue-675: #206A83;
   --palette-blue-725: #352C63;
@@ -86,24 +78,13 @@
   --palette-blue-785: #2A2250;
   --palette-blue-795: #14305A;
   --palette-blue-800: #164555;
-  --palette-blue-810: #172B4D;
   --palette-blue-820: #092957;
   --palette-blue-850: #0F213D;
-  --palette-blue-860: #091E42;
-  --palette-blue-860-a03: #091E4208;
-  --palette-blue-860-a06: #091E420F;
-  --palette-blue-860-a14: #091E4224;
-  --palette-blue-860-a15: #091E4226;
-  --palette-blue-860-a25: #091E4240;
-  --palette-blue-860-a31: #091E424F;
-  --palette-blue-860-a49: #091E427D;
   --palette-blue-925: #0B0818;
   --palette-blue-950: #040A14;
-
   /* ---------- Paleta · verde-água ---------- */
   --palette-teal-100: #D6EEF2;
   --palette-teal-975: #030D0F;
-
   /* ---------- Paleta · verde ---------- */
   --palette-green-75: #DCFFF1;
   --palette-green-100: #DCEFE3;
@@ -116,7 +97,6 @@
   --palette-green-725: #216E4E;
   --palette-green-800: #164B35;
   --palette-green-975: #040D08;
-
   /* ---------- Paleta · amarelo ---------- */
   --palette-yellow-75: #FFF7D6;
   --palette-yellow-325: #F8D35C;
@@ -124,7 +104,6 @@
   --palette-yellow-550: #E2B203;
   --palette-yellow-825: #533F04;
   --palette-yellow-950: #0C0B08;
-
   /* ---------- Paleta · laranja ---------- */
   --palette-orange-50: #FFF3EB;
   --palette-orange-100: #EFE9DF;
@@ -136,7 +115,6 @@
   --palette-orange-675: #A54800;
   --palette-orange-775: #5F3811;
   --palette-orange-950: #120A04;
-
   /* ---------- Paleta · vermelho ---------- */
   --palette-red-50: #FFECEB;
   --palette-red-200: #FF9C94;
@@ -147,7 +125,6 @@
   --palette-red-525: #C9372C;
   --palette-red-600: #AE2E24;
   --palette-red-800: #42221F;
-
   /* ---------- Paleta · magenta ---------- */
   --palette-magenta-25: #FFECF8;
   --palette-magenta-75: #F5DFEE;
@@ -155,43 +132,37 @@
   --palette-magenta-600: #943D73;
   --palette-magenta-775: #50253F;
   --palette-magenta-950: #120710;
-
-  /* ---------- Paleta · preto ---------- */
-  --palette-black-1000: #000000;
-  --palette-black-1000-a70: #000000B3;
-  --palette-black-1000-a80: #000000CC;
-
   /* ---------- Cor · texto ---------- */
-  --color-text: var(--palette-blue-810);
-  --color-text-subtle: var(--palette-slate-650);
-  --color-text-subtlest: var(--palette-slate-550);
-  --color-text-disabled: var(--palette-blue-860-a31);
+  --color-text: var(--palette-gray-900);
+  --color-text-subtle: var(--palette-gray-600);
+  --color-text-subtlest: var(--palette-gray-500);
+  --color-text-disabled: var(--palette-black-1000-a30);
   --color-text-inverse: var(--palette-white);
-  --color-text-brand: var(--palette-blue-525);
-  --color-text-selected: var(--palette-blue-600);
+  --color-text-brand: var(--palette-blue-540);
+  --color-text-selected: var(--palette-blue-640);
   --color-text-danger: var(--palette-red-600);
   --color-text-warning: var(--palette-orange-675);
-  --color-text-warning-inverse: var(--palette-blue-810);
+  --color-text-warning-inverse: var(--palette-gray-900);
   --color-text-success: var(--palette-green-725);
   --color-text-information: var(--palette-blue-600);
   --color-text-discovery: var(--palette-blue-500);
-  --color-link: var(--palette-blue-525);
-  --color-link-pressed: var(--palette-blue-600);
-
+  --color-link: var(--palette-blue-540);
+  --color-link-pressed: var(--palette-blue-640);
   /* ---------- Cor · superfícies (elevação) ---------- */
   --color-surface: var(--palette-white);
-  --color-surface-sunken: var(--palette-slate-25);
+  --color-surface-sunken: var(--palette-gray-40);
   --color-surface-raised: var(--palette-white);
   --color-surface-overlay: var(--palette-white);
-  --color-blanket: var(--palette-blue-860-a49);
+  --color-blanket: var(--palette-black-1000-a40);
   /* Fundo de papel para conteúdo de terceiros (corpo HTML de e-mail): claro nos dois temas. */
   --color-surface-paper: var(--palette-white);
-  /* Fundo da janela atrás dos blocos (US5). A casca lê --app-background, que aceita cor ou imagem. */
-  --color-canvas: var(--palette-slate-75);
-  /* Barra de rolagem (US6) */
-  --color-scrollbar-thumb: var(--palette-slate-275);
-  --color-scrollbar-thumb-hovered: var(--palette-slate-425);
-  /* Paleta do fundo (US6): escolhida em Configurações → Aparência, grava --app-background */
+  /* Barra de rolagem */
+  --color-scrollbar-thumb: var(--palette-gray-300);
+  --color-scrollbar-thumb-hovered: var(--palette-gray-425);
+  /* ---------- Cor · fundo da janela ---------- */
+  /* Fundo da janela atrás dos blocos. A casca lê --app-background, que aceita cor ou imagem. */
+  --color-canvas: var(--palette-gray-75);
+  /* Paleta do fundo: escolhida em Configurações → Aparência, grava --app-background */
   --color-canvas-blue: var(--palette-blue-95);
   --color-canvas-teal: var(--palette-teal-100);
   --color-canvas-green: var(--palette-green-100);
@@ -199,22 +170,21 @@
   --color-canvas-magenta: var(--palette-magenta-75);
   --color-canvas-orange: var(--palette-orange-110);
   --color-canvas-sand: var(--palette-orange-100);
-
   /* ---------- Cor · fundos de componente ---------- */
   --color-bg-input: var(--palette-white);
-  --color-bg-input-hovered: var(--palette-slate-25);
-  --color-bg-neutral: var(--palette-blue-860-a06);
-  --color-bg-neutral-hovered: var(--palette-blue-860-a14);
-  --color-bg-neutral-pressed: var(--palette-blue-860-a31);
-  --color-bg-neutral-subtle-hovered: var(--palette-blue-860-a06);
-  --color-bg-neutral-subtle-pressed: var(--palette-blue-860-a14);
-  --color-bg-neutral-bold: var(--palette-slate-650);
-  --color-bg-disabled: var(--palette-blue-860-a03);
+  --color-bg-input-hovered: var(--palette-gray-25);
+  --color-bg-neutral: var(--palette-black-1000-a05);
+  --color-bg-neutral-hovered: var(--palette-black-1000-a10);
+  --color-bg-neutral-pressed: var(--palette-black-1000-a14);
+  --color-bg-neutral-subtle-hovered: var(--palette-black-1000-a05);
+  --color-bg-neutral-subtle-pressed: var(--palette-black-1000-a08);
+  --color-bg-neutral-bold: var(--palette-gray-600);
+  --color-bg-disabled: var(--palette-black-1000-a03);
   --color-bg-selected: var(--palette-blue-50);
   --color-bg-selected-hovered: var(--palette-blue-100);
-  --color-bg-brand-bold: var(--palette-blue-525);
-  --color-bg-brand-bold-hovered: var(--palette-blue-600);
-  --color-bg-brand-bold-pressed: var(--palette-blue-775);
+  --color-bg-brand-bold: var(--palette-blue-540);
+  --color-bg-brand-bold-hovered: var(--palette-blue-640);
+  --color-bg-brand-bold-pressed: var(--palette-blue-760);
   --color-bg-danger: var(--palette-red-50);
   --color-bg-danger-bold: var(--palette-red-525);
   --color-bg-danger-bold-hovered: var(--palette-red-600);
@@ -224,64 +194,76 @@
   --color-bg-success: var(--palette-green-75);
   --color-bg-success-bold: var(--palette-green-675);
   --color-bg-information: var(--palette-blue-50);
-  --color-bg-information-bold: var(--palette-blue-525);
+  --color-bg-information-bold: var(--palette-blue-540);
   --color-bg-discovery: var(--palette-blue-25);
   --color-bg-discovery-bold: var(--palette-blue-425);
-
   /* ---------- Cor · bordas ---------- */
-  --color-border: var(--palette-blue-860-a14);
-  --color-border-bold: var(--palette-slate-475);
-  --color-border-input: var(--palette-slate-425);
+  --color-border: var(--palette-black-1000-a08);
+  --color-border-bold: var(--palette-gray-500);
+  --color-border-input: var(--palette-gray-425);
   --color-border-focused: var(--palette-blue-400);
-  --color-border-selected: var(--palette-blue-525);
+  --color-border-selected: var(--palette-blue-540);
   --color-border-danger: var(--palette-red-425);
   --color-border-warning: var(--palette-orange-525);
   --color-border-success: var(--palette-green-625);
-
   /* ---------- Cor · ícones ---------- */
-  --color-icon: var(--palette-slate-650);
-  --color-icon-subtle: var(--palette-slate-550);
-  --color-icon-brand: var(--palette-blue-525);
+  --color-icon: var(--palette-gray-600);
+  --color-icon-subtle: var(--palette-gray-500);
+  --color-icon-brand: var(--palette-blue-540);
   --color-icon-danger: var(--palette-red-525);
   --color-icon-warning: var(--palette-orange-525);
   --color-icon-success: var(--palette-green-625);
   --color-icon-discovery: var(--palette-blue-350);
   --color-icon-starred: var(--palette-orange-525);
-
   /* ---------- Cor · etiquetas de e-mail (pares fundo/texto) ---------- */
-  --color-label-blue-bg: var(--palette-blue-50);      --color-label-blue-text: var(--palette-blue-600);
-  --color-label-teal-bg: var(--palette-blue-60);      --color-label-teal-text: var(--palette-blue-675);
-  --color-label-green-bg: var(--palette-green-75);     --color-label-green-text: var(--palette-green-725);
-  --color-label-purple-bg: var(--palette-blue-25);    --color-label-purple-text: var(--palette-blue-500);
-  --color-label-magenta-bg: var(--palette-magenta-25);   --color-label-magenta-text: var(--palette-magenta-600);
-  --color-label-orange-bg: var(--palette-orange-50);    --color-label-orange-text: var(--palette-orange-675);
-
+  --color-label-blue-bg: var(--palette-blue-50);
+  --color-label-blue-text: var(--palette-blue-600);
+  --color-label-teal-bg: var(--palette-blue-60);
+  --color-label-teal-text: var(--palette-blue-675);
+  --color-label-green-bg: var(--palette-green-75);
+  --color-label-green-text: var(--palette-green-725);
+  --color-label-purple-bg: var(--palette-blue-25);
+  --color-label-purple-text: var(--palette-blue-500);
+  --color-label-magenta-bg: var(--palette-magenta-25);
+  --color-label-magenta-text: var(--palette-magenta-600);
+  --color-label-orange-bg: var(--palette-orange-50);
+  --color-label-orange-text: var(--palette-orange-675);
   /* ---------- Elevação · sombras ---------- */
-  --shadow-raised: 0 1px 1px var(--palette-blue-860-a25), 0 0 1px var(--palette-blue-860-a31);
-  --shadow-overlay: 0 8px 12px var(--palette-blue-860-a15), 0 0 1px var(--palette-blue-860-a31);
-
+  --shadow-raised: 0 1px 2px var(--palette-black-1000-a05), 0 0 0 1px var(--palette-black-1000-a06);
+  --shadow-overlay: 0 12px 32px var(--palette-black-1000-a10), 0 0 0 1px var(--palette-black-1000-a06);
   /* ---------- Tipografia · famílias ---------- */
   --font-family-body: "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-family-heading: var(--font-family-body);
   --font-family-code: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-
   /* ---------- Tipografia · pesos ---------- */
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-
   /* ---------- Tipografia · escala (tamanho / altura de linha / tracking) ---------- */
-  --font-size-hero: 2rem;          --line-height-hero: 2.25rem;        --letter-spacing-hero: -0.02em;
-  --font-size-page-title: 1.5rem;  --line-height-page-title: 1.75rem;  --letter-spacing-page-title: -0.015em;
-  --font-size-section: 1.25rem;    --line-height-section: 1.5rem;      --letter-spacing-section: -0.01em;
-  --font-size-card: 1rem;          --line-height-card: 1.25rem;        --letter-spacing-card: -0.005em;
-  --font-size-body-large: 1rem;    --line-height-body-large: 1.5rem;
-  --font-size-body: 0.875rem;      --line-height-body: 1.25rem;
-  --font-size-body-small: 0.75rem; --line-height-body-small: 1rem;
-  --font-size-label: 0.6875rem;    --line-height-label: 1rem;          --letter-spacing-label: 0.04em;
-  --font-size-code: 0.8125rem;     --line-height-code: 1.25rem;
-
+  --font-size-hero: 2rem;
+  --line-height-hero: 2.25rem;
+  --letter-spacing-hero: -0.02em;
+  --font-size-page-title: 1.5rem;
+  --line-height-page-title: 1.75rem;
+  --letter-spacing-page-title: -0.015em;
+  --font-size-section: 1.25rem;
+  --line-height-section: 1.5rem;
+  --letter-spacing-section: -0.01em;
+  --font-size-card: 1rem;
+  --line-height-card: 1.25rem;
+  --letter-spacing-card: -0.005em;
+  --font-size-body-large: 1rem;
+  --line-height-body-large: 1.5rem;
+  --font-size-body: 0.875rem;
+  --line-height-body: 1.25rem;
+  --font-size-body-small: 0.75rem;
+  --line-height-body-small: 1rem;
+  --font-size-label: 0.6875rem;
+  --line-height-label: 1rem;
+  --letter-spacing-label: 0.04em;
+  --font-size-code: 0.8125rem;
+  --line-height-code: 1.25rem;
   /* ---------- Tipografia · atalhos (shorthand `font`) ---------- */
   --font-hero: var(--font-weight-bold) var(--font-size-hero)/var(--line-height-hero) var(--font-family-heading);
   --font-page-title: var(--font-weight-semibold) var(--font-size-page-title)/var(--line-height-page-title) var(--font-family-heading);
@@ -292,52 +274,78 @@
   --font-body-small: var(--font-weight-regular) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body);
   --font-label: var(--font-weight-semibold) var(--font-size-label)/var(--line-height-label) var(--font-family-body);
   --font-code: var(--font-weight-regular) var(--font-size-code)/var(--line-height-code) var(--font-family-code);
-
   /* ---------- Espaçamento (base 8, meios-passos de 2 e 4) ---------- */
   --space-0: 0;
-  --space-025: 0.125rem;  /* 2px  */
-  --space-050: 0.25rem;   /* 4px  */
-  --space-075: 0.375rem;  /* 6px  */
-  --space-100: 0.5rem;    /* 8px  */
-  --space-150: 0.75rem;   /* 12px */
-  --space-200: 1rem;      /* 16px */
-  --space-250: 1.25rem;   /* 20px */
-  --space-300: 1.5rem;    /* 24px */
-  --space-400: 2rem;      /* 32px */
-  --space-500: 2.5rem;    /* 40px */
-  --space-600: 3rem;      /* 48px */
-  --space-800: 4rem;      /* 64px */
-  --space-1000: 5rem;     /* 80px */
-
+  /* 2px */
+  --space-025: 0.125rem;
+  /* 4px */
+  --space-050: 0.25rem;
+  /* 6px */
+  --space-075: 0.375rem;
+  /* 8px */
+  --space-100: 0.5rem;
+  /* 12px */
+  --space-150: 0.75rem;
+  /* 16px */
+  --space-200: 1rem;
+  /* 20px */
+  --space-250: 1.25rem;
+  /* 24px */
+  --space-300: 1.5rem;
+  /* 32px */
+  --space-400: 2rem;
+  /* 40px */
+  --space-500: 2.5rem;
+  /* 48px */
+  --space-600: 3rem;
+  /* 64px */
+  --space-800: 4rem;
+  /* 80px */
+  --space-1000: 5rem;
   /* ---------- Forma ---------- */
-  --radius-xsmall: 2px;   /* checkbox, badge interno */
-  --radius-small: 3px;    /* botões, inputs, lozenges, chips */
-  --radius-medium: 6px;   /* menus, toasts, cartões de anexo */
-  --radius-large: 8px;    /* modais, janela de composição */
-  --radius-round: 999px;  /* avatares, badges de contagem */
+  /* checkbox, badge interno */
+  --radius-xsmall: 4px;
+  /* botões, inputs, lozenges, chips */
+  --radius-small: 6px;
+  /* menus, toasts, cartões de anexo */
+  --radius-medium: 8px;
+  /* modais, janela de composição, blocos e cartões */
+  --radius-large: 12px;
+  /* avatares, badges de contagem */
+  --radius-round: 999px;
   --border-width: 1px;
   --border-width-focused: 2px;
-
   /* ---------- Layout do cliente ---------- */
-  --layout-header-height: 3.5rem;      /* 56px */
-  --layout-sidebar-width: 15rem;       /* 240px */
-  --layout-sidebar-collapsed: 4rem;    /* 64px  */
-  --layout-list-width: 25rem;          /* 400px */
-  --layout-reading-measure: 42rem;     /* 672px ≈ 70 caracteres em Body Large */
-  --layout-compose-width: 35rem;       /* 560px */
-  --layout-modal-small: 25rem;         /* 400px */
-  --layout-modal-medium: 37.5rem;      /* 600px */
-  --layout-form-column: 15rem;         /* 240px: largura mínima de cada coluna de formulário */
-
+  /* 56px */
+  --layout-header-height: 3.5rem;
+  /* 240px */
+  --layout-sidebar-width: 15rem;
+  /* 64px */
+  --layout-sidebar-collapsed: 4rem;
+  /* 400px */
+  --layout-list-width: 25rem;
+  /* 672px ≈ 70 caracteres em Body Large */
+  --layout-reading-measure: 42rem;
+  /* 560px */
+  --layout-compose-width: 35rem;
+  /* 400px */
+  --layout-modal-small: 25rem;
+  /* 600px */
+  --layout-modal-medium: 37.5rem;
+  /* 240px: largura mínima de cada coluna de formulário */
+  --layout-form-column: 15rem;
   /* ---------- Densidade (linhas e controles) ---------- */
-  /* Confortável e Padrão mostram 3 e 2 linhas por conversa; Compacta mostra 1. Controles seguem a densidade da linha. */
-  --row-height-compact: 2.25rem;       /* 36px · 1 linha */
-  --row-height-default: 4.75rem;       /* 76px · 3 linhas */
-  --control-height: 2rem;              /* 32px · botões */
-  --control-height-compact: 1.5rem;    /* 24px */
-  --input-height: 2.25rem;             /* 36px */
-
-  /* ---------- Camadas (z-index, escala ADS) ---------- */
+  /* 36px · 1 linha */
+  --row-height-compact: 2.25rem;
+  /* 76px · 3 linhas */
+  --row-height-default: 4.75rem;
+  /* 32px · botões */
+  --control-height: 2rem;
+  /* 24px */
+  --control-height-compact: 1.5rem;
+  /* 36px */
+  --input-height: 2.25rem;
+  /* ---------- Camadas (z-index) ---------- */
   --z-card: 100;
   --z-navigation: 200;
   --z-dialog: 300;
@@ -346,45 +354,55 @@
   --z-modal: 510;
   --z-flag: 600;
   --z-tooltip: 800;
-
   /* ---------- Movimento ---------- */
   --duration-fast: 100ms;
   --duration-medium: 200ms;
   --duration-slow: 350ms;
   --easing-standard: cubic-bezier(0.2, 0, 0, 1);
   --easing-exit: cubic-bezier(0.4, 0, 1, 1);
-
   /* ---------- Foco ---------- */
   /* O anel de teclado, igual em todo componente. */
   --focus-ring-width: var(--border-width-focused);
   --focus-ring-color: var(--color-border-focused);
-  --focus-ring-offset: 2px;          /* afastado da borda do controle */
-  --focus-ring-offset-inset: -2px;   /* para dentro, quando o controle ocupa a linha inteira */
-
+  /* afastado da borda do controle */
+  --focus-ring-offset: 2px;
+  /* para dentro, quando o controle ocupa a linha inteira */
+  --focus-ring-offset-inset: -2px;
   /* ---------- Opacidade ---------- */
-  /* Só estes níveis. */
-  --opacity-disabled: 0.45;  /* conta de que saiu, linha desabilitada, pulso do skeleton */
-  --opacity-muted: 0.55;     /* regra desligada, entrada desfeita no histórico */
-  --opacity-busy: 0.6;       /* janela enviando */
-  --opacity-soft: 0.8;       /* texto de apoio sobre cor, como o rótulo de um chip */
-  --opacity-glow: 0.22;      /* brilho desfocado do topo das páginas de destaque */
-
+  /* conta de que saiu, linha desabilitada, pulso do skeleton */
+  --opacity-disabled: 0.45;
+  /* regra desligada, entrada desfeita no histórico */
+  --opacity-muted: 0.55;
+  /* janela enviando */
+  --opacity-busy: 0.6;
+  /* texto de apoio sobre cor, como o rótulo de um chip */
+  --opacity-soft: 0.8;
+  /* brilho desfocado do topo das páginas de destaque */
+  --opacity-glow: 0.22;
   /* ---------- Ícones ---------- */
-  --icon-size-sm: 12px;   /* dentro de chips e textos pequenos */
-  --icon-size: 16px;      /* padrão */
-  --icon-size-lg: 20px;   /* títulos de modal, botões grandes */
-  --icon-size-xl: 24px;   /* estados vazios e destaques */
-
+  /* dentro de chips e textos pequenos */
+  --icon-size-sm: 12px;
+  /* padrão */
+  --icon-size: 16px;
+  /* títulos de modal, botões grandes */
+  --icon-size-lg: 20px;
+  /* estados vazios e destaques */
+  --icon-size-xl: 24px;
   /* ---------- Breakpoints ---------- */
-  /* Referência para as media queries (CSS não aceita var() em @media). */
-  /* Os valores abaixo são os que aparecem nos @media do components.css; o ds:check confere os dois. */
-  --breakpoint-compact: 960px;    /* abaixo: a leitura substitui a lista e a coluna de contas some */
-  --breakpoint-commands: 1280px;  /* abaixo: os botões da barra de comandos perdem o rótulo */
+  /* abaixo: a leitura substitui a lista e a coluna de contas some */
+  --breakpoint-compact: 960px;
+  /* abaixo: os botões da barra de comandos perdem o rótulo */
+  --breakpoint-commands: 1280px;
+  /* ---------- Gradientes ---------- */
+  --gradient-ocean: linear-gradient(120deg, var(--color-icon-brand), color-mix(in srgb, var(--color-label-teal-text) 70%, var(--color-icon-success)));
+  --gradient-aurora: linear-gradient(120deg, var(--color-icon-brand), var(--color-icon-discovery) 50%, color-mix(in srgb, var(--color-label-magenta-text) 80%, white));
+  --gradient-sunset: linear-gradient(120deg, var(--color-icon-warning), color-mix(in srgb, var(--color-label-magenta-text) 85%, white));
+  --gradient-meadow: linear-gradient(120deg, var(--color-icon-success), color-mix(in srgb, var(--color-label-teal-text) 80%, var(--color-icon-brand)));
+  --gradient-potato: linear-gradient(120deg, color-mix(in srgb, var(--color-icon-warning) 55%, var(--color-canvas-sand)), var(--color-icon-success));
 }
 
-/* ---------- Tema escuro: segue o sistema, a menos que o tema claro seja forçado ---------- */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme=light]) {
     color-scheme: dark;
     --color-text: var(--palette-slate-85);
     --color-text-subtle: var(--palette-slate-225);
@@ -405,9 +423,10 @@
     --color-surface-sunken: var(--palette-slate-950);
     --color-surface-raised: var(--palette-slate-900);
     --color-surface-overlay: var(--palette-slate-875);
-    --color-canvas: var(--palette-slate-975);
+    --color-blanket: var(--palette-black-1000-a70);
     --color-scrollbar-thumb: var(--palette-slate-800);
     --color-scrollbar-thumb-hovered: var(--palette-slate-675);
+    --color-canvas: var(--palette-slate-975);
     --color-canvas-blue: var(--palette-blue-950);
     --color-canvas-teal: var(--palette-teal-975);
     --color-canvas-green: var(--palette-green-975);
@@ -415,7 +434,6 @@
     --color-canvas-magenta: var(--palette-magenta-950);
     --color-canvas-orange: var(--palette-orange-950);
     --color-canvas-sand: var(--palette-yellow-950);
-    --color-blanket: var(--palette-black-1000-a70);
     --color-bg-input: var(--palette-slate-900);
     --color-bg-input-hovered: var(--palette-slate-875);
     --color-bg-neutral: var(--palette-white-a07);
@@ -458,19 +476,23 @@
     --color-icon-success: var(--palette-green-550);
     --color-icon-discovery: var(--palette-blue-310);
     --color-icon-starred: var(--palette-orange-275);
-    --color-label-blue-bg: var(--palette-blue-775);    --color-label-blue-text: var(--palette-blue-100);
-    --color-label-teal-bg: var(--palette-blue-800);    --color-label-teal-text: var(--palette-blue-125);
-    --color-label-green-bg: var(--palette-green-800);   --color-label-green-text: var(--palette-green-150);
-    --color-label-purple-bg: var(--palette-blue-785);  --color-label-purple-text: var(--palette-blue-75);
-    --color-label-magenta-bg: var(--palette-magenta-775); --color-label-magenta-text: var(--palette-magenta-100);
-    --color-label-orange-bg: var(--palette-orange-775);  --color-label-orange-text: var(--palette-orange-120);
+    --color-label-blue-bg: var(--palette-blue-775);
+    --color-label-blue-text: var(--palette-blue-100);
+    --color-label-teal-bg: var(--palette-blue-800);
+    --color-label-teal-text: var(--palette-blue-125);
+    --color-label-green-bg: var(--palette-green-800);
+    --color-label-green-text: var(--palette-green-150);
+    --color-label-purple-bg: var(--palette-blue-785);
+    --color-label-purple-text: var(--palette-blue-75);
+    --color-label-magenta-bg: var(--palette-magenta-775);
+    --color-label-magenta-text: var(--palette-magenta-100);
+    --color-label-orange-bg: var(--palette-orange-775);
+    --color-label-orange-text: var(--palette-orange-120);
     --shadow-raised: 0 0 0 1px var(--palette-white-a08), 0 1px 2px var(--palette-black-1000-a80);
     --shadow-overlay: 0 0 0 1px var(--palette-white-a12), 0 8px 16px var(--palette-black-1000-a70);
   }
 }
-
-/* ---------- Tema escuro forçado (mesmos valores do bloco acima) ---------- */
-:root[data-theme="dark"] {
+:root[data-theme=dark] {
   color-scheme: dark;
   --color-text: var(--palette-slate-85);
   --color-text-subtle: var(--palette-slate-225);
@@ -491,9 +513,10 @@
   --color-surface-sunken: var(--palette-slate-950);
   --color-surface-raised: var(--palette-slate-900);
   --color-surface-overlay: var(--palette-slate-875);
-  --color-canvas: var(--palette-slate-975);
+  --color-blanket: var(--palette-black-1000-a70);
   --color-scrollbar-thumb: var(--palette-slate-800);
   --color-scrollbar-thumb-hovered: var(--palette-slate-675);
+  --color-canvas: var(--palette-slate-975);
   --color-canvas-blue: var(--palette-blue-950);
   --color-canvas-teal: var(--palette-teal-975);
   --color-canvas-green: var(--palette-green-975);
@@ -501,7 +524,6 @@
   --color-canvas-magenta: var(--palette-magenta-950);
   --color-canvas-orange: var(--palette-orange-950);
   --color-canvas-sand: var(--palette-yellow-950);
-  --color-blanket: var(--palette-black-1000-a70);
   --color-bg-input: var(--palette-slate-900);
   --color-bg-input-hovered: var(--palette-slate-875);
   --color-bg-neutral: var(--palette-white-a07);
@@ -544,22 +566,24 @@
   --color-icon-success: var(--palette-green-550);
   --color-icon-discovery: var(--palette-blue-310);
   --color-icon-starred: var(--palette-orange-275);
-  --color-label-blue-bg: var(--palette-blue-775);    --color-label-blue-text: var(--palette-blue-100);
-  --color-label-teal-bg: var(--palette-blue-800);    --color-label-teal-text: var(--palette-blue-125);
-  --color-label-green-bg: var(--palette-green-800);   --color-label-green-text: var(--palette-green-150);
-  --color-label-purple-bg: var(--palette-blue-785);  --color-label-purple-text: var(--palette-blue-75);
-  --color-label-magenta-bg: var(--palette-magenta-775); --color-label-magenta-text: var(--palette-magenta-100);
-  --color-label-orange-bg: var(--palette-orange-775);  --color-label-orange-text: var(--palette-orange-120);
+  --color-label-blue-bg: var(--palette-blue-775);
+  --color-label-blue-text: var(--palette-blue-100);
+  --color-label-teal-bg: var(--palette-blue-800);
+  --color-label-teal-text: var(--palette-blue-125);
+  --color-label-green-bg: var(--palette-green-800);
+  --color-label-green-text: var(--palette-green-150);
+  --color-label-purple-bg: var(--palette-blue-785);
+  --color-label-purple-text: var(--palette-blue-75);
+  --color-label-magenta-bg: var(--palette-magenta-775);
+  --color-label-magenta-text: var(--palette-magenta-100);
+  --color-label-orange-bg: var(--palette-orange-775);
+  --color-label-orange-text: var(--palette-orange-120);
   --shadow-raised: 0 0 0 1px var(--palette-white-a08), 0 1px 2px var(--palette-black-1000-a80);
   --shadow-overlay: 0 0 0 1px var(--palette-white-a12), 0 8px 16px var(--palette-black-1000-a70);
 }
 
-/* ---------- Alto contraste: segue a preferência do sistema, no claro e no escuro ----------
-   Só reaponta tokens semânticos para outros mais fortes (nenhum valor novo): bordas sobem para a borda forte,
-   o texto de apoio vira texto comum, os ícones sutis viram ícones comuns e o anel de foco engrossa.
-   data-contrast="more" no <html> força o mesmo efeito (para testar e para as páginas de documentação). */
 @media (prefers-contrast: more) {
-  :root, :root:not([data-theme="light"]), :root[data-theme="light"], :root[data-theme="dark"] {
+  :root, :root:not([data-theme=light]), :root[data-theme=light], :root[data-theme=dark] {
     --color-border: var(--color-border-bold);
     --color-text-subtle: var(--color-text);
     --color-text-subtlest: var(--color-text);
@@ -568,7 +592,7 @@
     --focus-ring-width: 3px;
   }
 }
-:root[data-contrast="more"], :root[data-contrast="more"][data-theme="light"], :root[data-contrast="more"][data-theme="dark"] {
+:root[data-contrast=more], :root[data-contrast=more][data-theme=light], :root[data-contrast=more][data-theme=dark] {
   --color-border: var(--color-border-bold);
   --color-text-subtle: var(--color-text);
   --color-text-subtlest: var(--color-text);
@@ -583,14 +607,4 @@
     --duration-medium: 0ms;
     --duration-slow: 0ms;
   }
-}
-
-/* L77 · Gradientes (no espírito dos da Tailwind), feitos das cores do DS com color-mix. Como usam var(), acompanham
-   o tema: no escuro as cores dos ícones ficam mais claras. Só para o início de páginas de destaque (L78). */
-:root {
-  --gradient-ocean:  linear-gradient(120deg, var(--color-icon-brand), color-mix(in srgb, var(--color-label-teal-text) 70%, var(--color-icon-success)));
-  --gradient-aurora: linear-gradient(120deg, var(--color-icon-brand), var(--color-icon-discovery) 50%, color-mix(in srgb, var(--color-label-magenta-text) 80%, white));
-  --gradient-sunset: linear-gradient(120deg, var(--color-icon-warning), color-mix(in srgb, var(--color-label-magenta-text) 85%, white));
-  --gradient-meadow: linear-gradient(120deg, var(--color-icon-success), color-mix(in srgb, var(--color-label-teal-text) 80%, var(--color-icon-brand)));
-  --gradient-potato: linear-gradient(120deg, color-mix(in srgb, var(--color-icon-warning) 55%, var(--color-canvas-sand)), var(--color-icon-success));
 }

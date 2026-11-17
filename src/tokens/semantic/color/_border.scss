@@ -6,11 +6,11 @@
 
 $groups: (
   'Cor · bordas': (
-    'color-border': (light: p.palette('blue-860-a14'), dark: p.palette('white-a11')),
-    'color-border-bold': (light: p.palette('slate-475'), dark: p.palette('slate-525')),
-    'color-border-input': (light: p.palette('slate-425'), dark: p.palette('slate-525')),
+    'color-border': (light: p.palette('black-1000-a08'), dark: p.palette('white-a11')),
+    'color-border-bold': (light: p.palette('gray-500'), dark: p.palette('slate-525')),
+    'color-border-input': (light: p.palette('gray-425'), dark: p.palette('slate-525')),
     'color-border-focused': (light: p.palette('blue-400'), dark: p.palette('blue-225')),
-    'color-border-selected': (light: p.palette('blue-525'), dark: p.palette('blue-300')),
+    'color-border-selected': (light: p.palette('blue-540'), dark: p.palette('blue-300')),
     'color-border-danger': (light: p.palette('red-425'), dark: p.palette('red-300')),
     'color-border-warning': (light: p.palette('orange-525'), dark: p.palette('orange-400')),
     'color-border-success': (light: p.palette('green-625'), dark: p.palette('green-550')),

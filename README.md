@@ -39,6 +39,14 @@ pnpm dev        # gera dist/ e abre a documentação em http://localhost:4400/
 
 Ícones: `dist/sprite.svg` (símbolos `#i-<nome>`), usados como `<svg class="i"><use href="#i-inbox"/></svg>`.
 
+## Exemplos
+
+`examples/` traz telas inteiras montadas só com os tokens e os componentes, para ver as peças juntas. Rode `pnpm dev` e abra http://localhost:4400/examples/. No GitHub Pages ficam em `/examples/`.
+
+| Página | O que mostra |
+|---|---|
+| `examples/index.html` | Espaço de pesquisa com agente: navegação lateral, conversa com plano em etapas e uma planilha sendo preenchida. Claro e escuro (botão de lua no topo). |
+
 ## O que há em `dist/`
 
 | Arquivo | Conteúdo |
@@ -64,6 +72,7 @@ src/
     base/ core/ patterns/ product/ layouts/ docs-site/   um partial por peça, na camada da página
     index.scss    → dist/components.css (a ordem dos @use é a ordem da cascata)
   icons/          um .svg por ícone + icons.json
+examples/         telas inteiras de exemplo, só com tokens e componentes
 site/             as páginas da documentação (HTML), docs.css, docs.js, fichas.js
 baseline/         o CSS e o sprite de antes da migração, referência do pnpm compare
 docs/             fundamentos (v3) e o plano de migração
