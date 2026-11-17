@@ -6,13 +6,13 @@
 
 $groups: (
   'Cor · superfícies (elevação)': (
-    'color-surface': (light: p.palette('white'), dark: p.palette('slate-925')),
-    'color-surface-sunken': (light: p.palette('gray-40'), dark: p.palette('slate-950')),
-    'color-surface-raised': (light: p.palette('white'), dark: p.palette('slate-900')),
-    'color-surface-overlay': (light: p.palette('white'), dark: p.palette('slate-875')),
+    'color-surface': (light: p.palette('white'), dark: p.palette('gray-925')),
+    'color-surface-sunken': (light: p.palette('gray-40'), dark: p.palette('gray-950')),
+    'color-surface-raised': (light: p.palette('white'), dark: p.palette('gray-900')),
+    'color-surface-overlay': (light: p.palette('white'), dark: p.palette('gray-875')),
     'color-blanket': (light: p.palette('black-1000-a40'), dark: p.palette('black-1000-a70')),
     'color-surface-paper': (value: p.palette('white'), desc: 'Fundo de papel para conteúdo de terceiros (corpo HTML de e-mail): claro nos dois temas.'),
-    'color-scrollbar-thumb': (light: p.palette('gray-300'), dark: p.palette('slate-800'), desc: 'Barra de rolagem'),
-    'color-scrollbar-thumb-hovered': (light: p.palette('gray-425'), dark: p.palette('slate-675')),
+    'color-scrollbar-thumb': (light: p.palette('gray-300'), dark: p.palette('gray-800'), desc: 'Barra de rolagem'),
+    'color-scrollbar-thumb-hovered': (light: p.palette('gray-425'), dark: p.palette('gray-700')),
   ),
 );

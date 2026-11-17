@@ -43,44 +43,44 @@
   --tracking-display: -0.035em;
 }
 
-/* Escuro: a paleta do GitHub Dark (fundo #161b22, faixas #0d1117, bordas #30363d, texto #e6edf3); o azul do DS clareia */
+/* Escuro: cinza neutro, sem matiz azul, como o tema escuro do DS (decisão 0022); o azul do DS clareia */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-paper: oklch(22% 0.0157 256.8);       /* #161b22 */
-    --color-paper-2: oklch(26.7% 0.015 256.8);    /* #21262d */
-    --color-paper-3: oklch(31.9% 0.0165 255.6);   /* #2d333b */
-    --color-ink: oklch(94.3% 0.0111 243.7);       /* #e6edf3 */
-    --color-ink-2: oklch(85.7% 0.0141 248);       /* #c9d1d9 */
-    --color-muted: oklch(66.2% 0.0181 250.9);     /* #8b949e: 5.6:1 sobre o fundo */
-    --color-rule: oklch(33% 0.0149 252.3);        /* #30363d */
+    --color-paper: oklch(22% 0 0);       /* #161b22 */
+    --color-paper-2: oklch(26.7% 0 0);    /* #21262d */
+    --color-paper-3: oklch(31.9% 0 0);   /* #2d333b */
+    --color-ink: oklch(94.3% 0 0);       /* #e6edf3 */
+    --color-ink-2: oklch(85.7% 0 0);       /* #c9d1d9 */
+    --color-muted: oklch(66.2% 0 0);     /* #8b949e: 5.6:1 sobre o fundo */
+    --color-rule: oklch(33% 0 0);        /* #30363d */
     --color-accent: oklch(72.5% 0.1437 257.6);
     --color-accent-hover: oklch(77.5% 0.1158 256.8);
     --color-accent-ink: oklch(17.8% 0 0);
     --color-accent-text: oklch(77.5% 0.1158 256.8);
     --color-focus: oklch(77.5% 0.1158 256.8);
-    --color-band: oklch(17.6% 0.014 258.4);       /* #0d1117 */
-    --color-band-ink: oklch(94.3% 0.0111 243.7);
-    --color-band-muted: oklch(67.7% 0.0155 254.6); /* #9198a1: 6.5:1 sobre a faixa */
-    --color-band-rule: oklch(33% 0.0149 252.3);
+    --color-band: oklch(17.6% 0 0);       /* #0d1117 */
+    --color-band-ink: oklch(94.3% 0 0);
+    --color-band-muted: oklch(67.7% 0 0); /* #9198a1: 6.5:1 sobre a faixa */
+    --color-band-rule: oklch(33% 0 0);
     --shadow-screen: 0 24px 48px -16px oklch(5% 0.01 258 / 0.55), 0 0 0 1px oklch(100% 0 0 / 0.08);
   }
 }
 :root[data-theme="dark"] {
-  --color-paper: oklch(22% 0.0157 256.8);
-  --color-paper-2: oklch(26.7% 0.015 256.8);
-  --color-paper-3: oklch(31.9% 0.0165 255.6);
-  --color-ink: oklch(94.3% 0.0111 243.7);
-  --color-ink-2: oklch(85.7% 0.0141 248);
-  --color-muted: oklch(66.2% 0.0181 250.9);
-  --color-rule: oklch(33% 0.0149 252.3);
+  --color-paper: oklch(22% 0 0);
+  --color-paper-2: oklch(26.7% 0 0);
+  --color-paper-3: oklch(31.9% 0 0);
+  --color-ink: oklch(94.3% 0 0);
+  --color-ink-2: oklch(85.7% 0 0);
+  --color-muted: oklch(66.2% 0 0);
+  --color-rule: oklch(33% 0 0);
   --color-accent: oklch(72.5% 0.1437 257.6);
   --color-accent-hover: oklch(77.5% 0.1158 256.8);
   --color-accent-ink: oklch(17.8% 0 0);
   --color-accent-text: oklch(77.5% 0.1158 256.8);
   --color-focus: oklch(77.5% 0.1158 256.8);
-  --color-band: oklch(17.6% 0.014 258.4);
-  --color-band-ink: oklch(94.3% 0.0111 243.7);
-  --color-band-muted: oklch(67.7% 0.0155 254.6);
-  --color-band-rule: oklch(33% 0.0149 252.3);
+  --color-band: oklch(17.6% 0 0);
+  --color-band-ink: oklch(94.3% 0 0);
+  --color-band-muted: oklch(67.7% 0 0);
+  --color-band-rule: oklch(33% 0 0);
   --shadow-screen: 0 24px 48px -16px oklch(5% 0.01 258 / 0.55), 0 0 0 1px oklch(100% 0 0 / 0.08);
 }

@@ -62,4 +62,9 @@
 @use 'product/mail-archives';
 @use 'layouts/article';
 @use 'layouts/blog-index';
+// Visual neutro (decisão 0022): peças vindas de examples/
+@use 'core/pill';
+@use 'core/progress-steps';
+@use 'patterns/composer';
+@use 'layouts/workspace';
 @use 'docs-site/docs-site';

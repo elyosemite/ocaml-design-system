@@ -7,11 +7,13 @@
 //   icons.json       nome e categoria de cada ícone
 //   fonts.css, fonts/ Inter e JetBrains Mono do @fontsource (latin e latin-ext, woff2), sem requisição a terceiros
 //   pages.json       o registro de páginas (id, título, camada, status), para quem confere os links // DS:
+//   platforms/       os mesmos tokens para JSON (DTCG), TypeScript, SwiftUI, Compose e recursos Android (scripts/platforms.mjs)
 // Uso: node scripts/build.mjs
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, rmSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import * as sass from "sass";
+import { exportPlatforms } from "./platforms.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
@@ -66,4 +68,7 @@ const registry = (0, eval)(docsJs.match(/const OCAML_PAGES = (\[[\s\S]*?\n\]);/)
 const pages = registry.flatMap((g) => g.items.map(([id, title, description, status]) => ({ id, title, description, layer: g.group, status })));
 writeFileSync(join(dist, "pages.json"), JSON.stringify(pages, null, 2) + "\n");
 
-console.log(`dist/ pronto: tokens, componentes, docs-site, ${icons.length} ícones, ${faces.length} faces de fonte, ${pages.length} páginas.`);
+// ---- outras plataformas ----
+const platforms = exportPlatforms(root);
+
+console.log(`dist/ pronto: tokens, componentes, docs-site, ${icons.length} ícones, ${faces.length} faces de fonte, ${pages.length} páginas, plataformas (${platforms.colors} cores, ${platforms.dimensions} dimensões).`);

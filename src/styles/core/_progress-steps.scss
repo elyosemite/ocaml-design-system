@@ -1,0 +1,53 @@
+// Core · Stepper (passos de uma tarefa) e barra em segmentos
+// Vieram de examples/ (decisão 0022).
+
+/* ==========================================================================
+   Stepper: os passos de uma tarefa longa, com o atual em destaque.
+   <ol class="stepper"> com <li class="step step--done|step--current|step--todo">.
+   O estado está no texto (aside) e na marca; a cor só reforça.
+   ========================================================================== */
+.stepper { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-150); }
+.step {
+  position: relative;
+  display: grid; grid-template-columns: 1.125rem minmax(0, 1fr) auto; column-gap: var(--space-100); align-items: center;
+}
+/* A linha que liga uma marca à seguinte */
+.step:not(:last-child)::before {
+  content: ""; position: absolute;
+  inset-inline-start: calc(0.5625rem - 0.5px); top: 1.25rem; bottom: calc(var(--space-150) * -1 + 2px);
+  width: var(--border-width); background: var(--color-border);
+}
+.step__mark {
+  position: relative; display: grid; place-items: center;
+  width: 1.125rem; height: 1.125rem; border-radius: var(--radius-round);
+  background: var(--color-surface); box-shadow: inset 0 0 0 1.5px var(--color-border-bold);
+}
+.step__mark .i { width: 0.75rem; height: 0.75rem; }
+.step__name { min-width: 0; font-weight: var(--font-weight-medium); }
+.step__aside { font: var(--font-body-small); color: var(--color-text-subtlest); white-space: nowrap; }
+.step__detail {
+  grid-column: 2 / -1; min-width: 0; margin-top: var(--space-100);
+  display: grid; gap: var(--space-100);
+  padding: var(--space-150); border-radius: var(--radius-medium); background: var(--color-surface-sunken);
+}
+.step--done .step__mark { background: var(--color-bg-success-bold); box-shadow: none; color: var(--color-text-inverse); }
+.step--current .step__mark { box-shadow: inset 0 0 0 1.5px var(--color-border-selected); }
+.step--current .step__mark::after { content: ""; width: 0.4375rem; height: 0.4375rem; border-radius: var(--radius-round); background: var(--color-bg-brand-bold); }
+.step--current .step__aside { color: var(--color-text-brand); }
+.step--todo { color: var(--color-text-subtlest); }
+.step--todo .step__mark { box-shadow: inset 0 0 0 1.5px var(--color-border); }
+.step--todo .step__name { font-weight: var(--font-weight-regular); }
+.step--failed .step__mark { background: var(--color-bg-danger-bold); box-shadow: none; color: var(--color-text-inverse); }
+.step--failed .step__aside { color: var(--color-text-danger); }
+
+/* ==========================================================================
+   Barra em segmentos: uso de uma cota (créditos, armazenamento) em blocos contáveis.
+   <div class="segments" role="meter" aria-valuenow=… aria-valuemax=…> com N <span>, os usados com .is-on.
+   Neutra por padrão; --brand quando o número é progresso, --warning perto do limite.
+   ========================================================================== */
+.segments { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 2px; }
+.segments > span { height: 6px; border-radius: var(--radius-xsmall); background: var(--color-bg-neutral-hovered); }
+.segments > span.is-on { background: var(--color-bg-neutral-bold); }
+.segments--brand > span.is-on { background: var(--color-bg-brand-bold); }
+.segments--warning > span.is-on { background: var(--color-bg-warning-bold); }
+.segments--danger > span.is-on { background: var(--color-bg-danger-bold); }

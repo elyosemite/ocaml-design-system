@@ -1,10 +1,11 @@
-// Nível 1 · Primitivos · cor · neutros (branco, ardósia, preto)
+// Nível 1 · Primitivos · cor · neutros (branco, cinza, preto)
 // Valor bruto, sem intenção de uso. O nome diz a família e o quanto é escuro (25 claro … 1000 escuro);
 // o sufixo -aNN é a opacidade em %. Só os tokens semânticos usam estes valores, pela função palette().
 
 $groups: (
   'Paleta · branco': (
     'white': #FFFFFF,
+    'white-a04': #FFFFFF0A,
     'white-a06': #FFFFFF0F,
     'white-a07': #FFFFFF12,
     'white-a08': #FFFFFF14,
@@ -13,30 +14,26 @@ $groups: (
     'white-a20': #FFFFFF33,
     'white-a30': #FFFFFF4D,
   ),
-  'Paleta · ardósia': (
-    'slate-85': #E6EAF0,
-    'slate-225': #BCC5D0,
-    'slate-325': #9FADBC,
-    'slate-350': #9AA5B2,
-    'slate-525': #6B7685,
-    'slate-675': #4A535E,
-    'slate-800': #2E343B,
-    'slate-875': #1B1F24,
-    'slate-900': #15181C,
-    'slate-925': #0E1013,
-    'slate-950': #090A0C,
-    'slate-975': #030304,
-  ),
-  // Cinza neutro (sem matiz azul), base do visual claro desde a decisão 0022
+  // Cinza neutro (sem matiz azul): base dos temas claro e escuro
   'Paleta · cinza': (
     'gray-25': #FAFAFA,
     'gray-40': #F7F7F8,
     'gray-75': #F0F0F1,
+    'gray-85': #F4F4F5,
     'gray-300': #C9C9CF,
+    'gray-400': #93939E,
     'gray-425': #8B8B94,
+    'gray-475': #7A7A85,
     'gray-500': #71717A,
+    'gray-550': #6B6B76,
     'gray-600': #52525B,
+    'gray-700': #55555D,
+    'gray-800': #3A3A40,
+    'gray-875': #222226,
     'gray-900': #18181B,
+    'gray-925': #141416,
+    'gray-950': #0E0E10,
+    'gray-975': #09090B,
   ),
   'Paleta · preto': (
     'black-1000': #000000,

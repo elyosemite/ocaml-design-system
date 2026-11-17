@@ -6,9 +6,9 @@
 
 $groups: (
   'Cor · ícones': (
-    'color-icon': (light: p.palette('gray-600'), dark: p.palette('slate-225')),
-    'color-icon-subtle': (light: p.palette('gray-500'), dark: p.palette('slate-350')),
-    'color-icon-brand': (light: p.palette('blue-540'), dark: p.palette('blue-275')),
+    'color-icon': (light: p.palette('gray-600'), dark: p.palette('gray-300')),
+    'color-icon-subtle': (light: p.palette('gray-500'), dark: p.palette('gray-400')),
+    'color-icon-brand': (light: p.palette('blue-540'), dark: p.palette('blue-330')),
     'color-icon-danger': (light: p.palette('red-525'), dark: p.palette('red-375')),
     'color-icon-warning': (light: p.palette('orange-525'), dark: p.palette('orange-400')),
     'color-icon-success': (light: p.palette('green-625'), dark: p.palette('green-550')),

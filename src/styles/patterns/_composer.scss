@@ -1,0 +1,30 @@
+// Padrões · Composer: a caixa de escrever que cresce, com a barra de ações embaixo
+// Veio de examples/ (decisão 0022). Serve para responder um e-mail, comentar um card ou falar com um agente.
+
+/* ==========================================================================
+   Composer
+   <form class="composer"> <textarea class="composer__input"> <div class="composer__bar"> … </div> </form>
+   Na barra, .composer__spacer empurra o que vem depois para o fim (o botão de enviar).
+   ========================================================================== */
+.composer {
+  display: grid; gap: var(--space-100);
+  padding: var(--space-150);
+  border-radius: var(--radius-large);
+  background: var(--color-surface); box-shadow: var(--shadow-raised);
+}
+.composer:focus-within { box-shadow: var(--shadow-raised), 0 0 0 var(--border-width) var(--color-border-bold); }
+.composer__input {
+  min-height: 1.5rem; max-height: 12rem; padding: 0;
+  border: 0; resize: none; outline: none; background: transparent;
+  color: var(--color-text); font: var(--font-body);
+  field-sizing: content;
+}
+.composer__input::placeholder { color: var(--color-text-subtlest); }
+.composer__bar { display: flex; align-items: center; gap: var(--space-025); }
+.composer__spacer { margin-inline-start: auto; }
+.composer__hint { font: var(--font-body-small); color: var(--color-text-subtlest); }
+/* Parar a geração ou o envio: quadrado sólido, na cor do texto */
+.btn.composer__stop {
+  --btn-bg: var(--color-text); --btn-bg-hover: var(--color-text-subtle); --btn-bg-active: var(--color-text-subtle); --btn-fg: var(--color-text-inverse);
+}
+.btn.composer__stop::before { content: ""; width: 0.625rem; height: 0.625rem; border-radius: 2px; background: currentColor; }

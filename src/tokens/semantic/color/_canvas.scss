@@ -6,7 +6,7 @@
 
 $groups: (
   'Cor · fundo da janela': (
-    'color-canvas': (light: p.palette('gray-75'), dark: p.palette('slate-975'), desc: 'Fundo da janela atrás dos blocos. A casca lê --app-background, que aceita cor ou imagem.'),
+    'color-canvas': (light: p.palette('gray-75'), dark: p.palette('gray-975'), desc: 'Fundo da janela atrás dos blocos. A casca lê --app-background, que aceita cor ou imagem.'),
     'color-canvas-blue': (light: p.palette('blue-95'), dark: p.palette('blue-950'), desc: 'Paleta do fundo: escolhida em Configurações → Aparência, grava --app-background'),
     'color-canvas-teal': (light: p.palette('teal-100'), dark: p.palette('teal-975')),
     'color-canvas-green': (light: p.palette('green-100'), dark: p.palette('green-975')),

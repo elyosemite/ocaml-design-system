@@ -1001,7 +1001,7 @@ kbd, .kbd {
   background: var(--color-bg-neutral-subtle-pressed);
 }
 
-/* Selecionado é neutro: a cor de marca fica para ações e progresso (decisão 0025) */
+/* Selecionado é neutro: a cor de marca fica para ações e progresso (decisão 0022) */
 .nav-item.is-selected, .nav-item[aria-current=page] {
   background: var(--color-bg-neutral);
   color: var(--color-text);
@@ -2812,6 +2812,43 @@ html.is-grabbing, html.is-grabbing * {
 
 .tab[aria-selected=true]::after {
   background: var(--color-border-selected);
+}
+
+/* ==========================================================================
+   Abas elevadas (decisão 0022): a selecionada vira um cartão sobre o fundo afundado.
+   Para alternar documentos ou vistas dentro de um bloco; sem a linha de baixo.
+   ========================================================================== */
+.tabs--raised {
+  gap: var(--space-050);
+  border-bottom: 0;
+  padding: var(--space-050);
+}
+
+.tabs--raised .tab {
+  height: 1.75rem;
+  padding: 0 var(--space-100);
+  border-radius: var(--radius-small);
+  font: var(--font-weight-medium) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body);
+}
+
+.tabs--raised .tab::after {
+  content: none;
+}
+
+.tabs--raised .tab .i {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--color-icon-subtle);
+}
+
+.tabs--raised .tab:hover, .tabs--raised .tab.is-hover {
+  background: var(--color-bg-neutral-subtle-hovered);
+}
+
+.tabs--raised .tab[aria-selected=true] {
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-raised);
 }
 
 /* ==========================================================================
@@ -5578,6 +5615,607 @@ html.is-grabbing, html.is-grabbing * {
   }
   .blog__feature {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* ==========================================================================
+   Pill: status ou metadado curto, com contorno fino e cantos redondos.
+   Convive com o lozenge: o lozenge é o status forte de uma mensagem (maiúsculas, fundo);
+   a pill é discreta, em caixa normal, para listas, cabeçalhos de cartão e configurações.
+   ========================================================================== */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-050);
+  height: 1.375rem;
+  padding-inline: var(--space-075);
+  border-radius: var(--radius-round);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border);
+  background: transparent;
+  color: var(--color-text-subtle);
+  font: var(--font-body-small);
+  white-space: nowrap;
+}
+
+.pill > .i {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: inherit;
+}
+
+/* Ponto de cor antes do texto: reforça, não substitui a palavra */
+.pill__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: var(--radius-round);
+  background: currentColor;
+  flex: none;
+}
+
+.pill--success {
+  color: var(--color-text-success);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border-success);
+}
+
+.pill--warning {
+  color: var(--color-text-warning);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border-warning);
+}
+
+.pill--danger {
+  color: var(--color-text-danger);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border-danger);
+}
+
+.pill--information {
+  color: var(--color-text-information);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border-information);
+}
+
+.pill--brand {
+  color: var(--color-text-brand);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border-brand);
+}
+
+/* Preenchida: sem contorno, fundo neutro (contagem de passos, versão, atalho) */
+.pill--filled {
+  box-shadow: none;
+  background: var(--color-bg-neutral);
+  color: var(--color-text);
+}
+
+/* ==========================================================================
+   Chip de filtro: liga e desliga um filtro. É um <button aria-pressed>.
+   Ligado, fica com o fundo do texto (contraste máximo) e não com a cor de marca.
+   ========================================================================== */
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-050);
+  height: 1.75rem;
+  padding-inline: var(--space-100);
+  border: 0;
+  border-radius: var(--radius-round);
+  background: transparent;
+  color: var(--color-text-subtle);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-border);
+  font: var(--font-weight-medium) var(--font-size-body-small)/1 var(--font-family-body);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-chip .i {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: inherit;
+}
+
+.filter-chip:hover, .filter-chip.is-hover {
+  background: var(--color-bg-neutral-subtle-hovered);
+  color: var(--color-text);
+}
+
+.filter-chip[aria-pressed=true], .filter-chip.is-selected {
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  box-shadow: none;
+}
+
+.filter-chip:focus-visible, .filter-chip.is-focus {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.filter-chip:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.filter-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-050);
+  align-items: center;
+}
+
+/* ==========================================================================
+   Stepper: os passos de uma tarefa longa, com o atual em destaque.
+   <ol class="stepper"> com <li class="step step--done|step--current|step--todo">.
+   O estado está no texto (aside) e na marca; a cor só reforça.
+   ========================================================================== */
+.stepper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-150);
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.125rem minmax(0, 1fr) auto;
+  column-gap: var(--space-100);
+  align-items: center;
+}
+
+/* A linha que liga uma marca à seguinte */
+.step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: calc(0.5625rem - 0.5px);
+  top: 1.25rem;
+  bottom: calc(var(--space-150) * -1 + 2px);
+  width: var(--border-width);
+  background: var(--color-border);
+}
+
+.step__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: var(--radius-round);
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 1.5px var(--color-border-bold);
+}
+
+.step__mark .i {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.step__name {
+  min-width: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.step__aside {
+  font: var(--font-body-small);
+  color: var(--color-text-subtlest);
+  white-space: nowrap;
+}
+
+.step__detail {
+  grid-column: 2/-1;
+  min-width: 0;
+  margin-top: var(--space-100);
+  display: grid;
+  gap: var(--space-100);
+  padding: var(--space-150);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface-sunken);
+}
+
+.step--done .step__mark {
+  background: var(--color-bg-success-bold);
+  box-shadow: none;
+  color: var(--color-text-inverse);
+}
+
+.step--current .step__mark {
+  box-shadow: inset 0 0 0 1.5px var(--color-border-selected);
+}
+
+.step--current .step__mark::after {
+  content: "";
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: var(--radius-round);
+  background: var(--color-bg-brand-bold);
+}
+
+.step--current .step__aside {
+  color: var(--color-text-brand);
+}
+
+.step--todo {
+  color: var(--color-text-subtlest);
+}
+
+.step--todo .step__mark {
+  box-shadow: inset 0 0 0 1.5px var(--color-border);
+}
+
+.step--todo .step__name {
+  font-weight: var(--font-weight-regular);
+}
+
+.step--failed .step__mark {
+  background: var(--color-bg-danger-bold);
+  box-shadow: none;
+  color: var(--color-text-inverse);
+}
+
+.step--failed .step__aside {
+  color: var(--color-text-danger);
+}
+
+/* ==========================================================================
+   Barra em segmentos: uso de uma cota (créditos, armazenamento) em blocos contáveis.
+   <div class="segments" role="meter" aria-valuenow=… aria-valuemax=…> com N <span>, os usados com .is-on.
+   Neutra por padrão; --brand quando o número é progresso, --warning perto do limite.
+   ========================================================================== */
+.segments {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 2px;
+}
+
+.segments > span {
+  height: 6px;
+  border-radius: var(--radius-xsmall);
+  background: var(--color-bg-neutral-hovered);
+}
+
+.segments > span.is-on {
+  background: var(--color-bg-neutral-bold);
+}
+
+.segments--brand > span.is-on {
+  background: var(--color-bg-brand-bold);
+}
+
+.segments--warning > span.is-on {
+  background: var(--color-bg-warning-bold);
+}
+
+.segments--danger > span.is-on {
+  background: var(--color-bg-danger-bold);
+}
+
+/* ==========================================================================
+   Composer
+   <form class="composer"> <textarea class="composer__input"> <div class="composer__bar"> … </div> </form>
+   Na barra, .composer__spacer empurra o que vem depois para o fim (o botão de enviar).
+   ========================================================================== */
+.composer {
+  display: grid;
+  gap: var(--space-100);
+  padding: var(--space-150);
+  border-radius: var(--radius-large);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+}
+
+.composer:focus-within {
+  box-shadow: var(--shadow-raised), 0 0 0 var(--border-width) var(--color-border-bold);
+}
+
+.composer__input {
+  min-height: 1.5rem;
+  max-height: 12rem;
+  padding: 0;
+  border: 0;
+  resize: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+  font: var(--font-body);
+  field-sizing: content;
+}
+
+.composer__input::placeholder {
+  color: var(--color-text-subtlest);
+}
+
+.composer__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-025);
+}
+
+.composer__spacer {
+  margin-inline-start: auto;
+}
+
+.composer__hint {
+  font: var(--font-body-small);
+  color: var(--color-text-subtlest);
+}
+
+/* Parar a geração ou o envio: quadrado sólido, na cor do texto */
+.btn.composer__stop {
+  --btn-bg: var(--color-text);
+  --btn-bg-hover: var(--color-text-subtle);
+  --btn-bg-active: var(--color-text-subtle);
+  --btn-fg: var(--color-text-inverse);
+}
+
+.btn.composer__stop::before {
+  content: "";
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+/* ==========================================================================
+   Área de trabalho
+   <div class="workspace">
+     <aside class="sidebar workspace__sidebar">…</aside>
+     <main class="workspace__main"> <header class="workspace__topbar">…</header> <div>conteúdo</div> </main>
+   </div>
+   ========================================================================== */
+.workspace {
+  display: grid;
+  grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr);
+  height: 100vh;
+  height: 100dvh;
+  padding: var(--space-100) var(--space-100) var(--space-100) 0;
+  background: var(--app-background, var(--color-surface-sunken));
+}
+
+/* A navegação lateral fica sobre o fundo, sem borda; títulos em caixa normal */
+.workspace__sidebar {
+  width: auto;
+  min-height: 0;
+  overflow-y: auto;
+  background: transparent;
+  border: 0;
+  padding: var(--space-050) var(--space-150);
+  gap: var(--space-150);
+}
+
+.workspace__sidebar .nav-heading {
+  text-transform: none;
+  letter-spacing: 0;
+  font: var(--font-weight-medium) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body);
+}
+
+.workspace__sidebar .nav-item {
+  gap: var(--space-100);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text);
+}
+
+.workspace__sidebar-foot {
+  margin-top: auto;
+  display: grid;
+  gap: var(--space-150);
+}
+
+.workspace__main {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-xlarge);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+}
+
+/* Topo do bloco: onde estou | busca no centro | ações */
+.workspace__topbar {
+  display: grid;
+  grid-template-columns: 1fr minmax(12rem, 26rem) 1fr;
+  align-items: center;
+  gap: var(--space-150);
+  height: var(--layout-header-height);
+  padding-inline: var(--space-200) var(--space-150);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.workspace__topbar-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-075);
+}
+
+.workspace__crumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+  min-width: 0;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.workspace__crumb > .i {
+  color: var(--color-icon);
+}
+
+.workspace__crumb-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.workspace__crumb small {
+  font: var(--font-body-small);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-subtlest);
+}
+
+/* Campo com cantos redondos (busca no topo) */
+.input--round {
+  border-radius: var(--radius-round);
+}
+
+/* ==========================================================================
+   Painel: um cartão de conteúdo sobre a superfície (lista, resumo, configurações)
+   ========================================================================== */
+.panel {
+  min-width: 0;
+  border-radius: var(--radius-large);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+}
+
+.panel--clip {
+  overflow: hidden;
+}
+
+.panel__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+  padding: var(--space-150) var(--space-200);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.panel__title {
+  margin: 0;
+  font: var(--font-card);
+}
+
+.panel__body {
+  padding: var(--space-150) var(--space-200);
+}
+
+.panel__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-100);
+  padding: var(--space-100) var(--space-200);
+  border-top: var(--border-width) solid var(--color-border);
+  background: var(--color-surface-sunken);
+  font: var(--font-body-small);
+  color: var(--color-text-subtlest);
+}
+
+/* Linhas de um painel (contas, opções): separadas por borda fina */
+.panel__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-050) var(--space-200);
+  align-items: center;
+  padding: var(--space-150) var(--space-200);
+}
+
+.panel__row + .panel__row {
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+/* ==========================================================================
+   Cartão de uso: cota com valor, segmentos e rodapé (créditos, armazenamento)
+   ========================================================================== */
+.usage-card {
+  display: grid;
+  gap: var(--space-100);
+  padding: var(--space-150);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+}
+
+.usage-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-075);
+  font-weight: var(--font-weight-medium);
+}
+
+.usage-card__head > :last-child:not(:first-child) {
+  margin-inline-start: auto;
+}
+
+.usage-card__value {
+  font: var(--font-body-small);
+  color: var(--color-text-subtlest);
+}
+
+.usage-card__value strong {
+  margin-inline-end: var(--space-050);
+  font: var(--font-card);
+  color: var(--color-text);
+}
+
+.usage-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-100);
+  font: var(--font-body-small);
+  color: var(--color-text-subtlest);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Identidade: avatar + nome + detalhe (rodapé da navegação, linha de pessoa)
+   ========================================================================== */
+.identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+  min-width: 0;
+  padding-inline: var(--space-050);
+}
+
+.identity__text {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  line-height: 1.25;
+}
+
+.identity__name {
+  font-weight: var(--font-weight-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.identity__meta {
+  font: var(--font-body-small);
+  color: var(--color-text-subtlest);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Marca neutra no wordmark: o glyph na cor do texto, para produtos sem logo própria */
+.wordmark__glyph--neutral {
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+}
+
+/* Telas estreitas: a navegação some e o bloco ocupa a largura; no compacto o topo perde a busca */
+@media (max-width: 1279px) {
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--space-100);
+  }
+  .workspace > .workspace__sidebar {
+    display: none;
+  }
+}
+@media (max-width: 959px) {
+  .workspace {
+    height: auto;
+    min-height: 100vh;
+  }
+  .workspace__topbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-inline: var(--space-150) var(--space-100);
+    gap: var(--space-100);
+  }
+  .workspace__topbar > .input {
+    display: none;
   }
 }
 /* @docs-site:start */
