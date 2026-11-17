@@ -30,9 +30,10 @@
 .nav-item__count { font: var(--font-body-small); font-variant-numeric: tabular-nums; color: var(--color-text-subtlest); }
 .nav-item:hover, .nav-item.is-hover { background: var(--color-bg-neutral-subtle-hovered); color: var(--color-text); }
 .nav-item:active, .nav-item.is-active { background: var(--color-bg-neutral-subtle-pressed); }
-.nav-item.is-selected, .nav-item[aria-current="page"] { background: var(--color-bg-selected); color: var(--color-text-selected); }
-.nav-item.is-selected > .i, .nav-item[aria-current="page"] > .i { color: var(--color-icon-brand); }
-.nav-item.is-selected:hover, .nav-item[aria-current="page"]:hover { background: var(--color-bg-selected-hovered); }
+/* Selecionado é neutro: a cor de marca fica para ações e progresso (decisão 0022) */
+.nav-item.is-selected, .nav-item[aria-current="page"] { background: var(--color-bg-neutral); color: var(--color-text); }
+.nav-item.is-selected > .i, .nav-item[aria-current="page"] > .i { color: var(--color-icon); }
+.nav-item.is-selected:hover, .nav-item[aria-current="page"]:hover { background: var(--color-bg-neutral-hovered); }
 .nav-item.has-unread .nav-item__text { font-weight: var(--font-weight-semibold); color: var(--color-text); }
 .nav-item.has-unread .nav-item__count { font-weight: var(--font-weight-semibold); color: var(--color-text); }
 .nav-item.is-disabled { color: var(--color-text-disabled); cursor: not-allowed; background: transparent; }

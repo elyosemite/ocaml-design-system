@@ -17,6 +17,13 @@ $variants: (
     'btn-bg-active': var(--color-bg-brand-bold-pressed),
     'btn-fg': var(--color-text-inverse),
   ),
+  // Contorno: fundo da superfície com borda fina ("Compartilhar", "Novo")
+  'outline': (
+    'btn-bg': var(--color-surface),
+    'btn-bg-hover': var(--color-bg-input-hovered),
+    'btn-bg-active': var(--color-bg-neutral),
+    'btn-fg': var(--color-text),
+  ),
   'subtle': (
     'btn-bg': transparent,
     'btn-bg-hover': var(--color-bg-neutral-subtle-hovered),

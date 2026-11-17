@@ -6,7 +6,7 @@
 
 $groups: (
   'Elevação · sombras': (
-    'shadow-raised': (light: (0 1px 1px p.palette('blue-860-a25'), 0 0 1px p.palette('blue-860-a31')), dark: (0 0 0 1px p.palette('white-a08'), 0 1px 2px p.palette('black-1000-a80'))),
-    'shadow-overlay': (light: (0 8px 12px p.palette('blue-860-a15'), 0 0 1px p.palette('blue-860-a31')), dark: (0 0 0 1px p.palette('white-a12'), 0 8px 16px p.palette('black-1000-a70'))),
+    'shadow-raised': (light: (0 1px 2px p.palette('black-1000-a05'), 0 0 0 1px p.palette('black-1000-a06')), dark: (0 0 0 1px p.palette('white-a08'), 0 1px 2px p.palette('black-1000-a80'))),
+    'shadow-overlay': (light: (0 12px 32px p.palette('black-1000-a10'), 0 0 0 1px p.palette('black-1000-a06')), dark: (0 0 0 1px p.palette('white-a12'), 0 8px 16px p.palette('black-1000-a70'))),
   ),
 );

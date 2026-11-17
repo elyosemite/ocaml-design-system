@@ -121,3 +121,10 @@ As decisões 0015 a 0020 são de 14 nov 2026, da migração para o repositório 
 - **Data:** 14 nov 2026.
 - **Decisão:** o design system passa a se chamar OCaml Design System e serve a qualquer produto. O EpistulaMail foi o primeiro produto a usá-lo; os exemplos das páginas usam um app fictício ("Correio") e dados de exemplo.
 - **Efeito:** o nome aparece no topo e nos títulos das páginas, no pacote (`ocaml-design-system`) e no README. As constantes internas viraram `OCAML_PAGES`, `OCAML_STATUS`, `OCAML_FICHAS` e `OCAML_SPRITE`, e a preferência de tema guardada no navegador virou `ocaml-ds-theme` (quem já tinha escolhido um tema volta ao padrão uma vez). As entradas anteriores deste registro continuam citando o EpistulaMail porque contam a história.
+
+## 0022 · Visual claro neutro, cantos maiores e o exemplo em `examples/`
+
+- **Data:** 17 nov 2026.
+- **Contexto:** o tema claro herdava o tom azulado do ADS (texto `#172B4D`, bordas e fundos neutros com matiz azul, cantos de 3px). A referência pedida é um espaço de trabalho com agente: cinzas puros, superfícies brancas com borda fina, cantos mais redondos e o azul reservado para ação e progresso.
+- **Decisão:** no tema claro, texto, ícones, bordas, fundos neutros, véu e sombras passam para a nova família `gray-*` e para pretos com transparência (`black-1000-aNN`). A marca vai para `#2563EB` (`blue-540`, 5,2:1 sobre branco), com `blue-640`/`blue-760` para hover e pressionado. Os raios sobem um degrau: xsmall 4px, small 6px, medium 8px, large 12px. A borda de input fica em `gray-425` (3,4:1) para manter o contraste de 3:1 de componente. O item selecionado da navegação lateral passa a ser neutro. O botão ganha as variantes `.btn--outline` e `.btn--pill`. O tema escuro não muda.
+- **Efeito:** `baseline/tokens.css` e `baseline/components.css` foram atualizados com o resultado novo, de propósito. Os primitivos que ficaram sem uso (`blue-525`, `blue-810`, `blue-860*`, sete tons de `slate-*`) saíram da paleta. `examples/index.html` mostra uma tela inteira montada só com tokens e componentes, nos dois temas.
