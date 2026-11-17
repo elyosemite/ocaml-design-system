@@ -72,6 +72,7 @@ Nunca copie um hex para o produto: atualize a dependência e os valores chegam e
 | Página | O que mostra |
 |---|---|
 | `examples/index.html` | Espaço de pesquisa com agente (casca `.workspace`): navegação lateral, conversa com plano em etapas e uma planilha sendo preenchida. Claro e escuro (botão de lua no topo). |
+| `examples/epistulamail-inicio.html` | Tela inicial do EpistulaMail como no app (casca em blocos, coluna de contas, barra de comandos, pastas, lista e leitura), com a mesma marcação dos componentes de `src/layout/` do app. Clique numa conversa, troque de conta, esconda colunas (Ctrl+B) e alterne o tema. `#m0`… abre uma conversa direto. |
 | `examples/epistulamail.html` | Rascunho do EpistulaMail: caixa de entrada com leitura (clique nas conversas), busca com filtros e configurações de contas, aparência e segurança (`#caixa`, `#busca`, `#ajustes`). Claro e escuro. |
 
 ## O que há em `dist/`

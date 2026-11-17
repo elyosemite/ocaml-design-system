@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>EpistulaMail · tela inicial</title>
+  <meta name="description" content="A tela inicial do EpistulaMail (caixa de entrada) montada só com os tokens e os componentes do OCaml Design System.">
+  <script>try{var t=localStorage.getItem('ocaml-ds-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="../dist/fonts.css">
+  <link rel="stylesheet" href="../dist/tokens.css">
+  <link rel="stylesheet" href="../dist/components.css">
+  <style>
+    /* A mesma marcação do app (src/layout/*.tsx do EpistulaMail), sem React: casca em blocos com a coluna de contas,
+       bloco do header (marca, busca, colunas, conta e barra de comandos), bloco de navegação (pastas e lista) e leitura.
+       Tudo vem de components.css; aqui só o que é desta página de exemplo. */
+    body { margin: 0; font: var(--font-body); color: var(--color-text); background: var(--color-canvas); }
+    [hidden] { display: none !important; }
+    .reader-pane { overflow: auto; }
+    .reader-pane > .empty { margin-top: var(--space-400); }
+  </style>
+</head>
+<body>
+  <div class="app-shell app-shell--with-rail app-shell--blocks" id="shell" style="--app-shell-list: 560px">
+
+    <!-- AccountsBar.tsx · .account-rail -->
+    <nav class="account-rail app-shell__rail" aria-label="Contas">
+      <div class="account-rail__list" role="list" id="accounts"></div>
+      <div class="account-rail__sep" role="separator"></div>
+      <button class="account-rail__add" type="button" aria-label="Adicionar conta ou abrir arquivo" data-tip="Adicionar conta ou abrir arquivo"><svg class="i"><use href="#i-plus"/></svg></button>
+    </nav>
+
+    <!-- Header.tsx · bloco do header com a barra de comandos -->
+    <div class="app-shell__block app-shell__block--header">
+      <header class="appbar appbar--shell">
+        <span class="appbar__brand">
+          <span class="wordmark wordmark--sm"><img class="wordmark__logo" src="images/epistulamail-logo.png" alt="">EpistulaMail</span>
+        </span>
+        <div class="appbar__search">
+          <div class="input input--search"><svg class="i"><use href="#i-search"/></svg><input type="search" id="search" placeholder="Buscar em Trabalho" aria-label="Buscar e-mails nas mensagens salvas"><kbd>/</kbd></div>
+        </div>
+        <div class="appbar__actions appbar__end">
+          <button class="btn btn--subtle btn--icon" type="button" aria-pressed="true" aria-label="Pastas" data-col="folders" data-tip="Esconder pastas (Ctrl+B)"><svg class="i"><use href="#i-sidebar-left"/></svg></button>
+          <button class="btn btn--subtle btn--icon" type="button" aria-pressed="true" aria-label="Leitura" data-col="reader" data-tip="Esconder leitura (Ctrl+Alt+B)"><svg class="i"><use href="#i-sidebar-right"/></svg></button>
+          <button class="btn btn--subtle btn--icon" type="button" id="theme" aria-label="Alternar tema claro e escuro" data-tip="Tema"><svg class="i"><use href="#i-moon"/></svg></button>
+          <button class="btn btn--subtle btn--icon" type="button" aria-label="Notificações" data-tip="Notificações"><svg class="i"><use href="#i-bell"/></svg></button>
+          <button class="account-trigger" type="button" aria-haspopup="menu" aria-label="Conta: Trabalho" data-tip="Conta (Alt+A)" id="me"></button>
+        </div>
+      </header>
+
+      <!-- CommandBar.tsx · .commandbar -->
+      <div class="commandbar" role="toolbar" aria-label="Ações da mensagem">
+        <button class="btn btn--primary" type="button" aria-label="Novo e-mail" data-tip="Novo e-mail (N)"><svg class="i"><use href="#i-pencil"/></svg>Novo e-mail</button>
+        <span class="toolbar__sep" role="separator"></span>
+        <div class="commandbar__group">
+          <button class="btn btn--subtle" type="button" data-cmd aria-label="Excluir" data-tip="Excluir (Delete)"><svg class="i"><use href="#i-trash"/></svg><span class="commandbar__label">Excluir</span></button>
+          <button class="btn btn--subtle" type="button" data-cmd aria-label="Arquivar" data-tip="Arquivar (E)"><svg class="i"><use href="#i-archive"/></svg><span class="commandbar__label">Arquivar</span></button>
+          <button class="btn btn--subtle" type="button" data-cmd aria-label="Mover para" aria-haspopup="menu" aria-expanded="false" data-tip="Mover para (V)"><svg class="i"><use href="#i-folder-move"/></svg><span class="commandbar__label">Mover para</span><svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+          <div class="btn-split">
+            <button class="btn btn--subtle" type="button" data-cmd aria-label="Responder a todos" data-tip="Responder a todos (Shift+R)"><svg class="i"><use href="#i-reply-all"/></svg><span class="commandbar__label">Responder a todos</span></button>
+            <button class="btn btn--subtle" type="button" data-cmd aria-label="Responder ou encaminhar" aria-haspopup="menu" aria-expanded="false"><svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+          </div>
+        </div>
+        <span class="toolbar__sep" role="separator"></span>
+        <div class="commandbar__group">
+          <button class="btn btn--subtle" type="button" data-cmd aria-label="Marcar como não lida" data-tip="Marcar como não lida (Shift+U)"><svg class="i"><use href="#i-mail"/></svg><span class="commandbar__label">Marcar como não lida</span></button>
+          <div class="btn-split">
+            <button class="btn btn--subtle" type="button" data-cmd aria-label="Sinalizar" data-tip="Sinalizar (Insert)"><svg class="i"><use href="#i-flag"/></svg><span class="commandbar__label">Sinalizar</span></button>
+            <button class="btn btn--subtle" type="button" data-cmd aria-label="Prazo da sinalização" aria-haspopup="menu" aria-expanded="false"><svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+          </div>
+          <button class="btn btn--subtle" type="button" data-cmd aria-label="Mais" aria-haspopup="menu" aria-expanded="false" data-tip="Mais ações"><svg class="i"><use href="#i-more"/></svg><span class="commandbar__label">Mais</span><svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NavigationBlock.tsx · pastas + lista -->
+    <div class="app-shell__block app-shell__block--nav">
+      <nav class="sidebar app-shell__sidebar" aria-label="Pastas">
+        <div class="nav-group" id="folders"></div>
+        <div class="nav-group">
+          <div class="nav-heading">Marcadores</div>
+          <button class="nav-item" type="button" data-folder="Projetos"><svg class="i"><use href="#i-folder"/></svg><span class="nav-item__text">Projetos</span></button>
+          <button class="nav-item" type="button" data-folder="Financeiro"><svg class="i"><use href="#i-folder"/></svg><span class="nav-item__text">Financeiro</span></button>
+        </div>
+      </nav>
+
+      <section class="app-shell__list" aria-label="Caixa de entrada" id="list">
+        <div class="toolbar" role="toolbar" aria-label="Ações de Caixa de entrada" id="toolbar">
+          <input type="checkbox" class="checkbox" id="master" aria-label="Selecionar todas desta página">
+          <span id="tool-idle"><button class="btn btn--subtle btn--icon" type="button" aria-label="Atualizar" data-tip="Atualizar"><svg class="i"><use href="#i-refresh"/></svg></button></span>
+          <span id="tool-selecting" hidden style="display:contents"><span class="toolbar__count" aria-live="polite" id="count"></span><button class="btn btn--subtle btn--icon btn--compact" type="button" id="clear" aria-label="Limpar seleção" data-tip="Limpar seleção (Esc)"><svg class="i"><use href="#i-x"/></svg></button></span>
+          <div class="toolbar__end"><span id="range"></span>
+            <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Página anterior" disabled><svg class="i"><use href="#i-chevron-left"/></svg></button>
+            <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Próxima página"><svg class="i"><use href="#i-chevron-right"/></svg></button>
+          </div>
+        </div>
+        <div class="app-shell__list-body">
+          <div class="thread-list thread-list--standard" role="list" aria-label="Caixa de entrada" id="threads"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ContentColumn.tsx · leitura -->
+    <section class="app-shell__reader app-shell__block reader-pane" aria-label="Mensagem" id="reader"></section>
+
+    <div class="app-shell__resizer" role="separator" aria-orientation="vertical" aria-label="Largura da lista de mensagens" tabindex="0" id="resizer"></div>
+  </div>
+
+  <script src="../dist/sprite.js"></script>
+  <script>
+    document.body.insertAdjacentHTML('afterbegin', window.OCAML_SPRITE || '');
+    const $ = (s) => document.querySelector(s);
+    const photo = (n) => `../site/images/people/pessoa-${n}.webp`;
+    const icon = (n, sm) => `<svg class="i${sm ? ' i--sm' : ''}"><use href="#i-${n}"/></svg>`;
+    const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+    // ---------- Contas (dados fictícios) ----------
+    const accounts = [
+      { id: 'trabalho', name: 'Trabalho', email: 'ana@lumen.com.br', color: 'purple', photo: 5, unread: 28 },
+      { id: 'pessoal', name: 'Pessoal', email: 'ana.souza@exemplo.com', color: '', photo: 6, unread: 120 },
+      { id: 'freela', name: 'Freela', email: 'contato@anasouza.dev', color: 'teal', photo: 2, unread: 52 },
+      { id: 'faculdade', name: 'Faculdade', email: 'ana.souza@uni.edu.br', color: 'orange', photo: 1, unread: 9 },
+    ];
+    let current = 'trabalho';
+    const badge = (n) => (n > 99 ? '99+' : String(n));
+    const avatar = (a, size) => `<span class="avatar avatar--${size}${a.color ? ' avatar--' + a.color : ''}" aria-hidden="true">${a.name[0]}<img class="avatar__img" alt="" src="${photo(a.photo)}"></span>`;
+    function renderAccounts() {
+      $('#accounts').innerHTML = accounts.map((a, i) => `<div role="listitem"><button type="button" class="account-rail__item" data-account="${a.id}"${a.id === current ? ' aria-current="true"' : ''} aria-label="${a.name}, ${a.unread} não lidas" data-tip="${a.name} · ${a.email} (Ctrl+${i + 1})">${avatar(a, 'lg')}<span class="badge badge--primary account-rail__badge" aria-hidden="true">${badge(a.unread)}</span><span class="account-rail__name" aria-hidden="true">${a.name}</span></button></div>`).join('');
+      const a = accounts.find((x) => x.id === current);
+      $('#me').innerHTML = avatar(a, 'sm');
+      $('#me').setAttribute('aria-label', `Conta: ${a.name}`);
+      $('#search').placeholder = `Buscar em ${a.name}`;
+    }
+    $('#accounts').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-account]');
+      if (!b) return;
+      current = b.dataset.account;
+      openId = null; checked.clear();
+      renderAccounts(); renderFolders(); renderList(); renderReader();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && /^[1-9]$/.test(e.key) && accounts[+e.key - 1]) { e.preventDefault(); $(`[data-account="${accounts[+e.key - 1].id}"]`).click(); }
+    });
+
+    // ---------- Pastas (FoldersColumn.tsx) ----------
+    const folders = [['inbox', 'Caixa de entrada', 'inbox'], ['starred', 'Com estrela', 'star'], ['sent', 'Enviados', 'send'], ['drafts', 'Rascunhos', 'file'], ['all', 'Todos os e-mails', 'archive'], ['spam', 'Spam', 'spam'], ['trash', 'Lixeira', 'trash']];
+    let folder = 'inbox';
+    function renderFolders() {
+      const unread = accounts.find((a) => a.id === current).unread;
+      $('#folders').innerHTML = folders.map(([id, name, ic]) => {
+        const count = id === 'inbox' ? unread : 0;
+        return `<button type="button" class="nav-item${count ? ' has-unread' : ''}" data-folder="${id}"${id === folder ? ' aria-current="page"' : ''} aria-label="${name}${count ? `, ${count} não lidas` : ''}">${icon(ic)}<span class="nav-item__text">${name}</span>${count ? `<span class="nav-item__count" aria-hidden="true">${count}</span>` : ''}</button>`;
+      }).join('');
+    }
+    document.querySelector('.app-shell__sidebar').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-folder]');
+      if (!b) return;
+      folder = b.dataset.folder;
+      document.querySelectorAll('.app-shell__sidebar .nav-item').forEach((n) => n.removeAttribute('aria-current'));
+      b.setAttribute('aria-current', 'page');
+      const name = b.querySelector('.nav-item__text').textContent;
+      $('#list').setAttribute('aria-label', name); $('#threads').setAttribute('aria-label', name);
+      openId = null; checked.clear(); renderList(); renderReader();
+    });
+
+    // ---------- Conversas (EmailItem.tsx · ThreadRow) ----------
+    const mail = [
+      { from: 'Marina Couto', addr: 'marina.couto@lumen.com.br', p: 2, subject: 'Revisão do contrato: Fornecedor Lumen', date: '15 nov', unread: true, files: true, count: 3,
+        body: ['Oi, Ana.', 'Segue a versão 3 do contrato com a cláusula 7.2 reescrita. A multa por rescisão agora é proporcional ao período restante.', 'Consegue aprovar até sexta, 21 de novembro? Assim enviamos ainda nesta semana.', 'Obrigada,<br>Marina'] },
+      { from: 'Equipe Quadro', addr: 'ola@quadro.app', subject: 'Convide seu time para o espaço de trabalho', date: '15 nov', unread: true,
+        body: ['Seu espaço de trabalho está pronto.', 'Convide até 5 pessoas sem custo e comecem a organizar os projetos juntos.'] },
+      { from: 'Banco Atlântico', addr: 'avisos@atlantico.com.br', subject: 'Alerta de segurança: novo acesso à sua conta', date: '15 nov', unread: true,
+        body: ['Detectamos um acesso à sua conta a partir de um novo dispositivo (Windows, Recife).', 'Se foi você, não precisa fazer nada. Se não reconhece este acesso, troque a senha agora.'] },
+      { from: 'Rafael Brandão', addr: 'rafael@lumen.com.br', p: 3, subject: 'Re: Planejamento do primeiro trimestre', date: '14 nov', unread: true, starred: true, count: 5,
+        body: ['Fechei os números do T1 com o financeiro.', 'A planilha atualizada está na pasta do projeto. Podemos revisar na segunda às 10h?'] },
+      { from: 'Nuvem Docs', addr: 'no-reply@nuvemdocs.com', subject: 'Você compartilhou "Proposta 2027" com 3 pessoas', date: '14 nov', unread: true,
+        body: ['Marina Couto, Rafael Brandão e Carla Nunes agora podem editar "Proposta 2027".'] },
+      { from: 'Carla Nunes', addr: 'carla@estudiocn.com', p: 1, subject: 'Fotos da obra, semana 46', date: '12 nov', unread: true, files: true, images: true,
+        body: ['A fachada já está pintada e a calçada fica pronta na quinta.', 'Mando as fotos em anexo; a de número 4 mostra o detalhe da marquise.'] },
+      { from: 'Correios', addr: 'rastreio@correios.exemplo', subject: 'Sua encomenda saiu para entrega', date: '9 nov', unread: false,
+        body: ['O objeto BR 928 441 017 BR saiu para entrega ao destinatário.'] },
+      { from: 'Paulo Henrique', addr: 'paulo.h@exemplo.com', p: 4, subject: 'Almoço de sexta?', date: '8 nov', unread: false, starred: true,
+        body: ['Fechado então: 12h30 no Mercado. Levo a proposta impressa.'] },
+      { from: 'Armazenamento Nuvem', addr: 'avisos@nuvem.exemplo', subject: 'Seu armazenamento está 50% cheio', date: '8 nov', unread: false,
+        body: ['Você está usando 7,5 GB dos 15 GB do plano.', 'Libere espaço apagando anexos grandes ou mude de plano.'] },
+      { from: 'Equipe Quadro', addr: 'ola@quadro.app', subject: 'Resumo semanal: 4 cartões vencem esta semana', date: '6 nov', unread: false,
+        body: ['4 cartões do quadro "Roadmap" vencem até domingo.'] },
+    ];
+    let openId = null;
+    const checked = new Set();
+    const list = () => (folder === 'inbox' ? mail : folder === 'starred' ? mail.filter((m) => m.starred) : []);
+    function row(m, i) {
+      const cls = ['thread', m.unread && 'is-unread', checked.has(i) && 'is-checked', openId === i && 'is-open'].filter(Boolean).join(' ');
+      return `<div class="${cls}" role="listitem" tabindex="0" data-i="${i}"${openId === i ? ' aria-current="true"' : ''} aria-label="${m.unread ? 'Não lida, ' : ''}${m.starred ? 'com estrela, ' : ''}${esc(m.from)}, ${esc(m.subject)}, ${m.date}">
+        <input type="checkbox" class="checkbox thread__check" tabindex="-1" aria-label="Selecionar conversa de ${esc(m.from)}"${checked.has(i) ? ' checked' : ''}>
+        <button type="button" class="star-btn thread__star" tabindex="-1" aria-pressed="${!!m.starred}" aria-label="${m.starred ? 'Remover estrela' : 'Marcar com estrela'}" data-tip="${m.starred ? 'Remover estrela (S)' : 'Marcar com estrela (S)'}">${icon('star')}</button>
+        <div class="thread__from"><span class="thread__from-name">${esc(m.from)}</span>${m.count > 1 ? `<span class="thread__count">${m.count}</span>` : ''}</div>
+        <div class="thread__meta"><span class="thread__date">${m.date}</span><span class="thread__actions"><button class="btn btn--subtle btn--icon btn--compact" type="button" tabindex="-1" data-read aria-label="${m.unread ? 'Marcar como lida' : 'Marcar como não lida'}">${icon(m.unread ? 'mail-open' : 'mail')}</button></span></div>
+        <div class="thread__subject"><span class="thread__subject-text">${esc(m.subject)}</span>${m.files || m.images ? `<span class="thread__icons" aria-hidden="true">${m.files ? icon('clip', 1) : ''}${m.images ? icon('image', 1) : ''}</span>` : ''}</div>
+      </div>`;
+    }
+    function renderList() {
+      const items = list();
+      $('#threads').innerHTML = items.length ? items.map((m) => row(m, mail.indexOf(m))).join('')
+        : `<div class="empty"><h2 class="empty__title">Nenhuma mensagem nesta pasta</h2><p class="empty__desc">${esc($('#list').getAttribute('aria-label'))} está vazia.</p></div>`;
+      $('#range').textContent = items.length ? `1–${items.length} de ${folder === 'inbox' ? 57 : items.length}` : '';
+      const n = checked.size;
+      $('#toolbar').classList.toggle('is-selecting', n > 0);
+      $('#tool-idle').hidden = n > 0; $('#tool-selecting').hidden = n === 0;
+      $('#count').textContent = n === 1 ? '1 selecionada' : `${n} selecionadas`;
+      const master = $('#master');
+      master.checked = items.length > 0 && n === items.length;
+      master.indeterminate = n > 0 && n < items.length;
+      master.disabled = items.length === 0;
+      document.querySelectorAll('[data-cmd]').forEach((b) => { b.disabled = openId === null && n === 0; });
+    }
+    $('#threads').addEventListener('click', (e) => {
+      const r = e.target.closest('.thread');
+      if (!r) return;
+      const i = +r.dataset.i, m = mail[i];
+      if (e.target.closest('.thread__check')) { checked.has(i) ? checked.delete(i) : checked.add(i); return renderList(); }
+      if (e.target.closest('.thread__star')) { m.starred = !m.starred; return renderList(); }
+      if (e.target.closest('[data-read]')) { m.unread = !m.unread; return renderList(); }
+      openId = i; m.unread = false;
+      renderList(); renderReader();
+    });
+    $('#threads').addEventListener('keydown', (e) => {
+      const r = e.target.closest('.thread');
+      if (!r) return;
+      const rows = [...document.querySelectorAll('#threads .thread')], k = rows.indexOf(r);
+      const go = (to) => { const t = rows[Math.max(0, Math.min(rows.length - 1, to))]; t.click(); document.querySelector(`#threads .thread[data-i="${t.dataset.i}"]`).focus(); };
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); r.click(); }
+      else if (e.key === 'j' || e.key === 'ArrowDown') { e.preventDefault(); go(k + 1); }
+      else if (e.key === 'k' || e.key === 'ArrowUp') { e.preventDefault(); go(k - 1); }
+    });
+    $('#master').addEventListener('change', () => { const items = list(); if (checked.size === items.length) checked.clear(); else items.forEach((m) => checked.add(mail.indexOf(m))); renderList(); });
+    $('#clear').addEventListener('click', () => { checked.clear(); renderList(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && checked.size) { checked.clear(); renderList(); } });
+
+    // ---------- Leitura (MessageView.tsx) ----------
+    function renderReader() {
+      $('#shell').classList.toggle('has-reader', openId !== null);
+      if (openId === null) {
+        $('#reader').innerHTML = '<div class="empty"><h2 class="empty__title">Nenhuma mensagem aberta</h2><p class="empty__desc">Escolha uma mensagem na lista para ler.</p></div>';
+        return;
+      }
+      const m = mail[openId];
+      const me = accounts.find((a) => a.id === current);
+      const av = m.p ? `<span class="avatar avatar--lg avatar--purple">${m.from[0]}<img class="avatar__img" alt="" src="${photo(m.p)}"></span>` : `<span class="avatar avatar--lg avatar--teal">${m.from[0]}</span>`;
+      const files = m.files ? `<div class="attachments">
+          <button class="attachment" type="button"><span class="attachment__icon attachment__icon--pdf">${icon('file')}</span><span style="min-width:0;display:grid"><span class="attachment__name">Documento_v3.pdf</span><span class="attachment__meta">PDF · 1,8 MB</span></span></button>
+          ${m.images ? `<button class="attachment" type="button"><span class="attachment__icon attachment__icon--img">${icon('image')}</span><span style="min-width:0;display:grid"><span class="attachment__name">obra-semana46.zip</span><span class="attachment__meta">ZIP · 24 MB</span></span></button>` : ''}
+        </div>` : '';
+      $('#reader').innerHTML = `<article class="reader reader--fluid">
+        <div class="reader__head">
+          <div style="flex:1 1 18rem;min-width:0"><h2 class="reader__subject">${esc(m.subject)}</h2></div>
+          <div class="row" style="gap:var(--space-050)">
+            <button class="btn btn--subtle btn--icon" type="button" aria-label="Voltar para a lista" data-tip="Fechar (Esc)" id="close">${icon('x')}</button>
+          </div>
+        </div>
+        <div class="message">
+          <div class="message__head">${av}
+            <div style="min-width:0"><div class="message__from">${esc(m.from)} <span class="message__addr">&lt;${m.addr}&gt;</span></div>
+            <button class="message__to" type="button">para ${me.email}${icon('chevron-down', 1)}</button></div>
+            <div class="message__time">${m.date}, 10:42 <button class="star-btn" type="button" aria-pressed="${!!m.starred}" aria-label="Com estrela">${icon('star')}</button></div>
+          </div>
+          <div class="message__body">${m.body.map((p) => `<p>${p}</p>`).join('')}</div>
+          ${files}
+          <div class="reply-bar">
+            <button class="btn" type="button">${icon('reply')}Responder</button>
+            <button class="btn" type="button">${icon('reply-all')}Responder a todos</button>
+            <button class="btn" type="button">${icon('forward')}Encaminhar</button>
+          </div>
+        </div>
+      </article>`;
+      $('#close').addEventListener('click', () => { openId = null; renderList(); renderReader(); });
+    }
+
+    // ---------- Colunas (ColumnToggles.tsx), tema e divisor ----------
+    document.querySelectorAll('[data-col]').forEach((b) => b.addEventListener('click', () => {
+      const on = b.getAttribute('aria-pressed') !== 'true';
+      b.setAttribute('aria-pressed', String(on));
+      const label = b.dataset.col === 'folders' ? 'pastas (Ctrl+B)' : 'leitura (Ctrl+Alt+B)';
+      b.dataset.tip = `${on ? 'Esconder' : 'Mostrar'} ${label}`;
+      $('#shell').classList.toggle(b.dataset.col === 'folders' ? 'app-shell--no-folders' : 'app-shell--no-reader', !on);
+      $('#resizer').hidden = b.dataset.col === 'reader' && !on;
+    }));
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key.toLowerCase() === 'b') { e.preventDefault(); $(`[data-col="${e.altKey ? 'reader' : 'folders'}"]`).click(); }
+      if (e.key === '/' && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); $('#search').focus(); }
+    });
+    $('#theme').addEventListener('click', () => {
+      const root = document.documentElement;
+      const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+      root.dataset.theme = dark ? 'light' : 'dark';
+      try { localStorage.setItem('ocaml-ds-theme', root.dataset.theme); } catch (e) {}
+    });
+    // Divisor: arrastar muda --app-shell-list (como o Resizer.tsx)
+    $('#resizer').addEventListener('pointerdown', (e) => {
+      const start = e.clientX, width = parseFloat(getComputedStyle($('#shell')).getPropertyValue('--app-shell-list'));
+      $('#resizer').classList.add('is-dragging');
+      const move = (ev) => $('#shell').style.setProperty('--app-shell-list', `${Math.max(320, Math.min(560, width + ev.clientX - start))}px`);
+      const up = () => { $('#resizer').classList.remove('is-dragging'); removeEventListener('pointermove', move); removeEventListener('pointerup', up); };
+      addEventListener('pointermove', move); addEventListener('pointerup', up);
+    });
+
+    // #m0, #m1…: abre uma conversa ao carregar (para link direto)
+    const fromHash = /^#m(\d+)$/.exec(location.hash);
+    if (fromHash && mail[+fromHash[1]]) { openId = +fromHash[1]; mail[openId].unread = false; }
+    renderAccounts(); renderFolders(); renderList(); renderReader();
+  </script>
+</body>
+</html>
