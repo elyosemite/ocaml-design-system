@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exemplo · EpistulaMail · OCaml Design System</title>
+  <!-- Rascunho. Rode `pnpm build` antes: a página usa o CSS gerado em dist/. -->
+  <link rel="stylesheet" href="../dist/fonts.css">
+  <link rel="stylesheet" href="../dist/tokens.css">
+  <link rel="stylesheet" href="../dist/components.css">
+  <style>
+    /* Só a montagem desta tela. Tudo passa por tokens semânticos; nenhum valor de cor fixo.
+       As classes .pill, .block, .seg-meter, .composer e .trow são candidatas a componente (plano, fases 3 e 4). */
+    html, body { height: 100%; }
+    body { margin: 0; background: var(--color-surface-sunken); color: var(--color-text); font: var(--font-body); -webkit-font-smoothing: antialiased; }
+    button { font: inherit; }
+    [hidden] { display: none !important; }
+    mark { background: var(--color-bg-warning); color: inherit; border-radius: 2px; padding-inline: 1px; }
+
+    /* ---------- Peças candidatas a componente ---------- */
+    .block { border-radius: var(--radius-large); background: var(--color-surface); box-shadow: var(--shadow-raised); }
+    .pill { display: inline-flex; align-items: center; gap: var(--space-050); height: 1.375rem; padding-inline: var(--space-075); border-radius: var(--radius-round); box-shadow: inset 0 0 0 var(--border-width) var(--color-border); font: var(--font-body-small); color: var(--color-text-subtle); white-space: nowrap; }
+    .pill--success { color: var(--color-text-success); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-success); }
+    .pill--warning { color: var(--color-text-warning); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-warning); }
+    .pill--danger { color: var(--color-text-danger); box-shadow: inset 0 0 0 var(--border-width) var(--color-border-danger); }
+    .agent-dot { display: inline-grid; place-items: center; width: 1.25rem; height: 1.25rem; border-radius: var(--radius-small); background: var(--color-bg-brand-bold); color: var(--color-text-inverse); flex: none; }
+    .seg-meter { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; }
+    .seg-meter > span { height: 6px; border-radius: var(--radius-xsmall); background: var(--color-bg-neutral-hovered); }
+    .seg-meter > span.is-on { background: var(--color-bg-neutral-bold); }
+    .chipf { display: inline-flex; align-items: center; gap: var(--space-050); height: 1.75rem; padding-inline: var(--space-100); border: 0; border-radius: var(--radius-round); background: transparent; color: var(--color-text-subtle); box-shadow: inset 0 0 0 1px var(--color-border); font: var(--font-weight-medium) var(--font-size-body-small)/1 var(--font-family-body); cursor: pointer; white-space: nowrap; }
+    .chipf:hover { background: var(--color-bg-neutral-subtle-hovered); }
+    .chipf[aria-pressed="true"] { background: var(--color-text); color: var(--color-text-inverse); box-shadow: none; }
+    .chipf .i { color: inherit; }
+    .composer { padding: var(--space-150); border-radius: var(--radius-large); background: var(--color-surface); box-shadow: var(--shadow-raised); display: grid; gap: var(--space-100); }
+    .composer textarea { border: 0; resize: none; background: transparent; color: var(--color-text); font: var(--font-body); outline: none; min-height: 1.5rem; }
+    .composer textarea::placeholder { color: var(--color-text-subtlest); }
+    .composer__bar { display: flex; align-items: center; gap: var(--space-025); }
+    .grow { margin-inline-start: auto; }
+
+    /* ---------- Casca em blocos ---------- */
+    .ws { display: grid; grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr); height: 100vh; padding: var(--space-100) var(--space-100) var(--space-100) 0; }
+    .ws .sidebar { width: auto; background: transparent; border: 0; padding: var(--space-050) var(--space-150); gap: var(--space-150); min-height: 0; overflow-y: auto; }
+    .ws .nav-heading { text-transform: none; letter-spacing: 0; font: var(--font-weight-medium) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body); }
+    .ws .nav-item { gap: var(--space-100); font-weight: var(--font-weight-regular); color: var(--color-text); }
+    .ws .nav-group { gap: 1px; }
+    .brand { display: flex; align-items: center; gap: var(--space-100); height: var(--control-height); padding-inline: var(--space-050); }
+    .brand__mark { display: inline-grid; place-items: center; width: 1.375rem; height: 1.375rem; border-radius: var(--radius-small); background: var(--color-text); color: var(--color-text-inverse); }
+    .brand__name { flex: 1; font-weight: var(--font-weight-semibold); letter-spacing: -0.01em; }
+    .side-actions { display: flex; gap: var(--space-075); }
+    .side-actions .btn--outline:first-child { flex: 1; justify-content: flex-start; }
+    .side-foot { margin-top: auto; display: grid; gap: var(--space-150); }
+    .storage { display: grid; gap: var(--space-100); padding: var(--space-150); }
+    .storage__head { display: flex; align-items: center; gap: var(--space-075); font-weight: var(--font-weight-medium); }
+    .storage__head .label { margin-inline-start: auto; }
+    .storage__value { font: var(--font-body-small); color: var(--color-text-subtlest); }
+    .storage__value strong { font: var(--font-card); color: var(--color-text); margin-inline-end: var(--space-050); }
+    .me { display: flex; align-items: center; gap: var(--space-100); padding-inline: var(--space-050); }
+    .me__text { flex: 1; min-width: 0; display: grid; line-height: 1.25; }
+    .me__name { font-weight: var(--font-weight-medium); }
+    .me__mail { font: var(--font-body-small); color: var(--color-text-subtlest); }
+    .acct-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; margin-inline: 4px; }
+    .nav-dot { margin-inline: 4px; }
+
+    .main { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; overflow: hidden; }
+    .topbar { display: grid; grid-template-columns: 1fr minmax(12rem, 26rem) 1fr; align-items: center; gap: var(--space-150); height: var(--layout-header-height); padding-inline: var(--space-200) var(--space-150); border-bottom: var(--border-width) solid var(--color-border); }
+    .crumb { display: flex; align-items: center; gap: var(--space-100); min-width: 0; font-weight: var(--font-weight-medium); white-space: nowrap; }
+    .crumb .i { color: var(--color-icon); }
+    .crumb small { font: var(--font-body-small); color: var(--color-text-subtlest); font-weight: var(--font-weight-regular); }
+    .topbar .input--search { min-height: var(--control-height); border-radius: var(--radius-round); }
+    .topbar kbd { font: var(--font-weight-medium) 0.6875rem/1 var(--font-family-code); color: var(--color-text-subtlest); padding: 2px 6px; border-radius: var(--radius-xsmall); box-shadow: inset 0 0 0 1px var(--color-border); }
+    .topbar__end { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-075); }
+
+    /* ---------- Caixa de entrada ---------- */
+    .panes { display: grid; grid-template-columns: minmax(20rem, 25rem) minmax(0, 1fr); min-height: 0; }
+    .list { display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0; border-inline-end: var(--border-width) solid var(--color-border); }
+    .list__head { display: flex; align-items: center; gap: var(--space-050); padding: var(--space-100) var(--space-150) var(--space-075) var(--space-200); }
+    .chipbar { display: flex; gap: var(--space-050); flex-wrap: wrap; }
+    .rows { overflow-y: auto; padding: var(--space-025) var(--space-100) var(--space-100); display: grid; align-content: start; gap: 1px; }
+    .day { padding: var(--space-150) var(--space-100) var(--space-050); font: var(--font-weight-medium) var(--font-size-body-small)/var(--line-height-body-small) var(--font-family-body); color: var(--color-text-subtlest); }
+    .trow { position: relative; display: grid; grid-template-columns: 2rem minmax(0, 1fr) auto; grid-template-areas: "av from meta" "av subj subj" "av snip snip" "av tags tags"; column-gap: var(--space-150); row-gap: 1px; padding: var(--space-150) var(--space-150) var(--space-150) var(--space-200); border: 0; border-radius: var(--radius-medium); background: transparent; color: var(--color-text-subtle); text-align: start; cursor: pointer; width: 100%; }
+    .trow:hover { background: var(--color-bg-neutral-subtle-hovered); }
+    .trow:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: -2px; }
+    .trow .avatar { grid-area: av; align-self: start; }
+    .trow__from { grid-area: from; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text); }
+    .trow__meta { grid-area: meta; display: flex; align-items: center; gap: var(--space-050); font: var(--font-body-small); font-variant-numeric: tabular-nums; color: var(--color-text-subtlest); }
+    .trow__subj { grid-area: subj; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text); }
+    .trow__snip { grid-area: snip; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text-subtlest); }
+    .trow__tags { grid-area: tags; display: flex; gap: var(--space-050); margin-top: var(--space-075); }
+    .trow__tags:empty { display: none; }
+    .trow.is-unread .trow__from, .trow.is-unread .trow__subj { font-weight: var(--font-weight-semibold); }
+    .trow.is-unread .trow__meta { color: var(--color-text-brand); font-weight: var(--font-weight-semibold); }
+    .trow.is-unread::before { content: ""; position: absolute; inset-inline-start: 7px; top: calc(var(--space-150) + 7px); width: 6px; height: 6px; border-radius: 50%; background: var(--color-icon-brand); }
+    .trow[aria-current="true"] { background: var(--color-bg-neutral); }
+    .trow:not([aria-current="true"]) + .trow:not([aria-current="true"])::after { content: ""; position: absolute; top: 0; inset-inline: var(--space-200); height: 1px; background: var(--color-border); }
+    .trow .i--sm { color: var(--color-icon-subtle); }
+    .trow .star .i { fill: currentColor; color: var(--color-icon-starred); }
+
+    .reader { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; min-height: 0; background: var(--color-surface-sunken); }
+    .reader__bar { display: flex; align-items: center; gap: var(--space-050); padding: var(--space-100) var(--space-150); }
+    .reader__bar .sep { width: 1px; height: 1.25rem; background: var(--color-border); margin-inline: var(--space-050); }
+    .reader__bar .grow { font: var(--font-body-small); color: var(--color-text-subtlest); display: inline-flex; gap: var(--space-050); align-items: center; }
+    .reader__body { overflow-y: auto; padding: 0 var(--space-300) var(--space-200); display: grid; align-content: start; gap: var(--space-150); }
+    .subject { display: grid; gap: var(--space-100); padding: var(--space-100) 0 var(--space-050); }
+    .subject h2 { margin: 0; font: var(--font-weight-semibold) 1.375rem/1.25 var(--font-family-heading); letter-spacing: -0.015em; }
+    .subject__tags { display: flex; flex-wrap: wrap; gap: var(--space-075); align-items: center; }
+    .sec-ok { display: inline-flex; align-items: center; gap: var(--space-050); font: var(--font-body-small); color: var(--color-text-success); }
+    .summary { padding: var(--space-150) var(--space-200); display: grid; gap: var(--space-100); }
+    .summary__head { display: flex; align-items: center; gap: var(--space-100); font-weight: var(--font-weight-medium); }
+    .summary__head small { font: var(--font-body-small); color: var(--color-text-subtlest); margin-inline-start: auto; }
+    .summary ul { margin: 0; padding-inline-start: 1.125rem; display: grid; gap: var(--space-050); color: var(--color-text-subtle); }
+    .summary b { color: var(--color-text); font-weight: var(--font-weight-medium); }
+    .msg__head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-150); align-items: center; padding: var(--space-150) var(--space-200); }
+    .msg__who { display: grid; min-width: 0; line-height: 1.3; }
+    .msg__who b { font-weight: var(--font-weight-semibold); }
+    .msg__who span { font: var(--font-body-small); color: var(--color-text-subtlest); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .msg__when { display: flex; align-items: center; gap: var(--space-050); font: var(--font-body-small); color: var(--color-text-subtlest); }
+    .msg--collapsed .msg__head { padding-block: var(--space-100); }
+    .msg--collapsed .msg__who span { color: var(--color-text-subtle); }
+    .msg__text { padding: 0 var(--space-200) var(--space-150) calc(var(--space-200) + 2rem + var(--space-150)); display: grid; gap: var(--space-150); max-width: 46rem; }
+    .msg__text p { margin: 0; }
+    .msg__files { padding: 0 var(--space-200) var(--space-200) calc(var(--space-200) + 2rem + var(--space-150)); display: flex; flex-wrap: wrap; gap: var(--space-100); }
+    .msg__files .attachment { width: 15rem; border-radius: var(--radius-medium); }
+    .reader__reply { padding: 0 var(--space-300) var(--space-200); }
+
+    /* ---------- Busca ---------- */
+    .search { overflow-y: auto; padding: var(--space-200) var(--space-300) var(--space-400); display: grid; align-content: start; gap: var(--space-250); }
+    .search__q { display: grid; gap: var(--space-150); }
+    .search__q h2 { margin: 0; font: var(--font-weight-semibold) 1.375rem/1.25 var(--font-family-heading); letter-spacing: -0.015em; }
+    .search__q h2 span { color: var(--color-text-subtlest); font-weight: var(--font-weight-regular); }
+    .search__filters { display: flex; flex-wrap: wrap; gap: var(--space-075); align-items: center; }
+    .search__filters .chipf[aria-pressed="true"] .i:last-child { margin-inline-start: 2px; }
+    .search__grid { display: grid; grid-template-columns: minmax(0, 1fr) 18rem; gap: var(--space-200); align-items: start; }
+    .sec-title { display: flex; align-items: center; gap: var(--space-100); margin: 0 0 var(--space-100); font: var(--font-weight-semibold) var(--font-size-body)/1.4 var(--font-family-body); }
+    .sec-title small { font: var(--font-body-small); color: var(--color-text-subtlest); font-weight: var(--font-weight-regular); }
+    .sec-title .btn { margin-inline-start: auto; }
+    .results { padding: var(--space-050) var(--space-100); display: grid; }
+    .result { display: grid; grid-template-columns: 2rem minmax(0, 1fr) auto; gap: var(--space-025) var(--space-150); padding: var(--space-150) var(--space-100); border-radius: var(--radius-medium); cursor: pointer; }
+    .result:hover { background: var(--color-bg-neutral-subtle-hovered); }
+    .result + .result { box-shadow: 0 -1px 0 var(--color-border); }
+    .result .avatar { grid-row: span 3; }
+    .result__from { font-weight: var(--font-weight-medium); }
+    .result__when { font: var(--font-body-small); color: var(--color-text-subtlest); font-variant-numeric: tabular-nums; }
+    .result__subj { grid-column: 2 / -1; }
+    .result__snip { grid-column: 2 / -1; color: var(--color-text-subtle); font: var(--font-body-small); }
+    .result__meta { grid-column: 2 / -1; display: flex; gap: var(--space-075); margin-top: var(--space-050); }
+    .files { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-100); padding: var(--space-150); }
+    .files .attachment { border-radius: var(--radius-medium); }
+    .people { padding: var(--space-100); display: grid; gap: 1px; }
+    .person { display: flex; align-items: center; gap: var(--space-100); padding: var(--space-100); border-radius: var(--radius-medium); }
+    .person:hover { background: var(--color-bg-neutral-subtle-hovered); }
+    .person span { display: grid; min-width: 0; line-height: 1.3; }
+    .person small { font: var(--font-body-small); color: var(--color-text-subtlest); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tip { padding: var(--space-150) var(--space-200); display: grid; gap: var(--space-075); font: var(--font-body-small); color: var(--color-text-subtle); }
+    .tip code { font: 0.75rem/1.4 var(--font-family-code); background: var(--color-bg-neutral); padding: 1px 5px; border-radius: var(--radius-xsmall); color: var(--color-text); }
+
+    /* ---------- Configurações ---------- */
+    .settings { display: grid; grid-template-columns: 14rem minmax(0, 1fr); min-height: 0; }
+    .settings__nav { padding: var(--space-150); border-inline-end: var(--border-width) solid var(--color-border); display: grid; align-content: start; gap: 1px; }
+    .settings__nav .nav-item { font-weight: var(--font-weight-regular); color: var(--color-text); gap: var(--space-100); }
+    .settings__body { overflow-y: auto; padding: var(--space-250) var(--space-400) var(--space-500); display: grid; align-content: start; gap: var(--space-300); background: var(--color-surface-sunken); }
+    .set-sec { display: grid; gap: var(--space-150); max-width: 46rem; }
+    .set-sec > header h2 { margin: 0; font: var(--font-section); }
+    .set-sec > header p { margin: var(--space-050) 0 0; color: var(--color-text-subtle); }
+    .acct { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: var(--space-150); align-items: center; padding: var(--space-150) var(--space-200); }
+    .acct + .acct { border-top: var(--border-width) solid var(--color-border); }
+    .acct span { display: grid; min-width: 0; line-height: 1.3; }
+    .acct small { font: var(--font-body-small); color: var(--color-text-subtlest); }
+    .acct__mark { width: 2rem; height: 2rem; border-radius: var(--radius-medium); display: grid; place-items: center; color: var(--color-text-inverse); font-weight: var(--font-weight-semibold); font-size: 0.8125rem; }
+    .opt { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-050) var(--space-200); align-items: center; padding: var(--space-150) var(--space-200); }
+    .opt + .opt { border-top: var(--border-width) solid var(--color-border); }
+    .opt b { font-weight: var(--font-weight-medium); }
+    .opt p { margin: 0; grid-column: 1; font: var(--font-body-small); color: var(--color-text-subtlest); }
+    .opt > :last-child { grid-row: 1 / span 2; grid-column: 2; }
+    .keyfp { font: 0.8125rem/1.5 var(--font-family-code); color: var(--color-text-subtle); letter-spacing: 0.02em; }
+    .theme-picker { margin: 0; }
+
+    @media (max-width: 1100px) {
+      .ws { grid-template-columns: minmax(0, 1fr); padding: var(--space-100); }
+      .ws > .sidebar { display: none; }
+      .search__grid { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .topbar { grid-template-columns: 1fr auto; }
+      .topbar .input--search { display: none; }
+      .panes { grid-template-columns: minmax(0, 1fr); }
+      .reader { display: none; }
+      .settings { grid-template-columns: minmax(0, 1fr); }
+      .settings__nav { display: none; }
+      .settings__body, .search { padding-inline: var(--space-200); }
+      .files { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="ws">
+    <nav class="sidebar" aria-label="Navegação principal">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true"><svg class="i i--sm"><use href="#i-mail"/></svg></span>
+        <span class="brand__name">EpistulaMail</span>
+        <button class="btn btn--subtle btn--icon btn--compact" aria-label="Recolher navegação"><svg class="i"><use href="#i-sidebar-left"/></svg></button>
+      </div>
+      <div class="side-actions">
+        <button class="btn btn--outline btn--pill"><svg class="i"><use href="#i-pencil"/></svg>Escrever</button>
+        <button class="btn btn--outline btn--pill btn--icon" aria-label="Buscar" data-go="busca"><svg class="i"><use href="#i-search"/></svg></button>
+      </div>
+      <div class="nav-group">
+        <a class="nav-item has-unread" href="#caixa" data-view="caixa"><svg class="i"><use href="#i-inbox"/></svg><span class="nav-item__text">Caixa de entrada</span><span class="nav-item__count">3</span></a>
+        <a class="nav-item" href="#caixa"><svg class="i"><use href="#i-star"/></svg><span class="nav-item__text">Com estrela</span></a>
+        <a class="nav-item" href="#caixa"><svg class="i"><use href="#i-clock"/></svg><span class="nav-item__text">Adiados</span><span class="nav-item__count">2</span></a>
+        <a class="nav-item" href="#caixa"><svg class="i"><use href="#i-send"/></svg><span class="nav-item__text">Enviados</span></a>
+        <a class="nav-item" href="#caixa"><svg class="i"><use href="#i-file"/></svg><span class="nav-item__text">Rascunhos</span><span class="nav-item__count">3</span></a>
+        <a class="nav-item" href="#caixa"><svg class="i"><use href="#i-archive"/></svg><span class="nav-item__text">Arquivo</span></a>
+        <a class="nav-item" href="#caixa"><svg class="i"><use href="#i-trash"/></svg><span class="nav-item__text">Lixeira</span></a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-heading">Etiquetas</div>
+        <a class="nav-item" href="#caixa"><span class="dot nav-dot" style="--lb-fg: var(--color-icon-brand)"></span><span class="nav-item__text">Jurídico</span></a>
+        <a class="nav-item" href="#caixa"><span class="dot nav-dot" style="--lb-fg: var(--color-icon-success)"></span><span class="nav-item__text">Financeiro</span></a>
+        <a class="nav-item" href="#caixa"><span class="dot nav-dot" style="--lb-fg: var(--color-icon-warning)"></span><span class="nav-item__text">Obra da loja</span></a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-heading">Mais</div>
+        <a class="nav-item" href="#busca" data-view="busca"><svg class="i"><use href="#i-search"/></svg><span class="nav-item__text">Busca</span></a>
+        <a class="nav-item" href="#ajustes" data-view="ajustes"><svg class="i"><use href="#i-settings"/></svg><span class="nav-item__text">Configurações</span></a>
+      </div>
+      <div class="side-foot">
+        <section class="storage block" aria-label="Armazenamento">
+          <div class="storage__head"><svg class="i i--sm"><use href="#i-hard-drive"/></svg>Armazenamento<span class="label">Plus</span></div>
+          <div class="storage__value"><strong>6,2 GB</strong>de 15 GB</div>
+          <div class="seg-meter" data-on="10" role="meter" aria-valuemin="0" aria-valuemax="15" aria-valuenow="6.2" aria-label="Armazenamento usado"></div>
+        </section>
+        <div class="me">
+          <span class="avatar avatar--sm avatar--purple"><img class="avatar__img" src="../site/images/people/pessoa-5.webp" alt="">JR</span>
+          <span class="me__text"><span class="me__name">Joana Ribeiro</span><span class="me__mail">joana@epistula.app</span></span>
+          <button class="btn btn--subtle btn--icon btn--compact" id="theme" aria-label="Alternar tema claro e escuro"><svg class="i"><use href="#i-moon"/></svg></button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main block">
+      <header class="topbar">
+        <div class="crumb" id="crumb"></div>
+        <label class="input input--search"><svg class="i"><use href="#i-search"/></svg><input type="search" id="q" placeholder="Buscar e-mails, pessoas, anexos" aria-label="Buscar"><kbd>Ctrl K</kbd></label>
+        <div class="topbar__end">
+          <button class="btn btn--subtle btn--icon" aria-label="Notificações"><svg class="i"><use href="#i-bell"/></svg></button>
+          <button class="btn btn--subtle btn--icon" aria-label="Exibição"><svg class="i"><use href="#i-sliders"/></svg></button>
+          <button class="btn btn--subtle btn--icon" aria-label="Mais opções"><svg class="i"><use href="#i-more"/></svg></button>
+        </div>
+      </header>
+
+      <!-- ====================== Caixa de entrada ====================== -->
+      <div class="panes" id="view-caixa">
+        <section class="list" aria-label="Conversas">
+          <div class="list__head">
+            <div class="chipbar">
+              <button class="chipf" aria-pressed="true" data-filter="all">Todas</button>
+              <button class="chipf" aria-pressed="false" data-filter="unread">Não lidas</button>
+              <button class="chipf" aria-pressed="false" data-filter="files"><svg class="i i--sm"><use href="#i-clip"/></svg>Anexos</button>
+            </div>
+            <button class="btn btn--subtle btn--icon btn--compact grow" aria-label="Atualizar"><svg class="i"><use href="#i-refresh"/></svg></button>
+          </div>
+          <div class="rows" id="rows" role="list"></div>
+        </section>
+        <section class="reader" aria-label="Leitura">
+          <div class="reader__bar">
+            <button class="btn btn--subtle btn--icon btn--compact" aria-label="Arquivar"><svg class="i"><use href="#i-archive"/></svg></button>
+            <button class="btn btn--subtle btn--icon btn--compact" aria-label="Excluir"><svg class="i"><use href="#i-trash"/></svg></button>
+            <button class="btn btn--subtle btn--icon btn--compact" aria-label="Mover"><svg class="i"><use href="#i-folder-move"/></svg></button>
+            <button class="btn btn--subtle btn--icon btn--compact" aria-label="Adiar"><svg class="i"><use href="#i-clock"/></svg></button>
+            <span class="sep" aria-hidden="true"></span>
+            <button class="btn btn--subtle btn--icon btn--compact" aria-label="Marcar como não lida"><svg class="i"><use href="#i-mail"/></svg></button>
+            <span class="grow" id="pos"></span>
+          </div>
+          <div class="reader__body" id="reader"></div>
+          <div class="reader__reply">
+            <form class="composer" onsubmit="return false">
+              <textarea rows="1" id="reply" placeholder="Responder…" aria-label="Resposta"></textarea>
+              <div class="composer__bar">
+                <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Anexar"><svg class="i"><use href="#i-clip"/></svg></button>
+                <button class="btn btn--subtle btn--icon btn--compact" type="button" aria-label="Formatação"><svg class="i"><use href="#i-bold"/></svg></button>
+                <button class="btn btn--subtle btn--compact" type="button"><svg class="i"><use href="#i-reply-all"/></svg>Responder a todos<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+                <span class="pill pill--success grow"><svg class="i i--sm"><use href="#i-lock"/></svg>Criptografado</span>
+                <button class="btn btn--primary btn--pill" type="submit" style="margin-inline-start: var(--space-075)"><svg class="i"><use href="#i-send"/></svg>Enviar</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+
+      <!-- ====================== Busca ====================== -->
+      <div class="search" id="view-busca" hidden>
+        <div class="search__q">
+          <h2>contrato lumen <span>· 14 resultados</span></h2>
+          <div class="search__filters" role="group" aria-label="Filtros">
+            <button class="chipf" aria-pressed="true"><svg class="i i--sm"><use href="#i-user"/></svg>De: Marina Couto<svg class="i i--sm"><use href="#i-x"/></svg></button>
+            <button class="chipf" aria-pressed="true"><svg class="i i--sm"><use href="#i-clip"/></svg>Tem anexo<svg class="i i--sm"><use href="#i-x"/></svg></button>
+            <button class="chipf" aria-pressed="false"><svg class="i i--sm"><use href="#i-clock"/></svg>Qualquer data<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+            <button class="chipf" aria-pressed="false"><svg class="i i--sm"><use href="#i-folder"/></svg>Todas as pastas<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+            <button class="chipf" aria-pressed="false"><svg class="i i--sm"><use href="#i-tag"/></svg>Etiqueta<svg class="i i--sm"><use href="#i-chevron-down"/></svg></button>
+            <button class="btn btn--link btn--compact">Limpar filtros</button>
+          </div>
+        </div>
+        <div class="search__grid">
+          <div style="display:grid; gap: var(--space-250); min-width: 0">
+            <section>
+              <h3 class="sec-title">Mensagens <small>9</small></h3>
+              <div class="results block" id="results"></div>
+            </section>
+            <section>
+              <h3 class="sec-title">Anexos <small>5</small><button class="btn btn--subtle btn--compact">Ver todos</button></h3>
+              <div class="files block">
+                <div class="attachment"><span class="attachment__icon attachment__icon--pdf"><svg class="i i--lg"><use href="#i-file"/></svg></span><span style="min-width:0;display:grid"><span class="attachment__name"><mark>Contrato</mark>_<mark>Lumen</mark>_v3.pdf</span><span class="attachment__meta">PDF · 1,8 MB · hoje</span></span></div>
+                <div class="attachment"><span class="attachment__icon attachment__icon--pdf"><svg class="i i--lg"><use href="#i-file"/></svg></span><span style="min-width:0;display:grid"><span class="attachment__name"><mark>Contrato</mark>_<mark>Lumen</mark>_v2.pdf</span><span class="attachment__meta">PDF · 1,7 MB · 10 nov</span></span></div>
+                <div class="attachment"><span class="attachment__icon attachment__icon--doc"><svg class="i i--lg"><use href="#i-file"/></svg></span><span style="min-width:0;display:grid"><span class="attachment__name">Alteracoes_v2_v3.docx</span><span class="attachment__meta">Word · 88 KB · hoje</span></span></div>
+                <div class="attachment"><span class="attachment__icon attachment__icon--img"><svg class="i i--lg"><use href="#i-image"/></svg></span><span style="min-width:0;display:grid"><span class="attachment__name">assinatura_<mark>lumen</mark>.png</span><span class="attachment__meta">PNG · 240 KB · 3 nov</span></span></div>
+              </div>
+            </section>
+          </div>
+          <aside style="display:grid; gap: var(--space-200)">
+            <section>
+              <h3 class="sec-title">Pessoas</h3>
+              <div class="people block">
+                <div class="person"><span class="avatar avatar--teal"><img class="avatar__img" src="../site/images/people/pessoa-2.webp" alt="">MC</span><span><b style="font-weight:var(--font-weight-medium)">Marina Couto</b><small>marina@lumen.com.br</small></span></div>
+                <div class="person"><span class="avatar avatar--orange">JL</span><span><b style="font-weight:var(--font-weight-medium)">Jurídico Lumen</b><small>juridico@lumen.com.br</small></span></div>
+                <div class="person"><span class="avatar"><img class="avatar__img" src="../site/images/people/pessoa-6.webp" alt="">RB</span><span><b style="font-weight:var(--font-weight-medium)">Rafael Brandão</b><small>rafael@lojaribeiro.com.br</small></span></div>
+              </div>
+            </section>
+            <section class="tip block">
+              <span style="display:flex;gap:var(--space-075);align-items:center;color:var(--color-text);font-weight:var(--font-weight-medium)"><svg class="i i--sm"><use href="#i-info"/></svg>Busca no aparelho</span>
+              <span>As mensagens criptografadas são buscadas aqui, sem sair do seu computador.</span>
+              <span>Atalhos: <code>de:</code> <code>tem:anexo</code> <code>antes:2026-11-01</code></span>
+            </section>
+          </aside>
+        </div>
+      </div>
+
+      <!-- ====================== Configurações ====================== -->
+      <div class="settings" id="view-ajustes" hidden>
+        <nav class="settings__nav" aria-label="Seções">
+          <a class="nav-item" href="#ajustes"><svg class="i"><use href="#i-sliders"/></svg><span class="nav-item__text">Geral</span></a>
+          <a class="nav-item" href="#ajustes" aria-current="page"><svg class="i"><use href="#i-user"/></svg><span class="nav-item__text">Contas</span></a>
+          <a class="nav-item" href="#ajustes"><svg class="i"><use href="#i-palette"/></svg><span class="nav-item__text">Aparência</span></a>
+          <a class="nav-item" href="#ajustes"><svg class="i"><use href="#i-shield"/></svg><span class="nav-item__text">Segurança</span></a>
+          <a class="nav-item" href="#ajustes"><svg class="i"><use href="#i-bell"/></svg><span class="nav-item__text">Notificações</span></a>
+          <a class="nav-item" href="#ajustes"><svg class="i"><use href="#i-filter"/></svg><span class="nav-item__text">Regras</span></a>
+        </nav>
+        <div class="settings__body">
+          <section class="set-sec">
+            <header><h2>Contas</h2><p>As caixas que o EpistulaMail sincroniza neste computador.</p></header>
+            <div class="block">
+              <div class="acct"><span class="acct__mark" style="background: var(--color-label-teal-text)">T</span><span><b style="font-weight:var(--font-weight-medium)">Trabalho</b><small>joana@lojaribeiro.com.br · IMAP</small></span><span class="pill pill--success"><svg class="i i--sm"><use href="#i-check"/></svg>Sincronizada</span><button class="btn btn--subtle btn--icon btn--compact" aria-label="Opções da conta Trabalho"><svg class="i"><use href="#i-more"/></svg></button></div>
+              <div class="acct"><span class="acct__mark" style="background: var(--color-label-purple-text)">P</span><span><b style="font-weight:var(--font-weight-medium)">Pessoal</b><small>joana@epistula.app · Epistula</small></span><span class="pill pill--success"><svg class="i i--sm"><use href="#i-check"/></svg>Sincronizada</span><button class="btn btn--subtle btn--icon btn--compact" aria-label="Opções da conta Pessoal"><svg class="i"><use href="#i-more"/></svg></button></div>
+              <div class="acct"><span class="acct__mark" style="background: var(--color-label-orange-text)">A</span><span><b style="font-weight:var(--font-weight-medium)">Antiga</b><small>joana.r@provedor.com · POP3</small></span><span class="pill pill--warning"><svg class="i i--sm"><use href="#i-warning"/></svg>Senha expirada</span><button class="btn btn--outline btn--compact">Entrar de novo</button></div>
+            </div>
+            <div><button class="btn btn--outline btn--pill"><svg class="i"><use href="#i-plus"/></svg>Adicionar conta</button></div>
+          </section>
+
+          <section class="set-sec">
+            <header><h2>Aparência</h2><p>Vale para todas as contas.</p></header>
+            <div class="block" style="padding: var(--space-200)">
+              <fieldset class="theme-picker" id="picker">
+                <legend class="visually-hidden">Tema</legend>
+                <label class="theme-option"><input type="radio" name="tema" value="light"><span class="theme-option__icon"><svg class="i i--lg"><use href="#i-sun"/></svg></span><span class="theme-option__name">Claro</span><span class="theme-option__desc">Sempre claro</span></label>
+                <label class="theme-option"><input type="radio" name="tema" value="dark"><span class="theme-option__icon"><svg class="i i--lg"><use href="#i-moon"/></svg></span><span class="theme-option__name">Escuro</span><span class="theme-option__desc">Sempre escuro</span></label>
+                <label class="theme-option"><input type="radio" name="tema" value="system" checked><span class="theme-option__icon"><svg class="i i--lg"><use href="#i-monitor"/></svg></span><span class="theme-option__name">Sistema</span><span class="theme-option__desc">Segue o sistema</span></label>
+              </fieldset>
+            </div>
+          </section>
+
+          <section class="set-sec">
+            <header><h2>Segurança</h2><p>Chaves e criptografia da conta Pessoal.</p></header>
+            <div class="block">
+              <div class="opt"><b>Criptografar sozinho quando todos tiverem chave</b><p>Se algum destinatário não tiver chave, você escolhe na hora.</p><input type="checkbox" class="toggle" checked aria-label="Criptografar sozinho quando todos tiverem chave"></div>
+              <div class="opt"><b>Assinar todas as mensagens</b><p>Quem recebe confere que foi você quem enviou.</p><input type="checkbox" class="toggle" checked aria-label="Assinar todas as mensagens"></div>
+              <div class="opt"><b>Carregar imagens remotas</b><p>Imagens de fora podem avisar ao remetente que você abriu.</p><input type="checkbox" class="toggle" aria-label="Carregar imagens remotas"></div>
+              <div class="opt"><b>Sua chave OpenPGP</b><p class="keyfp">7A3F 92C1 0B4E D815 · criada em 2 mar 2025</p><button class="btn btn--outline btn--compact"><svg class="i"><use href="#i-key"/></svg>Exportar</button></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../dist/sprite.js"></script>
+  <script>
+    document.body.insertAdjacentHTML('afterbegin', window.OCAML_SPRITE || '');
+    const $ = (s) => document.querySelector(s);
+    const img = (n) => `../site/images/people/pessoa-${n}.webp`;
+
+    document.querySelectorAll('.seg-meter').forEach((m) => {
+      m.innerHTML = Array.from({ length: 24 }, (_, i) => `<span class="${i < +m.dataset.on ? 'is-on' : ''}"></span>`).join('');
+    });
+
+    // Conversas (dados fictícios)
+    const threads = [
+      { day: 'Hoje' },
+      { id: 'lumen', from: 'Marina Couto', av: ['teal', 'MC', 2], to: 'para você, cc Rafael Brandão', when: '10:42', subj: 'Revisão do contrato: Fornecedor Lumen', snip: 'Oi, Joana. Segue a versão 3 com a cláusula 7.2 reescrita. A multa agora fica em 10%…', unread: true, files: ['Contrato_Lumen_v3.pdf|PDF · 1,8 MB|pdf', 'Alteracoes_v2_v3.docx|Word · 88 KB|doc'], label: ['blue', 'Jurídico'], secure: true,
+        summary: ['A cláusula 7.2 limita a multa a <b>10% do valor mensal</b>.', 'Marina pede a sua assinatura até <b>sexta, 21 nov</b>.', 'O anexo <b>Contrato_Lumen_v3.pdf</b> substitui a versão 2.'],
+        before: 'Marina, consegue mandar a versão com a 7.2 ajustada? O resto está ok para mim.',
+        body: ['Oi, Joana. Segue a versão 3 com a cláusula 7.2 reescrita. A multa agora fica em 10% do valor mensal, como combinamos com o jurídico da Lumen.', 'Se estiver tudo certo, assine até sexta para a gente fechar o pedido de dezembro.'] },
+      { id: 'obra', from: 'Paulo Henrique', av: ['orange', 'PH', 1], to: 'para você', when: '09:15', subj: 'Fotos da obra, semana 46', snip: 'A fachada já está pintada e a calçada fica pronta na segunda. Mandei 12 fotos.', unread: true, files: ['fachada-loja.jpg|JPG · 3,2 MB|img', 'calcada.jpg|JPG · 2,9 MB|img'], label: ['orange', 'Obra da loja'],
+        body: ['Bom dia, Joana. A fachada já está pintada e a calçada fica pronta na segunda.', 'O letreiro chega na quarta; o eletricista confirmou para quinta à tarde.'] },
+      { id: 'fin', from: 'Financeiro · Loja Ribeiro', av: ['green', 'FL'], to: 'para equipe', when: '08:30', subj: 'Fechamento de novembro', snip: 'Planilha com as notas lançadas até ontem. Faltam duas do fornecedor de embalagens.', unread: true, files: ['Fechamento_nov.xlsx|Excel · 412 KB|doc'], label: ['green', 'Financeiro'],
+        body: ['Pessoal, segue a planilha com as notas lançadas até ontem.', 'Faltam duas notas do fornecedor de embalagens. Quem tiver, encaminhe até amanhã.'] },
+      { day: 'Ontem' },
+      { id: 'almoco', from: 'Rafael Brandão', av: ['blue', 'RB', 6], to: 'para você', when: '18:04', subj: 'Re: Almoço de sexta? (3)', snip: 'Fechado então, 12h30 no Mercado. Levo a proposta impressa.', star: true,
+        body: ['Fechado então, 12h30 no Mercado. Levo a proposta impressa.'] },
+      { id: 'banco', from: 'Banco Atlântico', av: ['purple', 'BA'], to: 'para você', when: '07:58', subj: 'Seu extrato de outubro está disponível', snip: 'O extrato da conta final 4821 já pode ser consultado no app.', secure: true,
+        body: ['O extrato da conta corrente final 4821 já pode ser consultado no app e no internet banking.'] },
+      { day: 'Esta semana' },
+      { id: 'carla', from: 'Carla Nunes', av: ['magenta', 'CN', 3], to: 'para você', when: 'seg', subj: 'Proposta de parceria, versão final', snip: 'Ajustei os valores do segundo semestre e incluí a cláusula de exclusividade regional.', files: ['Proposta_final.pdf|PDF · 640 KB|pdf'],
+        body: ['Joana, ajustei os valores do segundo semestre e incluí a cláusula de exclusividade regional.', 'Se fizer sentido, marcamos a assinatura para a semana que vem.'] },
+      { id: 'correios', from: 'Correios', av: ['teal', 'CO'], to: 'para você', when: '12 nov', subj: 'Sua encomenda saiu para entrega', snip: 'Objeto BR 928 441 017 BR saiu para entrega ao destinatário.',
+        body: ['Objeto BR 928 441 017 BR saiu para entrega ao destinatário.'] },
+    ];
+    const msgs = threads.filter((t) => t.id);
+    let current = 'lumen', filter = 'all';
+    const av = (a, cls = '') => `<span class="avatar avatar--${a[0]} ${cls}">${a[2] ? `<img class="avatar__img" src="${img(a[2])}" alt="">` : ''}${a[1]}</span>`;
+    const file = (f) => { const [n, m, k] = f.split('|'); return `<div class="attachment"><span class="attachment__icon attachment__icon--${k}"><svg class="i i--lg"><use href="#i-${k === 'img' ? 'image' : 'file'}"/></svg></span><span style="min-width:0;display:grid"><span class="attachment__name">${n}</span><span class="attachment__meta">${m}</span></span></div>`; };
+
+    function renderList() {
+      const keep = (t) => filter === 'all' || (filter === 'unread' && t.unread) || (filter === 'files' && t.files);
+      let out = '', pendingDay = null;
+      for (const t of threads) {
+        if (t.day) { pendingDay = t.day; continue; }
+        if (!keep(t)) continue;
+        if (pendingDay) { out += `<div class="day">${pendingDay}</div>`; pendingDay = null; }
+        out += `<button class="trow${t.unread ? ' is-unread' : ''}" role="listitem" data-id="${t.id}" aria-current="${t.id === current}">
+          ${av(t.av)}
+          <span class="trow__from">${t.from}</span>
+          <span class="trow__meta">${t.star ? '<span class="star"><svg class="i i--sm"><use href="#i-star"/></svg></span>' : ''}${t.files ? '<svg class="i i--sm"><use href="#i-clip"/></svg>' : ''}${t.when}</span>
+          <span class="trow__subj">${t.subj}</span>
+          <span class="trow__snip">${t.snip}</span>
+          <span class="trow__tags">${t.label ? `<span class="label label--${t.label[0]}">${t.label[1]}</span>` : ''}</span>
+        </button>`;
+      }
+      $('#rows').innerHTML = out || '<div class="day">Nada por aqui.</div>';
+    }
+    function renderReader() {
+      const t = msgs.find((m) => m.id === current);
+      $('#pos').innerHTML = `${msgs.indexOf(t) + 1} de ${msgs.length}`;
+      $('#reply').placeholder = `Responder a ${t.from}…`;
+      $('#reader').innerHTML = `
+        <div class="subject"><h2>${t.subj}</h2><div class="subject__tags">
+          ${t.label ? `<span class="label label--${t.label[0]}">${t.label[1]}</span>` : ''}
+          ${t.secure ? '<span class="sec-ok"><svg class="i i--sm"><use href="#i-lock"/></svg>Criptografado de ponta a ponta</span>' : ''}
+        </div></div>
+        ${t.summary ? `<section class="summary block" aria-label="Resumo da conversa"><div class="summary__head"><span class="agent-dot"><svg class="i i--sm"><use href="#i-sparkle"/></svg></span>Resumo da conversa<small>gerado no aparelho</small></div><ul>${t.summary.map((s) => `<li>${s}</li>`).join('')}</ul></section>` : ''}
+        ${t.before ? `<article class="msg--collapsed block"><div class="msg__head">${av(['purple', 'JR', 5])}<span class="msg__who"><b>Você</b><span>${t.before}</span></span><span class="msg__when">14 nov</span></div></article>` : ''}
+        <article class="block">
+          <div class="msg__head">${av(t.av)}<span class="msg__who"><b>${t.from}</b><span>${t.to}</span></span>
+            <span class="msg__when">${t.when}<button class="btn btn--subtle btn--icon btn--compact" aria-label="Responder"><svg class="i"><use href="#i-reply"/></svg></button><button class="btn btn--subtle btn--icon btn--compact" aria-label="Mais"><svg class="i"><use href="#i-more"/></svg></button></span></div>
+          <div class="msg__text">${t.body.map((p) => `<p>${p}</p>`).join('')}</div>
+          ${t.files ? `<div class="msg__files">${t.files.map(file).join('')}</div>` : ''}
+        </article>`;
+    }
+    $('#rows').addEventListener('click', (e) => {
+      const b = e.target.closest('.trow'); if (!b) return;
+      current = b.dataset.id;
+      msgs.find((m) => m.id === current).unread = false;
+      renderList(); renderReader();
+      $('.nav-item[data-view="caixa"] .nav-item__count').textContent = msgs.filter((m) => m.unread).length || '';
+    });
+    document.querySelectorAll('[data-filter]').forEach((b) => b.addEventListener('click', () => {
+      filter = b.dataset.filter;
+      document.querySelectorAll('[data-filter]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      renderList();
+    }));
+
+    // Resultados da busca
+    const hl = (s) => s.replace(/(contrato|lumen)/gi, '<mark>$1</mark>');
+    const results = [
+      ['teal', 'MC', 2, 'Marina Couto', 'hoje', 'Revisão do contrato: Fornecedor Lumen', 'Segue a versão 3 com a cláusula 7.2 reescrita. A multa agora fica em 10% do valor mensal, como combinamos com o jurídico da Lumen.', ['Jurídico', '2 anexos']],
+      ['teal', 'MC', 2, 'Marina Couto', '10 nov', 'Contrato Lumen, versão 2', 'Mandei a versão 2 do contrato com as alterações de prazo. Falta só a cláusula de multa.', ['Jurídico', '1 anexo']],
+      ['teal', 'MC', 2, 'Marina Couto', '3 nov', 'Assinatura digital para o contrato', 'Para assinar o contrato da Lumen pelo portal, use o certificado A1 da loja.', ['1 anexo']],
+    ];
+    $('#results').innerHTML = results.map((r) => `<div class="result">${av([r[0], r[1], r[2]])}<span class="result__from">${r[3]}</span><span class="result__when">${r[4]}</span><span class="result__subj">${hl(r[5])}</span><span class="result__snip">${hl(r[6])}</span><span class="result__meta">${r[7].map((m) => `<span class="pill">${m}</span>`).join('')}</span></div>`).join('');
+
+    // Vistas por hash: #caixa, #busca, #ajustes
+    const crumbs = {
+      caixa: '<svg class="i"><use href="#i-inbox"/></svg>Caixa de entrada <small>todas as contas</small>',
+      busca: '<svg class="i"><use href="#i-search"/></svg>Busca',
+      ajustes: '<svg class="i"><use href="#i-settings"/></svg>Configurações',
+    };
+    function show() {
+      let v = location.hash.slice(1); if (!crumbs[v]) v = 'caixa';
+      for (const k of Object.keys(crumbs)) $('#view-' + k).hidden = k !== v;
+      document.querySelectorAll('.sidebar [data-view]').forEach((a) => { if (a.dataset.view === v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+      $('#crumb').innerHTML = crumbs[v];
+    }
+    addEventListener('hashchange', show);
+    document.querySelector('[data-go="busca"]').addEventListener('click', () => { location.hash = 'busca'; });
+    $('#q').addEventListener('keydown', (e) => { if (e.key === 'Enter') location.hash = 'busca'; });
+
+    // Tema: botão de lua e seletor em Configurações → Aparência
+    const root = document.documentElement;
+    const isDark = () => root.dataset.theme === 'dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+    const syncIcon = () => $('#theme use').setAttribute('href', isDark() ? '#i-sun' : '#i-moon');
+    const setTheme = (t) => {
+      if (t === 'system') delete root.dataset.theme; else root.dataset.theme = t;
+      const r = document.querySelector(`#picker input[value="${t}"]`); if (r) r.checked = true;
+      syncIcon();
+    };
+    $('#theme').addEventListener('click', () => setTheme(isDark() ? 'light' : 'dark'));
+    $('#picker').addEventListener('change', (e) => setTheme(e.target.value));
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncIcon);
+
+    renderList(); renderReader(); show(); syncIcon();
+  </script>
+</body>
+</html>

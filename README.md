@@ -46,6 +46,7 @@ pnpm dev        # gera dist/ e abre a documentação em http://localhost:4400/
 | Página | O que mostra |
 |---|---|
 | `examples/index.html` | Espaço de pesquisa com agente: navegação lateral, conversa com plano em etapas e uma planilha sendo preenchida. Claro e escuro (botão de lua no topo). |
+| `examples/epistulamail.html` | Rascunho do EpistulaMail: caixa de entrada com leitura (clique nas conversas), busca com filtros e configurações de contas, aparência e segurança (`#caixa`, `#busca`, `#ajustes`). Claro e escuro. |
 
 ## O que há em `dist/`
 
@@ -85,7 +86,7 @@ O tema existe **só no nível semântico**. Cada token de cor traz os dois valor
 
 ```scss
 // src/tokens/semantic/color/_text.scss
-'color-text': (light: p.palette('blue-810'), dark: p.palette('slate-85')),
+'color-text': (light: p.palette('gray-900'), dark: p.palette('gray-85')),
 ```
 
 A mixin `themes()` gera, da mesma fonte, o tema claro, o escuro que segue o sistema e o escuro forçado por `data-theme="dark"`. Os tokens de componente apontam para semânticos com `var()`, então acompanham o tema sem declarar nada.

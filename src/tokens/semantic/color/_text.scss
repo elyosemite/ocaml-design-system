@@ -6,20 +6,20 @@
 
 $groups: (
   'Cor · texto': (
-    'color-text': (light: p.palette('gray-900'), dark: p.palette('slate-85')),
-    'color-text-subtle': (light: p.palette('gray-600'), dark: p.palette('slate-225')),
-    'color-text-subtlest': (light: p.palette('gray-500'), dark: p.palette('slate-350')),
+    'color-text': (light: p.palette('gray-900'), dark: p.palette('gray-85')),
+    'color-text-subtle': (light: p.palette('gray-600'), dark: p.palette('gray-300')),
+    'color-text-subtlest': (light: p.palette('gray-500'), dark: p.palette('gray-400')),
     'color-text-disabled': (light: p.palette('black-1000-a30'), dark: p.palette('white-a30')),
-    'color-text-inverse': (light: p.palette('white'), dark: p.palette('slate-925')),
-    'color-text-brand': (light: p.palette('blue-540'), dark: p.palette('blue-275')),
+    'color-text-inverse': (light: p.palette('white'), dark: p.palette('gray-975')),
+    'color-text-brand': (light: p.palette('blue-540'), dark: p.palette('blue-330')),
     'color-text-selected': (light: p.palette('blue-640'), dark: p.palette('blue-235')),
     'color-text-danger': (light: p.palette('red-600'), dark: p.palette('red-200')),
     'color-text-warning': (light: p.palette('orange-675'), dark: p.palette('yellow-325')),
-    'color-text-warning-inverse': (light: p.palette('gray-900'), dark: p.palette('slate-925')),
+    'color-text-warning-inverse': (light: p.palette('gray-900'), dark: p.palette('gray-975')),
     'color-text-success': (light: p.palette('green-725'), dark: p.palette('green-300')),
     'color-text-information': (light: p.palette('blue-600'), dark: p.palette('blue-250')),
     'color-text-discovery': (light: p.palette('blue-500'), dark: p.palette('blue-175')),
-    'color-link': (light: p.palette('blue-540'), dark: p.palette('blue-275')),
-    'color-link-pressed': (light: p.palette('blue-640'), dark: p.palette('blue-225')),
+    'color-link': (light: p.palette('blue-540'), dark: p.palette('blue-330')),
+    'color-link-pressed': (light: p.palette('blue-640'), dark: p.palette('blue-220')),
   ),
 );
